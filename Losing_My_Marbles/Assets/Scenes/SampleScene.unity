@@ -217,7 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2056779870}
   m_Layer: 0
-  m_Name: Max
+  m_Name: Carl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
