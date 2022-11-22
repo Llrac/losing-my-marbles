@@ -6,13 +6,9 @@ public class Movement : MonoBehaviour
 {
     public float jumpLength = 1;
 
-    enum Direction { NorthEast, SouthEast, SouthWest, NorthWest };
-    Direction currentDirection;
     int currentDirectionID = 0;
 
     GameObject body;
-
-    //Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +18,6 @@ public class Movement : MonoBehaviour
             if (child.gameObject.name == "Body")
                 body = child.gameObject;
         }
-        //rb = GetComponent<Rigidbody2D>();
 
         UpdatePlayerProperties(0, 1);
     }
@@ -56,7 +51,7 @@ public class Movement : MonoBehaviour
         // whatToChange 0 concerns transform position
         // whatToChange 1 concerns body transform rotation
 
-        // Set transform
+        // Set transform position
         if (whatToChange == 0)
         {
             switch (currentDirectionID)
@@ -85,7 +80,7 @@ public class Movement : MonoBehaviour
             }
         }
 
-        // Set rotation
+        // Set animation state
         if (whatToChange == 1)
         {
             switch (currentDirectionID)
