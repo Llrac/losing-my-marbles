@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
             for (int i = 0; i < availableMarbleSlots.Length; i++)
             {
-                if (availableMarbleSlots[i] == true)
+                if (availableMarbleSlots[i])
                 {
                     randomMarble.gameObject.SetActive(true);
                     randomMarble.handIndex = i;

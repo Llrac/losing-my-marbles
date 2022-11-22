@@ -19,10 +19,10 @@ public class Marble : MonoBehaviour
     {
         if (!hasBeenPlayed)
         {
-            transform.position += Vector3.up * 5;
+            transform.position += Vector3.up * 1.5f;
             hasBeenPlayed = true;
             gm.availableMarbleSlots[handIndex] = true;
-            Invoke("MoveToDiscardPile", 2f);
+            Invoke(nameof(MoveToDiscardPile), 2f);
         }
     }
 

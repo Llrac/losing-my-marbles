@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            if (child.gameObject.name == "Body")
+            if (child.gameObject.name == "Sprite")
                 body = child.gameObject;
         }
 
@@ -107,7 +107,6 @@ public class Movement : MonoBehaviour
                     body.transform.eulerAngles = new Vector3(-135, -135, 0);
                     break;
             }
-            Debug.Log(currentDirectionID);
         }
     }
 }
