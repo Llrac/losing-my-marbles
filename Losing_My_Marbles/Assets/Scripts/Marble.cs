@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Marble : MonoBehaviour
 {
-    public bool hasBeenPlayed;
+    public bool hasBeenSelected;
 
     public int handIndex;
 
@@ -17,12 +17,11 @@ public class Marble : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (!hasBeenPlayed)
+        if (!hasBeenSelected)
         {
-            transform.position += Vector3.up * 1.5f;
-            hasBeenPlayed = true;
+            transform.position += Vector3.up * 1.25f;
+            hasBeenSelected = true;
             gm.availableMarbleSlots[handIndex] = true;
-            Invoke(nameof(MoveToDiscardPile), 2f);
         }
     }
 
