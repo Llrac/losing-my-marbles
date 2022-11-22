@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
                     randomMarble.handIndex = i;
 
                     randomMarble.transform.position = marbleSlots[i].position;
-                    randomMarble.hasBeenPlayed = false;
+                    randomMarble.hasBeenSelected = false;
                     availableMarbleSlots[i] = false;
                     deck.Remove(randomMarble);
                     return;
