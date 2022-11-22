@@ -20,12 +20,19 @@ public class Wobbly : MonoBehaviour
         if(randomActivation < 0)
         {
             transform.position += new Vector3(0, -4f, 0) * Time.deltaTime;
+
             if (transform.position.y <= endPos.y)
             {
                 transform.position = endPos;
-                wob.enabled = false;
+               
             }
         }
-      
+        if (transform.position == endPos)
+        {
+            //do a wobble
+            float lerpedValue;
+            lerpedValue = Mathf.Lerp(transform.position.y, transform.position.y + 1f, 1f);
+            transform.position = new Vector3(transform.position.x,lerpedValue , 0);
+        }
     }
 }
