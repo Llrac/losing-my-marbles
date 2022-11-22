@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Marble : MonoBehaviour
 {
-    public bool hasBeenSelected;
+    public bool hasBeenSelected = false;
+    public bool hasHighlight = false;
 
     public int handIndex;
 
     GameManager gm;
+    MarbleManager mm;
 
     private void Start()
     {
         gm = FindObjectOfType<GameManager>();
+        mm = FindObjectOfType<MarbleManager>();
     }
 
     public void OnMouseDown()
@@ -21,7 +24,15 @@ public class Marble : MonoBehaviour
         {
             transform.position += Vector3.up * 1.25f;
             hasBeenSelected = true;
-            gm.availableMarbleSlots[handIndex] = true;
+            hasHighlight = true;
+            mm.GetHighlight(this.gameObject);
+        }
+        if (hasBeenSelected)
+        {
+            transform.position -= Vector3.up * 1.25f;
+            hasBeenSelected = false;
+            hasHighlight = false;
+            mm.GetHighlight(this.gameObject);
         }
     }
 
