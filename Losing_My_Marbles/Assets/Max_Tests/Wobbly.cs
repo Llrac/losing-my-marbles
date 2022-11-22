@@ -4,10 +4,28 @@ using UnityEngine;
 
 public class Wobbly : MonoBehaviour
 {
-    private Vector3 hoover;
-    void Update()
+    private Vector3 endPos;
+    private float randomActivation;
+    private Wobbly wob;
+    private void Start()
     {
-        hoover = Vector3.up * Mathf.Cos(Time.time);
-        transform.position = new Vector3 (transform.position.x,hoover.y,0);
+        endPos = transform.position - new Vector3(0, 5f, 0);
+        randomActivation = Random.Range(0, 2f);
+        wob = GetComponent<Wobbly>();
+    }
+    private void Update()
+    {
+        randomActivation -= 1f * Time.deltaTime;
+
+        if(randomActivation < 0)
+        {
+            transform.position += new Vector3(0, -4f, 0) * Time.deltaTime;
+            if (transform.position.y <= endPos.y)
+            {
+                transform.position = endPos;
+                wob.enabled = false;
+            }
+        }
+      
     }
 }
