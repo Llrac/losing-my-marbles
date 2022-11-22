@@ -9,6 +9,8 @@ public class Marble : MonoBehaviour
 
     public int handIndex;
 
+    public int orderID = 0;
+
     GameManager gm;
     MarbleManager mm;
 
@@ -22,17 +24,16 @@ public class Marble : MonoBehaviour
     {
         if (!hasBeenSelected)
         {
-            transform.position += Vector3.up * 1.25f;
+            mm.GetHighlight(gameObject);
             hasBeenSelected = true;
             hasHighlight = true;
-            mm.GetHighlight(this.gameObject);
+            Debug.Log(orderID);
         }
-        if (hasBeenSelected)
+        else if (hasBeenSelected)
         {
-            transform.position -= Vector3.up * 1.25f;
+            mm.GetHighlight(gameObject);
             hasBeenSelected = false;
             hasHighlight = false;
-            mm.GetHighlight(this.gameObject);
         }
     }
 

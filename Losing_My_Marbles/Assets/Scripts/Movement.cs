@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public Sprite[] sprites;
+    SpriteRenderer sr;
+
     public float jumpLength = 1;
 
     int currentDirectionID = 0;
@@ -18,6 +21,8 @@ public class Movement : MonoBehaviour
             if (child.gameObject.name == "Sprite")
                 body = child.gameObject;
         }
+        
+        sr = body.GetComponent<SpriteRenderer>();
 
         UpdatePlayerProperties(0, 1);
     }
@@ -86,25 +91,32 @@ public class Movement : MonoBehaviour
             switch (currentDirectionID)
             {
                 case -3:
-                    body.transform.eulerAngles = new Vector3(-135, -135, 0);
+                    sr.sprite = sprites[1];
+                    transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case -2:
-                    body.transform.eulerAngles = new Vector3(-45, -45, 0);
+                    sr.sprite = sprites[1];
+                    transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case -1:
-                    body.transform.eulerAngles = new Vector3(135, 135, 0);
+                    sr.sprite = sprites[0];
+                    transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case 0:
-                    body.transform.eulerAngles = new Vector3(45, 45, 0);
+                    sr.sprite = sprites[0];
+                    transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case 1:
-                    body.transform.eulerAngles = new Vector3(135, 135, 0);
+                    sr.sprite = sprites[1];
+                    transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case 2:
-                    body.transform.eulerAngles = new Vector3(-45, -45, 0);
+                    sr.sprite = sprites[1];
+                    transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case 3:
-                    body.transform.eulerAngles = new Vector3(-135, -135, 0);
+                    sr.sprite = sprites[0];
+                    transform.localScale = new Vector3(-1, 1, 1);
                     break;
             }
         }
