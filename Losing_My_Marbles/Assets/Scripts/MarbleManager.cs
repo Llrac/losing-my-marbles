@@ -13,11 +13,17 @@ public class MarbleManager : MonoBehaviour
     public List<Marble> marbleBagList = new();
     public Transform[] marbleSlots;
 
-    // public readonly GameObject[] marblesToTrigger;
     public List<Marble> discardPile = new();
 
     public GameObject highlight;
     public Transform marbleBagTransform;
+
+    MarbleEffects me;
+
+    private void Start()
+    {
+        me = FindObjectOfType<MarbleEffects>();
+    }
 
     void Update()
     {
@@ -70,8 +76,8 @@ public class MarbleManager : MonoBehaviour
             globalOrderID++;
             marbleToHighlightScript.orderID += globalOrderID;
             marbleToHighlightScript.hasBeenClicked = true;
-            //marblesToTrigger[globalOrderID - 1] = marbleToHighlight;
-            //Debug.Log(marblesToTrigger.Length);
+
+            me.marblesToTriggerList.Add(marbleToHighlight);
 
             if (globalOrderID >= 5)
             {
@@ -85,6 +91,9 @@ public class MarbleManager : MonoBehaviour
                 {
                     availableMarbleSlots[i] = true;
                 }
+
+                me.TriggerMarbles();
+
                 ResetOrder();
             }
         }
@@ -96,7 +105,7 @@ public class MarbleManager : MonoBehaviour
 
     public void ResetOrder()
     {
-        //Debug.Log(marblesToTrigger.Length);
+        me.marblesToTriggerList.Clear();
         Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
         foreach (Marble marbleScript in allMarbleScripts)
         {
