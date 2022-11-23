@@ -10,12 +10,10 @@ public class Marble : MonoBehaviour
     public int handIndex = 0;
     public int orderID = 0;
 
-    GameManager gm;
     MarbleManager mm;
 
     private void Start()
     {
-        gm = FindObjectOfType<GameManager>();
         mm = FindObjectOfType<MarbleManager>();
     }
 
@@ -34,7 +32,7 @@ public class Marble : MonoBehaviour
     public void MoveToDiscardPile()
     {
         isInHand = false;
-        gm.discardPile.Add(this);
-        transform.position = gm.marbleBagTransform.position;
+        mm.discardPile.Add(this);
+        transform.position = mm.marbleBagTransform.position;
     }
 }

@@ -1,17 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MarbleManager : MonoBehaviour
 {
-    public GameObject highlight;
     public int globalOrderID = 0;
+    public bool[] availableMarbleSlots;
+    public TextMeshProUGUI marblesInDeckText;
+    public TextMeshProUGUI marblesInDiscardPileText;
+    public List<Marble> marbleBagList = new();
+    public Transform[] marbleSlots;
 
-    GameManager gm;
+    // public readonly GameObject[] marblesToTrigger;
+    public List<Marble> discardPile = new();
 
-    private void Start()
+    public GameObject highlight;
+    public Transform marbleBagTransform;
+
+    void Update()
     {
-        gm = FindObjectOfType<GameManager>();
+        marblesInDeckText.text = marbleBagList.Count.ToString();
+        marblesInDiscardPileText.text = discardPile.Count.ToString();
+    }
+
+    public void FillHandWithMarbles()
+    {
+        for (int i = 0; i < availableMarbleSlots.Length; i++)
+        {
+            if (marbleBagList.Count <= 0)
+            {
+                Shuffle();
+                i--;
+            }
+            if (availableMarbleSlots[i])
+            {
+                Marble randomMarble = marbleBagList[Random.Range(0, marbleBagList.Count)];
+                randomMarble.handIndex = i;
+                randomMarble.transform.position = marbleSlots[i].position;
+                randomMarble.hasBeenClicked = false;
+                randomMarble.isInHand = true;
+                availableMarbleSlots[i] = false;
+                marbleBagList.Remove(randomMarble);
+            }
+        }
+    }
+
+    public void Shuffle()
+    {
+        if (discardPile.Count >= 1)
+        {
+            foreach (Marble marble in discardPile)
+            {
+                marbleBagList.Add(marble);
+            }
+            discardPile.Clear();
+        }
     }
 
     public void GetHighlight(GameObject marbleToHighlight)
@@ -25,20 +70,22 @@ public class MarbleManager : MonoBehaviour
             globalOrderID++;
             marbleToHighlightScript.orderID += globalOrderID;
             marbleToHighlightScript.hasBeenClicked = true;
+            //marblesToTrigger[globalOrderID - 1] = marbleToHighlight;
+            //Debug.Log(marblesToTrigger.Length);
 
             if (globalOrderID >= 5)
             {
-                ResetOrder();
                 Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
                 foreach (Marble marbleScript in allMarbleScripts)
                 {
                     if (marbleScript.isInHand)
                         marbleScript.MoveToDiscardPile();
                 }
-                for (int i = 0; i < gm.availableMarbleSlots.Length; i++)
+                for (int i = 0; i < availableMarbleSlots.Length; i++)
                 {
-                    gm.availableMarbleSlots[i] = true;
+                    availableMarbleSlots[i] = true;
                 }
+                ResetOrder();
             }
         }
         else
@@ -49,7 +96,7 @@ public class MarbleManager : MonoBehaviour
 
     public void ResetOrder()
     {
-        Debug.Log("resetorder");
+        //Debug.Log(marblesToTrigger.Length);
         Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
         foreach (Marble marbleScript in allMarbleScripts)
         {
