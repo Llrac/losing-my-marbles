@@ -6,39 +6,39 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Marble> deck = new();
+    public List<Marble> marbleBag = new();
     public List<Marble> discardPile = new();
     public Transform[] marbleSlots;
+    public Transform marbleBagTransform;
     public bool[] availableMarbleSlots;
 
-    public TextMeshProUGUI deckSizeText;
+    public TextMeshProUGUI bagSizeText;
     public TextMeshProUGUI discardPileText;
 
     private void Update()
     {
-        deckSizeText.text = deck.Count.ToString();
+        bagSizeText.text = marbleBag.Count.ToString();
         discardPileText.text = discardPile.Count.ToString();
     }
 
-    public void DrawMarbles()
+    public void FillHandWithMarbles()
     {
-        if (deck.Count >= 1)
+        for (int i = 0; i < availableMarbleSlots.Length; i++)
         {
-            Marble randomMarble = deck[Random.Range(0, deck.Count)];
-
-            for (int i = 0; i < availableMarbleSlots.Length; i++)
+            if (marbleBag.Count <= 0)
             {
-                if (availableMarbleSlots[i])
-                {
-                    randomMarble.gameObject.SetActive(true);
-                    randomMarble.handIndex = i;
-
-                    randomMarble.transform.position = marbleSlots[i].position;
-                    randomMarble.hasBeenSelected = false;
-                    availableMarbleSlots[i] = false;
-                    deck.Remove(randomMarble);
-                    return;
-                }
+                Shuffle();
+                i--;
+            }
+            if (availableMarbleSlots[i])
+            {
+                Marble randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
+                randomMarble.handIndex = i;
+                randomMarble.transform.position = marbleSlots[i].position;
+                randomMarble.hasBeenClicked = false;
+                randomMarble.isInHand = true;
+                availableMarbleSlots[i] = false;
+                marbleBag.Remove(randomMarble);
             }
         }
     }
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         {
             foreach (Marble marble in discardPile)
             {
-                deck.Add(marble);
+                marbleBag.Add(marble);
             }
             discardPile.Clear();
         }

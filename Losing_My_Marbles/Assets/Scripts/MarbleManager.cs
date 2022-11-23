@@ -5,38 +5,55 @@ using UnityEngine;
 public class MarbleManager : MonoBehaviour
 {
     public GameObject highlight;
-    int globalOrderID = 0;
+    public int globalOrderID = 0;
+
+    GameManager gm;
+
+    private void Start()
+    {
+        gm = FindObjectOfType<GameManager>();
+    }
 
     public void GetHighlight(GameObject marbleToHighlight)
     {
         Marble marbleToHighlightScript = marbleToHighlight.GetComponent<Marble>();
-        if (!marbleToHighlightScript.hasHighlight)
+        if (!marbleToHighlightScript.hasBeenClicked)
         {
             GameObject newHighlight = Instantiate(highlight, marbleToHighlight.transform);
             newHighlight.transform.position = marbleToHighlight.transform.position;
 
             globalOrderID++;
             marbleToHighlightScript.orderID += globalOrderID;
+            marbleToHighlightScript.hasBeenClicked = true;
 
             if (globalOrderID >= 5)
             {
-                ResetSelection();
-
+                ResetOrder();
+                Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
+                foreach (Marble marbleScript in allMarbleScripts)
+                {
+                    if (marbleScript.isInHand)
+                        marbleScript.MoveToDiscardPile();
+                }
+                for (int i = 0; i < gm.availableMarbleSlots.Length; i++)
+                {
+                    gm.availableMarbleSlots[i] = true;
+                }
             }
         }
         else
         {
-            ResetSelection();
+            ResetOrder();
         }
     }
 
-    public void ResetSelection()
+    public void ResetOrder()
     {
-        Marble[] marbleScripts = FindObjectsOfType<Marble>();
-        foreach (Marble marbleScript in marbleScripts)
+        Debug.Log("resetorder");
+        Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
+        foreach (Marble marbleScript in allMarbleScripts)
         {
-            marbleScript.hasBeenSelected = false;
-            marbleScript.hasHighlight = false;
+            marbleScript.hasBeenClicked = false;
             marbleScript.orderID = 0;
             globalOrderID = 0;
         }

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5938139530171352587}
+  - component: {fileID: -7810315073155797304}
   - component: {fileID: 5938139530171352586}
-  - component: {fileID: 5764233621873410647}
   - component: {fileID: 8235136549817779538}
   m_Layer: 0
   m_Name: Marble I
@@ -34,6 +34,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7810315073155797304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5938139530171352585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00cd98fca104fe14ab986ef86681e866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasBeenSelected: 0
+  hasHighlight: 0
+  handIndex: 0
+  orderID: 0
 --- !u!212 &5938139530171352586
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -86,20 +102,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5764233621873410647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5938139530171352585}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00cd98fca104fe14ab986ef86681e866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasBeenPlayed: 0
-  handIndex: 0
 --- !u!58 &8235136549817779538
 CircleCollider2D:
   m_ObjectHideFlags: 0
