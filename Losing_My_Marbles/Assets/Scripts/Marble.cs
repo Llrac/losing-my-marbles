@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Marble : MonoBehaviour
 {
-    public bool hasBeenSelected = false;
-    public bool hasHighlight = false;
+    public bool hasBeenClicked = false;
+    public bool isInHand = false;
 
-    public int handIndex;
-
+    public int handIndex = 0;
     public int orderID = 0;
 
     GameManager gm;
@@ -22,24 +21,20 @@ public class Marble : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (!hasBeenSelected)
+        if (!hasBeenClicked)
         {
             mm.GetHighlight(gameObject);
-            hasBeenSelected = true;
-            hasHighlight = true;
-            Debug.Log(orderID);
         }
-        else if (hasBeenSelected)
+        else if (hasBeenClicked)
         {
             mm.GetHighlight(gameObject);
-            hasBeenSelected = false;
-            hasHighlight = false;
         }
     }
 
-    void MoveToDiscardPile()
+    public void MoveToDiscardPile()
     {
+        isInHand = false;
         gm.discardPile.Add(this);
-        gameObject.SetActive(false);
+        transform.position = gm.marbleBagTransform.position;
     }
 }
