@@ -62,25 +62,25 @@ public class Movement : MonoBehaviour
             switch (currentDirectionID)
             {
                 case -3:
-                    transform.position += new Vector3(jumpLength, -jumpLength, 0);
+                    transform.position += new Vector3(jumpLength, -jumpLength/2, 0);
                     break;
                 case -2:
-                    transform.position += new Vector3(-jumpLength, -jumpLength, 0);
+                    transform.position += new Vector3(-jumpLength, -jumpLength/2, 0);
                     break;
                 case -1:
-                    transform.position += new Vector3(-jumpLength, jumpLength, 0);
+                    transform.position += new Vector3(-jumpLength, jumpLength/2, 0);
                     break;
                 case 0:
-                    transform.position += new Vector3(jumpLength, jumpLength, 0);
+                    transform.position += new Vector3(jumpLength, jumpLength/2, 0);
                     break;
                 case 1:
-                    transform.position += new Vector3(jumpLength, -jumpLength, 0);
+                    transform.position += new Vector3(jumpLength, -jumpLength/2, 0);
                     break;
                 case 2:
-                    transform.position += new Vector3(-jumpLength, -jumpLength, 0);
+                    transform.position += new Vector3(-jumpLength, -jumpLength/2, 0);
                     break;
                 case 3:
-                    transform.position += new Vector3(-jumpLength, jumpLength, 0);
+                    transform.position += new Vector3(-jumpLength, jumpLength/2, 0);
                     break;
             }
         }

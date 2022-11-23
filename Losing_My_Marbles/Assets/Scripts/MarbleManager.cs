@@ -20,16 +20,17 @@ public class MarbleManager : MonoBehaviour
 
             if (globalOrderID >= 5)
             {
-                PrepareForNextTurn();
+                ResetSelection();
+
             }
         }
         else
         {
-            PrepareForNextTurn();
+            ResetSelection();
         }
     }
 
-    public void PrepareForNextTurn()
+    public void ResetSelection()
     {
         Marble[] marbleScripts = FindObjectsOfType<Marble>();
         foreach (Marble marbleScript in marbleScripts)
