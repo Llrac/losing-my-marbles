@@ -32,7 +32,7 @@ public class Marble : MonoBehaviour
     public void MoveToDiscardPile()
     {
         isInHand = false;
-        mm.discardPile.Add(this);
+        mm.discardList.Add(this);
         transform.position = mm.marbleBagTransform.position;
     }
 }

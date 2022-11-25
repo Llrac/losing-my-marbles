@@ -7131,7 +7131,7 @@ MonoBehaviour:
   availableMarbleSlots: 01010101010101
   marblesInDeckText: {fileID: 167921948}
   marblesInDiscardPileText: {fileID: 150293078}
-  marbleBagList:
+  marbleList:
   - {fileID: 2822718187980015690}
   - {fileID: 2578611924602025489}
   - {fileID: 5909079390201455231}
@@ -7150,7 +7150,7 @@ MonoBehaviour:
   - {fileID: 435216360}
   - {fileID: 2044315131}
   - {fileID: 1827668919}
-  discardPile: []
+  discardList: []
   highlight: {fileID: 5962901347320887161, guid: 2edbc0708b6bcec40b131e66a34d1abd, type: 3}
   marbleBagTransform: {fileID: 7553351092172364897}
 --- !u!114 &2070015177
@@ -8712,7 +8712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7553351092172364897}
   m_Layer: 0
-  m_Name: _MarbleBag
+  m_Name: Marbles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

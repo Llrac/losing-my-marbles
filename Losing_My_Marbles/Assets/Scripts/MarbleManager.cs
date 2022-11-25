@@ -6,14 +6,14 @@ using TMPro;
 
 public class MarbleManager : MonoBehaviour
 {
-    public int globalOrderID = 0;
+    [HideInInspector] public int globalOrderID = 0;
     public bool[] availableMarbleSlots;
     public TextMeshProUGUI marblesInDeckText;
     public TextMeshProUGUI marblesInDiscardPileText;
-    public List<Marble> marbleBagList = new();
+    public List<Marble> marbleList = new();
     public Transform[] marbleSlots;
 
-    public List<Marble> discardPile = new();
+    [HideInInspector] public List<Marble> discardList = new();
 
     public GameObject highlight;
     public Transform marbleBagTransform;
@@ -27,41 +27,45 @@ public class MarbleManager : MonoBehaviour
 
     void Update()
     {
-        marblesInDeckText.text = marbleBagList.Count.ToString();
-        marblesInDiscardPileText.text = discardPile.Count.ToString();
+        marblesInDeckText.text = marbleList.Count.ToString();
+        marblesInDiscardPileText.text = discardList.Count.ToString();
     }
 
     public void FillHandWithMarbles()
     {
         for (int i = 0; i < availableMarbleSlots.Length; i++)
         {
-            if (marbleBagList.Count <= 0)
+            if (marbleList.Count <= 0)
             {
                 Shuffle();
                 i--;
+                if (marbleList.Count <= 0)
+                {
+                    return;
+                }
             }
             if (availableMarbleSlots[i])
             {
-                Marble randomMarble = marbleBagList[Random.Range(0, marbleBagList.Count)];
+                Marble randomMarble = marbleList[Random.Range(0, marbleList.Count)];
                 randomMarble.handIndex = i;
                 randomMarble.transform.position = marbleSlots[i].position;
                 randomMarble.hasBeenClicked = false;
                 randomMarble.isInHand = true;
                 availableMarbleSlots[i] = false;
-                marbleBagList.Remove(randomMarble);
+                marbleList.Remove(randomMarble);
             }
         }
     }
 
     public void Shuffle()
     {
-        if (discardPile.Count >= 1)
+        if (discardList.Count >= 1)
         {
-            foreach (Marble marble in discardPile)
+            foreach (Marble marble in discardList)
             {
-                marbleBagList.Add(marble);
+                marbleList.Add(marble);
             }
-            discardPile.Clear();
+            discardList.Clear();
         }
     }
 
