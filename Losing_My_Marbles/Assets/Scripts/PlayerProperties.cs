@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : Movement
+public class PlayerProperties : Character
 {
     void Update()
     {
         // Diagonal movement
         if (Input.GetKeyDown(KeyCode.W))
         {
-            UpdatePlayerProperties(gameObject, 0, 0);
+            UpdateData(gameObject, 0, 1);
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
+        {
+            UpdateData(gameObject, 0, -1);
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
-            UpdatePlayerProperties(gameObject, -1, 1);
+            UpdateData(gameObject, 1, -1);
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            UpdatePlayerProperties(gameObject, 1, 1);
+            UpdateData(gameObject, 1, 1);
         }
     }
 }

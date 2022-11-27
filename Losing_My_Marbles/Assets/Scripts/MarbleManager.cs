@@ -47,7 +47,7 @@ public class MarbleManager : MonoBehaviour
                     return;
                 }
             }
-            if (availableMarbleSlots[i])
+            else if (availableMarbleSlots[i])
             {
                 Marble randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
                 randomMarble.handIndex = i;

@@ -9,13 +9,12 @@ public class MarbleActions : MonoBehaviour
     public GameObject[] marblesToExecute = new GameObject[5];
 
     GameObject player;
-    PlayerMovement pm;
+    PlayerProperties pp;
 
-    // Start is called before the first frame update
     void Start()
     {
-        pm = FindObjectOfType<PlayerMovement>();
-        player = pm.gameObject;
+        pp = FindObjectOfType<PlayerProperties>();
+        player = pp.gameObject;
     }
 
     public void SelectedMarbles()
@@ -45,11 +44,10 @@ public class MarbleActions : MonoBehaviour
             }
         }
 
-        MarbleToAction(marblesToExecute[0]);
-        MarbleToAction(marblesToExecute[1]);
-        MarbleToAction(marblesToExecute[2]);
-        MarbleToAction(marblesToExecute[3]);
-        MarbleToAction(marblesToExecute[4]);
+        for (int i = 0; i < marblesToExecute.Length; i++)
+        {
+            MarbleToAction(marblesToExecute[i]);
+        }
     }
 
     public void MarbleToAction(GameObject marbleToAction)
@@ -57,30 +55,19 @@ public class MarbleActions : MonoBehaviour
         switch (marbleToAction.GetComponent<Marble>().marbleID)
         {
             case 1:
-                pm.UpdatePlayerProperties(player, 0, 0);
-                Debug.Log("move1");
+                pp.UpdateData(player, 0, 1);
                 break;
             case 2:
-                for (int i = 0; i < 2; i++)
-                {
-                    pm.UpdatePlayerProperties(player, 0, 0);
-                }
-                Debug.Log("move2");
+                pp.UpdateData(player, 0, 2);
                 break;
             case 3:
-                for (int i = 0; i < 3; i++)
-                {
-                    pm.UpdatePlayerProperties(player, 0, 0);
-                }
-                Debug.Log("move3");
+                pp.UpdateData(player, 0, 3);
                 break;
             case 4:
-                pm.UpdatePlayerProperties(player, -1, 1);
-                Debug.Log("turnL");
+                pp.UpdateData(player, 1, -1);
                 break;
             case 5:
-                pm.UpdatePlayerProperties(player, 1, 1);
-                Debug.Log("turnR");
+                pp.UpdateData(player, 1, 1);
                 break;
         }
     }
