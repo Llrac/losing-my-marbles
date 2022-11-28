@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     public float jumpLength = 1;
 
     int currentDirectionID = 0;
+    int integer;
 
     GameObject body;
 
@@ -33,6 +34,30 @@ public class Movement : MonoBehaviour
         Move(character, dataID, increment);
     }
 
+    void WorldToGrid(int currentDirectionID)
+    {
+        switch (currentDirectionID)
+        {
+            case 0:
+                gridPosition += new Vector2(0, 1);
+                Debug.Log(gridPosition);
+                break;
+            case 1 or -3:
+                gridPosition += new Vector2(1, 0);
+                Debug.Log(gridPosition);
+                break;
+            case 2 or -2:
+                gridPosition += new Vector2(0, -1);
+                Debug.Log(gridPosition);
+                break;
+            case 3 or -1:
+                gridPosition += new Vector2(-1, 0);
+                Debug.Log(gridPosition);
+                break;
+        }
+        
+    }
+
     void Move(GameObject character, int dataID, int increment)
     {
         // increment should not change when moving
@@ -52,19 +77,29 @@ public class Movement : MonoBehaviour
         {
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
+                integer = 1;
+
+                if (increment < 0)
+                {
+                    integer *= -1;
+                }
                 switch (currentDirectionID)
                 {
+                    case 0:
+                        character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * integer;
+                        WorldToGrid(currentDirectionID);
+                        break;
                     case 1 or -3:
-                        character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0);
+                        character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * integer;
+                        WorldToGrid(currentDirectionID);
                         break;
                     case 2 or -2:
-                        character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0);
+                        character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * integer;
+                        WorldToGrid(currentDirectionID);
                         break;
                     case 3 or -1:
-                        character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0);
-                        break;
-                    case 0:
-                        character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0);
+                        character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * integer;
+                        WorldToGrid(currentDirectionID);
                         break;
                 }
             }
@@ -75,6 +110,10 @@ public class Movement : MonoBehaviour
         {
             switch (currentDirectionID)
             {
+                case 0:
+                    sr.sprite = sprites[0];
+                    character.transform.localScale = new Vector3(1, 1, 1);
+                    break;
                 case 1 or -3:
                     sr.sprite = sprites[1];
                     character.transform.localScale = new Vector3(-1, 1, 1);
@@ -86,10 +125,6 @@ public class Movement : MonoBehaviour
                 case 3 or -1:
                     sr.sprite = sprites[0];
                     character.transform.localScale = new Vector3(-1, 1, 1);
-                    break;
-                case 0:
-                    sr.sprite = sprites[0];
-                    character.transform.localScale = new Vector3(1, 1, 1);
                     break;
             }
         }
