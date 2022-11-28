@@ -49,30 +49,21 @@ public class Movement : MonoBehaviour
         // Set transform position
         if (dataID == 0)
         {
-            for (int i = 0; i < increment; i++)
+            for (int i = 0; i < Mathf.Abs(increment); i++)
             {
                 switch (currentDirectionID)
                 {
-                    case -3:
+                    case 1 or -3:
                         character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0);
                         break;
-                    case -2:
+                    case 2 or -2:
                         character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0);
                         break;
-                    case -1:
+                    case 3 or -1:
                         character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0);
                         break;
                     case 0:
                         character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0);
-                        break;
-                    case 1:
-                        character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0);
-                        break;
-                    case 2:
-                        character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0);
-                        break;
-                    case 3:
-                        character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0);
                         break;
                 }
             }
@@ -83,33 +74,21 @@ public class Movement : MonoBehaviour
         {
             switch (currentDirectionID)
             {
-                case -3:
+                case 1 or -3:
                     sr.sprite = sprites[1];
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
-                case -2:
+                case 2 or -2:
                     sr.sprite = sprites[1];
                     character.transform.localScale = new Vector3(1, 1, 1);
                     break;
-                case -1:
+                case 3 or -1:
                     sr.sprite = sprites[0];
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case 0:
                     sr.sprite = sprites[0];
                     character.transform.localScale = new Vector3(1, 1, 1);
-                    break;
-                case 1:
-                    sr.sprite = sprites[1];
-                    character.transform.localScale = new Vector3(-1, 1, 1);
-                    break;
-                case 2:
-                    sr.sprite = sprites[1];
-                    character.transform.localScale = new Vector3(1, 1, 1);
-                    break;
-                case 3:
-                    sr.sprite = sprites[0];
-                    character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
             }
         }
