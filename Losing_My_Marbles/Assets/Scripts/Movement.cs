@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public Vector2 gridPosition = new(0, 0);
-
+    public Vector2 gridPosition = new(1, 0);
     public Sprite[] sprites;
     SpriteRenderer sr;
 
