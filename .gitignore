@@ -74,6 +74,9 @@ crashlytics-build.properties
 # Rider
 .idea/
 
+# Firebase
+*google-services*
+
 # Other
 .vscode/
 .vsconfig
