@@ -47,6 +47,8 @@ public class GridManager : MonoBehaviour
     }
     public void TryMove(GameObject player, Vector2 requestedTile)
     {
+        Vector2 vector2 = (Vector2)player.transform.position + requestedTile;
+
         for (int i = 0; i < board.GetLength(0); i++)
         {
             for (int j = 0; j < board.GetLength(1); j++)
