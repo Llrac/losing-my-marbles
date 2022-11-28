@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00cd98fca104fe14ab986ef86681e866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasBeenSelected: 0
-  hasHighlight: 0
+  marbleID: 1
+  hasBeenClicked: 0
+  isInHand: 0
   handIndex: 0
   orderID: 0
 --- !u!212 &5938139530171352586
