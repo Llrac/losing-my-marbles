@@ -29,14 +29,17 @@ public class GridManager : MonoBehaviour
     }
     private void Update()
     {
+        pp.RequestGridPosition(pp.currentDirectionID);
+
         switch (IsSquareEmpty(pp.requestedGridPosition)) // should happen before moving
         {
             case 0: //wall
                 //do wall stuff
                 break;
             case 1:
-                //Move
+                //Move grid position and world position ONE step
                 MoveInGridMatrix(pp.gameObject, pp.requestedGridPosition);
+                pp.Move(pp.gameObject, 0, 1);
                 break;
             case 2:
                 // player
@@ -76,16 +79,16 @@ public class GridManager : MonoBehaviour
 
     private void MoveInGridMatrix(GameObject character, Vector2 requestedTile) // should be player properties grid position
     {
-        float savedX = pp.requestedGridPosition.x;
-        float savedY = pp.requestedGridPosition.y;
+        float savedX = pp.gridPosition.x;
+        float savedY = pp.gridPosition.y;
 
         int x = (int)requestedTile.x; // viktigt att hålla koll på x och y
         int y = (int)requestedTile.y;
 
-        board[x, y] = board[(int)savedX, (int)savedY] = PLAYER;
+        board[x, y] = PLAYER;
         board[(int)savedX, (int)savedY] = WALKABLEGROUND;
 
-        pp.requestedGridPosition = requestedTile;
+        
     }
     public int IsSquareEmpty(Vector2 requestedTile)
     {

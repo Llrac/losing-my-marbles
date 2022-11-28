@@ -11,7 +11,7 @@ public class Movement : MonoBehaviour
 
     public float jumpLength = 1;
 
-    int currentDirectionID = 0;
+    public int currentDirectionID = 0;
     int integer;
 
     GameObject body;
@@ -27,53 +27,10 @@ public class Movement : MonoBehaviour
         
         sr = body.GetComponent<SpriteRenderer>();
 
-        TryMove(gameObject, 1, 0);
+        Move(gameObject, 1, 0);
     }
 
-    public void TryMove(GameObject character, int dataID, int increment)
-    {
-        Move(character, dataID, increment);
-    }
-
-    public void RequestGridPosition(int currentDirectionID)
-    {
-        switch (currentDirectionID)
-        {
-            case 0:
-                requestedGridPosition += new Vector2(0, 1);
-                break;
-            case 1 or -3:
-                requestedGridPosition += new Vector2(1, 0);
-                break;
-            case 2 or -2:
-                requestedGridPosition += new Vector2(0, -1);
-                break;
-            case 3 or -1:
-                requestedGridPosition += new Vector2(-1, 0);
-                break;
-        }
-    }
-
-    void WorldToGrid(int currentDirectionID)
-    {
-        switch (currentDirectionID)
-        {
-            case 0:
-                gridPosition += new Vector2(0, 1);
-                break;
-            case 1 or -3:
-                gridPosition += new Vector2(1, 0);
-                break;
-            case 2 or -2:
-                gridPosition += new Vector2(0, -1);
-                break;
-            case 3 or -1:
-                gridPosition += new Vector2(-1, 0);
-                break;
-        }
-    }
-
-    void Move(GameObject character, int dataID, int increment)
+    public void Move(GameObject character, int dataID, int increment)
     {
         // increment should not change when moving
         if (dataID != 0)
@@ -142,6 +99,44 @@ public class Movement : MonoBehaviour
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
             }
+        }
+    }
+
+    public void RequestGridPosition(int currentDirectionID)
+    {
+        switch (currentDirectionID)
+        {
+            case 0:
+                requestedGridPosition += new Vector2(0, 1);
+                break;
+            case 1 or -3:
+                requestedGridPosition += new Vector2(1, 0);
+                break;
+            case 2 or -2:
+                requestedGridPosition += new Vector2(0, -1);
+                break;
+            case 3 or -1:
+                requestedGridPosition += new Vector2(-1, 0);
+                break;
+        }
+    }
+
+    void WorldToGrid(int currentDirectionID)
+    {
+        switch (currentDirectionID)
+        {
+            case 0:
+                gridPosition += new Vector2(0, 1);
+                break;
+            case 1 or -3:
+                gridPosition += new Vector2(1, 0);
+                break;
+            case 2 or -2:
+                gridPosition += new Vector2(0, -1);
+                break;
+            case 3 or -1:
+                gridPosition += new Vector2(-1, 0);
+                break;
         }
     }
 }
