@@ -24,51 +24,62 @@ public class Movement : MonoBehaviour
         
         sr = body.GetComponent<SpriteRenderer>();
 
-        UpdatePlayerProperties(gameObject, 0, 1);
+        TryMove(gameObject, 1, 0);
     }
 
-    public void UpdatePlayerProperties(GameObject character, int increment, int whatToChange)
+    public void TryMove(GameObject character, int dataID, int increment)
     {
-        currentDirectionID += increment;
+        Move(character, dataID, increment);
+    }
+
+    void Move(GameObject character, int dataID, int increment)
+    {
+        // increment should not change when moving
+        if (dataID != 0)
+            currentDirectionID += increment;
+
         if (currentDirectionID <= -4 || currentDirectionID >= 4)
         {
             currentDirectionID = 0;
         }
 
-        // whatToChange 0 concerns transform position
-        // whatToChange 1 concerns animation rotation
+        // dataID 0 concerns transform position
+        // dataID 1 concerns character rotation
 
         // Set transform position
-        if (whatToChange == 0)
+        if (dataID == 0)
         {
-            switch (currentDirectionID)
+            for (int i = 0; i < increment; i++)
             {
-                case -3:
-                    character.transform.position += new Vector3(jumpLength, -jumpLength/2, 0);
-                    break;
-                case -2:
-                    character.transform.position += new Vector3(-jumpLength, -jumpLength/2, 0);
-                    break;
-                case -1:
-                    character.transform.position += new Vector3(-jumpLength, jumpLength/2, 0);
-                    break;
-                case 0:
-                    character.transform.position += new Vector3(jumpLength, jumpLength/2, 0);
-                    break;
-                case 1:
-                    character.transform.position += new Vector3(jumpLength, -jumpLength/2, 0);
-                    break;
-                case 2:
-                    character.transform.position += new Vector3(-jumpLength, -jumpLength/2, 0);
-                    break;
-                case 3:
-                    character.transform.position += new Vector3(-jumpLength, jumpLength/2, 0);
-                    break;
+                switch (currentDirectionID)
+                {
+                    case -3:
+                        character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0);
+                        break;
+                    case -2:
+                        character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0);
+                        break;
+                    case -1:
+                        character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0);
+                        break;
+                    case 0:
+                        character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0);
+                        break;
+                    case 1:
+                        character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0);
+                        break;
+                    case 2:
+                        character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0);
+                        break;
+                    case 3:
+                        character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0);
+                        break;
+                }
             }
         }
 
-        // Set animation state
-        if (whatToChange == 1)
+        // Set character rotation
+        if (dataID == 1)
         {
             switch (currentDirectionID)
             {

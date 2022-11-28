@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1691507434093092371, guid: 63e1b8c37f9239b48bbf7912bc1dc2d5, type: 3}
+      propertyPath: marbleID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6236883699568735952, guid: 63e1b8c37f9239b48bbf7912bc1dc2d5, type: 3}
       propertyPath: m_RootOrder
       value: 0
