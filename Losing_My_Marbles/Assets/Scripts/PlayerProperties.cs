@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    Vector2 gridPosition = new(1, 0);
-
     void Update()
     {
         // Diagonal movement
