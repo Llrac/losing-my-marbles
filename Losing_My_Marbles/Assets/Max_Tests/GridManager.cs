@@ -14,7 +14,7 @@ public class GridManager : MonoBehaviour
     {
         board = new char[9, 9]
         {
-            {'X','X','X','X','X','P','X','X','X'},
+            {'P','X','X','X','X','P','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'P','X','X','X','X','X','X','X','P'},
@@ -30,12 +30,12 @@ public class GridManager : MonoBehaviour
             {
                 switch (board[i, j])
                 {
-                    case WALKABLEGROUND:
+                    case PLAYER:
                         GameObject newTile = Instantiate(prefab);
-                        float posX = ((i * tileSize + j * tileSize) / 2) + prefab.transform.position.x; // this is the actual x position of the tile
-                        float posY = ((-i * tileSize + j * tileSize) / 4) + prefab.transform.position.y; // this is the actual y position of the tile
+                        float posX = ((i * tileSize + j * tileSize) / 2) + transform.position.x; // this is the actual x position of the tile
+                        float posY = ((-i * tileSize + j * tileSize) / 4) + transform.position.y; // this is the actual y position of the tile
                         newTile.transform.position = new Vector3(posX, posY, 0);
-                        newTile.transform.parent = gameObject.transform;
+                      //  newTile.transform.parent = gameObject.transform;
                         break;
                     default:
                         break;
