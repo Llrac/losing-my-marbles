@@ -55,19 +55,19 @@ public class MarbleActions : MonoBehaviour
         switch (marbleToAction.GetComponent<Marble>().marbleID)
         {
             case 1:
-                pp.UpdateData(player, 0, 1);
+                pp.TryMove(player, 0, 1);
                 break;
             case 2:
-                pp.UpdateData(player, 0, 2);
+                pp.TryMove(player, 0, 2);
                 break;
             case 3:
-                pp.UpdateData(player, 0, 3);
+                pp.TryMove(player, 0, 3);
                 break;
             case 4:
-                pp.UpdateData(player, 1, -1);
+                pp.TryMove(player, 1, -1);
                 break;
             case 5:
-                pp.UpdateData(player, 1, 1);
+                pp.TryMove(player, 1, 1);
                 break;
         }
     }

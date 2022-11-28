@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     public Sprite[] sprites;
     SpriteRenderer sr;
@@ -24,10 +24,15 @@ public class Character : MonoBehaviour
         
         sr = body.GetComponent<SpriteRenderer>();
 
-        UpdateData(gameObject, 1, 0);
+        TryMove(gameObject, 1, 0);
     }
 
-    public void UpdateData(GameObject character, int dataID, int increment)
+    public void TryMove(GameObject character, int dataID, int increment)
+    {
+        Move(character, dataID, increment);
+    }
+
+    void Move(GameObject character, int dataID, int increment)
     {
         // increment should not change when moving
         if (dataID != 0)
@@ -44,29 +49,32 @@ public class Character : MonoBehaviour
         // Set transform position
         if (dataID == 0)
         {
-            switch (currentDirectionID)
+            for (int i = 0; i < increment; i++)
             {
-                case -3:
-                    character.transform.position += new Vector3(jumpLength, -jumpLength/2, 0) * increment;
-                    break;
-                case -2:
-                    character.transform.position += new Vector3(-jumpLength, -jumpLength/2, 0) * increment;
-                    break;
-                case -1:
-                    character.transform.position += new Vector3(-jumpLength, jumpLength/2, 0) * increment;
-                    break;
-                case 0:
-                    character.transform.position += new Vector3(jumpLength, jumpLength/2, 0) * increment;
-                    break;
-                case 1:
-                    character.transform.position += new Vector3(jumpLength, -jumpLength/2, 0) * increment;
-                    break;
-                case 2:
-                    character.transform.position += new Vector3(-jumpLength, -jumpLength/2, 0) * increment;
-                    break;
-                case 3:
-                    character.transform.position += new Vector3(-jumpLength, jumpLength/2, 0) * increment;
-                    break;
+                switch (currentDirectionID)
+                {
+                    case -3:
+                        character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0);
+                        break;
+                    case -2:
+                        character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0);
+                        break;
+                    case -1:
+                        character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0);
+                        break;
+                    case 0:
+                        character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0);
+                        break;
+                    case 1:
+                        character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0);
+                        break;
+                    case 2:
+                        character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0);
+                        break;
+                    case 3:
+                        character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0);
+                        break;
+                }
             }
         }
 
