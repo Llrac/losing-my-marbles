@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public Vector2 gridPosition = new(1, 0);
+    public Vector2 gridPosition = new(0, 0);
+    public Vector2 requestedGridPosition = new(0, 0);
     public Sprite[] sprites;
     SpriteRenderer sr;
 
@@ -34,28 +35,42 @@ public class Movement : MonoBehaviour
         Move(character, dataID, increment);
     }
 
+    public void RequestGridPosition(int currentDirectionID)
+    {
+        switch (currentDirectionID)
+        {
+            case 0:
+                requestedGridPosition += new Vector2(0, 1);
+                break;
+            case 1 or -3:
+                requestedGridPosition += new Vector2(1, 0);
+                break;
+            case 2 or -2:
+                requestedGridPosition += new Vector2(0, -1);
+                break;
+            case 3 or -1:
+                requestedGridPosition += new Vector2(-1, 0);
+                break;
+        }
+    }
+
     void WorldToGrid(int currentDirectionID)
     {
         switch (currentDirectionID)
         {
             case 0:
                 gridPosition += new Vector2(0, 1);
-                Debug.Log(gridPosition);
                 break;
             case 1 or -3:
                 gridPosition += new Vector2(1, 0);
-                Debug.Log(gridPosition);
                 break;
             case 2 or -2:
                 gridPosition += new Vector2(0, -1);
-                Debug.Log(gridPosition);
                 break;
             case 3 or -1:
                 gridPosition += new Vector2(-1, 0);
-                Debug.Log(gridPosition);
                 break;
         }
-        
     }
 
     void Move(GameObject character, int dataID, int increment)

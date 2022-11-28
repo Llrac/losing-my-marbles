@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-   
-
     void Update()
     {
         // Diagonal movement

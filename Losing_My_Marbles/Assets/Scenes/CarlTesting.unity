@@ -8015,7 +8015,7 @@ MonoBehaviour:
   - {fileID: 2044315131}
   - {fileID: 1827668919}
   highlight: {fileID: 5962901347320887161, guid: 2edbc0708b6bcec40b131e66a34d1abd, type: 3}
-  marbleBagTransform: {fileID: 0}
+  marbleBagTransform: {fileID: 7553351092172364897}
   globalOrderID: 0
   marbleBag:
   - {fileID: 1666275524}
@@ -8269,6 +8269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2105792695}
   - component: {fileID: 2105792694}
+  - component: {fileID: 2105792696}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -8367,6 +8368,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2105792696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105792693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fba1c701b5569146a226485906f76dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2131771074
 GameObject:
   m_ObjectHideFlags: 0
