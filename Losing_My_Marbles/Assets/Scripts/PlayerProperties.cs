@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    GridManager grid;
+    
     void Update()
     {
-        grid = FindObjectOfType<GridManager>();
+        
         // Diagonal movement
         if (Input.GetKeyDown(KeyCode.W))
         {

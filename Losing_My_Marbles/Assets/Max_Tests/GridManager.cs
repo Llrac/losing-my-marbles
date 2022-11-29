@@ -27,29 +27,7 @@ public class GridManager : MonoBehaviour
             {'X','X','X','X','X','X','X','X','X'}
         };
     }
-    private void Update()
-    {
-        pp.RequestGridPosition(pp.currentDirectionID);
-
-        switch (IsSquareEmpty(pp.requestedGridPosition)) // should happen before moving
-        {
-            case 0: //wall
-                //do wall stuff
-                break;
-            case 1:
-                //Move grid position and world position ONE step
-                MoveInGridMatrix(pp.gameObject, pp.requestedGridPosition);
-                pp.Move(pp.gameObject, 0, 1);
-                break;
-            case 2:
-                // player
-                //Push that player && move to square
-                break;
-            case 3:
-                //Push enemy
-                break;
-        }
-    }
+   
     private void OnDrawGizmos()
     {
         if (board == null) return;
@@ -77,24 +55,24 @@ public class GridManager : MonoBehaviour
     }
 
 
-    private void MoveInGridMatrix(GameObject character, Vector2 requestedTile) // should be player properties grid position
+    public void MoveInGridMatrix(GameObject character, Vector2 requestedTile) //should be playerproperites instead of gameobject
     {
         float savedX = pp.gridPosition.x;
         float savedY = pp.gridPosition.y;
 
-        int x = (int)requestedTile.x; // viktigt att hålla koll på x och y
-        int y = (int)requestedTile.y;
+        int x = (int)requestedTile.x + (int)pp.gridPosition.x;
+        int y = (int)requestedTile.y + (int)pp.gridPosition.y;
 
         board[x, y] = PLAYER;
         board[(int)savedX, (int)savedY] = WALKABLEGROUND;
 
-        
+        pp.gridPosition += requestedTile;
     }
     public int IsSquareEmpty(Vector2 requestedTile)
     {
-        int x = (int)requestedTile.x;
-        int y = (int)requestedTile.y;
-        if (x > board.GetLength(0) || x < 0 || y > board.GetLength(0) || y < 0)
+        int x = (int)pp.gridPosition.x + (int)requestedTile.x;
+        int y = (int)pp.gridPosition.y + (int)requestedTile.y;
+        if (x >= board.GetLength(0) || x < 0 || y >= board.GetLength(0) || y < 0)
             return 0;
         return board[x, y] switch
         {
