@@ -46,7 +46,8 @@ public class MarbleActions : MonoBehaviour
 
         for (int i = 0; i < marblesToExecute.Length; i++)
         {
-            MarbleToAction(marblesToExecute[i]);
+            //if square empty = 1 move
+            MarbleToAction(marblesToExecute[i]);//.DirectionId
         }
     }
 
