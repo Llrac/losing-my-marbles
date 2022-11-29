@@ -8,25 +8,22 @@ public class GridManager : MonoBehaviour
     const char PLAYER = 'P';            // 2
     const char ENEMY = 'E';             // 3
 
-    PlayerProperties pp;
-
     public char[,] board;
 
     void Start()
     {
-        pp = FindObjectOfType<PlayerProperties>();
         board = new char[9, 9]
         {
             // what happens to a player if a hazard turns on while standing in it, GridLogic?
-            {'P','X','X','X','X','X','X','X','X'},
+            {'P','E','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','E','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'}
+            {'X','X','X','X','X','X','X','X','X'},
+            {'X','X','X','X','X','X','X','X','X'} // sortinglayer 8
         };
     }
    
@@ -56,12 +53,16 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public int IsSquareEmpty(Vector2 requestedTile)
+    public int IsSquareEmpty(GameObject character, Vector2 requestedTile)
     {
-        int x = (int)pp.gridPosition.x + (int)requestedTile.x;
-        int y = (int)pp.gridPosition.y + (int)requestedTile.y;
+        Movement moveScript;
+        moveScript = character.GetComponent<Movement>();
+        int x = (int)moveScript.gridPosition.x + (int)requestedTile.x;
+        int y = (int)moveScript.gridPosition.y + (int)requestedTile.y;
+
         if (x >= board.GetLength(0) || x < 0 || y >= board.GetLength(0) || y < 0)
             return 0;
+
         return board[x, y] switch
         {
             WALKABLEGROUND => 1,
@@ -71,17 +72,17 @@ public class GridManager : MonoBehaviour
         };
     }
 
-    public void MoveInGridMatrix(Vector2 requestedTile)
+    public void MoveInGridMatrix(Movement character, Vector2 requestedTile)
     {
-        float oldX = pp.gridPosition.x;
-        float oldY = pp.gridPosition.y;
+        float oldX = character.gridPosition.x;
+        float oldY = character.gridPosition.y;
 
-        int newX = (int)pp.gridPosition.x + (int)requestedTile.x;
-        int newY = (int)pp.gridPosition.y + (int)requestedTile.y;
+        int newX = (int)character.gridPosition.x + (int)requestedTile.x;
+        int newY = (int)character.gridPosition.y + (int)requestedTile.y;
 
-        board[newX, newY] = PLAYER;
+        board[newX, newY] = character.ChangeTag();
         board[(int)oldX, (int)oldY] = WALKABLEGROUND;
 
-        pp.gridPosition += requestedTile;
+        character.gridPosition += requestedTile;
     }
 }
