@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    private const char PLAYER = 'P';
-    private const char WALKABLEGROUND = 'X';
-    private const char ENEMY = 'E';
-    private PlayerProperties pp;
+    const char WALKABLEGROUND = 'X';    // 1
+    const char PLAYER = 'P';            // 2
+    const char ENEMY = 'E';             // 3
+
+    PlayerProperties pp;
+
     public char[,] board;
 
     void Start()
@@ -49,25 +51,11 @@ public class GridManager : MonoBehaviour
                         Gizmos.color = Color.red;
                         break;
                 }
-                Gizmos.DrawSphere(Vector3.down * (y + -5f )+ Vector3.right * x, 0.5f);
+                Gizmos.DrawSphere(Vector3.down * (y - 5f ) + Vector3.right * x, 0.5f);
             }
         }
     }
 
-
-    public void MoveInGridMatrix(GameObject character, Vector2 requestedTile) //should be playerproperites instead of gameobject
-    {
-        float savedX = pp.gridPosition.x;
-        float savedY = pp.gridPosition.y;
-
-        int x = (int)requestedTile.x + (int)pp.gridPosition.x;
-        int y = (int)requestedTile.y + (int)pp.gridPosition.y;
-
-        board[x, y] = PLAYER;
-        board[(int)savedX, (int)savedY] = WALKABLEGROUND;
-
-        pp.gridPosition += requestedTile;
-    }
     public int IsSquareEmpty(Vector2 requestedTile)
     {
         int x = (int)pp.gridPosition.x + (int)requestedTile.x;
@@ -81,5 +69,19 @@ public class GridManager : MonoBehaviour
             ENEMY => 3,
             _ => 0,
         };
+    }
+
+    public void MoveInGridMatrix(Vector2 requestedTile)
+    {
+        float oldX = pp.gridPosition.x;
+        float oldY = pp.gridPosition.y;
+
+        int newX = (int)pp.gridPosition.x + (int)requestedTile.x;
+        int newY = (int)pp.gridPosition.y + (int)requestedTile.y;
+
+        board[newX, newY] = PLAYER;
+        board[(int)oldX, (int)oldY] = WALKABLEGROUND;
+
+        pp.gridPosition += requestedTile;
     }
 }

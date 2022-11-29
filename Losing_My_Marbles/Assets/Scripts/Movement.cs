@@ -30,10 +30,10 @@ public class Movement : MonoBehaviour
         
         sr = body.GetComponent<SpriteRenderer>();
 
-        Move(gameObject, 1, 0);
+        TryMove(gameObject, 1, 0);
     }
 
-    public void Move(GameObject character, int dataID, int increment)
+    public void TryMove(GameObject character, int dataID, int increment)
     {
         // increment should not change when moving
         if (dataID != 0)
@@ -43,7 +43,6 @@ public class Movement : MonoBehaviour
         {
             currentDirectionID = 0;
         }
-
         
         // dataID 0 concerns transform position
         // dataID 1 concerns character rotation
@@ -53,36 +52,22 @@ public class Movement : MonoBehaviour
         {
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
-                if (grid.IsSquareEmpty(RequestGridPosition(currentDirectionID)) == 1)
+                switch (grid.IsSquareEmpty(RequestGridPosition(currentDirectionID)))
                 {
-                    integer = 1;
+                    case 0: // EMPTY (walls, void, etc)
+                        TryMove(gameObject, 1, 2);
+                        break;
+                    case 1: // WALKABLEGROUND
+                        Move(character, increment);
+                        break;
+                    case 2: // PLAYER
 
-                    if (increment < 0)
-                    {
-                        integer *= -1;
-                    }
-                    switch (currentDirectionID)
-                    {
-                        case 0:
-                            character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * integer;
-                            grid.MoveInGridMatrix(this.gameObject, RequestGridPosition(currentDirectionID));
-                            break;
-                        case 1 or -3:
-                            character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * integer;
-                            grid.MoveInGridMatrix(this.gameObject, RequestGridPosition(currentDirectionID));
-                            break;
-                        case 2 or -2:
-                            character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * integer;
-                            grid.MoveInGridMatrix(this.gameObject, RequestGridPosition(currentDirectionID));
-                            break;
-                        case 3 or -1:
-                            character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * integer;
-                            grid.MoveInGridMatrix(this.gameObject, RequestGridPosition(currentDirectionID));
-                            break;
-                    }
+                        break;
+                    case 3: // ENEMY
+
+                        break;
                 }
             }
-
         }
 
         // Set character rotation
@@ -110,24 +95,45 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public Vector2 RequestGridPosition(int currentDirectionID)
+    void Move(GameObject character, int increment)
     {
+        integer = 1;
+
+        if (increment < 0)
+        {
+            integer *= -1;
+        }
         switch (currentDirectionID)
         {
             case 0:
-                return new Vector2(0, 1);
-              
+                character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * integer;
+                grid.MoveInGridMatrix(RequestGridPosition(currentDirectionID));
+                break;
             case 1 or -3:
-                return new Vector2(1, 0);
-               
+                character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * integer;
+                grid.MoveInGridMatrix(RequestGridPosition(currentDirectionID));
+                break;
             case 2 or -2:
-                return new Vector2(0, -1);
-              
+                character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * integer;
+                grid.MoveInGridMatrix(RequestGridPosition(currentDirectionID));
+                break;
             case 3 or -1:
-                return new Vector2(-1, 0);
-
+                character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * integer;
+                grid.MoveInGridMatrix(RequestGridPosition(currentDirectionID));
+                break;
         }
-        return new Vector2(0, 0);
+    }
+
+    public Vector2 RequestGridPosition(int currentDirectionID)
+    {
+        return currentDirectionID switch
+        {
+            0 => new Vector2(0, 1),
+            1 or -3 => new Vector2(1, 0),
+            2 or -2 => new Vector2(0, -1),
+            3 or -1 => new Vector2(-1, 0),
+            _ => new Vector2(0, 0),
+        };
     }
 
 }
