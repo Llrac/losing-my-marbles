@@ -16,7 +16,7 @@ public class GridManager : MonoBehaviour
         {
             // what happens to a player if a hazard turns on while standing in it, GridLogic?
             {'P','E','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'},
+            {'X','X','E','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
@@ -84,5 +84,17 @@ public class GridManager : MonoBehaviour
         board[(int)oldX, (int)oldY] = WALKABLEGROUND;
 
         character.gridPosition += requestedTile;
+    }
+    public GameObject FindInMatrix(Vector2 tile, List <Movement> list)
+    {
+        for(int i = 0; i < list.Count; i++)
+        {
+            Movement movement = list[i];
+            if(movement.gridPosition == tile)
+            {
+                return movement.gameObject;
+            }
+        }
+        return null;
     }
 }

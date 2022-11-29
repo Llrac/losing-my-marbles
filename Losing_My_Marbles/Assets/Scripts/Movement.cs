@@ -5,7 +5,8 @@ using UnityEngine;
 public abstract class Movement : MonoBehaviour
 {
     public Vector2 gridPosition = new(0, 0);
-   
+    public List<Movement> enemies = new List<Movement>();
+
     public int currentDirectionID = 0;
 
     public Sprite[] sprites = new Sprite[2];
@@ -21,6 +22,8 @@ public abstract class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemies.Add(FindObjectOfType<RåttaProperties>());
+
         grid = FindObjectOfType<GridManager>();
         foreach (Transform child in transform)
         {
@@ -55,12 +58,18 @@ public abstract class Movement : MonoBehaviour
                         Move(character, increment);
                         break;
                     case 2: // PLAYER
-                        // Get character at requestedGridPosition
-                        // TryMove(character at requestedGridPosition, 0, 1, currentDirectionID);
+                       
                         // Move(character, increment);
                         break;
                     case 3: // ENEMY
-
+                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + gridPosition, enemies);
+                        if (grid.IsSquareEmpty(enemy, RequestGridPosition(currentDirectionID)) == 1)
+                        {
+                            Move(enemy, increment);
+                            Move(character, increment);
+                        }
+                           
+                        
                         break;
                 }
             }
