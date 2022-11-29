@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Movement : MonoBehaviour
 {
     public Vector2 gridPosition = new(0, 0);
-    public List<Movement> enemies = new List<Movement>();
+    public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
 
@@ -22,9 +22,8 @@ public abstract class Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemies.Add(FindObjectOfType<RåttaProperties>());
-
         grid = FindObjectOfType<GridManager>();
+
         foreach (Transform child in transform)
         {
             if (child.gameObject.name == "Sprite")

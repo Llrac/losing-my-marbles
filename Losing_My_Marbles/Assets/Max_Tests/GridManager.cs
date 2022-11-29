@@ -15,8 +15,8 @@ public class GridManager : MonoBehaviour
         board = new char[9, 9]
         {
             // what happens to a player if a hazard turns on while standing in it, GridLogic?
-            {'P','E','X','X','X','X','X','X','X'},
-            {'X','X','E','X','X','X','X','X','X'},
+            {'P','X','X','X','X','X','X','X','X'},
+            {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
@@ -25,6 +25,10 @@ public class GridManager : MonoBehaviour
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'} // sortinglayer 8
         };
+        for(int i = 0; i < Movement.enemies.Count; i++)
+        {
+            board[(int)Movement.enemies[i].gridPosition.x, (int)Movement.enemies[i].gridPosition.y] = ENEMY;
+        }
     }
    
     private void OnDrawGizmos()

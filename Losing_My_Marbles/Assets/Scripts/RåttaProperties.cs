@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class RåttaProperties : Movement
 {
+    private void Start()
+    {
+        Movement.enemies.Add(this);
+    }
     void Update()
     {
         // Diagonal movement
