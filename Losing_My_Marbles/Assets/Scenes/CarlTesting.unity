@@ -2765,6 +2765,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &631842762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 631842763}
+  - component: {fileID: 631842764}
+  m_Layer: 0
+  m_Name: TurnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &631842763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631842762}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &631842764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631842762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fc61709491cdc42b3617689c1927bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &688440265
 GameObject:
   m_ObjectHideFlags: 0
@@ -8010,99 +8054,17 @@ Transform:
   m_Father: {fileID: 1603885186}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2070015174
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2070015175}
-  - component: {fileID: 2070015176}
-  - component: {fileID: 2070015177}
-  m_Layer: 0
-  m_Name: MarbleManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2070015175
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070015174}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2070015176
+--- !u!114 &2070015176 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+  m_PrefabInstance: {fileID: 3825592211226396774}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070015174}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37c22a03e202c8b48a837526d34c4db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableMarbleSlots: 00000000000000
-  marblesInMarbleBagText: {fileID: 167921948}
-  marblesInDiscardBagText: {fileID: 150293078}
-  marbleSlots:
-  - {fileID: 309074698}
-  - {fileID: 823265099}
-  - {fileID: 114549888}
-  - {fileID: 1783805745}
-  - {fileID: 435216360}
-  - {fileID: 2044315131}
-  - {fileID: 1827668919}
-  highlight: {fileID: 5962901347320887161, guid: 2edbc0708b6bcec40b131e66a34d1abd, type: 3}
-  marbleBagTransform: {fileID: 7553351092172364897}
-  globalOrderID: 0
-  marbleBag:
-  - {fileID: 1666275524}
-  - {fileID: 440528239}
-  - {fileID: 1503193746}
-  - {fileID: 718992303}
-  - {fileID: 2098237226}
-  - {fileID: 94946890}
-  - {fileID: 740025693}
-  - {fileID: 237713115}
-  - {fileID: 252635614}
-  - {fileID: 1467993278}
-  - {fileID: 1433660985}
-  - {fileID: 814763863}
-  - {fileID: 912966634}
-  discardBag: []
---- !u!114 &2070015177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070015174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80cc8edaf2cdbf04e95bd4bfe2f2edd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedMarbles: []
-  marblesToExecute:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &2092240820
 GameObject:
   m_ObjectHideFlags: 0
@@ -8650,6 +8612,155 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7048e4a19ea99942a8380c6d04b87cc, type: 3}
+--- !u!1001 &3825592211226396774
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3825592210037367968, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_Name
+      value: MarbleManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367969, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBagTransform
+      value: 
+      objectReference: {fileID: 7553351092172364897}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marblesInMarbleBagText
+      value: 
+      objectReference: {fileID: 167921948}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[0]
+      value: 
+      objectReference: {fileID: 1666275524}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[1]
+      value: 
+      objectReference: {fileID: 440528239}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[2]
+      value: 
+      objectReference: {fileID: 1503193746}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[3]
+      value: 
+      objectReference: {fileID: 718992303}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[4]
+      value: 
+      objectReference: {fileID: 2098237226}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[5]
+      value: 
+      objectReference: {fileID: 94946890}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[6]
+      value: 
+      objectReference: {fileID: 740025693}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[7]
+      value: 
+      objectReference: {fileID: 237713115}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[8]
+      value: 
+      objectReference: {fileID: 252635614}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[9]
+      value: 
+      objectReference: {fileID: 1467993278}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marblesInDiscardBagText
+      value: 
+      objectReference: {fileID: 150293078}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[10]
+      value: 
+      objectReference: {fileID: 1433660985}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[11]
+      value: 
+      objectReference: {fileID: 814763863}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleBag.Array.data[12]
+      value: 
+      objectReference: {fileID: 912966634}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleSlots.Array.data[0]
+      value: 
+      objectReference: {fileID: 309074698}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleSlots.Array.data[1]
+      value: 
+      objectReference: {fileID: 823265099}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleSlots.Array.data[2]
+      value: 
+      objectReference: {fileID: 114549888}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleSlots.Array.data[3]
+      value: 
+      objectReference: {fileID: 1783805745}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleSlots.Array.data[4]
+      value: 
+      objectReference: {fileID: 435216360}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleSlots.Array.data[5]
+      value: 
+      objectReference: {fileID: 2044315131}
+    - target: {fileID: 3825592210037367982, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
+      propertyPath: marbleSlots.Array.data[6]
+      value: 
+      objectReference: {fileID: 1827668919}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 098818f2d8a061c42b8d27de11274bbf, type: 3}
 --- !u!1 &7553351092172364896
 GameObject:
   m_ObjectHideFlags: 0

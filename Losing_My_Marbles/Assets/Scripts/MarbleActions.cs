@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class MarbleActions : MonoBehaviour
 {
-    public List<GameObject> selectedMarbles = new();
-
-    public GameObject[] marblesToExecute = new GameObject[5];
+    [HideInInspector] public List<GameObject> selectedMarbles = new();
+    [HideInInspector] public GameObject[] marblesToExecute = new GameObject[5];
 
     GameObject player;
     PlayerProperties pp;
@@ -47,7 +46,7 @@ public class MarbleActions : MonoBehaviour
         for (int i = 0; i < marblesToExecute.Length; i++)
         {
             //if square empty = 1 move
-            MarbleToAction(marblesToExecute[i]);//.DirectionId
+            MarbleToAction(marblesToExecute[i]);
         }
     }
 

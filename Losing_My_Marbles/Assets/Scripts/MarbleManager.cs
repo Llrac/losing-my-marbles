@@ -6,15 +6,19 @@ using TMPro;
 
 public class MarbleManager : MonoBehaviour
 {
-    public bool[] availableMarbleSlots = new bool[7];
+    [Header("Marbles & Slots")]
+    public Transform[] marbleSlots = new Transform[7];
+    public List<Marble> marbleBag = new();
+    public Transform marbleBagTransform;
+    
+    [Header("Text")]
     public TextMeshProUGUI marblesInMarbleBagText;
     public TextMeshProUGUI marblesInDiscardBagText;
-    public Transform[] marbleSlots;
-    public GameObject highlight;
-    public Transform marbleBagTransform;
 
+    public GameObject highlight;
+
+    [HideInInspector] public bool[] availableMarbleSlots = new bool[7];
     [HideInInspector] public int globalOrderID = 0;
-    public List<Marble> marbleBag = new();
     [HideInInspector] public List<Marble> discardBag = new();
 
     MarbleActions ma;
