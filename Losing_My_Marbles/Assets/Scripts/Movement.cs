@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public abstract class Movement : MonoBehaviour
 {
-    GridManager grid;
-
     public Vector2 gridPosition = new(0, 0);
-    public Vector2 requestedGridPosition = new(0, 0);
-    public Sprite[] sprites;
+   
+    public int currentDirectionID = 0;
+
+    public Sprite[] sprites = new Sprite[2];
     SpriteRenderer sr;
+    GridManager grid;
 
     public float jumpLength = 1;
 
-    public int currentDirectionID = 0;
-    int integer;
+    int multiplier;
 
     GameObject body;
 
@@ -30,38 +30,34 @@ public class Movement : MonoBehaviour
         
         sr = body.GetComponent<SpriteRenderer>();
 
-        TryMove(gameObject, 1, 0);
     }
 
-    public void TryMove(GameObject character, int dataID, int increment)
+    public void TryMove(GameObject character, int dataID, int increment, int callersDirectionID = 5)
     {
-        // increment should not change when moving
-        if (dataID != 0)
-            currentDirectionID += increment;
-
-        if (currentDirectionID <= -4 || currentDirectionID >= 4)
+        // If this TryMove was called from another character's TryMove with their currentDirectionID,
+        // use their currentDirectionID as this currentDirectionID
+        if (callersDirectionID != 5)
         {
-            currentDirectionID = 0;
+            currentDirectionID = callersDirectionID;
         }
-        
-        // dataID 0 concerns transform position
-        // dataID 1 concerns character rotation
 
         // Set transform position
         if (dataID == 0)
         {
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
-                switch (grid.IsSquareEmpty(RequestGridPosition(currentDirectionID)))
+                switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
                 {
                     case 0: // EMPTY (walls, void, etc)
-                        TryMove(gameObject, 1, 2);
+                        TryMove(character, 1, 2);
                         break;
                     case 1: // WALKABLEGROUND
                         Move(character, increment);
                         break;
                     case 2: // PLAYER
-
+                        // Get character at requestedGridPosition
+                        // TryMove(character at requestedGridPosition, 0, 1, currentDirectionID);
+                        // Move(character, increment);
                         break;
                     case 3: // ENEMY
 
@@ -73,6 +69,20 @@ public class Movement : MonoBehaviour
         // Set character rotation
         if (dataID == 1)
         {
+            for (int i = 0; i < Mathf.Abs(increment); i++)
+            {
+                multiplier = 1;
+                if (increment < 0)
+                {
+                    multiplier *= -1;
+                }
+                currentDirectionID += multiplier;
+                if (currentDirectionID <= -4 || currentDirectionID >= 4)
+                {
+                    currentDirectionID = 0;
+                }
+            }
+
             switch (currentDirectionID)
             {
                 case 0:
@@ -95,35 +105,6 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void Move(GameObject character, int increment)
-    {
-        integer = 1;
-
-        if (increment < 0)
-        {
-            integer *= -1;
-        }
-        switch (currentDirectionID)
-        {
-            case 0:
-                character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * integer;
-                grid.MoveInGridMatrix(RequestGridPosition(currentDirectionID));
-                break;
-            case 1 or -3:
-                character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * integer;
-                grid.MoveInGridMatrix(RequestGridPosition(currentDirectionID));
-                break;
-            case 2 or -2:
-                character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * integer;
-                grid.MoveInGridMatrix(RequestGridPosition(currentDirectionID));
-                break;
-            case 3 or -1:
-                character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * integer;
-                grid.MoveInGridMatrix(RequestGridPosition(currentDirectionID));
-                break;
-        }
-    }
-
     public Vector2 RequestGridPosition(int currentDirectionID)
     {
         return currentDirectionID switch
@@ -136,4 +117,32 @@ public class Movement : MonoBehaviour
         };
     }
 
+    void Move(GameObject character, int increment)
+    {
+        multiplier = 1;
+        if (increment < 0)
+        {
+            multiplier *= -1;
+        }
+        switch (currentDirectionID)
+        {
+            case 0:
+                character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * multiplier;
+                grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+                break;
+            case 1 or -3:
+                character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * multiplier;
+                grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+                break;
+            case 2 or -2:
+                character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * multiplier;
+                grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+                break;
+            case 3 or -1:
+                character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * multiplier;
+                grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+                break;
+        }
+    }
+    public abstract char ChangeTag();
 }
