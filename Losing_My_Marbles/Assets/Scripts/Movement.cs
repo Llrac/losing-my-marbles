@@ -15,11 +15,12 @@ public abstract class Movement : MonoBehaviour
     GridManager grid;
 
     public float jumpLength = 1;
-
+ 
     int multiplier;
 
     GameObject body;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -32,17 +33,18 @@ public abstract class Movement : MonoBehaviour
         }
         
         sr = body.GetComponent<SpriteRenderer>();
-
+       
     }
 
-    public void TryMove(GameObject character, int dataID, int increment, int callersDirectionID = 5)
+
+    public void TryMove(GameObject character, int dataID, int increment)
     {
-        // If this TryMove was called from another character's TryMove with their currentDirectionID,
-        // use their currentDirectionID as this currentDirectionID
-        if (callersDirectionID != 5)
-        {
-            currentDirectionID = callersDirectionID;
-        }
+       
+        //if (callersDirectionID != 5)
+        //{
+        //    currentDirectionID = callersDirectionID;
+        //}
+      
 
         // Set transform position
         if (dataID == 0)
@@ -52,23 +54,19 @@ public abstract class Movement : MonoBehaviour
                 switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
                 {
                     case 0: // EMPTY (walls, void, etc)
-                        TryMove(character, 1, 2);
+                        TryMove(character, 1, 2); // lägg till recursion här
                         break;
                     case 1: // WALKABLEGROUND
-                        Move(character, increment);
+                        Move(character, 1);
                         break;
                     case 2: // PLAYER
                        
                         // Move(character, increment);
                         break;
                     case 3: // ENEMY
-                        
-                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + gridPosition, enemies);
-                        TryMove(enemy, 0, increment);
-                        Move(character, increment);
-                        
-                           
-                        
+                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + character.GetComponent<Movement>().gridPosition, enemies);
+                        TryMove(enemy,0, 1);
+                        TryMove(character, 0, 1);
                         break;
                 }
             }

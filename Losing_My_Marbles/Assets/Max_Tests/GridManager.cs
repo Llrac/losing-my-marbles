@@ -59,8 +59,8 @@ public class GridManager : MonoBehaviour
 
     public int IsSquareEmpty(GameObject character, Vector2 requestedTile)
     {
-        Movement moveScript;
-        moveScript = character.GetComponent<Movement>();
+        Movement moveScript = character.GetComponent<Movement>();
+
         int x = (int)moveScript.gridPosition.x + (int)requestedTile.x;
         int y = (int)moveScript.gridPosition.y + (int)requestedTile.y;
 
@@ -70,7 +70,7 @@ public class GridManager : MonoBehaviour
         return board[x, y] switch
         {
             WALKABLEGROUND => 1,
-            PLAYER => 2,// maybe should return something else which could be used in another switch statement
+            PLAYER => 2,
             ENEMY => 3,
             _ => 0,
         };
@@ -91,7 +91,7 @@ public class GridManager : MonoBehaviour
     }
     public GameObject FindInMatrix(Vector2 tile, List <Movement> list)
     {
-        for(int i = 0; i < list.Count; i++)
+        for(int i = 0; i <= list.Count - 1; i++)
         {
             Movement movement = list[i];
             if(movement.gridPosition == tile)
@@ -101,4 +101,5 @@ public class GridManager : MonoBehaviour
         }
         return null;
     }
+   
 }
