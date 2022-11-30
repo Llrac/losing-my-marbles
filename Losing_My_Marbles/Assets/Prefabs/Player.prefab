@@ -46,13 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dc345926ccc284a86a200b31161687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPosition: {x: 0, y: 288841}
-  requestedGridPosition: {x: 0, y: 0}
+  gridPosition: {x: 0, y: 0}
+  currentDirectionID: 0
   sprites:
   - {fileID: 21300000, guid: e11a4197bacf3fd4ea94a5ca3a1d7d4c, type: 3}
   - {fileID: 21300000, guid: 540a23c4954f03e49a689eed3f5c1746, type: 3}
   jumpLength: 1
-  currentDirectionID: 0
 --- !u!50 &6590025579627938569
 Rigidbody2D:
   serializedVersion: 4
@@ -146,7 +145,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e11a4197bacf3fd4ea94a5ca3a1d7d4c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
