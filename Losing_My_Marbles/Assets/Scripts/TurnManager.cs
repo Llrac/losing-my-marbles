@@ -2,19 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarbleActions : MonoBehaviour
+public class TurnManager : MonoBehaviour
 {
-    public List<GameObject> selectedMarbles = new();
+    // turn order
 
-    public GameObject[] marblesToExecute = new GameObject[5];
+    // player 1, 2, 3, 4
+
+    // enemy 1, 2, 3, etc
+    // all hazard tiles
+    // all environment tiles
+
+    [HideInInspector] public GameObject[] marblesToExecute = new GameObject[5];
+    [HideInInspector] public List<GameObject> selectedMarbles = new();
+    [HideInInspector] public int globalOrderID = 0;
 
     GameObject player;
     PlayerProperties pp;
 
-    void Start()
+    private void Start()
     {
         pp = FindObjectOfType<PlayerProperties>();
         player = pp.gameObject;
+    }
+
+    public void ResetOrder()
+    {
+        selectedMarbles.Clear();
+        Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
+        foreach (Marble marbleScript in allMarbleScripts)
+        {
+            marbleScript.hasBeenClicked = false;
+            marbleScript.orderID = 0;
+            globalOrderID = 0;
+        }
+        Highlight[] highlights = FindObjectsOfType<Highlight>();
+        foreach (Highlight highlight in highlights)
+        {
+            Destroy(highlight.gameObject);
+        }
     }
 
     public void SelectedMarbles()
@@ -46,8 +71,7 @@ public class MarbleActions : MonoBehaviour
 
         for (int i = 0; i < marblesToExecute.Length; i++)
         {
-            //if square empty = 1 move
-            MarbleToAction(marblesToExecute[i]);//.DirectionId
+            MarbleToAction(marblesToExecute[i]);
         }
     }
 
@@ -71,5 +95,18 @@ public class MarbleActions : MonoBehaviour
                 pp.TryMove(player, 1, 1);
                 break;
         }
+    }
+
+    public void RequestMove(GameObject character, int dataID, int increment, int callersDirectionID = 5)
+    {
+        //list spelare
+        //
+    }
+
+    public IEnumerator TurnOrder()
+    {
+
+
+        yield return null;
     }
 }
