@@ -16,15 +16,14 @@ public class Marble : MonoBehaviour
 
     private void Start()
     {
-        transform.localScale = new Vector3(Camera.main.orthographicSize / 10,
-            Camera.main.orthographicSize / 10, Camera.main.orthographicSize / 10);
         mm = FindObjectOfType<MarbleManager>();
     }
 
-    public void OnMouseDown()
+    public void SelectMarble()
     {
         if (!hasBeenClicked)
         {
+            Handheld.Vibrate();
             mm.GetHighlight(gameObject);
         }
         else if (hasBeenClicked)

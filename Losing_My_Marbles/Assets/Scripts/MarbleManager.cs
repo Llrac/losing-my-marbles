@@ -7,8 +7,6 @@ using TMPro;
 public class MarbleManager : MonoBehaviour
 {
     public bool[] availableMarbleSlots = new bool[7];
-    public TextMeshProUGUI marblesInMarbleBagText;
-    public TextMeshProUGUI marblesInDiscardBagText;
     public Transform[] marbleSlots;
     public GameObject highlight;
     public Transform marbleBagTransform;
@@ -26,12 +24,14 @@ public class MarbleManager : MonoBehaviour
             availableMarbleSlots[i] = true;
         }
         ma = FindObjectOfType<MarbleActions>();
+        
+        FillHandWithMarbles();
     }
 
     void Update()
     {
-        marblesInMarbleBagText.text = marbleBag.Count.ToString();
-        marblesInDiscardBagText.text = discardBag.Count.ToString();
+        //marblesInMarbleBagText.text = marbleBag.Count.ToString();
+        //marblesInDiscardBagText.text = discardBag.Count.ToString();
     }
 
     public void FillHandWithMarbles()
@@ -56,6 +56,7 @@ public class MarbleManager : MonoBehaviour
                 randomMarble.isInHand = true;
                 availableMarbleSlots[i] = false;
                 marbleBag.Remove(randomMarble);
+                Debug.Log("whatever");
             }
         }
     }
