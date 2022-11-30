@@ -62,12 +62,11 @@ public abstract class Movement : MonoBehaviour
                         // Move(character, increment);
                         break;
                     case 3: // ENEMY
+                        
                         GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + gridPosition, enemies);
-                        if (grid.IsSquareEmpty(enemy, RequestGridPosition(currentDirectionID)) == 1)
-                        {
-                            Move(enemy, increment);
-                            Move(character, increment);
-                        }
+                        TryMove(enemy, 0, increment);
+                        Move(character, increment);
+                        
                            
                         
                         break;
