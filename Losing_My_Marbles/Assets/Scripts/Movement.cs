@@ -95,7 +95,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void Move(GameObject character, int increment)
+    public void Move(GameObject character, int increment)
     {
         integer = 1;
 
