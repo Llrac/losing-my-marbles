@@ -6,32 +6,27 @@ using TMPro;
 
 public class MarbleManager : MonoBehaviour
 {
-    public bool[] availableMarbleSlots = new bool[7];
-    public TextMeshProUGUI marblesInMarbleBagText;
-    public TextMeshProUGUI marblesInDiscardBagText;
-    public Transform[] marbleSlots;
-    public GameObject highlight;
+    [Header("Marbles & Slots")]
+    public Transform[] marbleSlots = new Transform[7];
+    public List<Marble> marbleBag = new();
     public Transform marbleBagTransform;
 
-    [HideInInspector] public int globalOrderID = 0;
-    public List<Marble> marbleBag = new();
+    public GameObject highlight;
+
+    [HideInInspector] public bool[] availableMarbleSlots = new bool[7];
     [HideInInspector] public List<Marble> discardBag = new();
 
-    MarbleActions ma;
+    TurnManager tm;
 
     private void Start()
     {
+        tm = FindObjectOfType<TurnManager>();
         for (int i = 0; i < availableMarbleSlots.Length; i++)
         {
             availableMarbleSlots[i] = true;
         }
-        ma = FindObjectOfType<MarbleActions>();
-    }
 
-    void Update()
-    {
-        marblesInMarbleBagText.text = marbleBag.Count.ToString();
-        marblesInDiscardBagText.text = discardBag.Count.ToString();
+        FillHandWithMarbles();
     }
 
     public void FillHandWithMarbles()
@@ -80,13 +75,13 @@ public class MarbleManager : MonoBehaviour
             GameObject newHighlight = Instantiate(highlight, marbleToHighlight.transform);
             newHighlight.transform.position = marbleToHighlight.transform.position;
 
-            globalOrderID++;
-            marbleToHighlightScript.orderID += globalOrderID;
+            tm.globalOrderID++;
+            marbleToHighlightScript.orderID += tm.globalOrderID;
             marbleToHighlightScript.hasBeenClicked = true;
 
-            ma.selectedMarbles.Add(marbleToHighlight);
+            tm.selectedMarbles.Add(marbleToHighlight);
 
-            if (globalOrderID >= 5)
+            if (tm.globalOrderID >= 5)
             {
                 Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
                 foreach (Marble marbleScript in allMarbleScripts)
@@ -99,31 +94,18 @@ public class MarbleManager : MonoBehaviour
                     availableMarbleSlots[i] = true;
                 }
 
-                ma.SelectedMarbles();
+                tm.SelectedMarbles();
 
-                ResetOrder();
+                tm.ResetOrder();
             }
         }
         else
         {
-            ResetOrder();
+            tm.ResetOrder();
         }
     }
 
-    public void ResetOrder()
-    {
-        ma.selectedMarbles.Clear();
-        Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
-        foreach (Marble marbleScript in allMarbleScripts)
-        {
-            marbleScript.hasBeenClicked = false;
-            marbleScript.orderID = 0;
-            globalOrderID = 0;
-        }
-        Highlight[] highlights = FindObjectsOfType<Highlight>();
-        foreach (Highlight highlight in highlights)
-        {
-            Destroy(highlight.gameObject);
-        }
-    }
+    
+
+    
 }

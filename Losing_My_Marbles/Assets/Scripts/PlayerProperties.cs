@@ -11,10 +11,6 @@ public class PlayerProperties : Movement
         {
             TryMove(gameObject, 0, 1);
         }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            TryMove(gameObject, 0, -1);
-        }
         else if (Input.GetKeyDown(KeyCode.A))
         {
             TryMove(gameObject, 1, -1);

@@ -15,10 +15,6 @@ public class RåttaProperties : Movement
         {
             TryMove(gameObject, 0, 1);
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            TryMove(gameObject, 0, -1);
-        }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             TryMove(gameObject, 1, -1);
