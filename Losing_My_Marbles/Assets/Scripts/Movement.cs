@@ -52,7 +52,7 @@ public abstract class Movement : MonoBehaviour
                         TryMove(character, 1, 2);
                         break;
                     case 1: // WALKABLEGROUND
-                        Move(character, increment);
+                        Move(character, 1);
                         break;
                     case 2: // PLAYER
                         // Get character at requestedGridPosition
