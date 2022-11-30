@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Movement : MonoBehaviour
 {
     public Vector2 gridPosition = new(0, 0);
+
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
