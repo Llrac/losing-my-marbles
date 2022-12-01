@@ -53,10 +53,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   marbleID: 1
-  handIndex: 0
+  topRowIndex: 0
+  bottomRowIndex: 0
   orderID: 0
   isInHand: 1
-  hasBeenClicked: 0
+  isOnBottomRow: 0
 --- !u!58 &8235136549817779538
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9e969893dc3a09f4cb3bd518535478b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2ae1c6242ce5c494e9f1bd42724c61ee, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

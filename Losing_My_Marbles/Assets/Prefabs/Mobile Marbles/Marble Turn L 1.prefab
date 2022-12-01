@@ -91,13 +91,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1123641502879489580, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
+      propertyPath: marbleID
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1875667417433160254, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ce72dceb2385db749adb4daad86eb25a, type: 3}
+      objectReference: {fileID: 21300000, guid: 2885fb4d5d163164da2340095ac41f04, type: 3}
     - target: {fileID: 5648451115260212973, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_Name
-      value: Marble III 1
+      value: Marble Turn L 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}

@@ -3,19 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 [Serializable]
 
 public class MoveMessage
 {
-    public GameObject character;
-    public int dataID;
-    public int increment;
-    
-    public MoveMessage(GameObject character, int dataID, int increment)
+
+    public int playerID;
+    public int firstAction;
+    public int secondAction;
+    public int thirdAction;
+    public int fourthAction;
+    public int fifthAction;
+
+    public MoveMessage(int playerID, int firstAction, int secondAction, int thirdAction, int fourthAction, int fifthAction)
     {
-        this.character = character;
-        this.dataID = dataID;
-        this.increment = increment;
+        this.playerID = playerID;
+        this.firstAction = firstAction;
+        this.secondAction = secondAction;
+        this.thirdAction = thirdAction;
+        this.fourthAction = fourthAction;
+        this.fifthAction = fifthAction;
     }
+   
 }

@@ -1,37 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Random = UnityEngine.Random;
 
 public class MarbleManager : MonoBehaviour
 {
     [Header("Marbles & Slots")]
-    public Transform[] marbleSlots = new Transform[7];
+    public Transform[] marbleSlotsTop = new Transform[7];
+    public Transform[] marbleSlotsBottom = new Transform[5];
     public List<Marble> marbleBag = new();
     public Transform marbleBagTransform;
 
     public GameObject highlight;
 
-    [HideInInspector] public bool[] availableMarbleSlots = new bool[7];
+    [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
+    [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
     [HideInInspector] public List<Marble> discardBag = new();
+    [HideInInspector] public int[] orderID = new int[5];
 
-    TurnManager tm;
+    TurnManager turnManager;
 
     private void Start()
     {
-        tm = FindObjectOfType<TurnManager>();
-        for (int i = 0; i < availableMarbleSlots.Length; i++)
+        turnManager = FindObjectOfType<TurnManager>();
+        
+        for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
-            availableMarbleSlots[i] = true;
+            availableMarbleSlotsTop[i] = true;
+        }
+        
+        for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
+        {
+            availableMarbleSlotsBottom[i] = true;
         }
 
         FillHandWithMarbles();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            FillHandWithMarbles();
+        }
+    }
+
     public void FillHandWithMarbles()
     {
-        for (int i = 0; i < availableMarbleSlots.Length; i++)
+        for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
             if (marbleBag.Count <= 0)
             {
@@ -42,17 +62,53 @@ public class MarbleManager : MonoBehaviour
                     return;
                 }
             }
-            else if (availableMarbleSlots[i])
+            else if (availableMarbleSlotsTop[i])
             {
                 Marble randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
-                randomMarble.handIndex = i;
-                randomMarble.transform.position = marbleSlots[i].position;
-                randomMarble.hasBeenClicked = false;
+                randomMarble.topRowIndex = i;
+                randomMarble.transform.position = marbleSlotsTop[i].position;
                 randomMarble.isInHand = true;
-                availableMarbleSlots[i] = false;
+                availableMarbleSlotsTop[i] = false;
                 marbleBag.Remove(randomMarble);
             }
         }
+    }
+
+    public bool MoveMarbleToBottomRow(GameObject marble)
+    {
+        for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
+        {
+            if (availableMarbleSlotsBottom[i])
+            {
+                Marble currentMarble = marble.GetComponent<Marble>();
+                currentMarble.transform.position = marbleSlotsBottom[i].position;
+                currentMarble.bottomRowIndex = i;
+                availableMarbleSlotsBottom[i] = false;
+                orderID[i] = currentMarble.marbleID;
+                availableMarbleSlotsTop[currentMarble.topRowIndex] = true;
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public bool MoveMarbleToTopRow(GameObject marble)
+    {
+        for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
+        {
+            if (availableMarbleSlotsTop[i])
+            {
+                Marble currentMarble = marble.GetComponent<Marble>();
+                currentMarble.transform.position = marbleSlotsTop[i].position;
+                currentMarble.topRowIndex = i;
+                availableMarbleSlotsTop[i] = false;
+                availableMarbleSlotsBottom[currentMarble.bottomRowIndex] = true;
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     public void Shuffle()
@@ -63,49 +119,12 @@ public class MarbleManager : MonoBehaviour
             {
                 marbleBag.Add(marble);
             }
+            
             discardBag.Clear();
         }
     }
 
-    public void GetHighlight(GameObject marbleToHighlight)
-    {
-        Marble marbleToHighlightScript = marbleToHighlight.GetComponent<Marble>();
-        if (!marbleToHighlightScript.hasBeenClicked)
-        {
-            GameObject newHighlight = Instantiate(highlight, marbleToHighlight.transform);
-            newHighlight.transform.position = marbleToHighlight.transform.position;
 
-            tm.globalOrderID++;
-            marbleToHighlightScript.orderID += tm.globalOrderID;
-            marbleToHighlightScript.hasBeenClicked = true;
 
-            tm.selectedMarbles.Add(marbleToHighlight);
 
-            if (tm.globalOrderID >= 5)
-            {
-                Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
-                foreach (Marble marbleScript in allMarbleScripts)
-                {
-                    if (marbleScript.isInHand)
-                        marbleScript.MoveToDiscardPile();
-                }
-                for (int i = 0; i < availableMarbleSlots.Length; i++)
-                {
-                    availableMarbleSlots[i] = true;
-                }
-
-                tm.SelectedMarbles();
-
-                tm.ResetOrder();
-            }
-        }
-        else
-        {
-            tm.ResetOrder();
-        }
-    }
-
-    
-
-    
 }
