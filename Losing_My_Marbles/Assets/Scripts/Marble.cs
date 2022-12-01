@@ -6,7 +6,7 @@ public class Marble : MonoBehaviour
 {
     public int marbleID = 1;
 
-    [HideInInspector] public int handIndex = 0;
+    [HideInInspector] public int topRowIndex = 0;
     [HideInInspector] public int bottomRowIndex = 0;
     
     [HideInInspector] public int orderID = 0;

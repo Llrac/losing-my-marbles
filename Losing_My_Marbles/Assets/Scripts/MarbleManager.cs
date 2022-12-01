@@ -64,7 +64,7 @@ public class MarbleManager : MonoBehaviour
             else if (availableMarbleSlotsTop[i])
             {
                 Marble randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
-                randomMarble.handIndex = i;
+                randomMarble.topRowIndex = i;
                 randomMarble.transform.position = marbleSlotsTop[i].position;
                 randomMarble.isInHand = true;
                 availableMarbleSlotsTop[i] = false;
@@ -82,12 +82,12 @@ public class MarbleManager : MonoBehaviour
                 marble.transform.position = marbleSlotsBottom[i].position;
                 marble.GetComponent<Marble>().bottomRowIndex = i;
                 availableMarbleSlotsBottom[i] = false;
-                availableMarbleSlotsTop[marble.GetComponent<Marble>().handIndex] = true;
-                Debug.Log(marble.GetComponent<Marble>().handIndex);
+                availableMarbleSlotsTop[marble.GetComponent<Marble>().topRowIndex] = true;
+                Debug.Log(marble.GetComponent<Marble>().topRowIndex);
                 return true;
             }
-
-        } 
+        }
+        
         return false;
     }
     
@@ -98,12 +98,13 @@ public class MarbleManager : MonoBehaviour
             if (availableMarbleSlotsTop[i])
             {
                 marble.transform.position = marbleSlotsTop[i].position;
-                marble.GetComponent<Marble>().handIndex = i;
+                marble.GetComponent<Marble>().topRowIndex = i;
                 availableMarbleSlotsTop[i] = false;
                 availableMarbleSlotsBottom[marble.GetComponent<Marble>().bottomRowIndex] = true;
                 return false;
             }
         }
+        
         return true;
     }
 
