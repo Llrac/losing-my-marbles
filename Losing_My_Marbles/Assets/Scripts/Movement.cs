@@ -20,10 +20,10 @@ public abstract class Movement : MonoBehaviour
 
     GameObject body;
 
-    
     // Start is called before the first frame update
     void Start()
     {
+        
         grid = FindObjectOfType<GridManager>();
 
         foreach (Transform child in transform)
@@ -33,7 +33,8 @@ public abstract class Movement : MonoBehaviour
         }
         
         sr = body.GetComponent<SpriteRenderer>();
-       
+        
+
     }
 
 
@@ -44,13 +45,17 @@ public abstract class Movement : MonoBehaviour
         //{
         //    currentDirectionID = callersDirectionID;
         //}
-      
+        
 
         // Set transform position
         if (dataID == 0)
         {
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
+                if(grid == null)
+                {
+                    grid = FindObjectOfType<GridManager>();
+                }
                 switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
                 {
                     case 0: // EMPTY (walls, void, etc)
@@ -64,7 +69,7 @@ public abstract class Movement : MonoBehaviour
                         // Move(character, increment);
                         break;
                     case 3: // ENEMY
-                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + character.GetComponent<Movement>().gridPosition, enemies);
+                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + gridPosition, enemies);
                         TryMove(enemy,0, 1);
                         TryMove(character, 0, 1);
                         break;
@@ -89,22 +94,33 @@ public abstract class Movement : MonoBehaviour
                 }
             }
 
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.name == "Sprite")
+                    body = child.gameObject;
+                sr = body.GetComponent<SpriteRenderer>();
+            }
+
             switch (currentDirectionID)
             {
                 case 0:
-                    sr.sprite = sprites[0];
+                   
+                    character.GetComponent<Movement>().sr.sprite = sprites[0];
                     character.transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case 1 or -3:
-                    sr.sprite = sprites[1];
+                   
+                    character.GetComponent<Movement>().sr.sprite = sprites[1];
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case 2 or -2:
-                    sr.sprite = sprites[1];
+                    
+                    character.GetComponent<Movement>().sr.sprite = sprites[1];
                     character.transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case 3 or -1:
-                    sr.sprite = sprites[0];
+                    
+                    character.GetComponent<Movement>().sr.sprite = sprites[0];
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
             }
@@ -123,7 +139,7 @@ public abstract class Movement : MonoBehaviour
         };
     }
 
-    void Move(GameObject character, int increment)
+    public void Move(GameObject character, int increment)
     {
         multiplier = 1;
         if (increment < 0)

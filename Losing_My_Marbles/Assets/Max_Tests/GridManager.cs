@@ -25,12 +25,12 @@ public class GridManager : MonoBehaviour
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'} // sortinglayer 8
         };
-        for(int i = 0; i < Movement.enemies.Count; i++)
+        for (int i = 0; i < Movement.enemies.Count; i++)
         {
             board[(int)Movement.enemies[i].gridPosition.x, (int)Movement.enemies[i].gridPosition.y] = ENEMY;
         }
     }
-   
+
     private void OnDrawGizmos()
     {
         if (board == null) return;
@@ -52,7 +52,7 @@ public class GridManager : MonoBehaviour
                         Gizmos.color = Color.red;
                         break;
                 }
-                Gizmos.DrawSphere(Vector3.down * (y - 5f ) + Vector3.right * x, 0.5f);
+                Gizmos.DrawSphere(Vector3.down * (y - 5f) + Vector3.right * x, 0.5f);
             }
         }
     }
@@ -89,17 +89,17 @@ public class GridManager : MonoBehaviour
 
         character.gridPosition += requestedTile;
     }
-    public GameObject FindInMatrix(Vector2 tile, List <Movement> list)
+    public GameObject FindInMatrix(Vector2 tile, List<Movement> list)
     {
-        for(int i = 0; i <= list.Count - 1; i++)
+        for (int i = 0; i <= list.Count - 1; i++)
         {
             Movement movement = list[i];
-            if(movement.gridPosition == tile)
+            if (movement.gridPosition == tile)
             {
                 return movement.gameObject;
             }
         }
         return null;
     }
-   
+
 }
