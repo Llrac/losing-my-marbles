@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class RåttaProperties : Movement
 {
+    public int id = 0;
+    private List<Vector2> moves1 = new();
+    float timer = 5f;
+    private void Start()
+    {
+        Movement.enemies.Add(this);
+       
+
+
+    }
+
     void Update()
     {
-        // Diagonal movement
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        moves1 = new List<Vector2>
         {
-            TryMove(gameObject, 0, 1);
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            new Vector2(0, 1),new Vector2(0, 1),new Vector2(0, 1),new Vector2(0, 1),new Vector2(0, 1),
+            new Vector2(1, 2)
+        };
+        for (int i = 0; i < moves1.Count; i++)
         {
-            TryMove(gameObject, 1, -1);
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+            {
+                TryMove(gameObject, (int)moves1[i].x, (int)moves1[i].y);
+            
+                timer = 5f;
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            TryMove(gameObject, 1, 1);
-        }
+       
+        
     }
     public override char ChangeTag()
     {

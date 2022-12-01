@@ -67,5 +67,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Marble III
       objectReference: {fileID: 0}
+    - target: {fileID: 6340993772201960579, guid: 63e1b8c37f9239b48bbf7912bc1dc2d5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6633876d3c36c464d8a1430887e95211, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e1b8c37f9239b48bbf7912bc1dc2d5, type: 3}

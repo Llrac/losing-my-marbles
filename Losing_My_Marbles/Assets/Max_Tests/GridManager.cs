@@ -15,7 +15,7 @@ public class GridManager : MonoBehaviour
         board = new char[9, 9]
         {
             // what happens to a player if a hazard turns on while standing in it, GridLogic?
-            {'P','E','X','X','X','X','X','X','X'},
+            {'P','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
@@ -25,8 +25,12 @@ public class GridManager : MonoBehaviour
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'} // sortinglayer 8
         };
+        for (int i = 0; i < Movement.enemies.Count; i++)
+        {
+            board[(int)Movement.enemies[i].gridPosition.x, (int)Movement.enemies[i].gridPosition.y] = ENEMY;
+        }
     }
-   
+
     private void OnDrawGizmos()
     {
         if (board == null) return;
@@ -48,15 +52,15 @@ public class GridManager : MonoBehaviour
                         Gizmos.color = Color.red;
                         break;
                 }
-                Gizmos.DrawSphere(Vector3.down * (y - 5f ) + Vector3.right * x, 0.5f);
+                Gizmos.DrawSphere(Vector3.down * (y - 5f) + Vector3.right * x, 0.5f);
             }
         }
     }
 
     public int IsSquareEmpty(GameObject character, Vector2 requestedTile)
     {
-        Movement moveScript;
-        moveScript = character.GetComponent<Movement>();
+        Movement moveScript = character.GetComponent<Movement>();
+
         int x = (int)moveScript.gridPosition.x + (int)requestedTile.x;
         int y = (int)moveScript.gridPosition.y + (int)requestedTile.y;
 
@@ -66,7 +70,7 @@ public class GridManager : MonoBehaviour
         return board[x, y] switch
         {
             WALKABLEGROUND => 1,
-            PLAYER => 2,// maybe should return something else which could be used in another switch statement
+            PLAYER => 2,
             ENEMY => 3,
             _ => 0,
         };
@@ -85,4 +89,17 @@ public class GridManager : MonoBehaviour
 
         character.gridPosition += requestedTile;
     }
+    public GameObject FindInMatrix(Vector2 tile, List<Movement> list)
+    {
+        for (int i = 0; i <= list.Count - 1; i++)
+        {
+            Movement movement = list[i];
+            if (movement.gridPosition == tile)
+            {
+                return movement.gameObject;
+            }
+        }
+        return null;
+    }
+
 }
