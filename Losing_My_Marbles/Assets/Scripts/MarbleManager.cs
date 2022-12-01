@@ -17,9 +17,10 @@ public class MarbleManager : MonoBehaviour
 
     public GameObject highlight;
 
-    public bool[] availableMarbleSlotsTop = new bool[7];
+    [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
     [HideInInspector] public List<Marble> discardBag = new();
+    [HideInInspector] public int[] orderID = new int[5];
 
     TurnManager turnManager;
 
@@ -37,7 +38,7 @@ public class MarbleManager : MonoBehaviour
             availableMarbleSlotsBottom[i] = true;
         }
 
-        //FillHandWithMarbles();
+        FillHandWithMarbles();
     }
 
     private void Update()
@@ -79,11 +80,12 @@ public class MarbleManager : MonoBehaviour
         {
             if (availableMarbleSlotsBottom[i])
             {
-                marble.transform.position = marbleSlotsBottom[i].position;
-                marble.GetComponent<Marble>().bottomRowIndex = i;
+                Marble currentMarble = marble.GetComponent<Marble>();
+                currentMarble.transform.position = marbleSlotsBottom[i].position;
+                currentMarble.bottomRowIndex = i;
                 availableMarbleSlotsBottom[i] = false;
-                availableMarbleSlotsTop[marble.GetComponent<Marble>().topRowIndex] = true;
-                Debug.Log(marble.GetComponent<Marble>().topRowIndex);
+                orderID[i] = currentMarble.marbleID;
+                availableMarbleSlotsTop[currentMarble.topRowIndex] = true;
                 return true;
             }
         }
@@ -97,10 +99,11 @@ public class MarbleManager : MonoBehaviour
         {
             if (availableMarbleSlotsTop[i])
             {
-                marble.transform.position = marbleSlotsTop[i].position;
-                marble.GetComponent<Marble>().topRowIndex = i;
+                Marble currentMarble = marble.GetComponent<Marble>();
+                currentMarble.transform.position = marbleSlotsTop[i].position;
+                currentMarble.topRowIndex = i;
                 availableMarbleSlotsTop[i] = false;
-                availableMarbleSlotsBottom[marble.GetComponent<Marble>().bottomRowIndex] = true;
+                availableMarbleSlotsBottom[currentMarble.bottomRowIndex] = true;
                 return false;
             }
         }
@@ -121,45 +124,7 @@ public class MarbleManager : MonoBehaviour
         }
     }
 
-    public void GetHighlight(GameObject marbleToHighlight)
-    {
-        Marble marbleToHighlightScript = marbleToHighlight.GetComponent<Marble>();
-        if (!marbleToHighlightScript.isOnBottomRow)
-        {
-            GameObject newHighlight = Instantiate(highlight, marbleToHighlight.transform);
-            newHighlight.transform.position = marbleToHighlight.transform.position;
 
-            turnManager.globalOrderID++;
-            marbleToHighlightScript.orderID += turnManager.globalOrderID;
-            marbleToHighlightScript.isOnBottomRow = true;
 
-            turnManager.selectedMarbles.Add(marbleToHighlight);
 
-            if (turnManager.globalOrderID >= 5)
-            {
-                Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
-                foreach (Marble marbleScript in allMarbleScripts)
-                {
-                    if (marbleScript.isInHand)
-                        marbleScript.MoveToDiscardPile();
-                }
-                for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
-                {
-                    availableMarbleSlotsTop[i] = true;
-                }
-
-                turnManager.SelectedMarbles();
-
-                turnManager.ResetOrder();
-            }
-        }
-        else
-        {
-            turnManager.ResetOrder();
-        }
-    }
-
-    
-
-    
 }

@@ -8,9 +8,9 @@ public class Marble : MonoBehaviour
 
     [HideInInspector] public int topRowIndex = 0;
     [HideInInspector] public int bottomRowIndex = 0;
-    
-    [HideInInspector] public int orderID = 0;
 
+    public int orderID;
+    
     [HideInInspector] public bool isInHand = false;
     [HideInInspector] public bool isOnBottomRow = false;
 
