@@ -4,38 +4,41 @@ using UnityEngine;
 
 public class Marble : MonoBehaviour
 {
-    public int marbleID = 0;
+    public int marbleID = 1;
 
-    [HideInInspector] public int handIndex = 0;
-    public int orderID = 0;
+    [HideInInspector] public int topRowIndex = 0;
+    [HideInInspector] public int bottomRowIndex = 0;
 
+    public int orderID;
+    
     [HideInInspector] public bool isInHand = false;
-    [HideInInspector] public bool hasBeenClicked = false;
+    [HideInInspector] public bool isOnBottomRow = false;
 
-    MarbleManager mm;
+    MarbleManager marbleManager;
 
     private void Start()
     {
-        mm = FindObjectOfType<MarbleManager>();
+        marbleManager = FindObjectOfType<MarbleManager>();
     }
 
     public void SelectMarble()
     {
-        if (!hasBeenClicked)
+        //Handheld.Vibrate(); 
+        if (!isOnBottomRow)
         {
-            Handheld.Vibrate();
-            mm.GetHighlight(gameObject);
+            isOnBottomRow = marbleManager.MoveMarbleToBottomRow(gameObject);
         }
-        else if (hasBeenClicked)
+        else
         {
-            mm.GetHighlight(gameObject);
+            isOnBottomRow = marbleManager.MoveMarbleToTopRow(gameObject);
         }
     }
+    
 
     public void MoveToDiscardPile()
     {
         isInHand = false;
-        mm.discardBag.Add(this);
-        transform.position = mm.marbleBagTransform.position;
+        marbleManager.discardBag.Add(this);
+        transform.position = marbleManager.marbleBagTransform.position;
     }
 }
