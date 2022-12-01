@@ -739,7 +739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &156519153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10036,7 +10036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2070015175
 Transform:
   m_ObjectHideFlags: 0
@@ -10064,14 +10064,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c22a03e202c8b48a837526d34c4db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marbleSlots:
-  - {fileID: 309074698}
-  - {fileID: 823265099}
-  - {fileID: 114549888}
-  - {fileID: 1783805745}
-  - {fileID: 435216360}
-  - {fileID: 2044315131}
-  - {fileID: 1827668919}
+  marbleSlotsTop:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  marbleSlotsBottom:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   marbleBag:
   - {fileID: 440528239}
   - {fileID: 1503193746}
@@ -10088,8 +10094,10 @@ MonoBehaviour:
   - {fileID: 912966634}
   marbleBagTransform: {fileID: 7553351092172364897}
   highlight: {fileID: 5962901347320887161, guid: 2edbc0708b6bcec40b131e66a34d1abd, type: 3}
-  availableMarbleSlots: 00000000000000
+  availableMarbleSlotsTop: 00000000000000
+  availableMarbleSlotsBottom: 0000000000
   discardBag: []
+  orderID: 0000000000000000000000000000000000000000
 --- !u!1 &2092240820
 GameObject:
   m_ObjectHideFlags: 0
