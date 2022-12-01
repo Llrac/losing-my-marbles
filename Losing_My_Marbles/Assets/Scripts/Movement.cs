@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Movement : MonoBehaviour
 {
     public Vector2 gridPosition = new(0, 0);
-
+    [SerializeField] bool hasKey = false;
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
@@ -60,20 +60,39 @@ public abstract class Movement : MonoBehaviour
                 }
                 switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
                 {
-                    case 0: // EMPTY (walls, void, etc)
+                    case GridManager.EMPTY: // EMPTY (walls, void, etc)
                         TryMove(character, 1, 2); // lägg till recursion här'
                         break;
-                    case 1: // WALKABLEGROUND
+                    case GridManager.WALKABLEGROUND: // WALKABLEGROUND
                         Move(character, 1);
                         break;
-                    case 2: // PLAYER
+                    case GridManager.PLAYER: // PLAYER
                        
                         // Move(character, increment);
                         break;
-                    case 3: // ENEMY
+                    case GridManager.ENEMY: // ENEMY
+                       
                         GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + character.GetComponent<Movement>().gridPosition, enemies);
+                        
                         TryMove(enemy, 0, 1);
                         TryMove(character, 0, 1);
+
+                        break;
+                    case GridManager.DOOR:
+                        if (character.GetComponent<Movement>().hasKey == true)
+                        {
+                            Move(character, 1);
+                            character.gameObject.SetActive(false);
+                        }
+                        break;
+                    case GridManager.KEY:
+                        character.GetComponent<Movement>().hasKey = true;
+                        GameObject.FindGameObjectWithTag("Key").gameObject.SetActive(false);
+                        Move(character, 1);
+                        break;
+                    case GridManager.HOLE:
+                        character.SetActive(false);
+                        grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0,0));
                         break;
                 }
             }
@@ -106,7 +125,7 @@ public abstract class Movement : MonoBehaviour
             switch (currentDirectionID)
             {
                 case 0:
-                    Debug.Log(childRenderer);
+                   
                     character.GetComponent<Movement>().childRenderer.sprite = sprites[0];
                     character.transform.localScale = new Vector3(1, 1, 1);
                     break;

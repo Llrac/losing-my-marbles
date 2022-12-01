@@ -4,33 +4,51 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    const char WALKABLEGROUND = 'X';    // 1
-    const char PLAYER = 'P';            // 2
-    const char ENEMY = 'E';             // 3
-
-    public char[,] board;
+    public const char WALKABLEGROUND = 'X';    // 1
+    public const char PLAYER = 'P';            // 2
+    public const char ENEMY = 'E';             // 3
+    public const char DOOR = 'D';
+    public const char KEY = 'K';
+    public const char HOLE = 'H';
+    public const char EMPTY='?';
+    public char[,] board = new char[9, 9] 
+    {
+            // what happens to a player if a hazard turns on while standing in it, GridLogic?
+            {'X','X','X','X','X','D','X','X','X'},
+            {'X','X','H','X','X','X','X','X','X'},
+            {'X','X','X','X','X','X','X','X','X'},
+            {'X','X','X','X','K','X','X','X','X'},
+            {'X','X','X','X','X','X','X','X','X'},
+            {'X','X','X','X','X','X','X','X','X'},
+            {'X','X','X','X','X','X','X','X','X'},
+            {'X','X','X','X','X','X','X','X','X'},
+            {'X','X','X','X','P','X','X','X','X'} // sortinglayer 8
+    };
 
     void Start()
     {
-        board = new char[9, 9]
-        {
-            // what happens to a player if a hazard turns on while standing in it, GridLogic?
-            {'P','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','X','X','X','X','X'} // sortinglayer 8
-        };
+        //board = new char[9, 9]
+        //{
+        //    // what happens to a player if a hazard turns on while standing in it, GridLogic?
+        //    {'X','X','X','X','D','X','X','X','X'},
+        //    {'X','X','X','X','X','X','X','X','X'},
+        //    {'X','X','X','X','X','X','X','X','X'},
+        //    {'X','X','X','X','X','X','X','X','X'},
+        //    {'X','X','X','X','X','X','X','X','X'},
+        //    {'X','X','X','X','X','X','X','X','X'},
+        //    {'X','X','X','X','X','X','X','X','X'},
+        //    {'X','X','X','X','X','X','X','X','X'},
+        //    {'X','X','X','X','P','X','X','X','X'} // sortinglayer 8
+        //};
         for (int i = 0; i < Movement.enemies.Count; i++)
         {
             board[(int)Movement.enemies[i].gridPosition.x, (int)Movement.enemies[i].gridPosition.y] = ENEMY;
         }
     }
-
+    private void Awake()
+    {
+        
+    }
     private void OnDrawGizmos()
     {
         if (board == null) return;
@@ -42,14 +60,23 @@ public class GridManager : MonoBehaviour
             {
                 switch (board[y, x])
                 {
-                    case 'P':
+                    case PLAYER:
                         Gizmos.color = Color.green;
                         break;
-                    case 'X':
+                    case WALKABLEGROUND:
                         Gizmos.color = Color.blue;
                         break;
-                    case 'E':
+                    case ENEMY:
                         Gizmos.color = Color.red;
+                        break;
+                    case DOOR:
+                        Gizmos.color = Color.white;
+                        break;
+                    case KEY:
+                        Gizmos.color = Color.yellow;
+                        break;
+                    case HOLE:
+                        Gizmos.color = Color.black;
                         break;
                 }
                 Gizmos.DrawSphere(Vector3.down * (y - 5f) + Vector3.right * x, 0.5f);
@@ -57,37 +84,41 @@ public class GridManager : MonoBehaviour
         }
     }
 
-    public int IsSquareEmpty(GameObject character, Vector2 requestedTile)
+    public char IsSquareEmpty(GameObject character, Vector2 requestedTile)
     {
+
         Movement moveScript = character.GetComponent<Movement>();
 
         int x = (int)moveScript.gridPosition.x + (int)requestedTile.x;
         int y = (int)moveScript.gridPosition.y + (int)requestedTile.y;
         if (board == null)
         {
-            board = new char[9, 9]
-            {
-            // what happens to a player if a hazard turns on while standing in it, GridLogic?
-                {'P','X','X','X','X','X','X','X','X'},
-                {'X','X','X','X','X','X','X','X','X'},
-                {'X','X','X','X','X','X','X','X','X'},
-                {'X','X','X','X','X','X','X','X','X'},
-                {'X','X','X','X','X','X','X','X','X'},
-                {'X','X','X','X','X','X','X','X','X'},
-                {'X','X','X','X','X','X','X','X','X'},
-                {'X','X','X','X','X','X','X','X','X'},
-                {'X','X','X','X','X','X','X','X','X'} // sortinglayer 8
-            };
+            //board = new char[9, 9]
+            //{
+            //// what happens to a player if a hazard turns on while standing in it, GridLogic?
+            //    {'X','X','X','X','X','X','X','X','X'},
+            //    {'X','X','X','X','X','X','X','X','X'},
+            //    {'X','X','X','X','X','X','X','X','X'},
+            //    {'X','X','X','X','X','X','X','X','X'},
+            //    {'X','X','X','X','X','X','X','X','X'},
+            //    {'X','X','X','X','X','X','X','X','X'},
+            //    {'X','X','X','X','X','X','X','X','X'},
+            //    {'X','X','X','X','X','X','X','X','X'},
+            //    {'X','X','X','X','P','X','X','X','X'} // sortinglayer 8
+            //};
         }
         if (x >= board.GetLength(0) || x < 0 || y >= board.GetLength(0) || y < 0)
-            return 0;
+            return EMPTY;
 
         return board[x, y] switch
         {
-            WALKABLEGROUND => 1,
-            PLAYER => 2,
-            ENEMY => 3,
-            _ => 0,
+            WALKABLEGROUND => WALKABLEGROUND,
+            PLAYER => PLAYER,
+            ENEMY => ENEMY,
+            DOOR => DOOR,
+            KEY => KEY,
+            HOLE => HOLE,
+            _ => EMPTY,
         };
     }
 

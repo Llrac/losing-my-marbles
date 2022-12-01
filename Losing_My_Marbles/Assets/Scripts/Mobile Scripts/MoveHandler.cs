@@ -52,19 +52,19 @@ public class MoveHandler : MonoBehaviour
             switch (move)
             {
                 case 1:    
-                    playerProperties.TryMove(player, 0, 1);
+                    PlayerProperties.myMoves.Add( new Vector2(0, 1));
                     break;
-                case 2:    
-                    playerProperties.TryMove(player, 0, 2);
+                case 2:
+                    PlayerProperties.myMoves.Add(new Vector2( 0, 2));
                     break;
-                case 3:    
-                    playerProperties.TryMove(player, 0, 3);
+                case 3:
+                    PlayerProperties.myMoves.Add(new Vector2(0, 3));
                     break;
-                case 4:    
-                    playerProperties.TryMove(player, 1, -1);
+                case 4:
+                    PlayerProperties.myMoves.Add(new Vector2( 1, -2));
                     break;
-                case 5:    
-                    playerProperties.TryMove(player, 1, 1);
+                case 5:
+                    PlayerProperties.myMoves.Add(new Vector2( 1, 2));
                     break;
             }
         }
