@@ -1,37 +1,56 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Random = UnityEngine.Random;
 
 public class MarbleManager : MonoBehaviour
 {
     [Header("Marbles & Slots")]
-    public Transform[] marbleSlots = new Transform[7];
+    public Transform[] marbleSlotsTop = new Transform[7];
+    public Transform[] marbleSlotsBottom = new Transform[5];
     public List<Marble> marbleBag = new();
     public Transform marbleBagTransform;
 
     public GameObject highlight;
 
-    [HideInInspector] public bool[] availableMarbleSlots = new bool[7];
+    public bool[] availableMarbleSlotsTop = new bool[7];
+    [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
     [HideInInspector] public List<Marble> discardBag = new();
 
-    TurnManager tm;
+    TurnManager turnManager;
 
     private void Start()
     {
-        tm = FindObjectOfType<TurnManager>();
-        for (int i = 0; i < availableMarbleSlots.Length; i++)
+        turnManager = FindObjectOfType<TurnManager>();
+        
+        for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
-            availableMarbleSlots[i] = true;
+            availableMarbleSlotsTop[i] = true;
+        }
+        
+        for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
+        {
+            availableMarbleSlotsBottom[i] = true;
         }
 
-        FillHandWithMarbles();
+        //FillHandWithMarbles();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            FillHandWithMarbles();
+        }
     }
 
     public void FillHandWithMarbles()
     {
-        for (int i = 0; i < availableMarbleSlots.Length; i++)
+        for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
             if (marbleBag.Count <= 0)
             {
@@ -42,17 +61,50 @@ public class MarbleManager : MonoBehaviour
                     return;
                 }
             }
-            else if (availableMarbleSlots[i])
+            else if (availableMarbleSlotsTop[i])
             {
                 Marble randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
                 randomMarble.handIndex = i;
-                randomMarble.transform.position = marbleSlots[i].position;
-                randomMarble.hasBeenClicked = false;
+                randomMarble.transform.position = marbleSlotsTop[i].position;
                 randomMarble.isInHand = true;
-                availableMarbleSlots[i] = false;
+                availableMarbleSlotsTop[i] = false;
                 marbleBag.Remove(randomMarble);
             }
         }
+    }
+
+    public bool MoveMarbleToBottomRow(GameObject marble)
+    {
+        for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
+        {
+            if (availableMarbleSlotsBottom[i])
+            {
+                marble.transform.position = marbleSlotsBottom[i].position;
+                marble.GetComponent<Marble>().bottomRowIndex = i;
+                availableMarbleSlotsBottom[i] = false;
+                availableMarbleSlotsTop[marble.GetComponent<Marble>().handIndex] = true;
+                Debug.Log(marble.GetComponent<Marble>().handIndex);
+                return true;
+            }
+
+        } 
+        return false;
+    }
+    
+    public bool MoveMarbleToTopRow(GameObject marble)
+    {
+        for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
+        {
+            if (availableMarbleSlotsTop[i])
+            {
+                marble.transform.position = marbleSlotsTop[i].position;
+                marble.GetComponent<Marble>().handIndex = i;
+                availableMarbleSlotsTop[i] = false;
+                availableMarbleSlotsBottom[marble.GetComponent<Marble>().bottomRowIndex] = true;
+                return false;
+            }
+        }
+        return true;
     }
 
     public void Shuffle()
@@ -63,6 +115,7 @@ public class MarbleManager : MonoBehaviour
             {
                 marbleBag.Add(marble);
             }
+            
             discardBag.Clear();
         }
     }
@@ -70,18 +123,18 @@ public class MarbleManager : MonoBehaviour
     public void GetHighlight(GameObject marbleToHighlight)
     {
         Marble marbleToHighlightScript = marbleToHighlight.GetComponent<Marble>();
-        if (!marbleToHighlightScript.hasBeenClicked)
+        if (!marbleToHighlightScript.isOnBottomRow)
         {
             GameObject newHighlight = Instantiate(highlight, marbleToHighlight.transform);
             newHighlight.transform.position = marbleToHighlight.transform.position;
 
-            tm.globalOrderID++;
-            marbleToHighlightScript.orderID += tm.globalOrderID;
-            marbleToHighlightScript.hasBeenClicked = true;
+            turnManager.globalOrderID++;
+            marbleToHighlightScript.orderID += turnManager.globalOrderID;
+            marbleToHighlightScript.isOnBottomRow = true;
 
-            tm.selectedMarbles.Add(marbleToHighlight);
+            turnManager.selectedMarbles.Add(marbleToHighlight);
 
-            if (tm.globalOrderID >= 5)
+            if (turnManager.globalOrderID >= 5)
             {
                 Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
                 foreach (Marble marbleScript in allMarbleScripts)
@@ -89,19 +142,19 @@ public class MarbleManager : MonoBehaviour
                     if (marbleScript.isInHand)
                         marbleScript.MoveToDiscardPile();
                 }
-                for (int i = 0; i < availableMarbleSlots.Length; i++)
+                for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
                 {
-                    availableMarbleSlots[i] = true;
+                    availableMarbleSlotsTop[i] = true;
                 }
 
-                tm.SelectedMarbles();
+                turnManager.SelectedMarbles();
 
-                tm.ResetOrder();
+                turnManager.ResetOrder();
             }
         }
         else
         {
-            tm.ResetOrder();
+            turnManager.ResetOrder();
         }
     }
 

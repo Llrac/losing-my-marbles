@@ -57,7 +57,8 @@ MonoBehaviour:
   handIndex: 0
   orderID: 0
   isInHand: 1
-  hasBeenClicked: 0
+  isOnBottomRow: 0
+  isOnTopRow: 0
 --- !u!58 &7945127248835016118
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -159,6 +160,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1123641502879489580}
         m_TargetAssemblyTypeName: Marble, Assembly-CSharp
         m_MethodName: SelectMarble
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1123641502879489580}
+        m_TargetAssemblyTypeName: Marble, Assembly-CSharp
+        m_MethodName: DeselectMarble
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
