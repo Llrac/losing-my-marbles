@@ -63,7 +63,22 @@ public class GridManager : MonoBehaviour
 
         int x = (int)moveScript.gridPosition.x + (int)requestedTile.x;
         int y = (int)moveScript.gridPosition.y + (int)requestedTile.y;
-
+        if (board == null)
+        {
+            board = new char[9, 9]
+            {
+            // what happens to a player if a hazard turns on while standing in it, GridLogic?
+                {'P','X','X','X','X','X','X','X','X'},
+                {'X','X','X','X','X','X','X','X','X'},
+                {'X','X','X','X','X','X','X','X','X'},
+                {'X','X','X','X','X','X','X','X','X'},
+                {'X','X','X','X','X','X','X','X','X'},
+                {'X','X','X','X','X','X','X','X','X'},
+                {'X','X','X','X','X','X','X','X','X'},
+                {'X','X','X','X','X','X','X','X','X'},
+                {'X','X','X','X','X','X','X','X','X'} // sortinglayer 8
+            };
+        }
         if (x >= board.GetLength(0) || x < 0 || y >= board.GetLength(0) || y < 0)
             return 0;
 

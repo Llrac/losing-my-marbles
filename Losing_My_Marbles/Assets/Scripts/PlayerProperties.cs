@@ -6,6 +6,7 @@ public class PlayerProperties : Movement
 {
     void Update()
     {
+       
         // Diagonal movement
         if (Input.GetKeyDown(KeyCode.W))
         {
@@ -23,5 +24,10 @@ public class PlayerProperties : Movement
     public override char ChangeTag()
     {
         return 'P';
+    }
+
+    public override void DoAMove(int inc)
+    {
+        throw new System.NotImplementedException();
     }
 }
