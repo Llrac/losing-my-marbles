@@ -31,7 +31,7 @@ public class TurnManager : MonoBehaviour
         Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
         foreach (Marble marbleScript in allMarbleScripts)
         {
-            marbleScript.hasBeenClicked = false;
+            marbleScript.isOnBottomRow = false;
             marbleScript.orderID = 0;
             globalOrderID = 0;
         }
