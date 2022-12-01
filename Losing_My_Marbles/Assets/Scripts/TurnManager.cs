@@ -63,7 +63,7 @@ public class TurnManager : MonoBehaviour
             MarbleIDToAction(marblesToExecute[i]);
         }
 
-        ResetOrder();
+        //ResetOrder();
     }
 
     public void ResetOrder()
@@ -85,8 +85,6 @@ public class TurnManager : MonoBehaviour
 
     public void MarbleIDToAction(GameObject marbleToAction)
     {
-        Debug.Log(marbleToAction);
-        Debug.Log(marbleToAction.GetComponent<Marble>().marbleID);
         switch (marbleToAction.GetComponent<Marble>().marbleID)
         {
             case 1:
