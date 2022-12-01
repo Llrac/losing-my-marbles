@@ -32,7 +32,6 @@ public class GridGenerator : MonoBehaviour
                 newTile.transform.parent = gameObject.transform;
                 tileSpriteChosen = Random.Range(0, tileSprites.Length);
                 newTile.GetComponent<SpriteRenderer>().sprite = tileSprites[tileSpriteChosen];
-                Debug.Log(tileSpriteChosen);
             }
         }
     }
