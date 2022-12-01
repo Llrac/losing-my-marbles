@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Marble : MonoBehaviour
 {
-    public int marbleID = 1;
+    public int marbleID = 0;
 
     [HideInInspector] public int handIndex = 0;
-    [HideInInspector] public int orderID = 0;
+    public int orderID = 0;
 
     [HideInInspector] public bool isInHand = false;
     [HideInInspector] public bool hasBeenClicked = false;

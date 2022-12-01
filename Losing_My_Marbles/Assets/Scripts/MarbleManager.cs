@@ -94,7 +94,7 @@ public class MarbleManager : MonoBehaviour
                     availableMarbleSlots[i] = true;
                 }
 
-                tm.SelectedMarbles();
+                //tm.OrderSelectedMarbles();
 
                 tm.ResetOrder();
             }
@@ -104,8 +104,4 @@ public class MarbleManager : MonoBehaviour
             tm.ResetOrder();
         }
     }
-
-    
-
-    
 }

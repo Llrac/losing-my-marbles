@@ -12,8 +12,8 @@ public class TurnManager : MonoBehaviour
     // all hazard tiles
     // all environment tiles
 
-    [HideInInspector] public GameObject[] marblesToExecute = new GameObject[5];
-    [HideInInspector] public List<GameObject> selectedMarbles = new();
+    public GameObject[] marblesToExecute = new GameObject[5];
+    public List<GameObject> selectedMarbles = new();
     [HideInInspector] public int globalOrderID = 0;
 
     GameObject player;
@@ -25,25 +25,13 @@ public class TurnManager : MonoBehaviour
         player = pp.gameObject;
     }
 
-    public void ResetOrder()
+    public void OrderSelectedMarbles()
     {
-        selectedMarbles.Clear();
-        Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
-        foreach (Marble marbleScript in allMarbleScripts)
+        Debug.Log(globalOrderID);
+        if (globalOrderID < 5)
         {
-            marbleScript.hasBeenClicked = false;
-            marbleScript.orderID = 0;
-            globalOrderID = 0;
+            return;
         }
-        Highlight[] highlights = FindObjectsOfType<Highlight>();
-        foreach (Highlight highlight in highlights)
-        {
-            Destroy(highlight.gameObject);
-        }
-    }
-
-    public void SelectedMarbles()
-    {
         foreach (GameObject marble in selectedMarbles)
         {
             switch (marble.GetComponent<Marble>().orderID)
@@ -64,19 +52,41 @@ public class TurnManager : MonoBehaviour
                     marblesToExecute[4] = marble;
                     break;
                 default:
-                    Debug.Log(gameObject + " has no marble ID.");
+
                     break;
             }
         }
 
         for (int i = 0; i < marblesToExecute.Length; i++)
         {
-            MarbleToAction(marblesToExecute[i]);
+            Debug.Log(marblesToExecute[i]);
+            MarbleIDToAction(marblesToExecute[i]);
         }
+
+        ResetOrder();
     }
 
-    public void MarbleToAction(GameObject marbleToAction)
+    public void ResetOrder()
     {
+        selectedMarbles.Clear();
+        Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
+        foreach (Marble marbleScript in allMarbleScripts)
+        {
+            //marbleScript.hasBeenClicked = false;
+            marbleScript.orderID = 0;
+            globalOrderID = 0;
+        }
+        //Highlight[] highlights = FindObjectsOfType<Highlight>();
+        //foreach (Highlight highlight in highlights)
+        //{
+        //    Destroy(highlight.gameObject);
+        //}
+    }
+
+    public void MarbleIDToAction(GameObject marbleToAction)
+    {
+        Debug.Log(marbleToAction);
+        Debug.Log(marbleToAction.GetComponent<Marble>().marbleID);
         switch (marbleToAction.GetComponent<Marble>().marbleID)
         {
             case 1:
@@ -94,19 +104,9 @@ public class TurnManager : MonoBehaviour
             case 5:
                 pp.TryMove(player, 1, 1);
                 break;
+            default:
+                Debug.Log(gameObject + " has an unknown marble ID.");
+                break;
         }
-    }
-
-    public void RequestMove(GameObject character, int dataID, int increment, int callersDirectionID = 5)
-    {
-        //list spelare
-        //
-    }
-
-    public IEnumerator TurnOrder()
-    {
-
-
-        yield return null;
     }
 }
