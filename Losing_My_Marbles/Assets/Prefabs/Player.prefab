@@ -52,6 +52,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e11a4197bacf3fd4ea94a5ca3a1d7d4c, type: 3}
   - {fileID: 21300000, guid: 540a23c4954f03e49a689eed3f5c1746, type: 3}
   jumpLength: 1
+  move1: {fileID: 0}
+  move2: {fileID: 0}
+  move3: {fileID: 0}
+  left1: {fileID: 0}
+  right1: {fileID: 0}
 --- !u!50 &6590025579627938569
 Rigidbody2D:
   serializedVersion: 4
