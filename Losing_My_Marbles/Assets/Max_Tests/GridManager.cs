@@ -10,7 +10,7 @@ public class GridManager : MonoBehaviour
 
     public char[,] board;
 
-    void Start()
+    void Awake()
     {
         board = new char[9, 9]
         {
