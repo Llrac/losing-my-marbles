@@ -1,46 +1,51 @@
 using System.Collections;
+using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
     public Vector2 gridPosition = new(0, 0);
-
+    [SerializeField] bool hasKey = false;
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
 
     public Sprite[] sprites = new Sprite[2];
-    SpriteRenderer sr;
+    SpriteRenderer childRenderer;
     GridManager grid;
 
     public float jumpLength = 1;
  
     int multiplier;
 
+    
+    
     GameObject body;
 
+    float timer = 1f;
     // Start is called before the first frame update
     void Start()
     {
         
         grid = FindObjectOfType<GridManager>();
 
-        foreach (Transform child in transform)
-        {
-            if (child.gameObject.name == "Sprite")
-                body = child.gameObject;
-        }
         
-        sr = body.GetComponent<SpriteRenderer>();
         
-
     }
-
-
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+        if (timer < 0f)
+        {
+            timer = 1f;
+            //enemies[0].DoAMove(1);
+           
+        }
+    }
     public void TryMove(GameObject character, int dataID, int increment)
     {
-       
+
         //if (callersDirectionID != 5)
         //{
         //    currentDirectionID = callersDirectionID;
@@ -50,28 +55,53 @@ public abstract class Movement : MonoBehaviour
         // Set transform position
         if (dataID == 0)
         {
+           
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
-                if(grid == null)
+                
+                if (grid == null)
                 {
                     grid = FindObjectOfType<GridManager>();
                 }
                 switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
                 {
-                    case 0: // EMPTY (walls, void, etc)
-                        TryMove(character, 1, 2); // lägg till recursion här
+                    case GridManager.EMPTY: // EMPTY (walls, void, etc)
+                        TryMove(character, 1, 2); // lägg till recursion här'
                         break;
-                    case 1: // WALKABLEGROUND
+
+                    case GridManager.WALKABLEGROUND: // WALKABLEGROUND
                         Move(character, 1);
                         break;
-                    case 2: // PLAYER
+
+                    case GridManager.PLAYER: // PLAYER
                        
                         // Move(character, increment);
                         break;
-                    case 3: // ENEMY
-                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + gridPosition, enemies);
-                        TryMove(enemy,0, 1);
+
+                    case GridManager.ENEMY: // ENEMY
+                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + character.GetComponent<Movement>().gridPosition, enemies);
+                        
+                        TryMove(enemy, 0, 1);
                         TryMove(character, 0, 1);
+                        break;
+
+                    case GridManager.DOOR:
+                        if (character.GetComponent<Movement>().hasKey == true)
+                        {
+                            Move(character, 1);
+                            character.gameObject.SetActive(false);
+                        }
+                        break;
+
+                    case GridManager.KEY:
+                        character.GetComponent<Movement>().hasKey = true;
+                        GameObject.FindGameObjectWithTag("Key").gameObject.SetActive(false);
+                        Move(character, 1);
+                        break;
+
+                    case GridManager.HOLE:
+                        character.SetActive(false);
+                        grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0,0));
                         break;
                 }
             }
@@ -94,33 +124,32 @@ public abstract class Movement : MonoBehaviour
                 }
             }
 
-            foreach (Transform child in transform)
+            foreach (Transform child in character.transform)
             {
                 if (child.gameObject.name == "Sprite")
-                    body = child.gameObject;
-                sr = body.GetComponent<SpriteRenderer>();
+                    childRenderer = child.gameObject.GetComponent<SpriteRenderer>();
             }
 
             switch (currentDirectionID)
             {
                 case 0:
                    
-                    character.GetComponent<Movement>().sr.sprite = sprites[0];
+                    character.GetComponent<Movement>().childRenderer.sprite = sprites[0];
                     character.transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case 1 or -3:
                    
-                    character.GetComponent<Movement>().sr.sprite = sprites[1];
+                    character.GetComponent<Movement>().childRenderer.sprite = sprites[1];
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case 2 or -2:
                     
-                    character.GetComponent<Movement>().sr.sprite = sprites[1];
+                    character.GetComponent<Movement>().childRenderer.sprite = sprites[1];
                     character.transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case 3 or -1:
                     
-                    character.GetComponent<Movement>().sr.sprite = sprites[0];
+                    character.GetComponent<Movement>().childRenderer.sprite = sprites[0];
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
             }
@@ -167,4 +196,6 @@ public abstract class Movement : MonoBehaviour
         }
     }
     public abstract char ChangeTag();
+    public abstract void DoAMove(int inc);
+    
 }

@@ -4,76 +4,74 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    public GameObject move1;
-    public GameObject move2;
-    public GameObject move3;
-    public GameObject left1;
-    public GameObject right1;
-
-    TurnManager tm;
-
-    private void Start()
-    {
-        tm = FindObjectOfType<TurnManager>();
-    }
-
+    public static List<Vector2> myMoves = new List<Vector2>();
+  
+    int act = 1;
+    float myTime = 1f;
+    int index = 0;
+    bool enemyMove = false;
     void Update()
     {
-        // Diagonal movement
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (myMoves.Count >= 5)
         {
-            tm.globalOrderID++;
-            move1.GetComponent<Marble>().orderID += tm.globalOrderID;
-            tm.selectedMarbles.Add(move1);
-            tm.OrderSelectedMarbles();
+            //myMoves.Count >= 5
+            myTime -= Time.deltaTime; // dancing rats
+            if (myTime < 0f && enemyMove == false)
+            {
+                TryMove(gameObject, (int)myMoves[index].x, (int)myMoves[index].y);
+                index++;
+                enemyMove = true;
+            }
+            if (myTime <=-1f)
+            {
+                enemies[0].DoAMove(1);
+                enemyMove = false;
+                myTime = 1f;
+            }
+            if (index >= 5)
+            {
+                myMoves.Clear();
+                index = 0;
+            }
+
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+
+        if (Input.GetKeyDown(KeyCode.W))
         {
-            tm.globalOrderID++;
-            move2.GetComponent<Marble>().orderID += tm.globalOrderID;
-            tm.selectedMarbles.Add(move2);
-            tm.OrderSelectedMarbles();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            tm.globalOrderID++;
-            move3.GetComponent<Marble>().orderID += tm.globalOrderID;
-            tm.selectedMarbles.Add(move3);
-            tm.OrderSelectedMarbles();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            tm.globalOrderID++;
-            left1.GetComponent<Marble>().orderID += tm.globalOrderID;
-            tm.selectedMarbles.Add(left1);
-            tm.OrderSelectedMarbles();
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            tm.globalOrderID++;
-            right1.GetComponent<Marble>().orderID += tm.globalOrderID;
-            tm.selectedMarbles.Add(right1);
-            tm.OrderSelectedMarbles();
-        }
-        else if (Input.GetKeyDown(KeyCode.W))
-        {
-            TryMove(gameObject, 0, 1);
-        }
-        else if (Input.GetKeyDown(KeyCode.S))
-        {
-            //TryMove(gameObject, 0, -1);
+            TryMove(gameObject, 0, act);
+            
+            
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
             TryMove(gameObject, 1, -1);
+           
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             TryMove(gameObject, 1, 1);
+           
+        }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            act++;
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            act--;
         }
     }
     public override char ChangeTag()
     {
         return 'P';
+    }
+
+    public override void DoAMove(int inc)
+    {
+        throw new System.NotImplementedException();
+    }
+    private bool Waste()
+    {
+        return true;
     }
 }
