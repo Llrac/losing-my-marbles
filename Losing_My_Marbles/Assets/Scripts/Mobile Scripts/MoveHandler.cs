@@ -16,12 +16,12 @@ public class MoveHandler : MonoBehaviour
     {
         playerProperties = FindObjectOfType<PlayerProperties>();
         player = playerProperties.gameObject;
+        
         database.ListenForMovement(InstantiateMove, Debug.Log);
     }
 
     public void SendMove()
     {
-        
         database.PostMove(new MoveMessage(1, marbleManager.orderID[0], marbleManager.orderID[1], marbleManager.orderID[2], marbleManager.orderID[3], marbleManager.orderID[4]), () =>
         {
             Debug.Log("Move was sent!");
