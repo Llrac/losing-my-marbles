@@ -19,7 +19,6 @@ public class PlayerProperties : Movement
             if (myTime < 0f && enemyMove == false)
             {
                 TryMove(gameObject, (int)myMoves[index].x, (int)myMoves[index].y);
-                index++;
                 enemyMove = true;
             }
             if (myTime <=-1f)
@@ -27,6 +26,7 @@ public class PlayerProperties : Movement
                 enemies[0].DoAMove(1);
                 enemyMove = false;
                 myTime = 1f;
+                index++;
             }
             if (index >= 5)
             {
