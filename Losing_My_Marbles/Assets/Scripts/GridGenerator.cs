@@ -8,6 +8,7 @@ public class GridGenerator : MonoBehaviour
 
     [SerializeField] GameObject tileToImitate;
     [SerializeField] Sprite[] tileSprites = new Sprite[17];
+    [SerializeField] Sprite tileHoleSprite = null;
     float tileSize = 1f;
     int tileSpriteChosen;
 
@@ -32,6 +33,11 @@ public class GridGenerator : MonoBehaviour
                 newTile.transform.parent = gameObject.transform;
                 tileSpriteChosen = Random.Range(0, tileSprites.Length);
                 newTile.GetComponent<SpriteRenderer>().sprite = tileSprites[tileSpriteChosen];
+
+                if (grid.board[i, j] == GridManager.HOLE && tileHoleSprite != null)
+                {
+                    newTile.GetComponent<SpriteRenderer>().sprite = tileHoleSprite;
+                }
             }
         }
     }
