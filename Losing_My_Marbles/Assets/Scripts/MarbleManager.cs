@@ -19,7 +19,7 @@ public class MarbleManager : MonoBehaviour
     
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
-    [HideInInspector] public List<Marble> discardBag = new();
+    public List<Marble> discardBag = new();
     [HideInInspector] public int[] orderID = new int[5];
 
     TurnManager turnManager;
@@ -51,6 +51,8 @@ public class MarbleManager : MonoBehaviour
 
     public void FillHandWithMarbles()
     {
+        SetAllSlotsToAvailable();
+        
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
             if (marbleBag.Count <= 0)
@@ -70,6 +72,7 @@ public class MarbleManager : MonoBehaviour
                 randomMarble.isInHand = true;
                 availableMarbleSlotsTop[i] = false;
                 marbleBag.Remove(randomMarble);
+                Debug.Log("vadsomhelst");
             }
         }
     }
@@ -139,4 +142,37 @@ public class MarbleManager : MonoBehaviour
             discardBag.Clear();
         }
     }
+
+    public void DiscardMarblesFromHand()
+    {
+        Marble[] marblesInScene = FindObjectsOfType<Marble>();
+
+        foreach (Marble marble in marblesInScene)
+        {
+            if (marble.isInHand)
+            {
+                discardBag.Add(marble);
+                marble.isInHand = false;
+                marble.isOnBottomRow = false;
+                marble.gameObject.transform.position = new Vector2(-5000, -5000);
+            }
+        }
+    }
+
+
+
+    private void SetAllSlotsToAvailable()
+    {
+        for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
+        {
+            availableMarbleSlotsTop[i] = true;
+        }
+        
+        for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
+        {
+            availableMarbleSlotsBottom[i] = true;
+            confirmButton.interactable = false;
+        }
+    }
+    
 }

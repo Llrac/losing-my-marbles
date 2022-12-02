@@ -57,7 +57,7 @@ MonoBehaviour:
   topRowIndex: 0
   bottomRowIndex: 0
   orderID: 0
-  isInHand: 1
+  isInHand: 0
   isOnBottomRow: 0
 --- !u!58 &7945127248835016118
 CircleCollider2D:
