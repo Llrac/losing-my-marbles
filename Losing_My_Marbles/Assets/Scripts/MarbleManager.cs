@@ -15,8 +15,8 @@ public class MarbleManager : MonoBehaviour
     public List<Marble> marbleBag = new();
     public Transform marbleBagTransform;
 
-    public GameObject highlight;
-
+    public Button confirmButton;
+    
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
     [HideInInspector] public List<Marble> discardBag = new();
@@ -86,6 +86,7 @@ public class MarbleManager : MonoBehaviour
                 availableMarbleSlotsBottom[i] = false;
                 orderID[i] = currentMarble.marbleID;
                 availableMarbleSlotsTop[currentMarble.topRowIndex] = true;
+                confirmButton.interactable = BottomRowFull();
                 return true;
             }
         }
@@ -104,10 +105,25 @@ public class MarbleManager : MonoBehaviour
                 currentMarble.topRowIndex = i;
                 availableMarbleSlotsTop[i] = false;
                 availableMarbleSlotsBottom[currentMarble.bottomRowIndex] = true;
+                confirmButton.interactable = BottomRowFull();
+                
                 return false;
             }
         }
         
+        return true;
+    }
+
+    private bool BottomRowFull()
+    {
+        for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
+        {
+            if (availableMarbleSlotsBottom[i])
+            {
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -123,8 +139,4 @@ public class MarbleManager : MonoBehaviour
             discardBag.Clear();
         }
     }
-
-
-
-
 }
