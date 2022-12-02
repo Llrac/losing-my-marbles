@@ -7,9 +7,12 @@ public class RåttaProperties : Movement
     float tim = 1f;
     private void Start()
     {
+        
+    }
+    private void Awake()
+    {
         Movement.enemies.Add(this);
     }
-
     private void Update()
     {
         //tim -= Time.deltaTime;
