@@ -4,24 +4,11 @@ using UnityEngine;
 
 public class RåttaProperties : Movement
 {
-    float tim = 1f;
-    private void Start()
-    {
-        
-    }
     private void Awake()
     {
         Movement.enemies.Add(this);
     }
-    private void Update()
-    {
-        //tim -= Time.deltaTime;
-        //if (tim < 0f)
-        //{
-        //    DoAMove(1);
-        //    tim = 1f;
-        //}
-    }
+
     public override char ChangeTag()
     {
         return 'E';
