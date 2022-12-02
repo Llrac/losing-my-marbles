@@ -13,6 +13,8 @@ public class DatabaseAPI : MonoBehaviour
         // Gets an instance of the database
         FirebaseDatabase.GetInstance("https://losing-my-marbles-620eb-default-rtdb.europe-west1.firebasedatabase.app/");
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        dbReference.SetValueAsync(null); //clears the database every play session
+        dbReference.SetValueAsync("movement"); //makes sure we can post to movement
     }
 
     public void PostMove(MoveMessage moveMessage, Action callback, Action<AggregateException> fallback)
@@ -35,5 +37,4 @@ public class DatabaseAPI : MonoBehaviour
 
         dbReference.Child("movement").ChildAdded += CurrentListener;
     }
-    
 }

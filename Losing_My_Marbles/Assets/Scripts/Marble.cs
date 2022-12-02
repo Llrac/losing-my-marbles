@@ -33,7 +33,6 @@ public class Marble : MonoBehaviour
             isOnBottomRow = marbleManager.MoveMarbleToTopRow(gameObject);
         }
     }
-    
 
     public void MoveToDiscardPile()
     {
