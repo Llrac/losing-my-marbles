@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public abstract class Movement : MonoBehaviour
  
     int multiplier;
 
+    
+    
     GameObject body;
 
     float timer = 1f;
@@ -47,14 +50,16 @@ public abstract class Movement : MonoBehaviour
         //{
         //    currentDirectionID = callersDirectionID;
         //}
-       
+        
 
         // Set transform position
         if (dataID == 0)
         {
+           
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
-                if(grid == null)
+                
+                if (grid == null)
                 {
                     grid = FindObjectOfType<GridManager>();
                 }
@@ -63,21 +68,23 @@ public abstract class Movement : MonoBehaviour
                     case GridManager.EMPTY: // EMPTY (walls, void, etc)
                         TryMove(character, 1, 2); // lägg till recursion här'
                         break;
+
                     case GridManager.WALKABLEGROUND: // WALKABLEGROUND
                         Move(character, 1);
                         break;
+
                     case GridManager.PLAYER: // PLAYER
                        
                         // Move(character, increment);
                         break;
+
                     case GridManager.ENEMY: // ENEMY
-                       
                         GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + character.GetComponent<Movement>().gridPosition, enemies);
                         
                         TryMove(enemy, 0, 1);
                         TryMove(character, 0, 1);
-
                         break;
+
                     case GridManager.DOOR:
                         if (character.GetComponent<Movement>().hasKey == true)
                         {
@@ -85,11 +92,13 @@ public abstract class Movement : MonoBehaviour
                             character.gameObject.SetActive(false);
                         }
                         break;
+
                     case GridManager.KEY:
                         character.GetComponent<Movement>().hasKey = true;
                         GameObject.FindGameObjectWithTag("Key").gameObject.SetActive(false);
                         Move(character, 1);
                         break;
+
                     case GridManager.HOLE:
                         character.SetActive(false);
                         grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0,0));
@@ -119,7 +128,6 @@ public abstract class Movement : MonoBehaviour
             {
                 if (child.gameObject.name == "Sprite")
                     childRenderer = child.gameObject.GetComponent<SpriteRenderer>();
-                 
             }
 
             switch (currentDirectionID)
@@ -189,4 +197,5 @@ public abstract class Movement : MonoBehaviour
     }
     public abstract char ChangeTag();
     public abstract void DoAMove(int inc);
+    
 }

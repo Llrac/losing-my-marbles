@@ -61,10 +61,10 @@ public class MoveHandler : MonoBehaviour
                     PlayerProperties.myMoves.Add(new Vector2(0, 3));
                     break;
                 case 4:
-                    PlayerProperties.myMoves.Add(new Vector2( 1, -2));
+                    PlayerProperties.myMoves.Add(new Vector2( 1, -1));
                     break;
                 case 5:
-                    PlayerProperties.myMoves.Add(new Vector2( 1, 2));
+                    PlayerProperties.myMoves.Add(new Vector2( 1, 1));
                     break;
             }
         }

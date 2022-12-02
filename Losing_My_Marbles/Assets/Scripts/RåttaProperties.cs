@@ -12,12 +12,12 @@ public class RåttaProperties : Movement
 
     private void Update()
     {
-        tim -= Time.deltaTime;
-        if (tim < 0f)
-        {
-            DoAMove(1);
-            tim = 1f;
-        }
+        //tim -= Time.deltaTime;
+        //if (tim < 0f)
+        //{
+        //    DoAMove(1);
+        //    tim = 1f;
+        //}
     }
     public override char ChangeTag()
     {

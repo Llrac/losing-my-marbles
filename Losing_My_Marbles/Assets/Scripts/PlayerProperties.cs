@@ -7,26 +7,35 @@ public class PlayerProperties : Movement
     public static List<Vector2> myMoves = new List<Vector2>();
   
     int act = 1;
-   
+    float myTime = 1f;
+    int index = 0;
+    bool enemyMove = false;
     void Update()
     {
-        //if(myMoves.Count >= 5)
-        //{
-            
-        //    for(int i = 0; i < myMoves.Count; i++)
-        //    {
-        //        myTime -= Time.deltaTime; // dancing rats
-        //        if(myTime < 5f)
-        //        {
-        //            TryMove(gameObject, (int)myMoves[i].x, (int)myMoves[i].y);
-        //            enemies[0].DoAMove(1);
-        //            myTime = 5f;
-        //        }
-               
-        //    }
-           
-        //}
-        // Diagonal movement
+        if (myMoves.Count >= 5)
+        {
+            //myMoves.Count >= 5
+            myTime -= Time.deltaTime; // dancing rats
+            if (myTime < 0f && enemyMove == false)
+            {
+                TryMove(gameObject, (int)myMoves[index].x, (int)myMoves[index].y);
+                index++;
+                enemyMove = true;
+            }
+            if (myTime <=-1f)
+            {
+                enemies[0].DoAMove(1);
+                enemyMove = false;
+                myTime = 1f;
+            }
+            if (index >= 5)
+            {
+                myMoves.Clear();
+                index = 0;
+            }
+
+        }
+
         if (Input.GetKeyDown(KeyCode.W))
         {
             TryMove(gameObject, 0, act);
