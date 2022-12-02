@@ -24,7 +24,7 @@ public class PlayerProperties : Movement
             }
             if (myTime <=-1f)
             {
-                enemies[0].DoAMove(1);
+                enemies[0].DoAMove(1, enemies[0].GetComponent<RåttaProperties>().currentDirectionID);
                 enemyMove = false;
                 myTime = 1f;
             }
@@ -66,7 +66,7 @@ public class PlayerProperties : Movement
         return 'P';
     }
 
-    public override void DoAMove(int inc)
+    public override void DoAMove(int inc, int dir)
     {
         throw new System.NotImplementedException();
     }

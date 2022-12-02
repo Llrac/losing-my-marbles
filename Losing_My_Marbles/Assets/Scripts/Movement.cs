@@ -19,19 +19,13 @@ public abstract class Movement : MonoBehaviour
  
     int multiplier;
 
-    
-    
     GameObject body;
 
     float timer = 1f;
     // Start is called before the first frame update
     void Start()
     {
-        
         grid = FindObjectOfType<GridManager>();
-
-        
-        
     }
     private void Update()
     {
@@ -43,7 +37,7 @@ public abstract class Movement : MonoBehaviour
            
         }
     }
-    public void TryMove(GameObject character, int dataID, int increment)
+    public bool TryMove(GameObject character, int dataID, int increment)
     {
 
         //if (callersDirectionID != 5)
@@ -80,9 +74,10 @@ public abstract class Movement : MonoBehaviour
 
                     case GridManager.ENEMY: // ENEMY
                         GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + character.GetComponent<Movement>().gridPosition, enemies);
+
+                        enemy.GetComponent<RåttaProperties>().DoAMove(1, currentDirectionID); // redo DooneMove to take in current direction id as well
+                        TryMove(character, 0, 0); // return value could be used to handle stack overflow
                         
-                        TryMove(enemy, 0, 1);
-                        TryMove(character, 0, 1);
                         break;
 
                     case GridManager.DOOR:
@@ -154,6 +149,7 @@ public abstract class Movement : MonoBehaviour
                     break;
             }
         }
+        return true;
     }
 
     public Vector2 RequestGridPosition(int currentDirectionID)
@@ -196,6 +192,6 @@ public abstract class Movement : MonoBehaviour
         }
     }
     public abstract char ChangeTag();
-    public abstract void DoAMove(int inc);
+    public abstract void DoAMove(int inc, int dir);
     
 }
