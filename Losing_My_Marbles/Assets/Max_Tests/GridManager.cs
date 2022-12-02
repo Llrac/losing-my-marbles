@@ -25,7 +25,7 @@ public class GridManager : MonoBehaviour
             {'X','X','X','X','P','X','X','X','X'} // sortinglayer 8
     };
 
-    void Start()
+    void Awake()
     {
         //board = new char[9, 9]
         //{
