@@ -11,7 +11,7 @@ public class Marble : MonoBehaviour
 
     public int orderID;
     
-    [HideInInspector] public bool isInHand = false;
+    public bool isInHand = false;
     [HideInInspector] public bool isOnBottomRow = false;
 
     MarbleManager marbleManager;
@@ -33,11 +33,5 @@ public class Marble : MonoBehaviour
             isOnBottomRow = marbleManager.MoveMarbleToTopRow(gameObject);
         }
     }
-
-    public void MoveToDiscardPile()
-    {
-        isInHand = false;
-        marbleManager.discardBag.Add(this);
-        transform.position = marbleManager.marbleBagTransform.position;
-    }
+    
 }
