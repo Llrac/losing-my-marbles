@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RåttaProperties : Movement
+public class RatProperties : Movement
 {
-    private void Awake()
+    private void Start()
     {
         Movement.enemies.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        Movement.enemies.Remove(this);
     }
 
     public override char ChangeTag()

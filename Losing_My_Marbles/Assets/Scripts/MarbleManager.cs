@@ -171,7 +171,8 @@ public class MarbleManager : MonoBehaviour
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             availableMarbleSlotsBottom[i] = true;
-            confirmButton.interactable = false;
+            if (confirmButton != null)
+                confirmButton.interactable = false;
         }
     }
     

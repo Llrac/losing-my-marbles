@@ -10,6 +10,7 @@ public class PlayerProperties : Movement
     float myTime = 1f;
     int index = 0;
     bool enemyMove = false;
+    
     void Update()
     {
         if (myMoves.Count >= 5)

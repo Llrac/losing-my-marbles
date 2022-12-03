@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Threading;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
@@ -90,6 +91,7 @@ public abstract class Movement : MonoBehaviour
                         {
                             Move(character, 1);
                             character.gameObject.SetActive(false);
+                            //SceneManager.LoadScene(0);
                         }
                         break;
 
