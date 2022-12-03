@@ -251,11 +251,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &90430766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6792802075631556765, guid: a7048e4a19ea99942a8380c6d04b87cc, type: 3}
-  m_PrefabInstance: {fileID: 722677171}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &94946888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1382,10 +1377,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 450415427, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
-      propertyPath: m_FlipX
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6590025579627938566, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1434,18 +1425,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7121207949775654478, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
-      propertyPath: rat
-      value: 
-      objectReference: {fileID: 90430766}
-    - target: {fileID: 7121207949775654478, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
-      propertyPath: sprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: ef916385fbfa4ba49a0ff8ba4e9f208c, type: 3}
-    - target: {fileID: 7121207949775654478, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
-      propertyPath: sprites.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: 04933eff0b151524596d0a15887a1d16, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
 --- !u!1 &435216359
@@ -1794,7 +1773,7 @@ GameObject:
   - component: {fileID: 623496582}
   - component: {fileID: 623496581}
   m_Layer: 0
-  m_Name: MovementHandler
+  m_Name: ActionHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1987,14 +1966,6 @@ PrefabInstance:
     - target: {fileID: 6792802075631556765, guid: a7048e4a19ea99942a8380c6d04b87cc, type: 3}
       propertyPath: m_Name
       value: "R\xE5tta (1)"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6792802075631556780, guid: a7048e4a19ea99942a8380c6d04b87cc, type: 3}
-      propertyPath: gridPosition.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6792802075631556780, guid: a7048e4a19ea99942a8380c6d04b87cc, type: 3}
-      propertyPath: gridPosition.y
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7048e4a19ea99942a8380c6d04b87cc, type: 3}
@@ -3099,10 +3070,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 510053272, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
-      propertyPath: tileHoleSprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 16c07d3c479f0ab4f8c935d495142d4b, type: 3}
     - target: {fileID: 2120634356009288632, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -4024,7 +3991,7 @@ Transform:
   m_GameObject: {fileID: 1875013591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.286, y: 8.917, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4875,22 +4842,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2985965202447568530, guid: f100b1db78e971c499b4a192dec184e7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985965202447568531, guid: f100b1db78e971c499b4a192dec184e7, type: 3}
-      propertyPath: orthographic size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985965202447568531, guid: f100b1db78e971c499b4a192dec184e7, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985965202447568531, guid: f100b1db78e971c499b4a192dec184e7, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2985965202447568531, guid: f100b1db78e971c499b4a192dec184e7, type: 3}
-      propertyPath: m_BackGroundColor.r
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

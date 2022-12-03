@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    public static List<Vector2> myMoves = new List<Vector2>();
+    public int playerID = 0; // playerID of (0) is null
+
+    public static List<Vector2> myActions = new();
   
     int act = 1;
     float myTime = 1f;
@@ -13,13 +15,13 @@ public class PlayerProperties : Movement
     
     void Update()
     {
-        if (myMoves.Count >= 5)
+        if (myActions.Count >= 5)
         {
             //myMoves.Count >= 5
             myTime -= Time.deltaTime; // dancing rats
             if (myTime < 0f && enemyMove == false)
             {
-                TryMove(gameObject, (int)myMoves[index].x, (int)myMoves[index].y);
+                TryMove(gameObject, (int)myActions[index].x, (int)myActions[index].y);
                 enemyMove = true;
             }
             if (myTime <=-1f)
@@ -31,27 +33,22 @@ public class PlayerProperties : Movement
             }
             if (index >= 5)
             {
-                myMoves.Clear();
+                myActions.Clear();
                 index = 0;
             }
-
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             TryMove(gameObject, 0, act);
-            
-            
         }
         else if (Input.GetKeyDown(KeyCode.A))
         {
             TryMove(gameObject, 1, -1);
-           
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
             TryMove(gameObject, 1, 1);
-           
         }
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -71,7 +68,7 @@ public class PlayerProperties : Movement
     {
         throw new System.NotImplementedException();
     }
-    private bool Waste()
+    private bool Waste() // currently unassigned to any keyboard input
     {
         return true;
     }

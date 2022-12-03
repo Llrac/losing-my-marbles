@@ -17,7 +17,7 @@ public class DatabaseAPI : MonoBehaviour
         dbReference.SetValueAsync("movement"); //makes sure we can post to movement
     }
 
-    public void PostMove(MoveMessage moveMessage, Action callback, Action<AggregateException> fallback)
+    public void PostActions(ActionMessage moveMessage, Action callback, Action<AggregateException> fallback)
     {
         var moveJson = JsonUtility.ToJson(moveMessage);
         dbReference.Child("movement").Push().SetRawJsonValueAsync(moveJson).ContinueWith(task =>
@@ -27,12 +27,12 @@ public class DatabaseAPI : MonoBehaviour
         });
     }
 
-    public void ListenForMovement(Action<MoveMessage> callback, Action<AggregateException> fallback)
+    public void ListenForActions(Action<ActionMessage> callback, Action<AggregateException> fallback)
     {
         void CurrentListener(object o, ChildChangedEventArgs args)
         {
             if (args.DatabaseError != null) fallback(new AggregateException(new Exception(args.DatabaseError.Message)));
-            else callback(JsonUtility.FromJson<MoveMessage>(args.Snapshot.GetRawJsonValue()));
+            else callback(JsonUtility.FromJson<ActionMessage>(args.Snapshot.GetRawJsonValue()));
         }
 
         dbReference.Child("movement").ChildAdded += CurrentListener;

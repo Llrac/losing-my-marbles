@@ -20,19 +20,11 @@ public abstract class Movement : MonoBehaviour
  
     int multiplier;
 
-    
-    
-    GameObject body;
-
     float timer = 1f;
     // Start is called before the first frame update
     void Start()
     {
-        
         grid = FindObjectOfType<GridManager>();
-
-        
-        
     }
     private void Update()
     {
@@ -41,18 +33,10 @@ public abstract class Movement : MonoBehaviour
         {
             timer = 1f;
             //enemies[0].DoAMove(1);
-           
         }
     }
     public void TryMove(GameObject character, int dataID, int increment)
     {
-
-        //if (callersDirectionID != 5)
-        //{
-        //    currentDirectionID = callersDirectionID;
-        //}
-        
-
         // Set transform position
         if (dataID == 0)
         {
@@ -90,7 +74,7 @@ public abstract class Movement : MonoBehaviour
                         if (character.GetComponent<Movement>().hasKey == true)
                         {
                             Move(character, 1);
-                            character.gameObject.SetActive(false);
+                            character.SetActive(false);
                             //SceneManager.LoadScene(0);
                         }
                         break;
