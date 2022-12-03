@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 99508552}
   - component: {fileID: 99508553}
   m_Layer: 0
-  m_Name: Floorboards_enemypath (8)
+  m_Name: Floorboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -812,7 +812,7 @@ GameObject:
   - component: {fileID: 202172641}
   - component: {fileID: 202172642}
   m_Layer: 0
-  m_Name: Floorboards_enemypath
+  m_Name: Floorboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -896,7 +896,7 @@ GameObject:
   - component: {fileID: 237195730}
   - component: {fileID: 237195731}
   m_Layer: 0
-  m_Name: Floorboards_enemypath (2)
+  m_Name: Floorboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1164,7 +1164,7 @@ GameObject:
   - component: {fileID: 302126562}
   - component: {fileID: 302126561}
   m_Layer: 0
-  m_Name: Floorboards_enemypath (1)
+  m_Name: Enemy Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1297,7 +1297,7 @@ GameObject:
   - component: {fileID: 350368030}
   - component: {fileID: 350368031}
   m_Layer: 0
-  m_Name: Floorboards_enemypath (3)
+  m_Name: Floorboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1610,7 +1610,7 @@ GameObject:
   - component: {fileID: 486584003}
   - component: {fileID: 486584004}
   m_Layer: 0
-  m_Name: Floorboards_enemypath (7)
+  m_Name: Floorboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2205,7 +2205,7 @@ GameObject:
   - component: {fileID: 857244710}
   - component: {fileID: 857244709}
   m_Layer: 0
-  m_Name: Test_Background_Top
+  m_Name: Background Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2526,7 +2526,7 @@ GameObject:
   - component: {fileID: 1046090798}
   - component: {fileID: 1046090799}
   m_Layer: 0
-  m_Name: Floorboards_enemypath (4)
+  m_Name: Floorboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3136,7 +3136,7 @@ GameObject:
   - component: {fileID: 1371206172}
   - component: {fileID: 1371206171}
   m_Layer: 0
-  m_Name: Test_Background_Bottom
+  m_Name: Background Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3800,7 +3800,7 @@ GameObject:
   - component: {fileID: 1850662791}
   - component: {fileID: 1850662792}
   m_Layer: 0
-  m_Name: Floorboards_enemypath (6)
+  m_Name: Floorboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4406,7 +4406,7 @@ GameObject:
   - component: {fileID: 2063054033}
   - component: {fileID: 2063054034}
   m_Layer: 0
-  m_Name: Floorboards_enemypath (5)
+  m_Name: Floorboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

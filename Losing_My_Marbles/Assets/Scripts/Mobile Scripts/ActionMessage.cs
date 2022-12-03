@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class ActionMessage
 {
-
     public int playerID;
     public int firstAction;
     public int secondAction;
@@ -24,5 +23,4 @@ public class ActionMessage
         this.fourthAction = fourthAction;
         this.fifthAction = fifthAction;
     }
-   
 }

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ResetLevel : MonoBehaviour
+public class ResetManager : MonoBehaviour
 {
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-
-            SceneManager.LoadScene(0);
+            ResetLevel();
         }
+    }
+
+    public void ResetLevel()
+    {
+        SceneManager.LoadScene(0);
     }
 }
