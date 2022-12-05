@@ -19,8 +19,8 @@ public class DatabaseAPI : MonoBehaviour
 
     public void PostActions(ActionMessage actionMessage, Action callback, Action<AggregateException> fallback)
     {
-        var moveJson = JsonUtility.ToJson(actionMessage);
-        dbReference.Child("movement").Push().SetRawJsonValueAsync(moveJson).ContinueWith(task =>
+        var actionJson = JsonUtility.ToJson(actionMessage);
+        dbReference.Child("movement").Push().SetRawJsonValueAsync(actionJson).ContinueWith(task =>
         {
             if (task.IsCanceled || task.IsFaulted) fallback(task.Exception);
             else callback();

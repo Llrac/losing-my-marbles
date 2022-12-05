@@ -18,7 +18,7 @@ public class PlayerProperties : Movement
         if (myActions.Count >= 5)
         {
             //myMoves.Count >= 5
-            myTime -= Time.deltaTime; // dancing rats
+            myTime -= Time.deltaTime;
             if (myTime < 0f && enemyMove == false)
             {
                 TryMove(gameObject, (int)myActions[index].x, (int)myActions[index].y);

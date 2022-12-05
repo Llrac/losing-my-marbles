@@ -1909,8 +1909,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1402073848}
-        m_TargetAssemblyTypeName: MoveHandler, Assembly-CSharp
-        m_MethodName: SendMove
+        m_TargetAssemblyTypeName: ActionHandler, Assembly-CSharp
+        m_MethodName: SendAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2107,7 +2107,7 @@ GameObject:
   - component: {fileID: 1402073848}
   - component: {fileID: 1402073847}
   m_Layer: 0
-  m_Name: MovementHandler
+  m_Name: ActionHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2147,7 +2147,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402073846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6130493, y: 0.18741503, z: 6.7725306}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

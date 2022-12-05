@@ -15,6 +15,7 @@ public class ResetManager : MonoBehaviour
 
     public void ResetLevel()
     {
+        PlayerProperties.myActions.Clear();
         SceneManager.LoadScene(0);
     }
 }
