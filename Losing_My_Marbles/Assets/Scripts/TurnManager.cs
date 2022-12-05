@@ -12,8 +12,8 @@ public class TurnManager : MonoBehaviour
     // all hazard tiles
     // all environment tiles
 
-    public GameObject[] marblesToExecute = new GameObject[5];
     public List<GameObject> selectedMarbles = new();
+    public GameObject[] marblesToExecute = new GameObject[5];
     [HideInInspector] public int globalOrderID = 0;
 
     GameObject player;
@@ -72,15 +72,9 @@ public class TurnManager : MonoBehaviour
         Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
         foreach (Marble marbleScript in allMarbleScripts)
         {
-            //marbleScript.hasBeenClicked = false;
             marbleScript.orderID = 0;
             globalOrderID = 0;
         }
-        //Highlight[] highlights = FindObjectsOfType<Highlight>();
-        //foreach (Highlight highlight in highlights)
-        //{
-        //    Destroy(highlight.gameObject);
-        //}
     }
 
     public void MarbleIDToAction(GameObject marbleToAction)

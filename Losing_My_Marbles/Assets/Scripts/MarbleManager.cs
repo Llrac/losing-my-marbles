@@ -5,8 +5,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.U2D.Animation;
 using Random = UnityEngine.Random;
 
 public class MarbleManager : MonoBehaviour
@@ -21,15 +19,11 @@ public class MarbleManager : MonoBehaviour
     
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
-    public List<Marble> discardBag = new();
+    [HideInInspector] public List<Marble> discardBag = new();
     [HideInInspector] public int[] orderID = new int[5];
-
-    TurnManager turnManager;
 
     private void Start()
     {
-        turnManager = FindObjectOfType<TurnManager>();
-        
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
             availableMarbleSlotsTop[i] = true;
@@ -70,11 +64,11 @@ public class MarbleManager : MonoBehaviour
             {
                 Marble randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
                 randomMarble.topRowIndex = i;
-                randomMarble.transform.position = marbleSlotsTop[i].position;
+                if (marbleSlotsTop[i] != null)
+                    randomMarble.transform.position = marbleSlotsTop[i].position;
                 randomMarble.isInHand = true;
                 availableMarbleSlotsTop[i] = false;
                 marbleBag.Remove(randomMarble);
-                Debug.Log("vadsomhelst");
             }
         }
     }
@@ -161,8 +155,6 @@ public class MarbleManager : MonoBehaviour
         }
     }
 
-
-
     private void SetAllSlotsToAvailable()
     {
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
@@ -173,7 +165,8 @@ public class MarbleManager : MonoBehaviour
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             availableMarbleSlotsBottom[i] = true;
-            confirmButton.interactable = false;
+            if (confirmButton != null)
+                confirmButton.interactable = false;
         }
     }
     

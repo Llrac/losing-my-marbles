@@ -13,7 +13,6 @@ public class GridManager : MonoBehaviour
     public const char EMPTY='?';
     public char[,] board = new char[9, 9] 
     {
-            // what happens to a player if a hazard turns on while standing in it, GridLogic?
             {'X','X','X','X','X','D','X','X','X'},
             {'X','X','H','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
@@ -22,14 +21,15 @@ public class GridManager : MonoBehaviour
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','P','X','X','X','X'} // sortinglayer 8
+            {'X','X','X','X','P','X','X','X','X'}
     };
 
     void Start()
     {
         for (int i = 0; i < Movement.enemies.Count; i++)
         {
-            board[(int)Movement.enemies[i].gridPosition.x, (int)Movement.enemies[i].gridPosition.y] = ENEMY;
+            board[(int)Movement.enemies[i].gridPosition.x,
+                (int)Movement.enemies[i].gridPosition.y] = ENEMY;
         }
     }
    
@@ -75,22 +75,7 @@ public class GridManager : MonoBehaviour
 
         int x = (int)moveScript.gridPosition.x + (int)requestedTile.x;
         int y = (int)moveScript.gridPosition.y + (int)requestedTile.y;
-        if (board == null)
-        {
-            //board = new char[9, 9]
-            //{
-            //// what happens to a player if a hazard turns on while standing in it, GridLogic?
-            //    {'X','X','X','X','X','X','X','X','X'},
-            //    {'X','X','X','X','X','X','X','X','X'},
-            //    {'X','X','X','X','X','X','X','X','X'},
-            //    {'X','X','X','X','X','X','X','X','X'},
-            //    {'X','X','X','X','X','X','X','X','X'},
-            //    {'X','X','X','X','X','X','X','X','X'},
-            //    {'X','X','X','X','X','X','X','X','X'},
-            //    {'X','X','X','X','X','X','X','X','X'},
-            //    {'X','X','X','X','P','X','X','X','X'} // sortinglayer 8
-            //};
-        }
+
         if (x >= board.GetLength(0) || x < 0 || y >= board.GetLength(0) || y < 0)
             return EMPTY;
 
@@ -131,5 +116,4 @@ public class GridManager : MonoBehaviour
         }
         return null;
     }
-
 }

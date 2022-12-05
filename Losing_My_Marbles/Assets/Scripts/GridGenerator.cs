@@ -6,35 +6,30 @@ public class GridGenerator : MonoBehaviour
 {
     GridManager grid;
 
-    [SerializeField] GameObject tileToImitate;
+    [SerializeField] GameObject tileToCopy;
     [SerializeField] Sprite[] tileSprites = new Sprite[17];
     [SerializeField] Sprite tileHoleSprite = null;
-    float tileSize = 1f;
+    readonly float tileSize = 1f;
     int tileSpriteChosen;
 
     void Start()
     {
-        //grid = FindObjectOfType<GridManager>();
-        //if (grid == null)
-        //{
-        //    grid = FindObjectOfType<GridManager>();
-        //}
-        tileToImitate.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        tileToCopy.GetComponent<SpriteRenderer>().sortingOrder = 0;
         grid = transform.GetComponentInParent<GridManager>();
 
-        for (int i = 0; i < grid.board.GetLength(0); i++)
+        for (int x = 0; x < grid.board.GetLength(0); x++)
         {
-            for (int j = 0; j < grid.board.GetLength(1); j++)
+            for (int y = 0; y < grid.board.GetLength(1); y++)
             {
-                GameObject newTile = Instantiate(tileToImitate);
-                float posX = ((i * tileSize + j * tileSize)) + tileToImitate.transform.position.x; // this is the actual x position of the tile
-                float posY = ((-i * tileSize + j * tileSize) / 2) + tileToImitate.transform.position.y; // this is the actual y position of the tile
+                GameObject newTile = Instantiate(tileToCopy);
+                float posX = ((x * tileSize + y * tileSize)) + tileToCopy.transform.position.x; // this is the actual x position of the tile
+                float posY = ((-x * tileSize + y * tileSize) / 2) + tileToCopy.transform.position.y; // this is the actual y position of the tile
                 newTile.transform.position = new Vector3(posX, posY, 0);
                 newTile.transform.parent = gameObject.transform;
                 tileSpriteChosen = Random.Range(0, tileSprites.Length);
                 newTile.GetComponent<SpriteRenderer>().sprite = tileSprites[tileSpriteChosen];
 
-                if (grid.board[i, j] == GridManager.HOLE && tileHoleSprite != null)
+                if (grid.board[x, y] == GridManager.HOLE && tileHoleSprite != null)
                 {
                     newTile.GetComponent<SpriteRenderer>().sprite = tileHoleSprite;
                 }

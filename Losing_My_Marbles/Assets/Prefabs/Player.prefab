@@ -50,9 +50,10 @@ MonoBehaviour:
   hasKey: 0
   currentDirectionID: 3
   sprites:
-  - {fileID: 21300000, guid: e11a4197bacf3fd4ea94a5ca3a1d7d4c, type: 3}
-  - {fileID: 21300000, guid: 540a23c4954f03e49a689eed3f5c1746, type: 3}
+  - {fileID: 21300000, guid: ef916385fbfa4ba49a0ff8ba4e9f208c, type: 3}
+  - {fileID: 21300000, guid: 04933eff0b151524596d0a15887a1d16, type: 3}
   jumpLength: 1
+  playerID: 0
 --- !u!50 &6590025579627938569
 Rigidbody2D:
   serializedVersion: 4
@@ -149,7 +150,7 @@ SpriteRenderer:
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: e11a4197bacf3fd4ea94a5ca3a1d7d4c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 5.44, y: 12.82}

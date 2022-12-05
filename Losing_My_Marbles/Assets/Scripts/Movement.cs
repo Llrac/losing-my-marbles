@@ -19,8 +19,6 @@ public abstract class Movement : MonoBehaviour
  
     int multiplier;
 
-    GameObject body;
-
     float timer = 1f;
     // Start is called before the first frame update
     void Start()
@@ -34,25 +32,15 @@ public abstract class Movement : MonoBehaviour
         {
             timer = 1f;
             //enemies[0].DoAMove(1);
-           
         }
     }
-    public bool TryMove(GameObject character, int dataID, int increment)
+    public void TryMove(GameObject character, int dataID, int increment)
     {
-
-        //if (callersDirectionID != 5)
-        //{
-        //    currentDirectionID = callersDirectionID;
-        //}
-        
-
         // Set transform position
         if (dataID == 0)
         {
-           
-            for (int i = 0; i < Mathf.Abs(increment); i++) // ta ut det här, lägg increment som hur många gånger din effekt ska köras i playerproperties
+            for (int i = 0; i < Mathf.Abs(increment); i++)
             {
-                
                 if (grid == null)
                 {
                     grid = FindObjectOfType<GridManager>();
@@ -73,24 +61,25 @@ public abstract class Movement : MonoBehaviour
                         break;
 
                     case GridManager.ENEMY: // ENEMY
-                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID) + character.GetComponent<Movement>().gridPosition, enemies);
-
-                        enemy.GetComponent<RåttaProperties>().DoAMove(1, currentDirectionID); // redo DooneMove to take in current direction id as well
-                        TryMove(character, 0, 0); // return value could be used to handle stack overflow
+                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
+                            + character.GetComponent<Movement>().gridPosition, enemies);
                         
+                        TryMove(enemy, 0, 1);
+                        TryMove(character, 0, 1);
                         break;
 
                     case GridManager.DOOR:
                         if (character.GetComponent<Movement>().hasKey == true)
                         {
                             Move(character, 1);
-                            character.gameObject.SetActive(false);
+                            character.SetActive(false);
+                            FindObjectOfType<ResetManager>().ResetLevel();
                         }
                         break;
 
                     case GridManager.KEY:
                         character.GetComponent<Movement>().hasKey = true;
-                        GameObject.FindGameObjectWithTag("Key").gameObject.SetActive(false);
+                        GameObject.FindGameObjectWithTag("Key").SetActive(false);
                         Move(character, 1);
                         break;
 
@@ -128,28 +117,23 @@ public abstract class Movement : MonoBehaviour
             switch (currentDirectionID)
             {
                 case 0:
-                   
                     character.GetComponent<Movement>().childRenderer.sprite = sprites[0];
                     character.transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case 1 or -3:
-                   
                     character.GetComponent<Movement>().childRenderer.sprite = sprites[1];
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
                 case 2 or -2:
-                    
                     character.GetComponent<Movement>().childRenderer.sprite = sprites[1];
                     character.transform.localScale = new Vector3(1, 1, 1);
                     break;
                 case 3 or -1:
-                    
                     character.GetComponent<Movement>().childRenderer.sprite = sprites[0];
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
             }
         }
-        return true;
     }
 
     public Vector2 RequestGridPosition(int currentDirectionID)
@@ -175,23 +159,26 @@ public abstract class Movement : MonoBehaviour
         {
             case 0:
                 character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
+                    RequestGridPosition(currentDirectionID));
                 break;
             case 1 or -3:
                 character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
+                    RequestGridPosition(currentDirectionID));
                 break;
             case 2 or -2:
                 character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
+                    RequestGridPosition(currentDirectionID));
                 break;
             case 3 or -1:
                 character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
+                    RequestGridPosition(currentDirectionID));
                 break;
         }
     }
     public abstract char ChangeTag();
-    public abstract void DoAMove(int inc, int dir);
-    
+    public abstract void DoAMove(int inc);
 }
