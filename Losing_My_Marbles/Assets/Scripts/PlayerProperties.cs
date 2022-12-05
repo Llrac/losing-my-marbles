@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    public static List<Vector2> myMoves = new List<Vector2>()
+    public List<Vector2> myActions = new List<Vector2>()
     {
         new Vector2 (0, 1 ), new Vector2 (0, 2), new Vector2 (0, 2), new Vector2 (1,1), new Vector2 (1,1)
     };
@@ -23,7 +23,7 @@ public class PlayerProperties : Movement
             enemyMove = true;
         }
             
-        if (myMoves.Count >= 5)
+        if (myActions.Count >= 5)
         {
 
          
@@ -92,18 +92,19 @@ public class PlayerProperties : Movement
     }
     private IEnumerator Turn()
     {
-        for (int i = 0; i < myMoves.Count; i++)
+        for (int i = 0; i < myActions.Count; i++)
         {
-            for (int j = 0; j < (int)myMoves[i].y; j++) // början på turnmanager.
+            for (int j = 0; j < (int)myActions[i].y; j++) // början på turnmanager.
             {
                 yield return new WaitForSeconds(timeBetween);
-                TryMove(gameObject, (int)myMoves[i].x, 1);
+                TryMove(gameObject, (int)myActions[i].x, 1);
 
             }
             yield return new WaitForSeconds(timeBetween);
-            enemies[0].DoAMove(1, enemies[0].GetComponent<RåttaProperties>().currentDirectionID);
+            enemies[0].DoAMove(1, enemies[0].GetComponent<RatProperties>().currentDirectionID);
         }
         
         
     }
+   
 }

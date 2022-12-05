@@ -63,8 +63,8 @@ public abstract class Movement : MonoBehaviour
                     case GridManager.ENEMY: // ENEMY
                         GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
                             + character.GetComponent<Movement>().gridPosition, enemies);
-                        
-                        TryMove(enemy, 0, 1);
+
+                        enemy.GetComponent<RatProperties>().DoAMove(1, currentDirectionID);
                         TryMove(character, 0, 1);
                         break;
 
@@ -180,5 +180,5 @@ public abstract class Movement : MonoBehaviour
         }
     }
     public abstract char ChangeTag();
-    public abstract void DoAMove(int inc);
+    public abstract void DoAMove(int inc, int dir);
 }

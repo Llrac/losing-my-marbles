@@ -11,94 +11,27 @@ public class TurnManager : MonoBehaviour
     // enemy 1, 2, 3, etc
     // all hazard tiles
     // all environment tiles
+    int amountOfTurns = 5;
+    float turnLenght = .5f;
+    public static List <PlayerProperties> players = new List <PlayerProperties> ();
 
-    public List<GameObject> selectedMarbles = new();
-    public GameObject[] marblesToExecute = new GameObject[5];
-    [HideInInspector] public int globalOrderID = 0;
-
-    GameObject player;
-    PlayerProperties pp;
-
-    private void Start()
+    private void Update()
     {
-        pp = FindObjectOfType<PlayerProperties>();
-        player = pp.gameObject;
+        
     }
-
-    public void OrderSelectedMarbles()
+    private  IEnumerator ExecuteTurn()
     {
-        Debug.Log(globalOrderID);
-        if (globalOrderID < 5)
+        for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
-            return;
-        }
-        foreach (GameObject marble in selectedMarbles)
-        {
-            switch (marble.GetComponent<Marble>().orderID)
+            for(int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
-                case 1:
-                    marblesToExecute[0] = marble;
-                    break;
-                case 2:
-                    marblesToExecute[1] = marble;
-                    break;
-                case 3:
-                    marblesToExecute[2] = marble;
-                    break;
-                case 4:
-                    marblesToExecute[3] = marble;
-                    break;
-                case 5:
-                    marblesToExecute[4] = marble;
-                    break;
-                default:
+                for (int steps = 0; steps < (int)players[playerInList].myActions[currentTurn].y; steps++)  // execute player j trymove with player j gameobject and player j list of actions    
+                {                                                                             // början på turnmanager.
+                    yield return new WaitForSeconds(turnLenght);
+                    players[playerInList].TryMove(players[playerInList].gameObject, (int)players[playerInList].myActions[currentTurn].x, 1); 
 
-                    break;
+                }                                                    
             }
-        }
-
-        for (int i = 0; i < marblesToExecute.Length; i++)
-        {
-            Debug.Log(marblesToExecute[i]);
-            MarbleIDToAction(marblesToExecute[i]);
-        }
-
-        //ResetOrder();
-    }
-
-    public void ResetOrder()
-    {
-        selectedMarbles.Clear();
-        Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
-        foreach (Marble marbleScript in allMarbleScripts)
-        {
-            marbleScript.orderID = 0;
-            globalOrderID = 0;
-        }
-    }
-
-    public void MarbleIDToAction(GameObject marbleToAction)
-    {
-        switch (marbleToAction.GetComponent<Marble>().marbleID)
-        {
-            case 1:
-                pp.TryMove(player, 0, 1);
-                break;
-            case 2:
-                pp.TryMove(player, 0, 2);
-                break;
-            case 3:
-                pp.TryMove(player, 0, 3);
-                break;
-            case 4:
-                pp.TryMove(player, 1, -1);
-                break;
-            case 5:
-                pp.TryMove(player, 1, 1);
-                break;
-            default:
-                Debug.Log(gameObject + " has an unknown marble ID.");
-                break;
         }
     }
 }
