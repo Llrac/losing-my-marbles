@@ -12,7 +12,13 @@ public class PlayerProperties : Movement
     float myTime = 1f;
     int index = 0;
     bool enemyMove = false;
-    
+
+    public AnimationCurve jumpProgress;
+    public AnimationCurve jumpHeight;
+    public GameObject characterToAnimate;
+    public Vector2 destination;
+    public float animTimer = 1f;
+
     void Update()
     {
         if (myActions.Count >= 5)
@@ -57,6 +63,13 @@ public class PlayerProperties : Movement
         if (Input.GetKeyDown(KeyCode.E))
         {
             act--;
+        }
+        animTimer += Time.deltaTime;
+
+        if (animTimer < 1)
+        {
+            characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
+                Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpHeight.Evaluate(animTimer)));
         }
     }
     public override char ChangeTag()

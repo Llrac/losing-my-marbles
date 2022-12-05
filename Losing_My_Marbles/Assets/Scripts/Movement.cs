@@ -2,6 +2,8 @@ using System.Collections;
 using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine;
+using Spine.Unity;
 
 public abstract class Movement : MonoBehaviour
 {
@@ -11,8 +13,8 @@ public abstract class Movement : MonoBehaviour
 
     public int currentDirectionID = 0;
 
-    public Sprite[] sprites = new Sprite[2];
-    SpriteRenderer childRenderer;
+    public Material[] materials = new Material[2];
+    MeshRenderer childRenderer;
     GridManager grid;
 
     public float jumpLength = 1;
@@ -20,10 +22,15 @@ public abstract class Movement : MonoBehaviour
     int multiplier;
 
     float timer = 1f;
+
+    SkeletonAnimation sa;
+    public AnimationReferenceAsset front, back;
+
     // Start is called before the first frame update
     void Start()
     {
         grid = FindObjectOfType<GridManager>();
+        sa = GetComponentInChildren<SkeletonAnimation>();
     }
     private void Update()
     {
@@ -108,31 +115,31 @@ public abstract class Movement : MonoBehaviour
                 }
             }
 
-            foreach (Transform child in character.transform)
-            {
-                if (child.gameObject.name == "Sprite")
-                    childRenderer = child.gameObject.GetComponent<SpriteRenderer>();
-            }
+            Spine.Animation nextAnimation;
 
             switch (currentDirectionID)
             {
                 case 0:
-                    character.GetComponent<Movement>().childRenderer.sprite = sprites[0];
-                    character.transform.localScale = new Vector3(1, 1, 1);
+                    nextAnimation = back;
+                    Turn(false);
                     break;
                 case 1 or -3:
-                    character.GetComponent<Movement>().childRenderer.sprite = sprites[1];
-                    character.transform.localScale = new Vector3(-1, 1, 1);
+                    nextAnimation = front;
+                    Turn(false);
                     break;
                 case 2 or -2:
-                    character.GetComponent<Movement>().childRenderer.sprite = sprites[1];
-                    character.transform.localScale = new Vector3(1, 1, 1);
+                    nextAnimation = front;
+                    Turn(true);
                     break;
                 case 3 or -1:
-                    character.GetComponent<Movement>().childRenderer.sprite = sprites[0];
-                    character.transform.localScale = new Vector3(-1, 1, 1);
+                    nextAnimation = back;
+                    Turn(true);
+                    break;
+                default: nextAnimation = back;
+                    Turn(false);
                     break;
             }
+            sa.AnimationState.SetAnimation(0, nextAnimation, true);
         }
     }
 
@@ -150,6 +157,10 @@ public abstract class Movement : MonoBehaviour
 
     public void Move(GameObject character, int increment)
     {
+        PlayerProperties pp;
+        pp = FindObjectOfType<PlayerProperties>();
+        pp.characterToAnimate = character;
+
         multiplier = 1;
         if (increment < 0)
         {
@@ -158,27 +169,37 @@ public abstract class Movement : MonoBehaviour
         switch (currentDirectionID)
         {
             case 0:
-                character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * multiplier;
+                pp.destination = new Vector3(character.transform.position.x + jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier;
+                pp.animTimer = 0;
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 1 or -3:
-                character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * multiplier;
+                pp.destination = new Vector3(character.transform.position.x + jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier;
+                pp.animTimer = 0;
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 2 or -2:
-                character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * multiplier;
+                pp.destination = new Vector3(character.transform.position.x - jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier;
+                pp.animTimer = 0;
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 3 or -1:
-                character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * multiplier;
+                pp.destination = new Vector3(character.transform.position.x - jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier;
+                pp.animTimer = 0;
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
         }
     }
+
+    void Turn(bool facingLeft)
+    {
+        sa.Skeleton.ScaleX = facingLeft ? -1f : 1f;
+    }
+
     public abstract char ChangeTag();
     public abstract void DoAMove(int inc);
 }
