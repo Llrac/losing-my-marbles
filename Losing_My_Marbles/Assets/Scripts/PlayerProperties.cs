@@ -5,27 +5,31 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    public List<Vector2> myActions = new List<Vector2>()
+
+    public int playerId = 0;
+    public static List <int> ids = new List <int> ();
+    public static List<Vector2> myActions = new List<Vector2>()
     {
-        new Vector2 (0, 1 ), new Vector2 (0, 2), new Vector2 (0, 2), new Vector2 (1,1), new Vector2 (1,1)
+       
     };
-  
+    public List <Vector2> actions = new List<Vector2> ();
+    
     int act = 1;
     float timeBetween = 0.5f;
    
     bool enemyMove = false;
-    
+
+    private void Start()
+    {
+        TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
+    }
     void Update()
     {
-        if(enemyMove == false)
-        {
-            StartCoroutine(Turn()); 
-            enemyMove = true;
-        }
+       
             
         if (myActions.Count >= 5)
         {
-
+            
          
             //myMoves.Count >= 5
             //myTime -= Time.deltaTime; // den kommer inte ut här i tid till sequencing.
