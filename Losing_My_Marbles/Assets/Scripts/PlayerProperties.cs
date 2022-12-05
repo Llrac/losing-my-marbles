@@ -1,38 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    public static List<Vector2> myMoves = new List<Vector2>();
+    public static List<Vector2> myMoves = new List<Vector2>()
+    {
+        new Vector2 (0, 1 ), new Vector2 (0, 2), new Vector2 (0, 2), new Vector2 (1,1), new Vector2 (1,1)
+    };
   
     int act = 1;
-    float myTime = 1f;
-    int index = 0;
+    float timeBetween = 0.5f;
+   
     bool enemyMove = false;
+    
     void Update()
     {
+        if(enemyMove == false)
+        {
+            StartCoroutine(Turn()); 
+            enemyMove = true;
+        }
+            
         if (myMoves.Count >= 5)
         {
+
+         
             //myMoves.Count >= 5
-            myTime -= Time.deltaTime; // dancing rats
-            if (myTime < 0f && enemyMove == false)
-            {
-                TryMove(gameObject, (int)myMoves[index].x, (int)myMoves[index].y);
-                index++;
-                enemyMove = true;
-            }
-            if (myTime <=-1f)
-            {
-                enemies[0].DoAMove(1, enemies[0].GetComponent<RåttaProperties>().currentDirectionID);
-                enemyMove = false;
-                myTime = 1f;
-            }
-            if (index >= 5)
-            {
-                myMoves.Clear();
-                index = 0;
-            }
+            //myTime -= Time.deltaTime; // den kommer inte ut här i tid till sequencing.
+            //if (myTime < 0f && enemyMove == false)
+            //{   
+            //    for (int i = 0; i < Mathf.Abs((int)myMoves[index].y); i++)
+            //    {
+            //        TryMove(gameObject, (int)myMoves[index].x, 1);
+            //        myTime = 1f;
+            //    }
+
+            //    myTime -= Time.deltaTime;
+            //    enemyMove = true;
+            //}
+            //if (myTime <=-1f)
+            //{
+            //    enemies[0].DoAMove(1, enemies[0].GetComponent<RåttaProperties>().currentDirectionID);
+            //    enemyMove = false;
+            //    myTime = 1f;
+            //    index++;
+            //}
+            //if (index >= 5)
+            //{
+            //    myMoves.Clear();
+            //    index = 0;
+            //}
 
         }
 
@@ -60,6 +79,7 @@ public class PlayerProperties : Movement
         {
             act--;
         }
+       
     }
     public override char ChangeTag()
     {
@@ -70,8 +90,20 @@ public class PlayerProperties : Movement
     {
         throw new System.NotImplementedException();
     }
-    private bool Waste()
+    private IEnumerator Turn()
     {
-        return true;
+        for (int i = 0; i < myMoves.Count; i++)
+        {
+            for (int j = 0; j < (int)myMoves[i].y; j++) // början på turnmanager.
+            {
+                yield return new WaitForSeconds(timeBetween);
+                TryMove(gameObject, (int)myMoves[i].x, 1);
+
+            }
+            yield return new WaitForSeconds(timeBetween);
+            enemies[0].DoAMove(1, enemies[0].GetComponent<RåttaProperties>().currentDirectionID);
+        }
+        
+        
     }
 }

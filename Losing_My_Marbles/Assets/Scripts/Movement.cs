@@ -50,7 +50,7 @@ public abstract class Movement : MonoBehaviour
         if (dataID == 0)
         {
            
-            for (int i = 0; i < Mathf.Abs(increment); i++)
+            for (int i = 0; i < Mathf.Abs(increment); i++) // ta ut det här, lägg increment som hur många gånger din effekt ska köras i playerproperties
             {
                 
                 if (grid == null)
