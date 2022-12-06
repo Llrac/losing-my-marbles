@@ -5,6 +5,10 @@ using UnityEngine;
 public class RatProperties : Movement
 {
     int savedDir;
+    private List <Vector2> killZone = new List<Vector2>() 
+    { 
+        new Vector2 (0, 1), new Vector2( 0, -1), new Vector2 ( 1, 0), new Vector2 (-1, 0)
+    };
     private void Start()
     {
         Movement.enemies.Add(this);

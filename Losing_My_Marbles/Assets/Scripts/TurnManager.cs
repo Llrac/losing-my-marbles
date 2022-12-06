@@ -14,45 +14,32 @@ public class TurnManager : MonoBehaviour
     int amountOfTurns = 5;
     float turnLenght = .5f;
     public static List <PlayerProperties> players = new List <PlayerProperties> ();
-    bool startTurn = false;
+    bool startTurn = true;
 
     private void Update()
     {
         
-        if(PlayerProperties.myActions.Count == 10)
+        if(PlayerProperties.myActions.Count == players.Count * 5)
         {
-            
-            for(int i = 0; i < players.Count; i++)
+            for (int i = 0; i < players.Count; i++)
             {
-                switch (players[i].playerId)
+                for (int j = 0; j < players.Count; j++)
                 {
-                    case 1:
-                        for (int j = 0; j < 5; j++)
-                        {
-                            players[i].actions.Add(PlayerProperties.myActions[j]);
-                            
-                        }
-                        
-                        break;
-
-                    case 2:
-                        for (int k = 5; k < 9; k++)
-                        {
-                            players[i].actions.Add(PlayerProperties.myActions[k]);
-                            
-                        }
-                       
-
-                        break;
+                    if(PlayerProperties.ids[i] == players[j].playerId)
+                    {
+                        players[j].AddMarbles();
+                    }
                 }
             }
-            if(startTurn == false)
-                StartCoroutine(ExecuteTurn()); startTurn = true;
+            if(startTurn == true)
+            {
+                Debug.Log(PlayerProperties.myActions.Count);
+                StartCoroutine(ExecuteTurn()); 
+                startTurn = false;
+            }
+                
         }
-        if (startTurn == true)
-        {
-           // StartCoroutine(ExecuteTurn());
-        }
+        
     }
     private IEnumerator ExecuteTurn()
     {
@@ -60,26 +47,34 @@ public class TurnManager : MonoBehaviour
         {
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
-                Debug.Log(playerInList);
-                for (int steps = 0; steps < Mathf.Abs((int)players[playerInList].actions[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
-                {                                                                             // början på turnmanager.
-                    Debug.Log((int)players[playerInList].actions[currentTurn].y);
-                    switch ((int)players[playerInList].actions[currentTurn].x)
+                for (int steps = 0; steps < Mathf.Abs((int)players[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
+                { 
+                    switch ((int)players[playerInList].marbleEffect[currentTurn].x)
                     {
                         case 0:
-                            players[playerInList].TryMove(players[playerInList].gameObject, (int)players[playerInList].actions[currentTurn].x, 1);
+                            players[playerInList].TryMove(players[playerInList].gameObject, (int)players[playerInList].marbleEffect[currentTurn].x, 1);
                             break;
                         case 1:
-                            players[playerInList].TryMove(players[playerInList].gameObject, (int)players[playerInList].actions[currentTurn].x, (int)players[playerInList].actions[currentTurn].y);
+                            players[playerInList].TryMove(players[playerInList].gameObject, (int)players[playerInList].marbleEffect[currentTurn].x, (int)players[playerInList].marbleEffect[currentTurn].y);
                             break;
                     }
                     yield return new WaitForSeconds(turnLenght);
-                   
-
                 }
+                yield return new WaitForSeconds(turnLenght);
             }
             // enemy
+            for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
+            {
+                yield return new WaitForSeconds(turnLenght);
+                Movement.enemies[enemyCounter].DoAMove(1, Movement.enemies[enemyCounter].currentDirectionID);
+            }
+            
             // environment
         }
+        startTurn = true;
+        for(int i = 0; i < players.Count; i++)
+        {
+            players[i].ResetMarbles();
+        }  
     }
 }
