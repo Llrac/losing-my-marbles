@@ -13,6 +13,13 @@ public class PlayerProperties : Movement
        
     };
     public List <Vector2> actions = new List<Vector2> ();
+    public static List<Vector2> myActions = new();
+    public static List<int> ids = new();
+
+    int act = 1;
+    float myTime = 1f;
+    int index = 0;
+    bool enemyMove = false;
     
     int act = 1;
     float timeBetween = 0.5f;
@@ -32,7 +39,7 @@ public class PlayerProperties : Movement
             
          
             //myMoves.Count >= 5
-            //myTime -= Time.deltaTime; // den kommer inte ut här i tid till sequencing.
+            //myTime -= Time.deltaTime; // den kommer inte ut hï¿½r i tid till sequencing.
             //if (myTime < 0f && enemyMove == false)
             //{   
             //    for (int i = 0; i < Mathf.Abs((int)myMoves[index].y); i++)
@@ -46,7 +53,7 @@ public class PlayerProperties : Movement
             //}
             //if (myTime <=-1f)
             //{
-            //    enemies[0].DoAMove(1, enemies[0].GetComponent<RåttaProperties>().currentDirectionID);
+            //    enemies[0].DoAMove(1, enemies[0].GetComponent<Rï¿½ttaProperties>().currentDirectionID);
             //    enemyMove = false;
             //    myTime = 1f;
             //    index++;
@@ -98,7 +105,7 @@ public class PlayerProperties : Movement
     {
         for (int i = 0; i < myActions.Count; i++)
         {
-            for (int j = 0; j < (int)myActions[i].y; j++) // början på turnmanager.
+            for (int j = 0; j < (int)myActions[i].y; j++) // bï¿½rjan pï¿½ turnmanager.
             {
                 yield return new WaitForSeconds(timeBetween);
                 TryMove(gameObject, (int)myActions[i].x, 1);
