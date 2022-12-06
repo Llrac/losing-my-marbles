@@ -69,7 +69,7 @@ public class PlayerProperties : Movement
         if (animTimer < 1)
         {
             characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
-                Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpHeight.Evaluate(animTimer)));
+                Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
         }
     }
     public override char ChangeTag()
