@@ -34,7 +34,7 @@ public abstract class Movement : MonoBehaviour
             //enemies[0].DoAMove(1);
         }
     }
-    public void TryMove(GameObject character, int dataID, int increment)
+    public bool TryMove(GameObject character, int dataID, int increment) // into bool?
     {
         // Set transform position
         if (dataID == 0)
@@ -46,15 +46,18 @@ public abstract class Movement : MonoBehaviour
             switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                    TryMove(character, 1, 2); // lägg till recursion här'
-                    break;
+                    TryMove(character, 1, 2);
+                    return false;// lägg till recursion här'
+
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
                     Move(character, 1);
                     break;
 
-                case GridManager.PLAYER: // PLAYER
-
+                case GridManager.PLAYER: // PLAYER rat is able to push player
+                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID)
+                        + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+                    player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID);
                     // Move(character, increment);
                     break;
 
@@ -63,7 +66,7 @@ public abstract class Movement : MonoBehaviour
                         + character.GetComponent<Movement>().gridPosition, enemies);
 
                     enemy.GetComponent<RatProperties>().DoAMove(1, currentDirectionID);
-                    TryMove(character, 0, 1);
+                    
                     break;
 
                 case GridManager.DOOR:
@@ -84,6 +87,14 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.HOLE:
                     character.SetActive(false);
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+                    if(gameObject.tag == "Player")
+                    {
+                        TurnManager.players.Remove(character.GetComponent<PlayerProperties>());
+                    }
+                    else
+                    {
+                        enemies.Remove(character.GetComponent<Movement>());
+                    }
                     break;
             }
         }
@@ -131,6 +142,7 @@ public abstract class Movement : MonoBehaviour
                     break;
             }
         }
+        return true;
     }
 
     public Vector2 RequestGridPosition(int currentDirectionID)

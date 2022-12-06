@@ -33,13 +33,12 @@ public class TurnManager : MonoBehaviour
             }
             if(startTurn == true)
             {
+                PlayerProperties.ids.Clear();
                 Debug.Log(PlayerProperties.myActions.Count);
                 StartCoroutine(ExecuteTurn()); 
                 startTurn = false;
-            }
-                
-        }
-        
+            }     
+        }   
     }
     private IEnumerator ExecuteTurn()
     {
@@ -65,10 +64,9 @@ public class TurnManager : MonoBehaviour
             // enemy
             for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
             {
-                yield return new WaitForSeconds(turnLenght);
                 Movement.enemies[enemyCounter].DoAMove(1, Movement.enemies[enemyCounter].currentDirectionID);
+                yield return new WaitForSeconds(turnLenght);
             }
-            
             // environment
         }
         startTurn = true;
