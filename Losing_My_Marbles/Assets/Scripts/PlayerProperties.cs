@@ -7,7 +7,8 @@ public class PlayerProperties : Movement
     public int playerID = 0; // playerID of (0) is null
 
     public static List<Vector2> myActions = new();
-  
+    public static List<int> ids = new();
+
     int act = 1;
     float myTime = 1f;
     int index = 0;
