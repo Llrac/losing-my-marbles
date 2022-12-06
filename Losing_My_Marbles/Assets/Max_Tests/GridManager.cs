@@ -21,7 +21,7 @@ public class GridManager : MonoBehaviour
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
             {'X','X','X','X','X','X','X','X','X'},
-            {'X','X','X','X','P','X','X','X','X'}
+            {'X','X','X','X','X','X','X','X','X'}
     };
 
     void Start()
@@ -30,7 +30,11 @@ public class GridManager : MonoBehaviour
         {
             board[(int)Movement.enemies[i].gridPosition.x,
                 (int)Movement.enemies[i].gridPosition.y] = ENEMY;
+
+            board[(int)TurnManager.players[i].gridPosition.x,
+               (int)TurnManager.players[i].gridPosition.y] = PLAYER;
         }
+
     }
    
     private void OnDrawGizmos()
