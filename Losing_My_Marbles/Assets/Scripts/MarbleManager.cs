@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 using Random = UnityEngine.Random;
 
 public class MarbleManager : MonoBehaviour
@@ -16,7 +17,8 @@ public class MarbleManager : MonoBehaviour
     public Transform marbleBagTransform;
 
     public Button confirmButton;
-    
+    public Image insertAlert;
+
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
     [HideInInspector] public List<Marble> discardBag = new();
@@ -34,6 +36,8 @@ public class MarbleManager : MonoBehaviour
             availableMarbleSlotsBottom[i] = true;
         }
 
+        insertAlert.enabled = true;
+        confirmButton.image.enabled = false;
         FillHandWithMarbles();
     }
 
@@ -86,6 +90,7 @@ public class MarbleManager : MonoBehaviour
                 orderID[i] = currentMarble.marbleID;
                 availableMarbleSlotsTop[currentMarble.topRowIndex] = true;
                 confirmButton.interactable = BottomRowFull();
+                confirmButton.image.enabled = BottomRowFull();
                 return true;
             }
         }
@@ -105,7 +110,7 @@ public class MarbleManager : MonoBehaviour
                 availableMarbleSlotsTop[i] = false;
                 availableMarbleSlotsBottom[currentMarble.bottomRowIndex] = true;
                 confirmButton.interactable = BottomRowFull();
-                
+                confirmButton.image.enabled = BottomRowFull();
                 return false;
             }
         }
@@ -119,10 +124,12 @@ public class MarbleManager : MonoBehaviour
         {
             if (availableMarbleSlotsBottom[i])
             {
+                insertAlert.enabled = true;
                 return false;
             }
         }
 
+        insertAlert.enabled = false;
         return true;
     }
 
@@ -169,5 +176,5 @@ public class MarbleManager : MonoBehaviour
                 confirmButton.interactable = false;
         }
     }
-    
+
 }
