@@ -39,55 +39,52 @@ public abstract class Movement : MonoBehaviour
         // Set transform position
         if (dataID == 0)
         {
-            for (int i = 0; i < Mathf.Abs(increment); i++)
+            if (grid == null)
             {
-                if (grid == null)
-                {
-                    grid = FindObjectOfType<GridManager>();
-                }
-                switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
-                {
-                    case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                        TryMove(character, 1, 2); // lägg till recursion här'
-                        break;
+                grid = FindObjectOfType<GridManager>();
+            }
+            switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
+            {
+                case GridManager.EMPTY: // EMPTY (walls, void, etc)
+                    TryMove(character, 1, 2); // lägg till recursion här'
+                    break;
 
-                    case GridManager.WALKABLEGROUND: // WALKABLEGROUND
+                case GridManager.WALKABLEGROUND: // WALKABLEGROUND
+                    Move(character, 1);
+                    break;
+
+                case GridManager.PLAYER: // PLAYER
+
+                    // Move(character, increment);
+                    break;
+
+                case GridManager.ENEMY: // ENEMY
+                    GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
+                        + character.GetComponent<Movement>().gridPosition, enemies);
+
+                    enemy.GetComponent<RatProperties>().DoAMove(1, currentDirectionID);
+                    TryMove(character, 0, 1);
+                    break;
+
+                case GridManager.DOOR:
+                    if (character.GetComponent<Movement>().hasKey == true)
+                    {
                         Move(character, 1);
-                        break;
-
-                    case GridManager.PLAYER: // PLAYER
-                       
-                        // Move(character, increment);
-                        break;
-
-                    case GridManager.ENEMY: // ENEMY
-                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
-                            + character.GetComponent<Movement>().gridPosition, enemies);
-                        
-                        TryMove(enemy, 0, 1);
-                        TryMove(character, 0, 1);
-                        break;
-
-                    case GridManager.DOOR:
-                        if (character.GetComponent<Movement>().hasKey == true)
-                        {
-                            Move(character, 1);
-                            character.SetActive(false);
-                            FindObjectOfType<ResetManager>().ResetLevel();
-                        }
-                        break;
-
-                    case GridManager.KEY:
-                        character.GetComponent<Movement>().hasKey = true;
-                        GameObject.FindGameObjectWithTag("Key").SetActive(false);
-                        Move(character, 1);
-                        break;
-
-                    case GridManager.HOLE:
                         character.SetActive(false);
-                        grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0,0));
-                        break;
-                }
+                        FindObjectOfType<ResetManager>().ResetLevel();
+                    }
+                    break;
+
+                case GridManager.KEY:
+                    character.GetComponent<Movement>().hasKey = true;
+                    GameObject.FindGameObjectWithTag("Key").SetActive(false);
+                    Move(character, 1);
+                    break;
+
+                case GridManager.HOLE:
+                    character.SetActive(false);
+                    grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+                    break;
             }
         }
 
@@ -180,5 +177,5 @@ public abstract class Movement : MonoBehaviour
         }
     }
     public abstract char ChangeTag();
-    public abstract void DoAMove(int inc);
+    public abstract void DoAMove(int inc, int dir);
 }
