@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6792802075328423273}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 0.05, z: 0}
+  m_LocalPosition: {x: -0.157, y: 0.146, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 3086fe9f3af46844e93bdad212842225, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ae39f5e777e7ec499e7061e1b3bd9ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,10 +133,12 @@ MonoBehaviour:
   gridPosition: {x: 2, y: 1}
   hasKey: 0
   currentDirectionID: 0
-  sprites:
-  - {fileID: 21300000, guid: 3086fe9f3af46844e93bdad212842225, type: 3}
-  - {fileID: 21300000, guid: 7c473d1211f804340b9c67400294f76a, type: 3}
+  materials:
+  - {fileID: 0}
+  - {fileID: 0}
   jumpLength: 1
+  front: {fileID: 0}
+  back: {fileID: 0}
 --- !u!50 &6792802075631556754
 Rigidbody2D:
   serializedVersion: 4

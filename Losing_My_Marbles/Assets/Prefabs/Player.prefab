@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 6590025579627938566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6590025579863785203}
@@ -48,11 +48,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPosition: {x: 8, y: 4}
   hasKey: 0
-  currentDirectionID: 3
-  sprites:
-  - {fileID: 21300000, guid: ef916385fbfa4ba49a0ff8ba4e9f208c, type: 3}
-  - {fileID: 21300000, guid: 04933eff0b151524596d0a15887a1d16, type: 3}
+  currentDirectionID: 2
+  materials:
+  - {fileID: 2100000, guid: 23e681bbf318529448299daa97cd1133, type: 2}
+  - {fileID: 2100000, guid: a5c363dd3c8b99f4abe18cff92eb6ea8, type: 2}
   jumpLength: 1
+  front: {fileID: 11400000, guid: 6e5b8d86542c5964a860bab85ed606df, type: 2}
+  back: {fileID: 11400000, guid: 96adff7bd7bda384db721dd5f6d851ad, type: 2}
   playerID: 0
   jumpProgress:
     serializedVersion: 2
@@ -84,27 +86,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.5
-      value: 0.5
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -226,7 +219,7 @@ MonoBehaviour:
   skeletonDataAsset: {fileID: 11400000, guid: cad9ab3c9e2c9574bb2e07e883d7b85a, type: 2}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
-  initialFlipX: 0
+  initialFlipX: 1
   initialFlipY: 0
   updateWhenInvisible: 3
   separatorSlotNames: []
@@ -248,7 +241,7 @@ MonoBehaviour:
   disableRenderingOnOverride: 1
   updateTiming: 1
   unscaledTime: 0
-  _animationName: jump
+  _animationName: idle
   loop: 1
   timeScale: 1
 --- !u!33 &7259064180957796837
