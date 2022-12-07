@@ -47,11 +47,11 @@ public class PlayerProperties : Movement
             }
 
         }
-        if (playerId == 2)
+        if (playerId == 1)
         {
             if (Input.GetButtonDown("Jump"))
             {
-                TryMove(gameObject, 0, act);
+                Pushed(-1);
             }
         }
 
@@ -74,6 +74,7 @@ public class PlayerProperties : Movement
             {
                 yield return new WaitForSeconds(timeBetween);
                 TryMove(gameObject, (int)myActions[i].x, 1);
+              
 
             }
             yield return new WaitForSeconds(timeBetween);
@@ -97,14 +98,23 @@ public class PlayerProperties : Movement
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
         //TryMove(gameObject, 0, 1);
+        if (hasKey == true)
+        {
+            savedTile = 'K';
+            hasKey = false;
+            Vector2 keyPos;
+            keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7 - 1;
+            keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + .5f;
+            GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
+            GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
+            
+            
+        }
         if (TryMove(gameObject, 0, 1) == true)
         {
             gameObject.GetComponent<PlayerProperties>().currentDirectionID = savedDir;
         }
-        if(hasKey == true)
-        {
-
-        }
+        
        // currentDirectionID = savedDir;
 
     }

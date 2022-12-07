@@ -83,7 +83,7 @@ public abstract class Movement : MonoBehaviour
 
                 case GridManager.KEY:
                     character.GetComponent<Movement>().hasKey = true;
-                    GameObject.FindGameObjectWithTag("Key").SetActive(false);
+                    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
                     Move(character, 1);
                     break;
 
