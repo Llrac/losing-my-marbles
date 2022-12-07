@@ -13,8 +13,6 @@ public abstract class Movement : MonoBehaviour
 
     public int currentDirectionID = 0;
 
-    public Material[] materials = new Material[2];
-    MeshRenderer childRenderer;
     GridManager grid;
 
     public float jumpLength = 1;
@@ -24,14 +22,52 @@ public abstract class Movement : MonoBehaviour
     float timer = 1f;
 
     SkeletonAnimation sa;
-    public AnimationReferenceAsset front, back;
+    public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump;
+    public float jumpSpeed = 1f;
+    Spine.Animation nextIdleAnimation;
+    Spine.Animation nextJumpAnimation;
 
     // Start is called before the first frame update
     void Start()
     {
         grid = FindObjectOfType<GridManager>();
         sa = GetComponentInChildren<SkeletonAnimation>();
+
+        UpdateNextAnimation();
     }
+
+    private void UpdateNextAnimation()
+    {
+        switch (currentDirectionID)
+        {
+            case 0:
+                nextIdleAnimation = backIdle;
+                nextJumpAnimation = backJump;
+                Turn(false);
+                break;
+            case 1 or -3:
+                nextIdleAnimation = frontIdle;
+                nextJumpAnimation = frontJump;
+                Turn(false);
+                break;
+            case 2 or -2:
+                nextIdleAnimation = frontIdle;
+                nextJumpAnimation = frontJump;
+                Turn(true);
+                break;
+            case 3 or -1:
+                nextIdleAnimation = backIdle;
+                nextJumpAnimation = backJump;
+                Turn(true);
+                break;
+            default:
+                nextIdleAnimation = backIdle;
+                nextJumpAnimation = backJump;
+                Turn(false);
+                break;
+        }
+    }
+
     private void Update()
     {
         timer -= Time.deltaTime;
@@ -87,6 +123,7 @@ public abstract class Movement : MonoBehaviour
                     case GridManager.KEY:
                         character.GetComponent<Movement>().hasKey = true;
                         GameObject.FindGameObjectWithTag("Key").SetActive(false);
+                        FindObjectOfType<GridGenerator>().DestroyKeyGlitter();
                         Move(character, 1);
                         break;
 
@@ -115,31 +152,8 @@ public abstract class Movement : MonoBehaviour
                 }
             }
 
-            Spine.Animation nextAnimation;
-
-            switch (currentDirectionID)
-            {
-                case 0:
-                    nextAnimation = back;
-                    Turn(false);
-                    break;
-                case 1 or -3:
-                    nextAnimation = front;
-                    Turn(false);
-                    break;
-                case 2 or -2:
-                    nextAnimation = front;
-                    Turn(true);
-                    break;
-                case 3 or -1:
-                    nextAnimation = back;
-                    Turn(true);
-                    break;
-                default: nextAnimation = back;
-                    Turn(false);
-                    break;
-            }
-            sa.AnimationState.SetAnimation(0, nextAnimation, true);
+            UpdateNextAnimation();
+            sa.AnimationState.SetAnimation(0, nextIdleAnimation, true);
         }
     }
 
@@ -166,33 +180,39 @@ public abstract class Movement : MonoBehaviour
         {
             multiplier *= -1;
         }
+
+        if (nextIdleAnimation == null || nextJumpAnimation == null)
+        {
+            UpdateNextAnimation();
+        }
+
         switch (currentDirectionID)
         {
             case 0:
-                pp.destination = new Vector3(character.transform.position.x + jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier;
-                pp.animTimer = 0;
+                pp.JumpTo(new Vector3(character.transform.position.x + jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 1 or -3:
-                pp.destination = new Vector3(character.transform.position.x + jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier;
-                pp.animTimer = 0;
+                pp.JumpTo(new Vector3(character.transform.position.x + jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 2 or -2:
-                pp.destination = new Vector3(character.transform.position.x - jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier;
-                pp.animTimer = 0;
+                pp.JumpTo(new Vector3(character.transform.position.x - jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 3 or -1:
-                pp.destination = new Vector3(character.transform.position.x - jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier;
-                pp.animTimer = 0;
+                pp.JumpTo(new Vector3(character.transform.position.x - jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
         }
+
+        sa.AnimationState.SetAnimation(0, nextJumpAnimation, false);
+        sa.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpSpeed;
+        sa.AnimationState.AddAnimation(0, nextIdleAnimation, false, nextJumpAnimation.Duration);
     }
 
     void Turn(bool facingLeft)

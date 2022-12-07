@@ -7,10 +7,12 @@ public class GridGenerator : MonoBehaviour
     GridManager grid;
 
     [SerializeField] GameObject tileToCopy;
+    [SerializeField] GameObject keyGlitterParticle = null;
     [SerializeField] Sprite[] tileSprites = new Sprite[17];
     [SerializeField] Sprite tileHoleSprite = null;
     readonly float tileSize = 1f;
     int tileSpriteChosen;
+    GameObject newKeyGlitter;
 
     void Start()
     {
@@ -33,7 +35,17 @@ public class GridGenerator : MonoBehaviour
                 {
                     newTile.GetComponent<SpriteRenderer>().sprite = tileHoleSprite;
                 }
+                else if (grid.board[x, y] == GridManager.KEY && keyGlitterParticle != null)
+                {
+                    newKeyGlitter = Instantiate(keyGlitterParticle);
+                    newKeyGlitter.transform.position = new Vector2(newTile.transform.position.x, newTile.transform.position.y + 1);
+                }
             }
         }
+    }
+
+    public void DestroyKeyGlitter()
+    {
+        Destroy(newKeyGlitter);
     }
 }

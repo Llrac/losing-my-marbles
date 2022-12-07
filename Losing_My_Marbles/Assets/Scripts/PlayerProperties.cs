@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
+    public AnimationCurve jumpProgress;
+    public GameObject characterToAnimate;
+    public Vector2 destination;
+    public float animTimer = 10f;
+
     public int playerID = 0; // playerID of (0) is null
 
     public static List<Vector2> myActions = new();
@@ -12,12 +17,6 @@ public class PlayerProperties : Movement
     float myTime = 1f;
     int index = 0;
     bool enemyMove = false;
-
-    public AnimationCurve jumpProgress;
-    public AnimationCurve jumpHeight;
-    public GameObject characterToAnimate;
-    public Vector2 destination;
-    public float animTimer = 1f;
 
     void Update()
     {
@@ -64,9 +63,13 @@ public class PlayerProperties : Movement
         {
             act--;
         }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Debug.Log(jumpProgress.length);
+        }
         animTimer += Time.deltaTime;
 
-        if (animTimer < 1)
+        if (animTimer < jumpProgress.length)
         {
             characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
                 Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
@@ -84,5 +87,11 @@ public class PlayerProperties : Movement
     private bool Waste() // currently unassigned to any keyboard input
     {
         return true;
+    }
+
+    public void JumpTo(Vector3 position)
+    {
+        destination = position;
+        animTimer = 0;
     }
 }
