@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerProperties : Movement
 {
     public AnimationCurve jumpProgress;
-    public GameObject characterToAnimate;
-    public Vector2 destination;
-    public float animTimer = 10f;
+    [HideInInspector] public GameObject characterToAnimate;
+    [HideInInspector] public Vector2 destination;
+    [HideInInspector] public float animTimer = 10f;
 
     public int playerID = 0; // playerID of (0) is null
 
@@ -89,8 +89,9 @@ public class PlayerProperties : Movement
         return true;
     }
 
-    public void JumpTo(Vector3 position)
+    public void TransitionFromTo(GameObject character, Vector3 position)
     {
+        characterToAnimate = character;
         destination = position;
         animTimer = 0;
     }

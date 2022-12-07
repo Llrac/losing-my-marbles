@@ -14,15 +14,15 @@ public abstract class Movement : MonoBehaviour
     public int currentDirectionID = 0;
 
     GridManager grid;
-
-    public float jumpLength = 1;
  
     int multiplier;
-
     float timer = 1f;
 
-    SkeletonAnimation sa;
+    SkeletonAnimation frontSkeleton;
+    SkeletonAnimation backSkeleton;
+    bool useFrontSkeleton = false;
     public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump;
+    public float jumpLength = 1;
     public float jumpSpeed = 1f;
     Spine.Animation nextIdleAnimation;
     Spine.Animation nextJumpAnimation;
@@ -31,40 +31,69 @@ public abstract class Movement : MonoBehaviour
     void Start()
     {
         grid = FindObjectOfType<GridManager>();
-        sa = GetComponentInChildren<SkeletonAnimation>();
+        foreach (Transform child in transform)
+        {
+            if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>() != null)
+            {
+                frontSkeleton = child.GetComponent<SkeletonAnimation>();
+            }
+            else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>() != null)
+            {
+                backSkeleton = child.GetComponent<SkeletonAnimation>();
+            }
+        }
 
-        UpdateNextAnimation();
+        UpdateAnimation();
     }
 
-    private void UpdateNextAnimation()
+    private void UpdateAnimation()
     {
         switch (currentDirectionID)
         {
             case 0:
-                nextIdleAnimation = backIdle;
-                nextJumpAnimation = backJump;
-                Turn(false);
+                Turn(false, false);
                 break;
             case 1 or -3:
-                nextIdleAnimation = frontIdle;
-                nextJumpAnimation = frontJump;
-                Turn(false);
+                Turn(false, true);
                 break;
             case 2 or -2:
-                nextIdleAnimation = frontIdle;
-                nextJumpAnimation = frontJump;
-                Turn(true);
+                Turn(true, true);
                 break;
             case 3 or -1:
-                nextIdleAnimation = backIdle;
-                nextJumpAnimation = backJump;
-                Turn(true);
+                Turn(true, false);
                 break;
             default:
-                nextIdleAnimation = backIdle;
-                nextJumpAnimation = backJump;
-                Turn(false);
+                Turn(false, false);
                 break;
+        }
+    }
+
+    void Turn(bool facingLeft, bool front)
+    {
+        if (front)
+        {
+            nextIdleAnimation = frontIdle;
+            nextJumpAnimation = frontJump;
+            useFrontSkeleton = true;
+        }
+        else if (!front)
+        {
+            nextIdleAnimation = backIdle;
+            nextJumpAnimation = backJump;
+            useFrontSkeleton = false;
+        }
+
+        if (useFrontSkeleton)
+        {
+            frontSkeleton.GetComponent<SkeletonAnimation>().Skeleton.ScaleX = facingLeft ? -1f : 1f;
+            frontSkeleton.gameObject.SetActive(true);
+            backSkeleton.gameObject.SetActive(false);
+        }
+        else
+        {
+            backSkeleton.GetComponent<SkeletonAnimation>().Skeleton.ScaleX = facingLeft ? 1f : -1f;
+            frontSkeleton.gameObject.SetActive(false);
+            backSkeleton.gameObject.SetActive(true);
         }
     }
 
@@ -152,8 +181,11 @@ public abstract class Movement : MonoBehaviour
                 }
             }
 
-            UpdateNextAnimation();
-            sa.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+            UpdateAnimation();
+            if (useFrontSkeleton)
+                frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+            else
+                backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
         }
     }
 
@@ -173,7 +205,6 @@ public abstract class Movement : MonoBehaviour
     {
         PlayerProperties pp;
         pp = FindObjectOfType<PlayerProperties>();
-        pp.characterToAnimate = character;
 
         multiplier = 1;
         if (increment < 0)
@@ -183,41 +214,45 @@ public abstract class Movement : MonoBehaviour
 
         if (nextIdleAnimation == null || nextJumpAnimation == null)
         {
-            UpdateNextAnimation();
+            UpdateAnimation();
         }
 
         switch (currentDirectionID)
         {
             case 0:
-                pp.JumpTo(new Vector3(character.transform.position.x + jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 1 or -3:
-                pp.JumpTo(new Vector3(character.transform.position.x + jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 2 or -2:
-                pp.JumpTo(new Vector3(character.transform.position.x - jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 3 or -1:
-                pp.JumpTo(new Vector3(character.transform.position.x - jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
         }
 
-        sa.AnimationState.SetAnimation(0, nextJumpAnimation, false);
-        sa.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpSpeed;
-        sa.AnimationState.AddAnimation(0, nextIdleAnimation, false, nextJumpAnimation.Duration);
-    }
-
-    void Turn(bool facingLeft)
-    {
-        sa.Skeleton.ScaleX = facingLeft ? -1f : 1f;
+        if (useFrontSkeleton)
+        {
+            frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
+            frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpSpeed;
+            frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, nextJumpAnimation.Duration);
+        }
+        else
+        {
+            backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
+            backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpSpeed;
+            backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, nextJumpAnimation.Duration);
+        }
     }
 
     public abstract char ChangeTag();
