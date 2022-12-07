@@ -5,14 +5,17 @@ using Random = UnityEngine.Random;
 
 public class UIManager : MonoBehaviour
 {
+    public PlayerID playerID;
     [Header("Marbles & Slots")]
     public Transform[] marbleSlotsTop = new Transform[7];
     public Transform[] marbleSlotsBottom = new Transform[5];
     public List<Marble> marbleBag = new();
     public Transform marbleBagTransform;
     public Image[] marbleLights;
-    
-    
+
+    [Header("Background & Lights")]
+    public GameObject background;
+
     public Button confirmButton;
     public Image insertAlert;
 
@@ -23,6 +26,9 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        // TODO connect this to matchmaking etc
+        background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
+        
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
             availableMarbleSlotsTop[i] = true;
