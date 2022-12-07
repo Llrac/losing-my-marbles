@@ -35,7 +35,11 @@ public class RatProperties : Movement
         {
             gameObject.GetComponent<RatProperties>().currentDirectionID = savedDir;
         }
-        StartCoroutine(CheckForKills());
+        if(gameObject.GetComponent<RatProperties>().isActiveAndEnabled == true)
+        {
+            StartCoroutine(CheckForKills());
+        }
+        
     }
     public IEnumerator CheckForKills() 
     {
@@ -45,7 +49,7 @@ public class RatProperties : Movement
             {
                 gridManager.GetComponent<GridManager>();
             }
-            if (gridManager.IsSquareEmpty(gameObject, killZone[i]) == 'P')
+            if (gridManager.GetNexTile(gameObject, killZone[i]) == 'P')
             {
                 //kill that player
                 yield return new WaitForSeconds(0.5f); // viktigt att notera, du kan inte ha denna timern för seg för då missar du den andra coroutinen.

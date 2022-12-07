@@ -11,6 +11,7 @@ public class GridManager : MonoBehaviour
     public const char KEY = 'K';
     public const char HOLE = 'H';
     public const char EMPTY='?';
+    public const char WATER = 'W';
     public char[,] board = new char[10, 10]
     {
             {'?','?','?','?','?','D','?','?','?','?'},
@@ -70,13 +71,16 @@ public class GridManager : MonoBehaviour
                     case EMPTY:
                         Gizmos.color = Color.clear;
                         break;
+                    case WATER:
+                        Gizmos.color = Color.cyan;
+                        break;
                 }
                 Gizmos.DrawSphere(Vector3.down * (y - 5f) + Vector3.right * x, 0.5f);
             }
         }
     }
 
-    public char IsSquareEmpty(GameObject character, Vector2 requestedTile)
+    public char GetNexTile(GameObject character, Vector2 requestedTile)
     {
 
         Movement moveScript = character.GetComponent<Movement>();
@@ -95,6 +99,7 @@ public class GridManager : MonoBehaviour
             DOOR => DOOR,
             KEY => KEY,
             HOLE => HOLE,
+            WATER => WATER,
             _ => EMPTY,
         };
     }
@@ -108,7 +113,7 @@ public class GridManager : MonoBehaviour
         int newY = (int)character.gridPosition.y + (int)requestedTile.y;
 
         board[newX, newY] = character.ChangeTag();
-        board[(int)oldX, (int)oldY] = WALKABLEGROUND;
+        board[(int)oldX, (int)oldY] = character.savedTile;
 
         character.gridPosition += requestedTile;
     }

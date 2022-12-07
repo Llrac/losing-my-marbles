@@ -5,8 +5,10 @@ using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
+    public char savedTile = 'X';
+
     public Vector2 gridPosition = new(0, 0);
-    [SerializeField] bool hasKey = false;
+    public bool hasKey = false;
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
@@ -43,7 +45,7 @@ public abstract class Movement : MonoBehaviour
             {
                 grid = FindObjectOfType<GridManager>();
             }
-            switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
+            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     TryMove(character, 1, 2);
@@ -52,6 +54,7 @@ public abstract class Movement : MonoBehaviour
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
                     Move(character, 1);
+                    savedTile = 'X';
                     break;
 
                 case GridManager.PLAYER: // PLAYER rat is able to push player
@@ -84,6 +87,12 @@ public abstract class Movement : MonoBehaviour
                     Move(character, 1);
                     break;
 
+                case GridManager.WATER:
+                    // do water stuff
+                    Move(character, 1);
+                    savedTile = GridManager.WATER;
+                    break;
+
                 case GridManager.HOLE:
                     character.SetActive(false);
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
@@ -93,7 +102,8 @@ public abstract class Movement : MonoBehaviour
                     }
                     else
                     {
-                        enemies.Remove(character.GetComponent<Movement>());
+                        enemies.Clear();
+
                     }
                     break;
             }
@@ -141,7 +151,9 @@ public abstract class Movement : MonoBehaviour
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
             }
+            
         }
+        
         return true;
     }
 
@@ -168,25 +180,21 @@ public abstract class Movement : MonoBehaviour
         {
             case 0:
                 character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
             case 1 or -3:
                 character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
             case 2 or -2:
                 character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
             case 3 or -1:
                 character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
         }
+        //
+        grid.MoveInGridMatrix(character.GetComponent<Movement>(),
+                    RequestGridPosition(currentDirectionID));
+       
     }
     public abstract char ChangeTag();
     public abstract void DoAMove(int inc, int dir);

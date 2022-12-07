@@ -47,8 +47,15 @@ public class PlayerProperties : Movement
             }
 
         }
-       
-       
+        if (playerId == 2)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                TryMove(gameObject, 0, act);
+            }
+        }
+
+
     }
     public override char ChangeTag()
     {
@@ -89,8 +96,16 @@ public class PlayerProperties : Movement
     {
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
-        TryMove(gameObject, 0, 1);
-        currentDirectionID = savedDir;
+        //TryMove(gameObject, 0, 1);
+        if (TryMove(gameObject, 0, 1) == true)
+        {
+            gameObject.GetComponent<PlayerProperties>().currentDirectionID = savedDir;
+        }
+        if(hasKey == true)
+        {
+
+        }
+       // currentDirectionID = savedDir;
 
     }
 }
