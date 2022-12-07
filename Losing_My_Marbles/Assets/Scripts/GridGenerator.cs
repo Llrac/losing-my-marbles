@@ -24,8 +24,8 @@ public class GridGenerator : MonoBehaviour
                 if(grid.board[x, y] != GridManager.EMPTY && grid.board[x, y] != GridManager.DOOR)
                 {
                     GameObject newTile = Instantiate(tileToCopy);
-                    float posX = ((x * tileSize + y * tileSize)) + tileToCopy.transform.position.x + 2f; // this is the actual x position of the tile
-                    float posY = ((-x * tileSize + y * tileSize) / 2) + tileToCopy.transform.position.y + 1.5f; // this is the actual y position of the tile
+                    float posX = ((x * tileSize + y * tileSize)) + tileToCopy.transform.position.x -1; // this is the actual x position of the tile
+                    float posY = ((-x * tileSize + y * tileSize) / 2) + tileToCopy.transform.position.y +.5f; // this is the actual y position of the tile
                     newTile.transform.position = new Vector3(posX, posY, 0);
                     newTile.transform.parent = gameObject.transform;
                     tileSpriteChosen = Random.Range(0, tileSprites.Length);

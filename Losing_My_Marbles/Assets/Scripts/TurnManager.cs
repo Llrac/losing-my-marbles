@@ -34,7 +34,6 @@ public class TurnManager : MonoBehaviour
             if(startTurn == true)
             {
                 PlayerProperties.ids.Clear();
-                Debug.Log(PlayerProperties.myActions.Count);
                 StartCoroutine(ExecuteTurn()); 
                 startTurn = false;
             }     
