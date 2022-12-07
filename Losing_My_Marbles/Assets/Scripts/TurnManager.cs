@@ -12,7 +12,7 @@ public class TurnManager : MonoBehaviour
     // all hazard tiles
     // all environment tiles
     int amountOfTurns = 5;
-    float turnLenght = .5f;
+    public static float turnLenght = .5f; // den här kan alltså ändras så att man hinner med en annan corroutine!!!
     public static List <PlayerProperties> players = new List <PlayerProperties> ();
     bool startTurn = true;
 
@@ -25,19 +25,17 @@ public class TurnManager : MonoBehaviour
             {
                 for (int j = 0; j < players.Count; j++)
                 {
-                    if(PlayerProperties.ids[i] == players[j].playerId)
+                    if (PlayerProperties.ids[i] == players[j].playerId)
                     {
                         players[j].AddMarbles();
                     }
                 }
             }
             if(startTurn == true)
-            {
-                Debug.Log(PlayerProperties.myActions.Count);
+            { 
                 StartCoroutine(ExecuteTurn()); 
                 startTurn = false;
-            }
-                
+            }     
         }
         
     }
@@ -48,6 +46,7 @@ public class TurnManager : MonoBehaviour
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
                 for (int steps = 0; steps < Mathf.Abs((int)players[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
+                    // implement a if player is still alive.
                 { 
                     switch ((int)players[playerInList].marbleEffect[currentTurn].x)
                     {
@@ -63,18 +62,25 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(turnLenght);
             }
             // enemy
-            for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
+            if(Movement.enemies.Count > 0)
             {
-                yield return new WaitForSeconds(turnLenght);
-                Movement.enemies[enemyCounter].DoAMove(1, Movement.enemies[enemyCounter].currentDirectionID);
+                for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
+                {
+                    yield return new WaitForSeconds(turnLenght);
+                    Movement.enemies[enemyCounter].DoAMove(1, Movement.enemies[enemyCounter].currentDirectionID);
+
+                }
             }
             
-            // environment
+            yield return new WaitForSeconds(turnLenght);
+           
+            Environment.Turn();
         }
         startTurn = true;
         for(int i = 0; i < players.Count; i++)
         {
             players[i].ResetMarbles();
-        }  
+        }
+        PlayerProperties.ids.Clear();
     }
 }

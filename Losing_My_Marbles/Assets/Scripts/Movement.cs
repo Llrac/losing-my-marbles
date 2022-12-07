@@ -5,8 +5,10 @@ using UnityEngine;
 
 public abstract class Movement : MonoBehaviour
 {
+    public char savedTile = 'X';
+
     public Vector2 gridPosition = new(0, 0);
-    [SerializeField] bool hasKey = false;
+    public bool hasKey = false;
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
@@ -34,7 +36,7 @@ public abstract class Movement : MonoBehaviour
             //enemies[0].DoAMove(1);
         }
     }
-    public void TryMove(GameObject character, int dataID, int increment)
+    public bool TryMove(GameObject character, int dataID, int increment) // into bool?
     {
         // Set transform position
         if (dataID == 0)
@@ -43,18 +45,22 @@ public abstract class Movement : MonoBehaviour
             {
                 grid = FindObjectOfType<GridManager>();
             }
-            switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
+            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                    TryMove(character, 1, 2); // lägg till recursion här'
-                    break;
+                    TryMove(character, 1, 2);
+                    return false;// lägg till recursion här'
+
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
                     Move(character, 1);
+                    savedTile = 'X';
                     break;
 
-                case GridManager.PLAYER: // PLAYER
-
+                case GridManager.PLAYER: // PLAYER rat is able to push player
+                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID)
+                        + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+                    player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID);
                     // Move(character, increment);
                     break;
 
@@ -63,7 +69,7 @@ public abstract class Movement : MonoBehaviour
                         + character.GetComponent<Movement>().gridPosition, enemies);
 
                     enemy.GetComponent<RatProperties>().DoAMove(1, currentDirectionID);
-                    TryMove(character, 0, 1);
+                    
                     break;
 
                 case GridManager.DOOR:
@@ -81,9 +87,24 @@ public abstract class Movement : MonoBehaviour
                     Move(character, 1);
                     break;
 
+                case GridManager.WATER:
+                    // do water stuff
+                    Move(character, 1);
+                    savedTile = GridManager.WATER;
+                    break;
+
                 case GridManager.HOLE:
                     character.SetActive(false);
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+                    if(gameObject.tag == "Player")
+                    {
+                        TurnManager.players.Remove(character.GetComponent<PlayerProperties>());
+                    }
+                    else
+                    {
+                        enemies.Clear();
+
+                    }
                     break;
             }
         }
@@ -130,7 +151,10 @@ public abstract class Movement : MonoBehaviour
                     character.transform.localScale = new Vector3(-1, 1, 1);
                     break;
             }
+            
         }
+        
+        return true;
     }
 
     public Vector2 RequestGridPosition(int currentDirectionID)
@@ -156,25 +180,21 @@ public abstract class Movement : MonoBehaviour
         {
             case 0:
                 character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
             case 1 or -3:
                 character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
             case 2 or -2:
                 character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
             case 3 or -1:
                 character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * multiplier;
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
         }
+        //
+        grid.MoveInGridMatrix(character.GetComponent<Movement>(),
+                    RequestGridPosition(currentDirectionID));
+       
     }
     public abstract char ChangeTag();
     public abstract void DoAMove(int inc, int dir);
