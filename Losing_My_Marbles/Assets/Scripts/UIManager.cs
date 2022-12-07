@@ -1,22 +1,24 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using Random = UnityEngine.Random;
 
-public class MarbleManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
+    public PlayerID playerID;
     [Header("Marbles & Slots")]
     public Transform[] marbleSlotsTop = new Transform[7];
     public Transform[] marbleSlotsBottom = new Transform[5];
     public List<Marble> marbleBag = new();
     public Transform marbleBagTransform;
+    public Image[] marbleLights;
+
+    [Header("Background & Lights")]
+    public GameObject background;
 
     public Button confirmButton;
-    
+    public Image insertAlert;
+
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
     [HideInInspector] public List<Marble> discardBag = new();
@@ -24,6 +26,9 @@ public class MarbleManager : MonoBehaviour
 
     private void Start()
     {
+        // TODO connect this to matchmaking etc
+        background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
+        
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
             availableMarbleSlotsTop[i] = true;
@@ -34,6 +39,8 @@ public class MarbleManager : MonoBehaviour
             availableMarbleSlotsBottom[i] = true;
         }
 
+        insertAlert.enabled = true;
+        confirmButton.image.enabled = false;
         FillHandWithMarbles();
     }
 
@@ -86,6 +93,8 @@ public class MarbleManager : MonoBehaviour
                 orderID[i] = currentMarble.marbleID;
                 availableMarbleSlotsTop[currentMarble.topRowIndex] = true;
                 confirmButton.interactable = BottomRowFull();
+                confirmButton.image.enabled = BottomRowFull();
+                marbleLights[i].enabled = true;
                 return true;
             }
         }
@@ -105,7 +114,8 @@ public class MarbleManager : MonoBehaviour
                 availableMarbleSlotsTop[i] = false;
                 availableMarbleSlotsBottom[currentMarble.bottomRowIndex] = true;
                 confirmButton.interactable = BottomRowFull();
-                
+                confirmButton.image.enabled = BottomRowFull();
+                marbleLights[currentMarble.bottomRowIndex].enabled = false;
                 return false;
             }
         }
@@ -119,10 +129,12 @@ public class MarbleManager : MonoBehaviour
         {
             if (availableMarbleSlotsBottom[i])
             {
+                insertAlert.enabled = true;
                 return false;
             }
         }
 
+        insertAlert.enabled = false;
         return true;
     }
 
@@ -165,9 +177,10 @@ public class MarbleManager : MonoBehaviour
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             availableMarbleSlotsBottom[i] = true;
+            marbleLights[i].enabled = false;
             if (confirmButton != null)
                 confirmButton.interactable = false;
         }
     }
-    
+
 }
