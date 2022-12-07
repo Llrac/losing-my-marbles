@@ -103,8 +103,8 @@ public class PlayerProperties : Movement
             savedTile = 'K';
             hasKey = false;
             Vector2 keyPos;
-            keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7 - 1;
-            keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + .5f;
+            keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7-1;
+            keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + 1.5f;
             GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
             GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
             
