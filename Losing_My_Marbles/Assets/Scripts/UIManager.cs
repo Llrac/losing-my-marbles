@@ -1,21 +1,18 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Unity.VisualScripting;
 using Random = UnityEngine.Random;
 
-public class MarbleManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     [Header("Marbles & Slots")]
     public Transform[] marbleSlotsTop = new Transform[7];
     public Transform[] marbleSlotsBottom = new Transform[5];
     public List<Marble> marbleBag = new();
     public Transform marbleBagTransform;
-
+    public Image[] marbleLights;
+    
+    
     public Button confirmButton;
     public Image insertAlert;
 
@@ -91,6 +88,7 @@ public class MarbleManager : MonoBehaviour
                 availableMarbleSlotsTop[currentMarble.topRowIndex] = true;
                 confirmButton.interactable = BottomRowFull();
                 confirmButton.image.enabled = BottomRowFull();
+                marbleLights[i].enabled = true;
                 return true;
             }
         }
@@ -111,6 +109,7 @@ public class MarbleManager : MonoBehaviour
                 availableMarbleSlotsBottom[currentMarble.bottomRowIndex] = true;
                 confirmButton.interactable = BottomRowFull();
                 confirmButton.image.enabled = BottomRowFull();
+                marbleLights[currentMarble.bottomRowIndex].enabled = false;
                 return false;
             }
         }
@@ -172,6 +171,7 @@ public class MarbleManager : MonoBehaviour
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             availableMarbleSlotsBottom[i] = true;
+            marbleLights[i].enabled = false;
             if (confirmButton != null)
                 confirmButton.interactable = false;
         }

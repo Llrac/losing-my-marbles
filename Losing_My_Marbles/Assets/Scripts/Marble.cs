@@ -14,11 +14,11 @@ public class Marble : MonoBehaviour
     public bool isInHand = false;
     [HideInInspector] public bool isOnBottomRow = false;
 
-    MarbleManager marbleManager;
+    UIManager uiManager;
 
     private void Start()
     {
-        marbleManager = FindObjectOfType<MarbleManager>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     public void SelectMarble()
@@ -26,11 +26,11 @@ public class Marble : MonoBehaviour
         //Handheld.Vibrate(); 
         if (!isOnBottomRow)
         {
-            isOnBottomRow = marbleManager.MoveMarbleToBottomRow(gameObject);
+            isOnBottomRow = uiManager.MoveMarbleToBottomRow(gameObject);
         }
         else
         {
-            isOnBottomRow = marbleManager.MoveMarbleToTopRow(gameObject);
+            isOnBottomRow = uiManager.MoveMarbleToTopRow(gameObject);
         }
     }
     

@@ -7,7 +7,7 @@ using UnityEngine;
 public class ActionHandler : MonoBehaviour
 {
     public DatabaseAPI database;
-    public MarbleManager marbleManager;
+    public UIManager uiManager;
     public PlayerID playerId;
 
     private int playerID;
@@ -21,9 +21,9 @@ public class ActionHandler : MonoBehaviour
     public void SendAction()
     {
         
-        database.PostActions(new ActionMessage(playerID, marbleManager.orderID[0],
-            marbleManager.orderID[1], marbleManager.orderID[2],
-            marbleManager.orderID[3], marbleManager.orderID[4]), () =>
+        database.PostActions(new ActionMessage(playerID, uiManager.orderID[0],
+            uiManager.orderID[1], uiManager.orderID[2],
+            uiManager.orderID[3], uiManager.orderID[4]), () =>
         {
             // Action was sent!
         }, exception => {
