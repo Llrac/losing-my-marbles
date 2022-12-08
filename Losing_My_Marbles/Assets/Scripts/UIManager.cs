@@ -27,10 +27,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         // TODO connect this to matchmaking etc
-        if (background != null)
-        {
-            background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
-        }
+        //background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
         
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
@@ -180,7 +177,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             availableMarbleSlotsBottom[i] = true;
-            marbleLights[i].enabled = false;
+           // marbleLights[i].enabled = false;
             if (confirmButton != null)
                 confirmButton.interactable = false;
         }

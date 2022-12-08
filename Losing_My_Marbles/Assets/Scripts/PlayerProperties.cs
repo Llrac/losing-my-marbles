@@ -31,6 +31,7 @@ public class PlayerProperties : Movement
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
+                Debug.Log(Movement.enemies[0].gridPosition + " " + Movement.enemies[1].gridPosition);
                 TryMove(gameObject, 0, act);
             }
             else if (Input.GetKeyDown(KeyCode.A))

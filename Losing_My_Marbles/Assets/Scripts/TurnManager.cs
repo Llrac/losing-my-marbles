@@ -80,10 +80,12 @@ public class TurnManager : MonoBehaviour
                 {
                     float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
                     float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
-                    yield return new WaitForSeconds(turnLenght);
+                    
                     Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
+                    yield return new WaitForSeconds(turnLenght);
                 }
             }
+            
 
             ratPathKeeping++;
             Debug.Log(ratPathKeeping.ToString());
@@ -93,7 +95,7 @@ public class TurnManager : MonoBehaviour
             }
             yield return new WaitForSeconds(turnLenght);
            
-            Environment.Turn();
+            //Environment.Turn();
         }
         startTurn = true;
         for(int i = 0; i < players.Count; i++)
