@@ -24,7 +24,7 @@ public abstract class Movement : MonoBehaviour
     bool usingFrontSkeleton = false;
     public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump;
     public float jumpLength = 1;
-    public float jumpSpeed = 1f;
+    public float jumpAnimationSpeed = 5f;
     Spine.Animation nextIdleAnimation;
     Spine.Animation nextJumpAnimation;
 
@@ -268,14 +268,14 @@ public abstract class Movement : MonoBehaviour
         if (usingFrontSkeleton)
         {
             frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
-            frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpSpeed;
-            frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, nextJumpAnimation.Duration);
+            frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
+            frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
         }
         else
         {
             backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
-            backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpSpeed;
-            backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, nextJumpAnimation.Duration);
+            backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
+            backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
         }
     }
 

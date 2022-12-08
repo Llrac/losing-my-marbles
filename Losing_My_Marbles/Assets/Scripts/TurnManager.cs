@@ -14,6 +14,7 @@ public class TurnManager : MonoBehaviour
     int amountOfTurns = 5;
     public static float turnLenght = .5f; // den här kan alltså ändras så att man hinner med en annan corroutine!!!
     public static List <PlayerProperties> players = new List <PlayerProperties> ();
+    //add a sortet list here
     bool startTurn = true;
 
     private void Update()
