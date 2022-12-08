@@ -19,9 +19,6 @@ public class PlayerProperties : Movement
    
     int act = 1;
   
-    float timeBetween = 0.5f;
-
-
     private void Start()
     {
         TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
@@ -107,6 +104,7 @@ public class PlayerProperties : Movement
                     marbleEffect.Add(new Vector2(1, 1));
                     break;
             }
+           // Debug.Log(myActions[0]);
             playerMarbles.Add(myActions[0]);
             myActions.RemoveAt(0);
         }

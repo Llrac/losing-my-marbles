@@ -49,10 +49,10 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            FillHandWithMarbles();
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    FillHandWithMarbles();
+        //}
     }
 
     public void FillHandWithMarbles()

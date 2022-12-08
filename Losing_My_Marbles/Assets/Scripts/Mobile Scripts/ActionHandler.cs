@@ -54,21 +54,22 @@ public class ActionHandler : MonoBehaviour
             switch (action)
             {
                 case 1: // Move 1
-                    PlayerProperties.myActions.Add(action1);
+                    PlayerProperties.myActions.Add(action);
                     break;
                 case 2: // Move 2
-                    PlayerProperties.myActions.Add(action2);
+                    PlayerProperties.myActions.Add(action);
                     break;
                 case 3: // Move 3
-                    PlayerProperties.myActions.Add(action3);
+                    PlayerProperties.myActions.Add(action);
                     break;
                 case 4: // Turn L
-                    PlayerProperties.myActions.Add(action4);
+                    PlayerProperties.myActions.Add(action);
                     break;
                 case 5: // Turn R
-                    PlayerProperties.myActions.Add(action5);
+                    PlayerProperties.myActions.Add(action);
                     break;
             }
+           
         }
     }
     
