@@ -5,25 +5,27 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
+    public AnimationCurve jumpProgress;
+    [HideInInspector] public GameObject characterToAnimate;
+    [HideInInspector] public Vector2 destination;
+    [HideInInspector] public float animTimer = 10f;
 
-    public int playerId = 0;
+    public int playerId = 0; // playerID of (0) is null
+
     public static List <int> ids = new List <int> ();
-    public static List<Vector2> myActions = new List<Vector2>();
-  
+    public static List<int> myActions = new List<int>();
+    public List<int> playerMarbles = new List<int>();
     public List <Vector2> marbleEffect = new List<Vector2> ();
    
     int act = 1;
   
-    float timeBetween = 0.5f;
-
-
     private void Start()
     {
         TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
     }
     void Update()
     {
-        if(playerId == 1)
+        if (playerId == 1)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -45,17 +47,27 @@ public class PlayerProperties : Movement
             {
                 act--;
             }
-
-        }
-        if (playerId == 1)
-        {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetKeyDown(KeyCode.J))
             {
-                Pushed(-1);
+                Debug.Log(jumpProgress.length);
             }
         }
 
+        if (playerId == 2)
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                TryMove(gameObject, 0, act);
+            }
+        }
 
+        animTimer += Time.deltaTime;
+
+        if (animTimer <= jumpProgress.length)
+        {
+            characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
+            Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
+        }
     }
     public override char ChangeTag()
     {
@@ -66,57 +78,62 @@ public class PlayerProperties : Movement
     {
         throw new System.NotImplementedException();
     }
-    private IEnumerator Turn()
-    {
-        for (int i = 0; i < myActions.Count; i++)
-        {
-            for (int j = 0; j < (int)myActions[i].y; j++) // b�rjan p� turnmanager.
-            {
-                yield return new WaitForSeconds(timeBetween);
-                TryMove(gameObject, (int)myActions[i].x, 1);
-              
-
-            }
-            yield return new WaitForSeconds(timeBetween);
-            enemies[0].DoAMove(1, enemies[0].GetComponent<RatProperties>().currentDirectionID);
-        }
-    }
+    
     public void AddMarbles()
     {
         for (int i = 0; i < 5; i++)
         {
-            this.marbleEffect.Add(myActions[0]);
+            
+            switch (myActions[0])
+            {
+                case 1: // Move 1
+                    marbleEffect.Add(new Vector2(0, 1));
+                    break;
+                case 2: // Move 2
+                    marbleEffect.Add(new Vector2(0, 2));
+                    break;
+                case 3: // Move 3
+                    marbleEffect.Add(new Vector2(0, 3));
+                    break;
+                case 4: // Turn L
+                    marbleEffect.Add(new Vector2(1, -1));
+                    break;
+                case 5: // Turn R
+                    marbleEffect.Add(new Vector2(1, 1));
+                    break;
+            }
+            playerMarbles.Add(myActions[0]);
             myActions.RemoveAt(0);
         }
     }
+
     public void ResetMarbles()
     {
         marbleEffect.Clear();
     }
+
     public void Pushed(int dir)
     {
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
         //TryMove(gameObject, 0, 1);
-        if (hasKey == true)
-        {
-            savedTile = 'K';
-            hasKey = false;
-            Vector2 keyPos;
-            keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7-1;
-            keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + 1.5f;
-            GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
-            GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
-            
-            
-        }
         if (TryMove(gameObject, 0, 1) == true)
         {
             gameObject.GetComponent<PlayerProperties>().currentDirectionID = savedDir;
         }
-        
+        if(hasKey == true)
+        {
+
+        }
        // currentDirectionID = savedDir;
 
+    }
+
+    public void TransitionFromTo(GameObject character, Vector3 position)
+    {
+        characterToAnimate = character;
+        destination = position;
+        animTimer = 0;
     }
 }
 

@@ -14,12 +14,13 @@ public class TurnManager : MonoBehaviour
     int amountOfTurns = 5;
     public static float turnLenght = .5f; // den här kan alltså ändras så att man hinner med en annan corroutine!!!
     public static List <PlayerProperties> players = new List <PlayerProperties> ();
+    public static List<PlayerProperties> sortedPlayers = new List <PlayerProperties> ();
     bool startTurn = true;
 
     private void Update()
     {
         
-        if(PlayerProperties.myActions.Count == players.Count * 5)
+        if(PlayerProperties.myActions.Count == players.Count * 5 && players.Count != 0)
         {
             for (int i = 0; i < players.Count; i++)
             {
@@ -28,6 +29,7 @@ public class TurnManager : MonoBehaviour
                     if (PlayerProperties.ids[i] == players[j].playerId)
                     {
                         players[j].AddMarbles();
+                        sortedPlayers.Add(players[j]);
                     }
                 }
             }
@@ -43,18 +45,19 @@ public class TurnManager : MonoBehaviour
     {
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
-            for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
+            for (int playerInList = 0; playerInList < sortedPlayers.Count; playerInList++) // keeps track of which player is currently doing something
             {
-                for (int steps = 0; steps < Mathf.Abs((int)players[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
+                for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
                     // implement a if player is still alive.
+                Debug.Log(sortedPlayers[playerInList].playerId);
                 { 
-                    switch ((int)players[playerInList].marbleEffect[currentTurn].x)
+                    switch ((int)sortedPlayers[playerInList].marbleEffect[currentTurn].x)
                     {
                         case 0:
-                            players[playerInList].TryMove(players[playerInList].gameObject, (int)players[playerInList].marbleEffect[currentTurn].x, 1);
+                            sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, 1);
                             break;
                         case 1:
-                            players[playerInList].TryMove(players[playerInList].gameObject, (int)players[playerInList].marbleEffect[currentTurn].x, (int)players[playerInList].marbleEffect[currentTurn].y);
+                            sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
                             break;
                     }
                     yield return new WaitForSeconds(turnLenght);
@@ -68,7 +71,6 @@ public class TurnManager : MonoBehaviour
                 {
                     yield return new WaitForSeconds(turnLenght);
                     Movement.enemies[enemyCounter].DoAMove(1, Movement.enemies[enemyCounter].currentDirectionID);
-
                 }
             }
             
@@ -77,9 +79,9 @@ public class TurnManager : MonoBehaviour
             Environment.Turn();
         }
         startTurn = true;
-        for(int i = 0; i < players.Count; i++)
+        for(int i = 0; i < sortedPlayers.Count; i++)
         {
-            players[i].ResetMarbles();
+            sortedPlayers[i].ResetMarbles();
         }
         PlayerProperties.ids.Clear();
     }
