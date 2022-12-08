@@ -23,6 +23,8 @@ public class PlayerProperties : Movement
     {
         TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
     }
+
+
     void Update()
     {
         if (playerId == 1)

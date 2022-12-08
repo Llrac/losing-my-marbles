@@ -2,6 +2,8 @@ using System.Collections;
 using System.Threading;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine;
+using Spine.Unity;
 
 public abstract class Movement : MonoBehaviour
 {
@@ -13,29 +15,104 @@ public abstract class Movement : MonoBehaviour
 
     public int currentDirectionID = 0;
 
-    public Sprite[] sprites = new Sprite[2];
-    SpriteRenderer childRenderer;
     GridManager grid;
-
-    public float jumpLength = 1;
  
     int multiplier;
 
-    float timer = 1f;
+    SkeletonAnimation frontSkeleton;
+    SkeletonAnimation backSkeleton;
+    bool usingFrontSkeleton = false;
+    public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump;
+    public float jumpLength = 1;
+    public float jumpAnimationSpeed = 5f;
+    Spine.Animation nextIdleAnimation;
+    Spine.Animation nextJumpAnimation;
+
     // Start is called before the first frame update
     void Start()
     {
         grid = FindObjectOfType<GridManager>();
-    }
-    private void Update()
-    {
-        timer -= Time.deltaTime;
-        if (timer < 0f)
+        foreach (Transform child in transform)
         {
-            timer = 1f;
-            //enemies[0].DoAMove(1);
+            if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>() != null)
+            {
+                frontSkeleton = child.GetComponent<SkeletonAnimation>();
+            }
+            else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>() != null)
+            {
+                backSkeleton = child.GetComponent<SkeletonAnimation>();
+            }
+        }
+
+        UpdateAnimation();
+    }
+
+    private void UpdateAnimation()
+    {
+        switch (currentDirectionID)
+        {
+            case 0:
+                Turn(false, false);
+                break;
+            case 1 or -3:
+                Turn(false, true);
+                break;
+            case 2 or -2:
+                Turn(true, true);
+                break;
+            case 3 or -1:
+                Turn(true, false);
+                break;
+            default:
+                Turn(false, false);
+                break;
         }
     }
+
+    void Turn(bool facingLeft, bool front)
+    {
+        if (frontSkeleton == null || backSkeleton == null)
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                {
+                    frontSkeleton = child.GetComponent<SkeletonAnimation>();
+                }
+                else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                {
+                    backSkeleton = child.GetComponent<SkeletonAnimation>();
+                }
+            }
+        }
+
+        if (front)
+        {
+            nextIdleAnimation = frontIdle;
+            nextJumpAnimation = frontJump;
+            usingFrontSkeleton = true;
+        }
+        else
+        {
+            nextIdleAnimation = backIdle;
+            nextJumpAnimation = backJump;
+            usingFrontSkeleton = false;
+        }
+
+        if (usingFrontSkeleton)
+        {
+            frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
+            frontSkeleton.gameObject.SetActive(true);
+            backSkeleton.gameObject.SetActive(false);
+        }
+        else
+        {
+            backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
+            frontSkeleton.gameObject.SetActive(false);
+            backSkeleton.gameObject.SetActive(true);
+        }
+    }
+
     public bool TryMove(GameObject character, int dataID, int increment) // into bool?
     {
         // Set transform position
@@ -49,7 +126,7 @@ public abstract class Movement : MonoBehaviour
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     TryMove(character, 1, 2);
-                    return false;// lägg till recursion här'
+                    return false;// lï¿½gg till recursion hï¿½r'
 
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
@@ -83,14 +160,9 @@ public abstract class Movement : MonoBehaviour
 
                 case GridManager.KEY:
                     character.GetComponent<Movement>().hasKey = true;
-                    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
+                    GameObject.FindGameObjectWithTag("Key").SetActive(false);
+                    FindObjectOfType<GridGenerator>().DestroyKeyGlitter();
                     Move(character, 1);
-                    break;
-
-                case GridManager.WATER:
-                    // do water stuff
-                    Move(character, 1);
-                    savedTile = GridManager.WATER;
                     break;
 
                 case GridManager.HOLE:
@@ -105,6 +177,12 @@ public abstract class Movement : MonoBehaviour
                         enemies.Clear();
 
                     }
+                    break;
+
+                case GridManager.WATER:
+                    // do water stuff
+                    Move(character, 1);
+                    savedTile = GridManager.WATER;
                     break;
             }
         }
@@ -126,32 +204,16 @@ public abstract class Movement : MonoBehaviour
                 }
             }
 
-            foreach (Transform child in character.transform)
+            UpdateAnimation();
+            if (usingFrontSkeleton)
             {
-                if (child.gameObject.name == "Sprite")
-                    childRenderer = child.gameObject.GetComponent<SpriteRenderer>();
+                frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+            }
+            else
+            {
+                backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
             }
 
-            switch (currentDirectionID)
-            {
-                case 0:
-                    character.GetComponent<Movement>().childRenderer.sprite = sprites[0];
-                    character.transform.localScale = new Vector3(1, 1, 1);
-                    break;
-                case 1 or -3:
-                    character.GetComponent<Movement>().childRenderer.sprite = sprites[1];
-                    character.transform.localScale = new Vector3(-1, 1, 1);
-                    break;
-                case 2 or -2:
-                    character.GetComponent<Movement>().childRenderer.sprite = sprites[1];
-                    character.transform.localScale = new Vector3(1, 1, 1);
-                    break;
-                case 3 or -1:
-                    character.GetComponent<Movement>().childRenderer.sprite = sprites[0];
-                    character.transform.localScale = new Vector3(-1, 1, 1);
-                    break;
-            }
-            
         }
         
         return true;
@@ -171,31 +233,52 @@ public abstract class Movement : MonoBehaviour
 
     public void Move(GameObject character, int increment)
     {
+        PlayerProperties pp;
+        pp = FindObjectOfType<PlayerProperties>();
+
         multiplier = 1;
         if (increment < 0)
         {
             multiplier *= -1;
         }
+
+        UpdateAnimation();
         switch (currentDirectionID)
         {
             case 0:
-                character.transform.position += new Vector3(jumpLength, jumpLength / 2, 0) * multiplier;
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
                 break;
             case 1 or -3:
-                character.transform.position += new Vector3(jumpLength, -jumpLength / 2, 0) * multiplier;
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
                 break;
             case 2 or -2:
-                character.transform.position += new Vector3(-jumpLength, -jumpLength / 2, 0) * multiplier;
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
                 break;
             case 3 or -1:
-                character.transform.position += new Vector3(-jumpLength, jumpLength / 2, 0) * multiplier;
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
                 break;
         }
-        //
         grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
-       
+            RequestGridPosition(currentDirectionID));
+
+        if (usingFrontSkeleton)
+        {
+            frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
+            frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
+            frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
+        }
+        else
+        {
+            backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
+            backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
+            backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
+        }
     }
+
     public abstract char ChangeTag();
     public abstract void DoAMove(int inc, int dir);
 }
