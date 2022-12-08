@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
+    public AnimationCurve jumpProgress;
+    [HideInInspector] public GameObject characterToAnimate;
+    [HideInInspector] public Vector2 destination;
+    [HideInInspector] public float animTimer = 10f;
 
-    public int playerId = 0;
+    public int playerId = 0; // playerID of (0) is null
+
     public static List <int> ids = new List <int> ();
     public static List<Vector2> myActions = new List<Vector2>();
   
@@ -21,9 +26,11 @@ public class PlayerProperties : Movement
     {
         TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
     }
+
+
     void Update()
     {
-        if(playerId == 1)
+        if (playerId == 1)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -45,8 +52,12 @@ public class PlayerProperties : Movement
             {
                 act--;
             }
-
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                Debug.Log(jumpProgress.length);
+            }
         }
+
         if (playerId == 2)
         {
             if (Input.GetButtonDown("Jump"))
@@ -55,7 +66,13 @@ public class PlayerProperties : Movement
             }
         }
 
+        animTimer += Time.deltaTime;
 
+        if (animTimer <= jumpProgress.length)
+        {
+            characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
+            Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
+        }
     }
     public override char ChangeTag()
     {
@@ -80,6 +97,7 @@ public class PlayerProperties : Movement
             enemies[0].DoAMove(1, enemies[0].GetComponent<RatProperties>().currentDirectionID);
         }
     }
+
     public void AddMarbles()
     {
         for (int i = 0; i < 5; i++)
@@ -88,10 +106,12 @@ public class PlayerProperties : Movement
             myActions.RemoveAt(0);
         }
     }
+
     public void ResetMarbles()
     {
         marbleEffect.Clear();
     }
+
     public void Pushed(int dir)
     {
         int savedDir = currentDirectionID;
@@ -107,6 +127,13 @@ public class PlayerProperties : Movement
         }
        // currentDirectionID = savedDir;
 
+    }
+
+    public void TransitionFromTo(GameObject character, Vector3 position)
+    {
+        characterToAnimate = character;
+        destination = position;
+        animTimer = 0;
     }
 }
 

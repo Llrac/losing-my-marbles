@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 901df20ba22133d49866cbeff68bb04d
+guid: 4c4c551bea65ba64ca8aec27a9674115
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,196 +139,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Insert5_Sprite_180x116_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 180
-        height: 116
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 303f5b66d64b0974594e66cc09bdddb5
-      internalID: 174030587
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Insert5_Sprite_180x116_1
-      rect:
-        serializedVersion: 2
-        x: 180
-        y: 0
-        width: 180
-        height: 116
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bbca1f0db756aec44a88482d371175e8
-      internalID: 2128725411
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Insert5_Sprite_180x116_2
-      rect:
-        serializedVersion: 2
-        x: 360
-        y: 0
-        width: 180
-        height: 116
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b52d8769d20a6e040a6f464da2311520
-      internalID: -2070191096
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Insert5_Sprite_180x116_3
-      rect:
-        serializedVersion: 2
-        x: 540
-        y: 0
-        width: 180
-        height: 116
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f6d9cef2858fb184c821c4f3d235a19f
-      internalID: 109355834
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Insert5_Sprite_180x116_4
-      rect:
-        serializedVersion: 2
-        x: 720
-        y: 0
-        width: 180
-        height: 116
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c87fe02cae99e654bab94648b16340ad
-      internalID: -670497462
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Insert5_Sprite_180x116_5
-      rect:
-        serializedVersion: 2
-        x: 900
-        y: 0
-        width: 180
-        height: 116
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef657dadee24739458cf631d9ec38f40
-      internalID: -2040336288
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Insert5_Sprite_180x116_6
-      rect:
-        serializedVersion: 2
-        x: 1080
-        y: 0
-        width: 180
-        height: 116
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9897aa8023315f24781d5e6c3f4a0552
-      internalID: 26270239
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Insert5_Sprite_180x116_7
-      rect:
-        serializedVersion: 2
-        x: 1260
-        y: 0
-        width: 180
-        height: 116
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7a2fbca0b1766db488fc9c23867c80c5
-      internalID: -1796067424
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Insert5_Sprite_180x116_8
-      rect:
-        serializedVersion: 2
-        x: 1440
-        y: 0
-        width: 180
-        height: 116
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e87d92101460f24f8caa0a41605dd30
-      internalID: -2086118975
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -339,16 +150,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Insert5_Sprite_180x116_4: -670497462
-      Insert5_Sprite_180x116_3: 109355834
-      Insert5_Sprite_180x116_2: -2070191096
-      Insert5_Sprite_180x116_6: 26270239
-      Insert5_Sprite_180x116_7: -1796067424
-      Insert5_Sprite_180x116_0: 174030587
-      Insert5_Sprite_180x116_5: -2040336288
-      Insert5_Sprite_180x116_1: 2128725411
-      Insert5_Sprite_180x116_8: -2086118975
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
