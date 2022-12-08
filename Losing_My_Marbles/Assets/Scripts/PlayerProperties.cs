@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 
 public class PlayerProperties : Movement
@@ -9,6 +8,7 @@ public class PlayerProperties : Movement
     [HideInInspector] public GameObject characterToAnimate;
     [HideInInspector] public Vector2 destination;
     [HideInInspector] public float animTimer = 10f;
+    GridGenerator gridGen;
 
     public int playerId = 0; // playerID of (0) is null
 
@@ -22,8 +22,11 @@ public class PlayerProperties : Movement
     private void Start()
     {
         TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
-    }
+        gridGen = FindObjectOfType<GridGenerator>();
 
+        UpdateAnimation();
+        UpdateSkinBasedOnPlayerID();
+    }
 
     void Update()
     {
@@ -69,6 +72,8 @@ public class PlayerProperties : Movement
         {
             characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
             Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
+            if (hasKey)
+                gridGen.UpdateGlitter();
         }
     }
     public override char ChangeTag()

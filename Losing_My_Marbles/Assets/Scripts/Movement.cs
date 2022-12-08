@@ -22,16 +22,14 @@ public abstract class Movement : MonoBehaviour
     SkeletonAnimation frontSkeleton;
     SkeletonAnimation backSkeleton;
     bool usingFrontSkeleton = false;
-    public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump;
+    public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump; // TODO: implement idle2 and idle3
     public float jumpLength = 1;
     public float jumpAnimationSpeed = 5f;
     Spine.Animation nextIdleAnimation;
     Spine.Animation nextJumpAnimation;
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateSkinBasedOnPlayerID()
     {
-        grid = FindObjectOfType<GridManager>();
         foreach (Transform child in transform)
         {
             if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>() != null)
@@ -43,11 +41,47 @@ public abstract class Movement : MonoBehaviour
                 backSkeleton = child.GetComponent<SkeletonAnimation>();
             }
         }
+        PlayerProperties pp = GetComponent<PlayerProperties>();
+        if (pp != null)
+        {
+            switch (pp.playerId)
+            {
+                case 1:
+                    frontSkeleton.initialSkinName = "red";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "red";
+                    backSkeleton.Initialize(true);
 
-        UpdateAnimation();
+                    break;
+                case 2:
+                    frontSkeleton.initialSkinName = "purple";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "purple";
+                    backSkeleton.Initialize(true);
+                    break;
+                case 3:
+                    frontSkeleton.initialSkinName = "turquoise";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "turquoise";
+                    backSkeleton.Initialize(true);
+                    break;
+                case 4:
+                    frontSkeleton.initialSkinName = "yellow";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "yellow";
+                    backSkeleton.Initialize(true);
+                    break;
+                default:
+                    frontSkeleton.initialSkinName = "default";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "default";
+                    backSkeleton.Initialize(true);
+                    break;
+            }
+        }
     }
 
-    private void UpdateAnimation()
+    public void UpdateAnimation()
     {
         switch (currentDirectionID)
         {
@@ -148,9 +182,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.ENEMY: // ENEMY
                     GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
                         + character.GetComponent<Movement>().gridPosition, enemies);
-
                     enemy.GetComponent<RatProperties>().DoAMove(1, currentDirectionID);
-                    
                     break;
 
                 case GridManager.DOOR:
@@ -165,21 +197,19 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.KEY:
                     character.GetComponent<Movement>().hasKey = true;
                     GameObject.FindGameObjectWithTag("Key").SetActive(false);
-                    FindObjectOfType<GridGenerator>().DestroyKeyGlitter();
                     Move(character, 1);
                     break;
 
                 case GridManager.HOLE:
                     character.SetActive(false);
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
-                    if(gameObject.tag == "Player")
+                    if (CompareTag("Player"))
                     {
                         TurnManager.players.Remove(character.GetComponent<PlayerProperties>());
                     }
                     else
                     {
                         enemies.Clear();
-
                     }
                     break;
 
