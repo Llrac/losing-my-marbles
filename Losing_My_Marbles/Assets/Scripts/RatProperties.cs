@@ -10,6 +10,13 @@ public class RatProperties : Movement
     { 
         new Vector2 (0, 1), new Vector2( 0, -1), new Vector2 ( 1, 0), new Vector2 (-1, 0)
     };
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            TryMove(gameObject, 0, 1);
+        }
+    }
     private void Start()
     {
         Movement.enemies.Add(this);

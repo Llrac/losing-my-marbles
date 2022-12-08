@@ -71,46 +71,50 @@ public abstract class Movement : MonoBehaviour
 
     void Turn(bool facingLeft, bool front)
     {
-        if (frontSkeleton == null || backSkeleton == null)
+        if(gameObject.tag == "Player")
         {
-            foreach (Transform child in transform)
+            if (frontSkeleton == null || backSkeleton == null)
             {
-                if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                foreach (Transform child in transform)
                 {
-                    frontSkeleton = child.GetComponent<SkeletonAnimation>();
-                }
-                else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
-                {
-                    backSkeleton = child.GetComponent<SkeletonAnimation>();
+                    if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                    {
+                        frontSkeleton = child.GetComponent<SkeletonAnimation>();
+                    }
+                    else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                    {
+                        backSkeleton = child.GetComponent<SkeletonAnimation>();
+                    }
                 }
             }
-        }
 
-        if (front)
-        {
-            nextIdleAnimation = frontIdle;
-            nextJumpAnimation = frontJump;
-            usingFrontSkeleton = true;
-        }
-        else
-        {
-            nextIdleAnimation = backIdle;
-            nextJumpAnimation = backJump;
-            usingFrontSkeleton = false;
-        }
+            if (front)
+            {
+                nextIdleAnimation = frontIdle;
+                nextJumpAnimation = frontJump;
+                usingFrontSkeleton = true;
+            }
+            else
+            {
+                nextIdleAnimation = backIdle;
+                nextJumpAnimation = backJump;
+                usingFrontSkeleton = false;
+            }
 
-        if (usingFrontSkeleton)
-        {
-            frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
-            frontSkeleton.gameObject.SetActive(true);
-            backSkeleton.gameObject.SetActive(false);
+            if (usingFrontSkeleton)
+            {
+                frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
+                frontSkeleton.gameObject.SetActive(true);
+                backSkeleton.gameObject.SetActive(false);
+            }
+            else
+            {
+                backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
+                frontSkeleton.gameObject.SetActive(false);
+                backSkeleton.gameObject.SetActive(true);
+            }
         }
-        else
-        {
-            backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
-            frontSkeleton.gameObject.SetActive(false);
-            backSkeleton.gameObject.SetActive(true);
-        }
+       
     }
 
     public bool TryMove(GameObject character, int dataID, int increment) // into bool?
@@ -207,11 +211,11 @@ public abstract class Movement : MonoBehaviour
             UpdateAnimation();
             if (usingFrontSkeleton)
             {
-                frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+                frontSkeleton?.AnimationState.SetAnimation(0, nextIdleAnimation, true);
             }
             else
             {
-                backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+                backSkeleton?.AnimationState.SetAnimation(0, nextIdleAnimation, true);
             }
 
         }
@@ -264,19 +268,22 @@ public abstract class Movement : MonoBehaviour
         }
         grid.MoveInGridMatrix(character.GetComponent<Movement>(),
             RequestGridPosition(currentDirectionID));
-
-        if (usingFrontSkeleton)
+        if(frontSkeleton != null || backSkeleton != null)
         {
-            frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
-            frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-            frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
+            if (usingFrontSkeleton)
+            {
+                frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
+                frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
+                frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
+            }
+            else
+            {
+                backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
+                backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
+                backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
+            }
         }
-        else
-        {
-            backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
-            backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-            backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
-        }
+        
     }
 
     public abstract char ChangeTag();

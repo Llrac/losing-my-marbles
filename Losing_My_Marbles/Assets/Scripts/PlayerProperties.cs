@@ -104,6 +104,7 @@ public class PlayerProperties : Movement
                     marbleEffect.Add(new Vector2(1, 1));
                     break;
             }
+           // Debug.Log(myActions[0]);
             playerMarbles.Add(myActions[0]);
             myActions.RemoveAt(0);
         }
