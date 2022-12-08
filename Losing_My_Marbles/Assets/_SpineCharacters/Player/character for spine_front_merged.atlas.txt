@@ -1,0 +1,45 @@
+character for spine_front_merged.png
+size:1394,627
+filter:Linear,Linear
+pma:true
+scale:0.6
+backpack
+bounds:1002,158,287,217
+body
+bounds:2,204,251,421
+body2
+bounds:255,209,247,416
+body3
+bounds:504,209,247,416
+body4
+bounds:753,209,247,416
+head
+bounds:1002,377,268,248
+left arm
+bounds:2,101,101,290
+rotate:90
+left arm2
+bounds:2,2,97,285
+rotate:90
+left arm3
+bounds:289,2,97,285
+rotate:90
+left arm4
+bounds:1291,154,97,285
+left foot
+bounds:1196,35,117,155
+rotate:90
+right arm
+bounds:294,113,94,302
+rotate:90
+right arm2
+bounds:598,118,89,297
+rotate:90
+right arm3
+bounds:598,27,89,297
+rotate:90
+right arm4
+bounds:897,67,89,297
+rotate:90
+right foot
+bounds:1272,441,120,184
