@@ -8,20 +8,20 @@ public class LogHandler : MonoBehaviour
 {
     public GameObject messagePrefab;
     public Transform messagesContainer;
-    public PlayerProperties playerProperties;
+    public DatabaseAPI database;
+    
     private void Start()
     {
+        database.ListenForActions(InstantiateMessage, Debug.Log);
     }
-
-    private void Update()
+    
+    private void InstantiateMessage(ActionMessage message)
     {
-        
-    }
-
-    public void InstantiateMessage(int message)
-    {
-        var newMessage = Instantiate(messagePrefab, transform.position, Quaternion.identity);
-        newMessage.transform.SetParent(messagesContainer, false);
-        newMessage.GetComponent<TextMeshProUGUI>().text = message.ToString();
+        if (message != null)
+        {
+            var newMessage = Instantiate(messagePrefab, transform.position, Quaternion.identity);
+            newMessage.transform.SetParent(messagesContainer, false);
+            newMessage.GetComponent<TextMeshProUGUI>().text = message.playerID.ToString();
+        }
     }
 }
