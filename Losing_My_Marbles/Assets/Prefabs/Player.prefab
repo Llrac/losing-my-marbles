@@ -179,7 +179,7 @@ MonoBehaviour:
   backIdle: {fileID: 11400000, guid: 96adff7bd7bda384db721dd5f6d851ad, type: 2}
   backJump: {fileID: 11400000, guid: 539a457010e6b534584105c4290b338b, type: 2}
   jumpLength: 1
-  jumpSpeed: 1
+  jumpSpeed: 1.5
   jumpProgress:
     serializedVersion: 2
     m_Curve:
@@ -193,7 +193,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5
+      time: 0.3
       value: 0
       inSlope: 0
       outSlope: 0
@@ -202,10 +202,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 2
+      time: 1.5
       value: 1
-      inSlope: 0.6666667
-      outSlope: 0.6666667
+      inSlope: 0.8333333
+      outSlope: 0.8333333
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
