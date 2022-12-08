@@ -10,6 +10,7 @@ public class RatProperties : Movement
     { 
         new Vector2 (0, 1), new Vector2( 0, -1), new Vector2 ( 1, 0), new Vector2 (-1, 0)
     };
+    public List<Vector2> moves = new List<Vector2>();
     private void Update()
     {
         if (Input.GetButtonDown("Jump"))
@@ -33,12 +34,12 @@ public class RatProperties : Movement
         return 'E';
     }
 
-    public override void DoAMove(int inc , int dir)
+    public override void DoAMove(int id, int inc , int dir)
     {
         savedDir = gameObject.GetComponent<RatProperties>().currentDirectionID;
         gameObject.GetComponent<RatProperties>().currentDirectionID = dir;
-        
-        if (TryMove(gameObject, 0, inc) == true)
+         
+        if (TryMove(gameObject, id, inc) == true)
         {
             gameObject.GetComponent<RatProperties>().currentDirectionID = savedDir;
         }
@@ -48,6 +49,7 @@ public class RatProperties : Movement
         }
         
     }
+    
     public IEnumerator CheckForKills() 
     {
         for(int i = 0; i < killZone.Count; i++)

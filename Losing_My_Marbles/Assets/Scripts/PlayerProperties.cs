@@ -53,6 +53,10 @@ public class PlayerProperties : Movement
             {
                 Debug.Log(jumpProgress.length);
             }
+            if (Input.GetButtonDown("Jump"))
+            {
+                Pushed(-1);
+            }
         }
 
         if (playerId == 2)
@@ -76,7 +80,7 @@ public class PlayerProperties : Movement
         return 'P';
     }
 
-    public override void DoAMove(int inc, int dir)
+    public override void DoAMove(int id, int inc, int dir)
     {
         throw new System.NotImplementedException();
     }
@@ -120,14 +124,15 @@ public class PlayerProperties : Movement
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
         //TryMove(gameObject, 0, 1);
+        if (hasKey == true)
+        {
+            DroppKey();
+        }
         if (TryMove(gameObject, 0, 1) == true)
         {
-            gameObject.GetComponent<PlayerProperties>().currentDirectionID = savedDir;
+            currentDirectionID = savedDir;
         }
-        if(hasKey == true)
-        {
-
-        }
+       
        // currentDirectionID = savedDir;
 
     }

@@ -18,6 +18,7 @@ public class TurnManager : MonoBehaviour
     //add a sortet list here
     bool startTurn = true;
     int tracking = 0;
+    int ratPathKeeping = 0;
     private void Update()
     {
         if(PlayerProperties.ids.Count > tracking)
@@ -74,11 +75,19 @@ public class TurnManager : MonoBehaviour
             {
                 for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
                 {
+                    float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
+                    float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
                     yield return new WaitForSeconds(turnLenght);
-                    Movement.enemies[enemyCounter].DoAMove(1, Movement.enemies[enemyCounter].currentDirectionID);
+                    Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
                 }
             }
-            
+
+            ratPathKeeping++;
+            Debug.Log(ratPathKeeping.ToString());
+            if(ratPathKeeping >= 7)
+            {
+                ratPathKeeping = 0;
+            }
             yield return new WaitForSeconds(turnLenght);
            
             Environment.Turn();

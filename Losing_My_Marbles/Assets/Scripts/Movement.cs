@@ -149,7 +149,7 @@ public abstract class Movement : MonoBehaviour
                     GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
                         + character.GetComponent<Movement>().gridPosition, enemies);
 
-                    enemy.GetComponent<RatProperties>().DoAMove(1, currentDirectionID);
+                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
                     
                     break;
 
@@ -164,14 +164,20 @@ public abstract class Movement : MonoBehaviour
 
                 case GridManager.KEY:
                     character.GetComponent<Movement>().hasKey = true;
-                    GameObject.FindGameObjectWithTag("Key").SetActive(false);
+                    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
                     FindObjectOfType<GridGenerator>().DestroyKeyGlitter();
                     Move(character, 1);
                     break;
 
                 case GridManager.HOLE:
-                    character.SetActive(false);
+                    if (gameObject.GetComponent<Movement>().hasKey == true)
+                    {
+                        DroppKey();
+                    }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+                    
+                    character.SetActive(false);
+
                     if(gameObject.tag == "Player")
                     {
                         TurnManager.players.Remove(character.GetComponent<PlayerProperties>());
@@ -219,8 +225,8 @@ public abstract class Movement : MonoBehaviour
             }
 
         }
-        
-        return true;
+
+        return false;
     }
 
     public Vector2 RequestGridPosition(int currentDirectionID)
@@ -285,7 +291,17 @@ public abstract class Movement : MonoBehaviour
         }
         
     }
-
+    public void DroppKey()
+    {
+        savedTile = 'K';
+        hasKey = false;
+        Vector2 keyPos;
+        keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7 - 1;
+        keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + 1.5f;
+        GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
+        GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
+        
+    }
     public abstract char ChangeTag();
-    public abstract void DoAMove(int inc, int dir);
+    public abstract void DoAMove(int id, int inc, int dir);
 }

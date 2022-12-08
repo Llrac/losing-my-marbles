@@ -51,4 +51,18 @@ public class GridGenerator : MonoBehaviour
     {
         Destroy(newKeyGlitter);
     }
+    public void UpdateStarGlitter(Vector2 pos)
+    {
+        for (int x = 0; x < grid.board.GetLength(0); x++)
+        {
+            for (int y = 0; y < grid.board.GetLength(1); y++)
+            {
+                if (grid.board[x, y] == GridManager.KEY)
+                {
+                    newKeyGlitter = Instantiate(keyGlitterParticle);
+                    newKeyGlitter.transform.position = pos;
+                }
+            }
+        }
+    } 
 }
