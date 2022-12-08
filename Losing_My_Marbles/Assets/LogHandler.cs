@@ -2,26 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class LogHandler : MonoBehaviour
 {
     public GameObject messagePrefab;
     public Transform messagesContainer;
-    public DatabaseAPI database;
-    
-    private void Start()
+
+
+    public void InstantiateMessage(int messageIndex)
     {
-        database.ListenForActions(InstantiateMessage, Debug.Log);
-    }
-    
-    private void InstantiateMessage(ActionMessage message)
-    {
-        if (message != null)
-        {
-            var newMessage = Instantiate(messagePrefab, transform.position, Quaternion.identity);
-            newMessage.transform.SetParent(messagesContainer, false);
-            newMessage.GetComponent<TextMeshProUGUI>().text = message.playerID.ToString();
-        }
+        var newMessage = Instantiate(messagePrefab, transform.position, Quaternion.identity);
+        newMessage.transform.SetParent(messagesContainer, false);
+        newMessage.GetComponent<TextMeshProUGUI>().text = PlayerProperties.ids[messageIndex].ToString();
+        Debug.Log("Player " + (PlayerProperties.ids[messageIndex]) + " has locked in");
     }
 }
