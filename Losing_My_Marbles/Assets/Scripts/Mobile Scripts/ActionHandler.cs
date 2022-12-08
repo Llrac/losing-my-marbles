@@ -9,7 +9,6 @@ public class ActionHandler : MonoBehaviour
     public DatabaseAPI database;
     public UIManager uiManager;
     public PlayerID playerId;
-    public LogHandler logHandler;
 
     private int playerID;
     private void Start()
@@ -20,14 +19,15 @@ public class ActionHandler : MonoBehaviour
 
     public void SendAction()
     {
-        database.PostActions(new ActionMessage(playerID, uiManager.orderID[0],
-            uiManager.orderID[1], uiManager.orderID[2],
-            uiManager.orderID[3], uiManager.orderID[4]), () =>
+        if (uiManager != null)
         {
-            // Action was sent!
-        }, exception => {
-            Debug.Log(exception);
-        });
+            database.PostActions(new ActionMessage(playerID, uiManager.orderID[0],
+                uiManager.orderID[1], uiManager.orderID[2],
+                uiManager.orderID[3], uiManager.orderID[4]), () =>
+            {
+                // Action was sent!
+            }, exception => { Debug.Log(exception); });
+        }
     }
     
     // This happens on the desktop side
@@ -48,29 +48,28 @@ public class ActionHandler : MonoBehaviour
         Debug.Log("Instantiate Action");
 
         PlayerProperties.ids.Add(playerID);
-        logHandler.InstantiateMessage(playerID);
-        
-        
+
         foreach (int action in listOfActions)
         {
             switch (action)
             {
                 case 1: // Move 1
-                    PlayerProperties.myActions.Add(action1);
+                    PlayerProperties.myActions.Add(action);
                     break;
                 case 2: // Move 2
-                    PlayerProperties.myActions.Add(action2);
+                    PlayerProperties.myActions.Add(action);
                     break;
                 case 3: // Move 3
-                    PlayerProperties.myActions.Add(action3);
+                    PlayerProperties.myActions.Add(action);
                     break;
                 case 4: // Turn L
-                    PlayerProperties.myActions.Add(action4);
+                    PlayerProperties.myActions.Add(action);
                     break;
                 case 5: // Turn R
-                    PlayerProperties.myActions.Add(action5);
+                    PlayerProperties.myActions.Add(action);
                     break;
             }
+           
         }
     }
     

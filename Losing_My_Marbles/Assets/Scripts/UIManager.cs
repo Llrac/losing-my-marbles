@@ -28,7 +28,9 @@ public class UIManager : MonoBehaviour
     {
         // TODO connect this to matchmaking etc
         if (background != null)
+        {
             background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
+        }
         
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
@@ -48,10 +50,10 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            FillHandWithMarbles();
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    FillHandWithMarbles();
+        //}
     }
 
     public void FillHandWithMarbles()

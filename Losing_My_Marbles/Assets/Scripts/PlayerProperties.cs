@@ -12,15 +12,13 @@ public class PlayerProperties : Movement
 
     public int playerId = 0; // playerID of (0) is null
 
-    public static List <int> ids = new List <int> ();
+    public static List<int> ids = new List <int> ();
     public static List<int> myActions = new List<int>();
     public List<int> playerMarbles = new List<int>();
     public List <Vector2> marbleEffect = new List<Vector2> ();
    
     int act = 1;
   
-    // float timeBetween = 0.5f;
-
     private void Start()
     {
         TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
@@ -111,6 +109,7 @@ public class PlayerProperties : Movement
                     marbleEffect.Add(new Vector2(1, 1));
                     break;
             }
+           // Debug.Log(myActions[0]);
             playerMarbles.Add(myActions[0]);
             myActions.RemoveAt(0);
         }
