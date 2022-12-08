@@ -47,6 +47,7 @@ public class TurnManager : MonoBehaviour
             {
                 for (int steps = 0; steps < Mathf.Abs((int)players[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
                     // implement a if player is still alive.
+                Debug.Log(players[playerInList].playerId);
                 { 
                     switch ((int)players[playerInList].marbleEffect[currentTurn].x)
                     {
