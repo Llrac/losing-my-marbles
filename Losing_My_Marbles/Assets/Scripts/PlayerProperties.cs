@@ -12,16 +12,16 @@ public class PlayerProperties : Movement
 
     public int playerId = 0; // playerID of (0) is null
 
-    public static List<int> ids = new List <int> ();
-    public static List<int> myActions = new List<int>();
-    public List<int> playerMarbles = new List<int>();
+    public static List<int> ids = new();
+    public static List<int> myActions = new();
+    public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new List<Vector2> ();
    
     int act = 1;
   
     private void Start()
     {
-        TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
+        TurnManager.players.Add(gameObject.GetComponent<PlayerProperties>());
         gridGen = FindObjectOfType<GridGenerator>();
 
         UpdateAnimation();
