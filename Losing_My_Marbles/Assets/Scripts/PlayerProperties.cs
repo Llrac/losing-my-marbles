@@ -69,7 +69,7 @@ public class PlayerProperties : Movement
         }
         animTimer += Time.deltaTime;
 
-        if (animTimer < jumpProgress.length)
+        if (animTimer <= jumpProgress.length)
         {
             characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
                 Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 445813850}
   - component: {fileID: 445813849}
   m_Layer: 0
-  m_Name: Back Sprite
+  m_Name: Back_Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -173,12 +173,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPosition: {x: 8, y: 4}
   hasKey: 0
-  currentDirectionID: 2
-  jumpLength: 1
+  currentDirectionID: 3
   frontIdle: {fileID: 11400000, guid: 6e5b8d86542c5964a860bab85ed606df, type: 2}
   frontJump: {fileID: 11400000, guid: 2f687a3a42c7d524f9d08a3d61773f5e, type: 2}
   backIdle: {fileID: 11400000, guid: 96adff7bd7bda384db721dd5f6d851ad, type: 2}
   backJump: {fileID: 11400000, guid: 539a457010e6b534584105c4290b338b, type: 2}
+  jumpLength: 1
   jumpSpeed: 1
   jumpProgress:
     serializedVersion: 2
@@ -186,15 +186,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.0014811356
-      outSlope: -0.0014811356
-      tangentMode: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.056799117
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.9
-      value: 0.01
+      time: 0.5
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -204,12 +204,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 2
       value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 0.6666667
+      outSlope: 0.6666667
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 3772214514663726717}
   - component: {fileID: 7259064180957796837}
   m_Layer: 0
-  m_Name: Front Sprite
+  m_Name: Front_Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

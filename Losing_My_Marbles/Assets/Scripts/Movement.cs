@@ -16,11 +16,10 @@ public abstract class Movement : MonoBehaviour
     GridManager grid;
  
     int multiplier;
-    float timer = 1f;
 
     SkeletonAnimation frontSkeleton;
     SkeletonAnimation backSkeleton;
-    bool useFrontSkeleton = false;
+    bool usingFrontSkeleton = false;
     public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump;
     public float jumpLength = 1;
     public float jumpSpeed = 1f;
@@ -74,16 +73,16 @@ public abstract class Movement : MonoBehaviour
         {
             nextIdleAnimation = frontIdle;
             nextJumpAnimation = frontJump;
-            useFrontSkeleton = true;
+            usingFrontSkeleton = true;
         }
-        else if (!front)
+        else
         {
             nextIdleAnimation = backIdle;
             nextJumpAnimation = backJump;
-            useFrontSkeleton = false;
+            usingFrontSkeleton = false;
         }
 
-        if (useFrontSkeleton)
+        if (usingFrontSkeleton)
         {
             frontSkeleton.GetComponent<SkeletonAnimation>().Skeleton.ScaleX = facingLeft ? -1f : 1f;
             frontSkeleton.gameObject.SetActive(true);
@@ -97,15 +96,6 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        timer -= Time.deltaTime;
-        if (timer < 0f)
-        {
-            timer = 1f;
-            //enemies[0].DoAMove(1);
-        }
-    }
     public void TryMove(GameObject character, int dataID, int increment)
     {
         // Set transform position
@@ -182,10 +172,15 @@ public abstract class Movement : MonoBehaviour
             }
 
             UpdateAnimation();
-            if (useFrontSkeleton)
+            if (usingFrontSkeleton)
+            {
                 frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+            }
             else
+            {
                 backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+            }
+
         }
     }
 
@@ -212,36 +207,36 @@ public abstract class Movement : MonoBehaviour
             multiplier *= -1;
         }
 
-        if (nextIdleAnimation == null || nextJumpAnimation == null)
-        {
-            UpdateAnimation();
-        }
-
+        UpdateAnimation();
         switch (currentDirectionID)
         {
             case 0:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 1 or -3:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 2 or -2:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength, character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
             case 3 or -1:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength, character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
                 grid.MoveInGridMatrix(character.GetComponent<Movement>(),
                     RequestGridPosition(currentDirectionID));
                 break;
         }
 
-        if (useFrontSkeleton)
+        if (usingFrontSkeleton)
         {
             frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
             frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpSpeed;
