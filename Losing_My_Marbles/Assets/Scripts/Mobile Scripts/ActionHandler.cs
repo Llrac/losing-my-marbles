@@ -9,18 +9,17 @@ public class ActionHandler : MonoBehaviour
     public DatabaseAPI database;
     public UIManager uiManager;
     public PlayerID playerId;
+    public LogHandler logHandler;
 
     private int playerID;
     private void Start()
     {
         playerID = playerId.playerID;
         database.ListenForActions(InstantiateAction, Debug.Log);
-        
     }
 
     public void SendAction()
     {
-        
         database.PostActions(new ActionMessage(playerID, uiManager.orderID[0],
             uiManager.orderID[1], uiManager.orderID[2],
             uiManager.orderID[3], uiManager.orderID[4]), () =>
@@ -31,6 +30,7 @@ public class ActionHandler : MonoBehaviour
         });
     }
     
+    // This happens on the desktop side
     private void InstantiateAction(ActionMessage actionMessage)
     {
         var playerID = Int32.Parse($"{actionMessage.playerID}"); 
@@ -48,27 +48,31 @@ public class ActionHandler : MonoBehaviour
         Debug.Log("Instantiate Action");
 
         PlayerProperties.ids.Add(playerID);
+        logHandler.InstantiateMessage(playerID);
+        
         
         foreach (int action in listOfActions)
         {
             switch (action)
             {
                 case 1: // Move 1
-                    PlayerProperties.myActions.Add(new Vector2(0, 1));
+                    PlayerProperties.myActions.Add(action1);
                     break;
                 case 2: // Move 2
-                    PlayerProperties.myActions.Add(new Vector2(0, 2));
+                    PlayerProperties.myActions.Add(action2);
                     break;
                 case 3: // Move 3
-                    PlayerProperties.myActions.Add(new Vector2(0, 3));
+                    PlayerProperties.myActions.Add(action3);
                     break;
                 case 4: // Turn L
-                    PlayerProperties.myActions.Add(new Vector2(1, -1));
+                    PlayerProperties.myActions.Add(action4);
                     break;
                 case 5: // Turn R
-                    PlayerProperties.myActions.Add(new Vector2(1, 1));
+                    PlayerProperties.myActions.Add(action5);
                     break;
             }
         }
     }
+    
+    
 }

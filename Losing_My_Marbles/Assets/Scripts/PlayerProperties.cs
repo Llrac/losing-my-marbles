@@ -13,8 +13,8 @@ public class PlayerProperties : Movement
     public int playerId = 0; // playerID of (0) is null
 
     public static List <int> ids = new List <int> ();
-    public static List<Vector2> myActions = new List<Vector2>();
-  
+    public static List<int> myActions = new List<int>();
+    public List<int> playerMarbles = new List<int>();
     public List <Vector2> marbleEffect = new List<Vector2> ();
    
     int act = 1;
@@ -83,26 +83,31 @@ public class PlayerProperties : Movement
     {
         throw new System.NotImplementedException();
     }
-    private IEnumerator Turn()
-    {
-        for (int i = 0; i < myActions.Count; i++)
-        {
-            for (int j = 0; j < (int)myActions[i].y; j++) // b�rjan p� turnmanager.
-            {
-                yield return new WaitForSeconds(timeBetween);
-                TryMove(gameObject, (int)myActions[i].x, 1);
-
-            }
-            yield return new WaitForSeconds(timeBetween);
-            enemies[0].DoAMove(1, enemies[0].GetComponent<RatProperties>().currentDirectionID);
-        }
-    }
-
+    
     public void AddMarbles()
     {
         for (int i = 0; i < 5; i++)
         {
-            this.marbleEffect.Add(myActions[0]);
+            
+            switch (myActions[0])
+            {
+                case 1: // Move 1
+                    marbleEffect.Add(new Vector2(0, 1));
+                    break;
+                case 2: // Move 2
+                    marbleEffect.Add(new Vector2(0, 2));
+                    break;
+                case 3: // Move 3
+                    marbleEffect.Add(new Vector2(0, 3));
+                    break;
+                case 4: // Turn L
+                    marbleEffect.Add(new Vector2(1, -1));
+                    break;
+                case 5: // Turn R
+                    marbleEffect.Add(new Vector2(1, 1));
+                    break;
+            }
+            playerMarbles.Add(myActions[0]);
             myActions.RemoveAt(0);
         }
     }
