@@ -83,25 +83,7 @@ public class PlayerProperties : Movement
     {
         throw new System.NotImplementedException();
     }
-<<<<<<< Updated upstream
-    private IEnumerator Turn()
-    {
-        for (int i = 0; i < myActions.Count; i++)
-        {
-            for (int j = 0; j < (int)myActions[i].y; j++) // b�rjan p� turnmanager.
-            {
-                yield return new WaitForSeconds(timeBetween);
-                TryMove(gameObject, (int)myActions[i].x, 1);
-
-            }
-            yield return new WaitForSeconds(timeBetween);
-            enemies[0].DoAMove(1, enemies[0].GetComponent<RatProperties>().currentDirectionID);
-        }
-    }
-
-=======
     
->>>>>>> Stashed changes
     public void AddMarbles()
     {
         for (int i = 0; i < 5; i++)
