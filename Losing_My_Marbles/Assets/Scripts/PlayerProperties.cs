@@ -12,7 +12,7 @@ public class PlayerProperties : Movement
 
     public int playerId = 0; // playerID of (0) is null
 
-    public static List <int> ids = new List <int> ();
+    public static List<int> ids = new List <int> ();
     public static List<int> myActions = new List<int>();
     public List<int> playerMarbles = new List<int>();
     public List <Vector2> marbleEffect = new List<Vector2> ();
