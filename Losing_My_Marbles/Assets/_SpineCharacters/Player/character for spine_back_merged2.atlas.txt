@@ -1,0 +1,40 @@
+character for spine_back_merged2.png
+size:1771,1512
+filter:Linear,Linear
+pma:true
+scale:0.6
+arm
+bounds:1352,305,114,306
+arm2
+bounds:1352,2,109,301
+arm3
+bounds:1463,2,109,301
+arm4
+bounds:1468,502,109,301
+rotate:90
+backpack
+bounds:1357,980,256,257
+body
+bounds:2,756,1353,754
+body2
+bounds:2,5,1348,749
+head
+bounds:1357,1239,271,259
+rotate:90
+left foot
+bounds:1352,613,131,141
+right foot
+bounds:1357,862,116,137
+rotate:90
+
+character for spine_back_merged2_2.png
+size:1504,1352
+filter:Linear,Linear
+pma:true
+scale:0.6
+body3
+bounds:2,2,1348,749
+rotate:90
+body4
+bounds:753,2,1348,749
+rotate:90

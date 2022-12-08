@@ -14,10 +14,10 @@ public class UIManager : MonoBehaviour
     public Image[] marbleLights;
 
     [Header("Background & Lights")]
-    public GameObject background;
+    public GameObject background = null;
 
-    public Button confirmButton;
-    public Image insertAlert;
+    public Button confirmButton = null;
+    public Image insertAlert = null;
 
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
@@ -27,7 +27,8 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         // TODO connect this to matchmaking etc
-        background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
+        if (background != null)
+            background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
         
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
@@ -38,9 +39,10 @@ public class UIManager : MonoBehaviour
         {
             availableMarbleSlotsBottom[i] = true;
         }
-
-        insertAlert.enabled = true;
-        confirmButton.image.enabled = false;
+        if (insertAlert != null)
+            insertAlert.enabled = true;
+        if (confirmButton != null)
+            confirmButton.image.enabled = false;
         FillHandWithMarbles();
     }
 
@@ -92,8 +94,10 @@ public class UIManager : MonoBehaviour
                 availableMarbleSlotsBottom[i] = false;
                 orderID[i] = currentMarble.marbleID;
                 availableMarbleSlotsTop[currentMarble.topRowIndex] = true;
-                confirmButton.interactable = BottomRowFull();
-                confirmButton.image.enabled = BottomRowFull();
+                if (confirmButton != null)
+                    confirmButton.interactable = BottomRowFull();
+                if (confirmButton != null)
+                    confirmButton.image.enabled = BottomRowFull();
                 marbleLights[i].enabled = true;
                 return true;
             }
@@ -113,8 +117,10 @@ public class UIManager : MonoBehaviour
                 currentMarble.topRowIndex = i;
                 availableMarbleSlotsTop[i] = false;
                 availableMarbleSlotsBottom[currentMarble.bottomRowIndex] = true;
-                confirmButton.interactable = BottomRowFull();
-                confirmButton.image.enabled = BottomRowFull();
+                if (confirmButton != null)
+                    confirmButton.interactable = BottomRowFull();
+                if (confirmButton != null)
+                    confirmButton.image.enabled = BottomRowFull();
                 marbleLights[currentMarble.bottomRowIndex].enabled = false;
                 return false;
             }
@@ -129,12 +135,13 @@ public class UIManager : MonoBehaviour
         {
             if (availableMarbleSlotsBottom[i])
             {
-                insertAlert.enabled = true;
+                if (insertAlert != null)
+                    insertAlert.enabled = true;
                 return false;
             }
         }
-
-        insertAlert.enabled = false;
+        if (insertAlert != null)
+            insertAlert.enabled = false;
         return true;
     }
 
