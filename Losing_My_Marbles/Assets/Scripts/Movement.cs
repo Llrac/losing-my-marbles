@@ -215,6 +215,7 @@ public abstract class Movement : MonoBehaviour
             }
 
             UpdateAnimation();
+            
             if (usingFrontSkeleton)
             {
                 frontSkeleton?.AnimationState.SetAnimation(0, nextIdleAnimation, true);
@@ -223,7 +224,7 @@ public abstract class Movement : MonoBehaviour
             {
                 backSkeleton?.AnimationState.SetAnimation(0, nextIdleAnimation, true);
             }
-
+            
         }
 
         return false;

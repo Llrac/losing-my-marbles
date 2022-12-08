@@ -27,7 +27,10 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         // TODO connect this to matchmaking etc
-        background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
+        if (background != null)
+        {
+            background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
+        }
         
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
