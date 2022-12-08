@@ -11,94 +11,76 @@ public class TurnManager : MonoBehaviour
     // enemy 1, 2, 3, etc
     // all hazard tiles
     // all environment tiles
+    int amountOfTurns = 5;
+    public static float turnLenght = .5f; // den här kan alltså ändras så att man hinner med en annan corroutine!!!
+    public static List <PlayerProperties> players = new List <PlayerProperties> ();
+    bool startTurn = true;
 
-    public List<GameObject> selectedMarbles = new();
-    public GameObject[] marblesToExecute = new GameObject[5];
-    [HideInInspector] public int globalOrderID = 0;
-
-    GameObject player;
-    PlayerProperties pp;
-
-    private void Start()
+    private void Update()
     {
-        pp = FindObjectOfType<PlayerProperties>();
-        player = pp.gameObject;
-    }
-
-    public void OrderSelectedMarbles()
-    {
-        Debug.Log(globalOrderID);
-        if (globalOrderID < 5)
+        
+        if(PlayerProperties.myActions.Count == players.Count * 5)
         {
-            return;
-        }
-        foreach (GameObject marble in selectedMarbles)
-        {
-            switch (marble.GetComponent<Marble>().orderID)
+            for (int i = 0; i < players.Count; i++)
             {
-                case 1:
-                    marblesToExecute[0] = marble;
-                    break;
-                case 2:
-                    marblesToExecute[1] = marble;
-                    break;
-                case 3:
-                    marblesToExecute[2] = marble;
-                    break;
-                case 4:
-                    marblesToExecute[3] = marble;
-                    break;
-                case 5:
-                    marblesToExecute[4] = marble;
-                    break;
-                default:
-
-                    break;
+                for (int j = 0; j < players.Count; j++)
+                {
+                    if (PlayerProperties.ids[i] == players[j].playerId)
+                    {
+                        players[j].AddMarbles();
+                    }
+                }
             }
+            if(startTurn == true)
+            { 
+                StartCoroutine(ExecuteTurn()); 
+                startTurn = false;
+            }     
         }
-
-        for (int i = 0; i < marblesToExecute.Length; i++)
-        {
-            Debug.Log(marblesToExecute[i]);
-            MarbleIDToAction(marblesToExecute[i]);
-        }
-
-        //ResetOrder();
+        
     }
-
-    public void ResetOrder()
+    private IEnumerator ExecuteTurn()
     {
-        selectedMarbles.Clear();
-        Marble[] allMarbleScripts = FindObjectsOfType<Marble>();
-        foreach (Marble marbleScript in allMarbleScripts)
+        for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
-            marbleScript.orderID = 0;
-            globalOrderID = 0;
-        }
-    }
+            for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
+            {
+                for (int steps = 0; steps < Mathf.Abs((int)players[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
+                    // implement a if player is still alive.
+                { 
+                    switch ((int)players[playerInList].marbleEffect[currentTurn].x)
+                    {
+                        case 0:
+                            players[playerInList].TryMove(players[playerInList].gameObject, (int)players[playerInList].marbleEffect[currentTurn].x, 1);
+                            break;
+                        case 1:
+                            players[playerInList].TryMove(players[playerInList].gameObject, (int)players[playerInList].marbleEffect[currentTurn].x, (int)players[playerInList].marbleEffect[currentTurn].y);
+                            break;
+                    }
+                    yield return new WaitForSeconds(turnLenght);
+                }
+                yield return new WaitForSeconds(turnLenght);
+            }
+            // enemy
+            if(Movement.enemies.Count > 0)
+            {
+                for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
+                {
+                    yield return new WaitForSeconds(turnLenght);
+                    Movement.enemies[enemyCounter].DoAMove(1, Movement.enemies[enemyCounter].currentDirectionID);
 
-    public void MarbleIDToAction(GameObject marbleToAction)
-    {
-        switch (marbleToAction.GetComponent<Marble>().marbleID)
-        {
-            case 1:
-                pp.TryMove(player, 0, 1);
-                break;
-            case 2:
-                pp.TryMove(player, 0, 2);
-                break;
-            case 3:
-                pp.TryMove(player, 0, 3);
-                break;
-            case 4:
-                pp.TryMove(player, 1, -1);
-                break;
-            case 5:
-                pp.TryMove(player, 1, 1);
-                break;
-            default:
-                Debug.Log(gameObject + " has an unknown marble ID.");
-                break;
+                }
+            }
+            
+            yield return new WaitForSeconds(turnLenght);
+           
+            Environment.Turn();
         }
+        startTurn = true;
+        for(int i = 0; i < players.Count; i++)
+        {
+            players[i].ResetMarbles();
+        }
+        PlayerProperties.ids.Clear();
     }
 }

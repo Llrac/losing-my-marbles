@@ -7,8 +7,10 @@ using Spine.Unity;
 
 public abstract class Movement : MonoBehaviour
 {
+    public char savedTile = 'X';
+
     public Vector2 gridPosition = new(0, 0);
-    [SerializeField] bool hasKey = false;
+    public bool hasKey = false;
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
@@ -96,61 +98,77 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public void TryMove(GameObject character, int dataID, int increment)
+    public bool TryMove(GameObject character, int dataID, int increment) // into bool?
     {
         // Set transform position
         if (dataID == 0)
         {
-            for (int i = 0; i < Mathf.Abs(increment); i++)
+            if (grid == null)
             {
-                if (grid == null)
-                {
-                    grid = FindObjectOfType<GridManager>();
-                }
-                switch (grid.IsSquareEmpty(character, RequestGridPosition(currentDirectionID)))
-                {
-                    case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                        TryMove(character, 1, 2); // lägg till recursion här'
-                        break;
+                grid = FindObjectOfType<GridManager>();
+            }
+            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID)))
+            {
+                case GridManager.EMPTY: // EMPTY (walls, void, etc)
+                    TryMove(character, 1, 2);
+                    return false;// lï¿½gg till recursion hï¿½r'
 
-                    case GridManager.WALKABLEGROUND: // WALKABLEGROUND
+
+                case GridManager.WALKABLEGROUND: // WALKABLEGROUND
+                    Move(character, 1);
+                    savedTile = 'X';
+                    break;
+
+                case GridManager.PLAYER: // PLAYER rat is able to push player
+                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID)
+                        + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+                    player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID);
+                    // Move(character, increment);
+                    break;
+
+                case GridManager.ENEMY: // ENEMY
+                    GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
+                        + character.GetComponent<Movement>().gridPosition, enemies);
+
+                    enemy.GetComponent<RatProperties>().DoAMove(1, currentDirectionID);
+                    
+                    break;
+
+                case GridManager.DOOR:
+                    if (character.GetComponent<Movement>().hasKey == true)
+                    {
                         Move(character, 1);
-                        break;
-
-                    case GridManager.PLAYER: // PLAYER
-                       
-                        // Move(character, increment);
-                        break;
-
-                    case GridManager.ENEMY: // ENEMY
-                        GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
-                            + character.GetComponent<Movement>().gridPosition, enemies);
-                        
-                        TryMove(enemy, 0, 1);
-                        TryMove(character, 0, 1);
-                        break;
-
-                    case GridManager.DOOR:
-                        if (character.GetComponent<Movement>().hasKey == true)
-                        {
-                            Move(character, 1);
-                            character.SetActive(false);
-                            FindObjectOfType<ResetManager>().ResetLevel();
-                        }
-                        break;
-
-                    case GridManager.KEY:
-                        character.GetComponent<Movement>().hasKey = true;
-                        GameObject.FindGameObjectWithTag("Key").SetActive(false);
-                        FindObjectOfType<GridGenerator>().DestroyKeyGlitter();
-                        Move(character, 1);
-                        break;
-
-                    case GridManager.HOLE:
                         character.SetActive(false);
-                        grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0,0));
-                        break;
-                }
+                        FindObjectOfType<ResetManager>().ResetLevel();
+                    }
+                    break;
+
+                case GridManager.KEY:
+                    character.GetComponent<Movement>().hasKey = true;
+                    GameObject.FindGameObjectWithTag("Key").SetActive(false);
+                    FindObjectOfType<GridGenerator>().DestroyKeyGlitter();
+                    Move(character, 1);
+                    break;
+
+                case GridManager.HOLE:
+                    character.SetActive(false);
+                    grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+                    if(gameObject.tag == "Player")
+                    {
+                        TurnManager.players.Remove(character.GetComponent<PlayerProperties>());
+                    }
+                    else
+                    {
+                        enemies.Clear();
+
+                    }
+                    break;
+
+                case GridManager.WATER:
+                    // do water stuff
+                    Move(character, 1);
+                    savedTile = GridManager.WATER;
+                    break;
             }
         }
 
@@ -182,6 +200,8 @@ public abstract class Movement : MonoBehaviour
             }
 
         }
+        
+        return true;
     }
 
     public Vector2 RequestGridPosition(int currentDirectionID)
@@ -213,28 +233,22 @@ public abstract class Movement : MonoBehaviour
             case 0:
                 pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
                     character.transform.position.y + jumpLength / 2, 0) * multiplier);
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
             case 1 or -3:
                 pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
                     character.transform.position.y - jumpLength / 2, 0) * multiplier);
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
             case 2 or -2:
                 pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
                     character.transform.position.y - jumpLength / 2, 0) * multiplier);
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
             case 3 or -1:
                 pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
                     character.transform.position.y + jumpLength / 2, 0) * multiplier);
-                grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-                    RequestGridPosition(currentDirectionID));
                 break;
         }
+        grid.MoveInGridMatrix(character.GetComponent<Movement>(),
+            RequestGridPosition(currentDirectionID));
 
         if (usingFrontSkeleton)
         {
@@ -251,5 +265,5 @@ public abstract class Movement : MonoBehaviour
     }
 
     public abstract char ChangeTag();
-    public abstract void DoAMove(int inc);
+    public abstract void DoAMove(int inc, int dir);
 }

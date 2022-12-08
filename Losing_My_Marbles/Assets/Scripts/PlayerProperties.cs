@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerProperties : Movement
@@ -11,68 +12,69 @@ public class PlayerProperties : Movement
 
     public int playerID = 0; // playerID of (0) is null
 
-    public static List<Vector2> myActions = new();
+    public static List <int> ids = new List <int> ();
+    public static List<Vector2> myActions = new List<Vector2>();
   
+    public List <Vector2> marbleEffect = new List<Vector2> ();
+   
     int act = 1;
     float myTime = 1f;
     int index = 0;
     bool enemyMove = false;
+  
+    float timeBetween = 0.5f;
+
+
+    private void Start()
+    {
+        TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
+    }
+
 
     void Update()
     {
-        if (myActions.Count >= 5)
+        if (playerId == 1)
         {
-            //myMoves.Count >= 5
-            myTime -= Time.deltaTime;
-            if (myTime < 0f && enemyMove == false)
+            if (Input.GetKeyDown(KeyCode.W))
             {
-                TryMove(gameObject, (int)myActions[index].x, (int)myActions[index].y);
-                enemyMove = true;
+                TryMove(gameObject, 0, act);
             }
-            if (myTime <=-1f)
+            else if (Input.GetKeyDown(KeyCode.A))
             {
-                enemies[0].DoAMove(1);
-                enemyMove = false;
-                myTime = 1f;
-                index++;
+                TryMove(gameObject, 1, -1);
             }
-            if (index >= 5)
+            else if (Input.GetKeyDown(KeyCode.D))
             {
-                myActions.Clear();
-                index = 0;
+                TryMove(gameObject, 1, 1);
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                act++;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                act--;
+            }
+            if (Input.GetKeyDown(KeyCode.J))
+            {
+                Debug.Log(jumpProgress.length);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (playerId == 2)
         {
-            TryMove(gameObject, 0, act);
+            if (Input.GetButtonDown("Jump"))
+            {
+                TryMove(gameObject, 0, act);
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.A))
-        {
-            TryMove(gameObject, 1, -1);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-            TryMove(gameObject, 1, 1);
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            act++;
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            act--;
-        }
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Debug.Log(jumpProgress.length);
-        }
+
         animTimer += Time.deltaTime;
 
         if (animTimer <= jumpProgress.length)
         {
             characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
-                Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
+            Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
         }
     }
     public override char ChangeTag()
@@ -80,13 +82,54 @@ public class PlayerProperties : Movement
         return 'P';
     }
 
-    public override void DoAMove(int inc)
+    public override void DoAMove(int inc, int dir)
     {
         throw new System.NotImplementedException();
     }
-    private bool Waste() // currently unassigned to any keyboard input
+    private IEnumerator Turn()
     {
-        return true;
+        for (int i = 0; i < myActions.Count; i++)
+        {
+            for (int j = 0; j < (int)myActions[i].y; j++) // b�rjan p� turnmanager.
+            {
+                yield return new WaitForSeconds(timeBetween);
+                TryMove(gameObject, (int)myActions[i].x, 1);
+
+            }
+            yield return new WaitForSeconds(timeBetween);
+            enemies[0].DoAMove(1, enemies[0].GetComponent<RatProperties>().currentDirectionID);
+        }
+    }
+
+    public void AddMarbles()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            this.marbleEffect.Add(myActions[0]);
+            myActions.RemoveAt(0);
+        }
+    }
+
+    public void ResetMarbles()
+    {
+        marbleEffect.Clear();
+    }
+
+    public void Pushed(int dir)
+    {
+        int savedDir = currentDirectionID;
+        currentDirectionID = dir;
+        //TryMove(gameObject, 0, 1);
+        if (TryMove(gameObject, 0, 1) == true)
+        {
+            gameObject.GetComponent<PlayerProperties>().currentDirectionID = savedDir;
+        }
+        if(hasKey == true)
+        {
+
+        }
+       // currentDirectionID = savedDir;
+
     }
 
     public void TransitionFromTo(GameObject character, Vector3 position)
@@ -96,3 +139,4 @@ public class PlayerProperties : Movement
         animTimer = 0;
     }
 }
+
