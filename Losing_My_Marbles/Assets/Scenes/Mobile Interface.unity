@@ -2623,6 +2623,7 @@ MonoBehaviour:
   database: {fileID: 1402073847}
   uiManager: {fileID: 831956079}
   playerId: {fileID: 803238549}
+  logHandler: {fileID: 0}
 --- !u!4 &1402073849
 Transform:
   m_ObjectHideFlags: 0
