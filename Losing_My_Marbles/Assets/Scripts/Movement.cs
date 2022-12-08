@@ -269,13 +269,13 @@ public abstract class Movement : MonoBehaviour
         {
             frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
             frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpSpeed;
-            frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, nextJumpAnimation.Duration);
+            frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
         }
         else
         {
             backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
             backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpSpeed;
-            backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, nextJumpAnimation.Duration);
+            backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
         }
     }
 
