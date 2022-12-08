@@ -10,7 +10,7 @@ public class PlayerProperties : Movement
     [HideInInspector] public Vector2 destination;
     [HideInInspector] public float animTimer = 10f;
 
-    public int playerID = 0; // playerID of (0) is null
+    public int playerId = 0; // playerID of (0) is null
 
     public static List <int> ids = new List <int> ();
     public static List<Vector2> myActions = new List<Vector2>();
@@ -18,9 +18,6 @@ public class PlayerProperties : Movement
     public List <Vector2> marbleEffect = new List<Vector2> ();
    
     int act = 1;
-    float myTime = 1f;
-    int index = 0;
-    bool enemyMove = false;
   
     float timeBetween = 0.5f;
 

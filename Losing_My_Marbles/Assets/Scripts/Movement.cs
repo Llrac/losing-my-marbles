@@ -71,6 +71,21 @@ public abstract class Movement : MonoBehaviour
 
     void Turn(bool facingLeft, bool front)
     {
+        if (frontSkeleton == null || backSkeleton == null)
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                {
+                    frontSkeleton = child.GetComponent<SkeletonAnimation>();
+                }
+                else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                {
+                    backSkeleton = child.GetComponent<SkeletonAnimation>();
+                }
+            }
+        }
+
         if (front)
         {
             nextIdleAnimation = frontIdle;
@@ -86,13 +101,13 @@ public abstract class Movement : MonoBehaviour
 
         if (usingFrontSkeleton)
         {
-            frontSkeleton.GetComponent<SkeletonAnimation>().Skeleton.ScaleX = facingLeft ? -1f : 1f;
+            frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
             frontSkeleton.gameObject.SetActive(true);
             backSkeleton.gameObject.SetActive(false);
         }
         else
         {
-            backSkeleton.GetComponent<SkeletonAnimation>().Skeleton.ScaleX = facingLeft ? 1f : -1f;
+            backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
             frontSkeleton.gameObject.SetActive(false);
             backSkeleton.gameObject.SetActive(true);
         }
