@@ -171,9 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84dc345926ccc284a86a200b31161687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridPosition: {x: 8, y: 4}
+  savedTile: 88
+  gridPosition: {x: 9, y: 7}
   hasKey: 0
-  currentDirectionID: 3
+  currentDirectionID: 2
   frontIdle: {fileID: 11400000, guid: 6e5b8d86542c5964a860bab85ed606df, type: 2}
   frontJump: {fileID: 11400000, guid: 2f687a3a42c7d524f9d08a3d61773f5e, type: 2}
   backIdle: {fileID: 11400000, guid: 96adff7bd7bda384db721dd5f6d851ad, type: 2}
@@ -216,7 +217,8 @@ MonoBehaviour:
   characterToAnimate: {fileID: 0}
   destination: {x: 0, y: 0}
   animTimer: 10
-  playerID: 0
+  playerId: 1
+  marbleEffect: []
 --- !u!50 &6590025579627938569
 Rigidbody2D:
   serializedVersion: 4
