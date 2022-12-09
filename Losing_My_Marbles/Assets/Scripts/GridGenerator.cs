@@ -63,7 +63,7 @@ public class GridGenerator : MonoBehaviour
             if (playerScript.hasKey)
             {
                 newPlayerGlitter.transform.position = playerScript.gameObject.transform.position;
-                Debug.Log(playerScript.gameObject + " got the key!");
+                //Debug.Log(playerScript.gameObject + " got the key!");
             }
         }
     }

@@ -134,6 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6590025579627938568}
   - component: {fileID: 7121207949775654478}
+  - component: {fileID: 3852757702061416657}
   - component: {fileID: 6590025579627938569}
   m_Layer: 0
   m_Name: Player
@@ -172,15 +173,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savedTile: 88
-  gridPosition: {x: 9, y: 7}
+  gridPosition: {x: 1, y: 0}
   hasKey: 0
-  currentDirectionID: 2
+  currentDirectionID: 0
   frontIdle: {fileID: 11400000, guid: 89c9a43523241f045843d25082d3dd5f, type: 2}
   frontJump: {fileID: 11400000, guid: 683f0ce70a17327419e196ba029867e2, type: 2}
   backIdle: {fileID: 11400000, guid: bab9b12edf5bd68408aaf91ab9ebfd3c, type: 2}
   backJump: {fileID: 11400000, guid: 8c4332a7956efb14e92d382ae814f355, type: 2}
   jumpLength: 1
   jumpAnimationSpeed: 4
+  playerId: 1
+  playerMarbles: 
+  marbleEffect: []
+--- !u!114 &3852757702061416657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590025579627938566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27b8033dd80dfac4f804bdab7cce74d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   jumpProgress:
     serializedVersion: 2
     m_Curve:
@@ -194,7 +210,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.1
+      time: 0.15
       value: 0
       inSlope: 0
       outSlope: 0
@@ -205,8 +221,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.5
       value: 1
-      inSlope: 2.5
-      outSlope: 2.5
+      inSlope: 2.857143
+      outSlope: 2.857143
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -217,9 +233,6 @@ MonoBehaviour:
   characterToAnimate: {fileID: 0}
   destination: {x: 0, y: 0}
   animTimer: 10
-  playerId: 1
-  playerMarbles: 
-  marbleEffect: []
 --- !u!50 &6590025579627938569
 Rigidbody2D:
   serializedVersion: 4

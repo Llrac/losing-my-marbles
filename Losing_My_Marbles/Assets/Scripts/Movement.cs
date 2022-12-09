@@ -199,7 +199,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.KEY:
                     character.GetComponent<Movement>().hasKey = true;
                     GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
-                    FindObjectOfType<GridGenerator>().DestroyKeyGlitter();
+                    FindObjectOfType<GridGenerator>().UpdateGlitter();
                     Move(character, 1);
                     break;
 
@@ -288,20 +288,28 @@ public abstract class Movement : MonoBehaviour
         switch (currentDirectionID)
         {
             case 0:
-                character.transform.position = new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier;
+                animation.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                //character.transform.position = new Vector3(character.transform.position.x + jumpLength,
+                //    character.transform.position.y + jumpLength / 2, 0) * multiplier;
                 break;
             case 1 or -3:
-                character.transform.position = new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier;
+                animation.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                //character.transform.position = new Vector3(character.transform.position.x + jumpLength,
+                //    character.transform.position.y - jumpLength / 2, 0) * multiplier;
                 break;
             case 2 or -2:
-                character.transform.position = new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier;
+                animation.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                //character.transform.position = new Vector3(character.transform.position.x - jumpLength,
+                //    character.transform.position.y - jumpLength / 2, 0) * multiplier;
                 break;
             case 3 or -1:
-                character.transform.position = new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier;
+                animation.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                //character.transform.position = new Vector3(character.transform.position.x - jumpLength,
+                //    character.transform.position.y + jumpLength / 2, 0) * multiplier;
                 break;
         }
         grid.MoveInGridMatrix(character.GetComponent<Movement>(),
