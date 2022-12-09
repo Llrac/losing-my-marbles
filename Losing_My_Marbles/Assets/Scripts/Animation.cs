@@ -18,7 +18,6 @@ public class Animation : MonoBehaviour
             characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
             Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
         }
-        
     }
 
     public void TransitionFromTo(GameObject character, Vector3 position)

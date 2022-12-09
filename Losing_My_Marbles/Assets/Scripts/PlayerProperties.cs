@@ -123,9 +123,6 @@ public class PlayerProperties : Movement
             currentDirectionID = savedDir;
             UpdateAnimation();
         }
-       
-       // currentDirectionID = savedDir;
-
     }
 
     
