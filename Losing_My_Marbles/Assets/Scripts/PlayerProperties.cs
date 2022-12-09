@@ -19,7 +19,7 @@ public class PlayerProperties : Movement
    
     int act = 1;
   
-    private void Start()
+    private void Awake()
     {
         TurnManager.players.Add(this.gameObject.GetComponent<PlayerProperties>());
     }
@@ -31,7 +31,6 @@ public class PlayerProperties : Movement
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
-                Debug.Log(Movement.enemies[0].gridPosition + " " + Movement.enemies[1].gridPosition);
                 TryMove(gameObject, 0, act);
             }
             else if (Input.GetKeyDown(KeyCode.A))

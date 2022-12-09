@@ -18,9 +18,13 @@ public class RatProperties : Movement
             TryMove(gameObject, 0, 1);
         }
     }
-    private void Start()
+    private void Awake()
     {
         Movement.enemies.Add(this);
+    }
+    private void Start()
+    {
+        
         gridManager = FindObjectOfType<GridManager>().GetComponent<GridManager>();
     }
      

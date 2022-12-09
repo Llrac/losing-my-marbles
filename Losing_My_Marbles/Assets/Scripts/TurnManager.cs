@@ -54,6 +54,7 @@ public class TurnManager : MonoBehaviour
     }
     private IEnumerator ExecuteTurn()
     {
+        Debug.Log(PlayerProperties.myActions.Count);
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
