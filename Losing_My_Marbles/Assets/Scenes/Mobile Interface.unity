@@ -626,7 +626,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406489874}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -993,15 +993,15 @@ PrefabInstance:
     - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
       propertyPath: marbleBag.Array.data[10]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 743793486}
     - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
       propertyPath: marbleBag.Array.data[11]
       value: 
-      objectReference: {fileID: 743793486}
+      objectReference: {fileID: 307347900}
     - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
       propertyPath: marbleBag.Array.data[12]
       value: 
-      objectReference: {fileID: 307347900}
+      objectReference: {fileID: 920537489}
     - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
       propertyPath: marbleBag.Array.data[13]
       value: 
@@ -1009,7 +1009,7 @@ PrefabInstance:
     - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
       propertyPath: marbleBag.Array.data[14]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2123571970}
     - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
       propertyPath: marbleSlots.Array.data[0]
       value: 
@@ -1190,7 +1190,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644521983}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1553,7 +1553,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882384069}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1686,6 +1686,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7812296077624100166, guid: d2a4e567af350a1479fb90d53f46f499, type: 3}
   m_PrefabInstance: {fileID: 920537483}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &920537489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7230893046146363903, guid: d2a4e567af350a1479fb90d53f46f499, type: 3}
+  m_PrefabInstance: {fileID: 920537483}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00cd98fca104fe14ab986ef86681e866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &953574778
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,7 +1742,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953574778}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -2481,18 +2492,6 @@ MonoBehaviour:
       - m_Target: {fileID: 831956079}
         m_TargetAssemblyTypeName: MarbleManager, Assembly-CSharp
         m_MethodName: DiscardMarblesFromHand
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 831956079}
-        m_TargetAssemblyTypeName: MarbleManager, Assembly-CSharp
-        m_MethodName: FillHandWithMarbles
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3536,7 +3535,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954028393}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -3761,6 +3760,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117650029}
   m_CullTransparentMesh: 1
+--- !u!114 &2123571970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7230893046146363903, guid: 528e8879cd7749d448681b5ca85b5633, type: 3}
+  m_PrefabInstance: {fileID: 300101397}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00cd98fca104fe14ab986ef86681e866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2129881953
 PrefabInstance:
   m_ObjectHideFlags: 0

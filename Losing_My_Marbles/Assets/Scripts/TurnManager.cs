@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class TurnManager : MonoBehaviour
     public static List <PlayerProperties> players = new List <PlayerProperties> ();
     public static List <PlayerProperties> sortedPlayers = new List <PlayerProperties> ();
     public LogHandler logHandler;
+    public GameObject readyAlert;
     
     //add a sortet list here
     bool startTurn = true;
@@ -45,7 +47,8 @@ public class TurnManager : MonoBehaviour
             }
             
             if(startTurn == true)
-            { 
+            {
+                readyAlert.GetComponent<Image>().enabled = false;
                 StartCoroutine(ExecuteTurn()); 
                 startTurn = false;
             }     
@@ -100,7 +103,8 @@ public class TurnManager : MonoBehaviour
            
             //Environment.Turn();
         }
-        startTurn = true;
+
+
         for(int i = 0; i < players.Count; i++)
         {
             players[i].ResetMarbles();
@@ -110,6 +114,9 @@ public class TurnManager : MonoBehaviour
         PlayerProperties.ids.Clear();
         tracking = 0;
         sortedPlayers.Clear();
+
+        startTurn = true;
+        readyAlert.GetComponent<Image>().enabled = true;
     }
     
     

@@ -31,6 +31,8 @@ public class UIManager : MonoBehaviour
         {
             background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID - 1];
         }
+
+       
         
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
@@ -186,7 +188,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             availableMarbleSlotsBottom[i] = true;
-           // marbleLights[i].enabled = false; this cannot be built in mobile interface
+            //marbleLights[i].enabled = false;
             if (confirmButton != null)
                 confirmButton.interactable = false;
         }
