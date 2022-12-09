@@ -275,7 +275,7 @@ public abstract class Movement : MonoBehaviour
 
     public void Move(GameObject character, int increment)
     {
-        PlayerProperties pp = character.GetComponent<PlayerProperties>();
+        Animation animation = character.GetComponent<Animation>();
 
         multiplier = 1;
         if (increment < 0)
@@ -313,13 +313,13 @@ public abstract class Movement : MonoBehaviour
             {
                 frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                 frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
+                frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, animation.jumpProgress.length);
             }
             else
             {
                 backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                 backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, pp.jumpProgress.length);
+                backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, animation.jumpProgress.length);
             }
         }
         

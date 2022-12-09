@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    public AnimationCurve jumpProgress;
-    [HideInInspector] public GameObject characterToAnimate;
-    [HideInInspector] public Vector2 destination;
-    [HideInInspector] public float animTimer = 10f;
-    GridGenerator gridGen;
-
     public int playerId = 0; // playerID of (0) is null
 
     public static List<int> ids = new();
     public static List<int> myActions = new();
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
-   
+
+    GridGenerator gridGen;
+
     int act = 1;
   
     private void Awake()
@@ -52,10 +48,6 @@ public class PlayerProperties : Movement
             {
                 act--;
             }
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                Debug.Log(jumpProgress.length);
-            }
             if (Input.GetButtonDown("Jump"))
             {
                 Pushed(-1);
@@ -70,15 +62,8 @@ public class PlayerProperties : Movement
             }
         }
 
-        animTimer += Time.deltaTime;
-
-        if (animTimer <= jumpProgress.length)
-        {
-            characterToAnimate.transform.position = new Vector2(Mathf.Lerp(characterToAnimate.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
-            Mathf.Lerp(characterToAnimate.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
-            if (hasKey)
-                gridGen.UpdateGlitter();
-        }
+        if (hasKey)
+            gridGen.UpdateGlitter();
     }
     public override char ChangeTag()
     {
@@ -142,11 +127,6 @@ public class PlayerProperties : Movement
 
     }
 
-    public void TransitionFromTo(GameObject character, Vector3 position)
-    {
-        characterToAnimate = character;
-        destination = position;
-        animTimer = 0;
-    }
+    
 }
 
