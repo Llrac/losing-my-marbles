@@ -12,7 +12,7 @@ public class TurnManager : MonoBehaviour
     // all hazard tiles
     // all environment tiles
     int amountOfTurns = 5;
-    public static float turnLenght = .5f; // den här kan alltså ändras så att man hinner med en annan corroutine!!!
+    public static float turnLength = .5f; // den här kan alltså ändras så att man hinner med en annan corroutine!!!
     public static List <PlayerProperties> players = new List <PlayerProperties> ();
     public static List <PlayerProperties> sortedPlayers = new List <PlayerProperties> ();
     public LogHandler logHandler;
@@ -59,42 +59,44 @@ public class TurnManager : MonoBehaviour
         {
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
+                Debug.Log(playerInList);
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
                 {                                                // implement a if player is still alive.
                     switch ((int)sortedPlayers[playerInList].marbleEffect[currentTurn].x)
                     {
                         case 0:
-                            sortedPlayers[playerInList].TryMove(players[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, 1);
+                            sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, 1);
                             break;
                         case 1:
-                            sortedPlayers[playerInList].TryMove(players[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)players[playerInList].marbleEffect[currentTurn].y);
+                            sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
+                            Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
                             break;
                     }
-                    yield return new WaitForSeconds(turnLenght);
+                    yield return new WaitForSeconds(turnLength);
                 }
-                yield return new WaitForSeconds(turnLenght);
+                yield return new WaitForSeconds(turnLength);
             }
             // enemy
             if(Movement.enemies.Count > 0)
             {
                 for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
                 {
-                    float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
-                    float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
+                    //float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
+                    //float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
                     
-                    Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
-                    yield return new WaitForSeconds(turnLenght);
+                    //Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
+                    yield return new WaitForSeconds(turnLength);
                 }
             }
             
 
-            ratPathKeeping++;
-            Debug.Log(ratPathKeeping.ToString());
-            if(ratPathKeeping >= 7)
-            {
-                ratPathKeeping = 0;
-            }
-            yield return new WaitForSeconds(turnLenght);
+            //ratPathKeeping++;
+            //Debug.Log(ratPathKeeping.ToString());
+            //if(ratPathKeeping >= 7)
+            //{
+            //    ratPathKeeping = 0;
+            //}
+            yield return new WaitForSeconds(turnLength);
            
             //Environment.Turn();
         }
@@ -102,7 +104,9 @@ public class TurnManager : MonoBehaviour
         for(int i = 0; i < players.Count; i++)
         {
             players[i].ResetMarbles();
+            Debug.Log("has reset " + players[i].marbleEffect.Count + " players marbles");
         }
+
         PlayerProperties.ids.Clear();
         tracking = 0;
         sortedPlayers.Clear();

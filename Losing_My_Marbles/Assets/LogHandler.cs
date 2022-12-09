@@ -17,4 +17,5 @@ public class LogHandler : MonoBehaviour
         newMessage.GetComponent<TextMeshProUGUI>().text = PlayerProperties.ids[messageIndex].ToString();
         Debug.Log("Player " + (PlayerProperties.ids[messageIndex]) + " has locked in");
     }
+
 }

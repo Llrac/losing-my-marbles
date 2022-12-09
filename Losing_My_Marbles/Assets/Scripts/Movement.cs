@@ -170,7 +170,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
                     Move(character, 1);
                     savedTile = 'X';
-                    break;
+                    return true;
 
                 case GridManager.PLAYER: // PLAYER rat is able to push player
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID)

@@ -121,6 +121,7 @@ public class PlayerProperties : Movement
         if (TryMove(gameObject, 0, 1) == true)
         {
             currentDirectionID = savedDir;
+            UpdateAnimation();
         }
        
        // currentDirectionID = savedDir;
