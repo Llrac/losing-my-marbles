@@ -8,15 +8,20 @@ public class GridGenerator : MonoBehaviour
 
     [SerializeField] GameObject tileToCopy;
     [SerializeField] GameObject keyGlitterParticle = null;
+    [SerializeField] GameObject playerGlitterParticle = null;
     [SerializeField] Sprite[] tileSprites = new Sprite[17];
     [SerializeField] Sprite tileHoleSprite = null;
     readonly float tileSize = 1f;
     int tileSpriteChosen;
     GameObject newTile;
     GameObject newKeyGlitter;
+    GameObject newPlayerGlitter;
 
     void Start()
     {
+        newPlayerGlitter = Instantiate(playerGlitterParticle);
+        newPlayerGlitter.transform.position = new Vector2(-100, 0);
+
         tileToCopy.GetComponent<SpriteRenderer>().sortingOrder = 0;
         grid = transform.GetComponentInParent<GridManager>();
 
@@ -47,9 +52,20 @@ public class GridGenerator : MonoBehaviour
         }
     }
 
-    public void DestroyKeyGlitter()
+    public void UpdateGlitter()
     {
-        Destroy(newKeyGlitter);
+        if (newKeyGlitter != null)
+        {
+            Destroy(newKeyGlitter);
+        }
+        foreach (PlayerProperties playerScript in FindObjectsOfType<PlayerProperties>())
+        {
+            if (playerScript.hasKey)
+            {
+                newPlayerGlitter.transform.position = playerScript.gameObject.transform.position;
+                Debug.Log(playerScript.gameObject + " got the key!");
+            }
+        }
     }
    
 }

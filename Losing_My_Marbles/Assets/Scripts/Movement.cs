@@ -22,16 +22,14 @@ public abstract class Movement : MonoBehaviour
     SkeletonAnimation frontSkeleton;
     SkeletonAnimation backSkeleton;
     bool usingFrontSkeleton = false;
-    public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump;
+    public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump; // TODO: implement idle2 and idle3
     public float jumpLength = 1;
     public float jumpAnimationSpeed = 5f;
     Spine.Animation nextIdleAnimation;
     Spine.Animation nextJumpAnimation;
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateSkinBasedOnPlayerID()
     {
-        grid = FindObjectOfType<GridManager>();
         foreach (Transform child in transform)
         {
             if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>() != null)
@@ -43,11 +41,47 @@ public abstract class Movement : MonoBehaviour
                 backSkeleton = child.GetComponent<SkeletonAnimation>();
             }
         }
+        PlayerProperties pp = GetComponent<PlayerProperties>();
+        if (pp != null)
+        {
+            switch (pp.playerId)
+            {
+                case 1:
+                    frontSkeleton.initialSkinName = "red";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "red";
+                    backSkeleton.Initialize(true);
 
-        UpdateAnimation();
+                    break;
+                case 2:
+                    frontSkeleton.initialSkinName = "purple";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "purple";
+                    backSkeleton.Initialize(true);
+                    break;
+                case 3:
+                    frontSkeleton.initialSkinName = "turquoise";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "turquoise";
+                    backSkeleton.Initialize(true);
+                    break;
+                case 4:
+                    frontSkeleton.initialSkinName = "yellow";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "yellow";
+                    backSkeleton.Initialize(true);
+                    break;
+                default:
+                    frontSkeleton.initialSkinName = "default";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "default";
+                    backSkeleton.Initialize(true);
+                    break;
+            }
+        }
     }
 
-    private void UpdateAnimation()
+    public void UpdateAnimation()
     {
         switch (currentDirectionID)
         {
@@ -175,17 +209,14 @@ public abstract class Movement : MonoBehaviour
                         DroppKey();
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
-                    
-                    character.SetActive(false);
-
-                    if(gameObject.tag == "Player")
+                    if (CompareTag("Player"))
                     {
                         TurnManager.players.Remove(character.GetComponent<PlayerProperties>());
+                        character.SetActive(false);
                     }
                     else
                     {
                         enemies.Clear();
-
                     }
                     break;
 
@@ -244,8 +275,7 @@ public abstract class Movement : MonoBehaviour
 
     public void Move(GameObject character, int increment)
     {
-        PlayerProperties pp;
-        pp = FindObjectOfType<PlayerProperties>();
+        PlayerProperties pp = character.GetComponent<PlayerProperties>();
 
         multiplier = 1;
         if (increment < 0)
@@ -254,27 +284,29 @@ public abstract class Movement : MonoBehaviour
         }
 
         UpdateAnimation();
+
         switch (currentDirectionID)
         {
             case 0:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                character.transform.position = new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier;
                 break;
             case 1 or -3:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                character.transform.position = new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier;
                 break;
             case 2 or -2:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                character.transform.position = new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier;
                 break;
             case 3 or -1:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                character.transform.position = new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier;
                 break;
         }
         grid.MoveInGridMatrix(character.GetComponent<Movement>(),
             RequestGridPosition(currentDirectionID));
+
         if(frontSkeleton != null || backSkeleton != null)
         {
             if (usingFrontSkeleton)
