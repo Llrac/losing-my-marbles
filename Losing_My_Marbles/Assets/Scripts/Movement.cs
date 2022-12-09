@@ -268,8 +268,7 @@ public abstract class Movement : MonoBehaviour
 
     public void Move(GameObject character, int increment)
     {
-        PlayerProperties pp;
-        pp = FindObjectOfType<PlayerProperties>();
+        PlayerProperties pp = character.GetComponent<PlayerProperties>();
 
         multiplier = 1;
         if (increment < 0)
@@ -278,27 +277,29 @@ public abstract class Movement : MonoBehaviour
         }
 
         UpdateAnimation();
+
         switch (currentDirectionID)
         {
             case 0:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                character.transform.position = new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier;
                 break;
             case 1 or -3:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                character.transform.position = new Vector3(character.transform.position.x + jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier;
                 break;
             case 2 or -2:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
+                character.transform.position = new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y - jumpLength / 2, 0) * multiplier;
                 break;
             case 3 or -1:
-                pp.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
+                character.transform.position = new Vector3(character.transform.position.x - jumpLength,
+                    character.transform.position.y + jumpLength / 2, 0) * multiplier;
                 break;
         }
         grid.MoveInGridMatrix(character.GetComponent<Movement>(),
             RequestGridPosition(currentDirectionID));
+
         if(frontSkeleton != null || backSkeleton != null)
         {
             if (usingFrontSkeleton)
