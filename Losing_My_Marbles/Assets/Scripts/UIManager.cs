@@ -186,7 +186,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             availableMarbleSlotsBottom[i] = true;
-            marbleLights[i].enabled = false;
+           // marbleLights[i].enabled = false; this cannot be built in mobile interface
             if (confirmButton != null)
                 confirmButton.interactable = false;
         }

@@ -33,9 +33,14 @@ public class GridManager : MonoBehaviour
             board[(int)Movement.enemies[i].gridPosition.x,
                 (int)Movement.enemies[i].gridPosition.y] = ENEMY;
 
-            board[(int)TurnManager.players[i].gridPosition.x,
-               (int)TurnManager.players[i].gridPosition.y] = PLAYER;
+            
         }
+        for (int i = 0; i < TurnManager.players.Count; i++)
+        {
+            board[(int)TurnManager.players[i].gridPosition.x,
+              (int)TurnManager.players[i].gridPosition.y] = PLAYER;
+        }
+               
 
     }
    

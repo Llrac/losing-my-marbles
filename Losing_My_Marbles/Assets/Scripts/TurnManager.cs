@@ -20,6 +20,7 @@ public class TurnManager : MonoBehaviour
     //add a sortet list here
     bool startTurn = true;
     int tracking = 0;
+    int ratPathKeeping = 0;
     private void Update()
     {
         if(PlayerProperties.ids.Count > tracking)
@@ -53,6 +54,7 @@ public class TurnManager : MonoBehaviour
     }
     private IEnumerator ExecuteTurn()
     {
+        Debug.Log(PlayerProperties.myActions.Count);
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
@@ -77,14 +79,24 @@ public class TurnManager : MonoBehaviour
             {
                 for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
                 {
+                    float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
+                    float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
+                    
+                    Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
                     yield return new WaitForSeconds(turnLenght);
-                    Movement.enemies[enemyCounter].DoAMove(1, Movement.enemies[enemyCounter].currentDirectionID);
                 }
             }
             
+
+            ratPathKeeping++;
+            Debug.Log(ratPathKeeping.ToString());
+            if(ratPathKeeping >= 7)
+            {
+                ratPathKeeping = 0;
+            }
             yield return new WaitForSeconds(turnLenght);
            
-            Environment.Turn();
+            //Environment.Turn();
         }
         startTurn = true;
         for(int i = 0; i < players.Count; i++)
