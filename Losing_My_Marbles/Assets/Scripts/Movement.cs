@@ -105,7 +105,7 @@ public abstract class Movement : MonoBehaviour
 
     void Turn(bool facingLeft, bool front)
     {
-        if(gameObject.tag == "Player")
+        if(CompareTag("Player"))
         {
             if (frontSkeleton == null || backSkeleton == null)
             {

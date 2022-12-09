@@ -15,7 +15,7 @@ public class PlayerProperties : Movement
     public static List<int> ids = new();
     public static List<int> myActions = new();
     public List<int> playerMarbles = new();
-    public List <Vector2> marbleEffect = new List<Vector2> ();
+    public List <Vector2> marbleEffect = new();
    
     int act = 1;
   
