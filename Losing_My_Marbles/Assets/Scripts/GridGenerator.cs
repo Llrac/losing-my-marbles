@@ -6,9 +6,12 @@ public class GridGenerator : MonoBehaviour
 {
     GridManager grid;
 
-    [SerializeField] GameObject tileToCopy;
+    [Header("Particle Effects")]
     [SerializeField] GameObject keyGlitterParticle = null;
     [SerializeField] GameObject playerGlitterParticle = null;
+    [SerializeField] GameObject hitEffect = null;
+
+    [SerializeField] GameObject tileToCopy;
     [SerializeField] Sprite[] tileSprites = new Sprite[17];
     [SerializeField] Sprite tileHoleSprite = null;
     readonly float tileSize = 1f;
@@ -16,6 +19,7 @@ public class GridGenerator : MonoBehaviour
     GameObject newTile;
     GameObject newKeyGlitter;
     GameObject newPlayerGlitter;
+    GameObject newHit;
 
     void Start()
     {
@@ -63,9 +67,13 @@ public class GridGenerator : MonoBehaviour
             if (playerScript.hasKey)
             {
                 newPlayerGlitter.transform.position = playerScript.gameObject.transform.position;
-                //Debug.Log(playerScript.gameObject + " got the key!");
             }
         }
     }
-   
+
+    public void OnHitWall(GameObject character)
+    {
+        newHit = Instantiate(hitEffect);
+        newHit.transform.position = new Vector2(character.transform.position.x, character.transform.position.y);
+    }
 }

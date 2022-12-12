@@ -11,13 +11,15 @@ public abstract class Movement : MonoBehaviour
 
     public Vector2 gridPosition = new(0, 0);
     public bool hasKey = false;
+    //public bool wallJump = false;
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
 
     GridManager grid;
  
-    int multiplier;
+    int jumpMultiplier;
+    int wallJumpMultiplier;
 
     SkeletonAnimation frontSkeleton;
     SkeletonAnimation backSkeleton;
@@ -151,7 +153,7 @@ public abstract class Movement : MonoBehaviour
        
     }
 
-    public bool TryMove(GameObject character, int dataID, int increment) // into bool?
+    public bool TryMove(GameObject character, int dataID, int increment)
     {
         // Set transform position
         if (dataID == 0)
@@ -163,9 +165,9 @@ public abstract class Movement : MonoBehaviour
             switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                    TryMove(character, 1, 2);
-                    return false;// l�gg till recursion h�r'
-
+                    FindObjectOfType<GridGenerator>().OnHitWall(character);
+                    Move(character, 1, true);
+                    return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
                     Move(character, 1);
@@ -206,7 +208,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.HOLE:
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
-                        DroppKey();
+                        DropKey();
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     if (CompareTag("Player"))
@@ -233,12 +235,12 @@ public abstract class Movement : MonoBehaviour
         {
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
-                multiplier = 1;
+                jumpMultiplier = 1;
                 if (increment < 0)
                 {
-                    multiplier *= -1;
+                    jumpMultiplier *= -1;
                 }
-                currentDirectionID += multiplier;
+                currentDirectionID += jumpMultiplier;
                 if (currentDirectionID <= -4 || currentDirectionID >= 4)
                 {
                     currentDirectionID = 0;
@@ -273,49 +275,50 @@ public abstract class Movement : MonoBehaviour
         };
     }
 
-    public void Move(GameObject character, int increment)
+    public void Move(GameObject character, int increment, bool isWallJumping = false)
     {
         Animation animation = character.GetComponent<Animation>();
 
-        multiplier = 1;
+        UpdateAnimation();
+
+        jumpMultiplier = 1;
         if (increment < 0)
         {
-            multiplier *= -1;
+            jumpMultiplier *= -1;
         }
 
-        UpdateAnimation();
+        wallJumpMultiplier = 1;
+        if (!isWallJumping)
+        {
+            grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+        }
+        else if (isWallJumping)
+        {
+            wallJumpMultiplier *= 2;
+        }
 
         switch (currentDirectionID)
         {
             case 0:
-                animation.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
-                //character.transform.position = new Vector3(character.transform.position.x + jumpLength,
-                //    character.transform.position.y + jumpLength / 2, 0) * multiplier;
+                animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength / wallJumpMultiplier,
+                    character.transform.position.y + jumpLength / (wallJumpMultiplier * 2), 0) * jumpMultiplier, isWallJumping);
                 break;
             case 1 or -3:
-                animation.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
-                //character.transform.position = new Vector3(character.transform.position.x + jumpLength,
-                //    character.transform.position.y - jumpLength / 2, 0) * multiplier;
+                animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength / wallJumpMultiplier,
+                    character.transform.position.y - jumpLength / (wallJumpMultiplier * 2), 0) * jumpMultiplier, isWallJumping);
                 break;
             case 2 or -2:
-                animation.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
-                //character.transform.position = new Vector3(character.transform.position.x - jumpLength,
-                //    character.transform.position.y - jumpLength / 2, 0) * multiplier;
+                animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength / wallJumpMultiplier,
+                    character.transform.position.y - jumpLength / (wallJumpMultiplier * 2), 0) * jumpMultiplier, isWallJumping);
                 break;
             case 3 or -1:
-                animation.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
-                //character.transform.position = new Vector3(character.transform.position.x - jumpLength,
-                //    character.transform.position.y + jumpLength / 2, 0) * multiplier;
+                animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength / wallJumpMultiplier,
+                    character.transform.position.y + jumpLength / (wallJumpMultiplier * 2), 0) * jumpMultiplier, isWallJumping);
                 break;
         }
-        grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-            RequestGridPosition(currentDirectionID));
 
-        if(frontSkeleton != null || backSkeleton != null)
+
+        if (frontSkeleton != null || backSkeleton != null)
         {
             if (usingFrontSkeleton)
             {
@@ -332,7 +335,7 @@ public abstract class Movement : MonoBehaviour
         }
         
     }
-    public void DroppKey()
+    public void DropKey()
     {
         savedTile = 'K';
         hasKey = false;

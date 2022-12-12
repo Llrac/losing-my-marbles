@@ -1213,7 +1213,87 @@ PrefabInstance:
     - target: {fileID: 445813849, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 7064127189265369304, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[1].time
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[2].time
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[3].time
+      value: 0.2501
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[4].time
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[5].time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[2].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[3].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[4].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[5].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[2].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[3].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[2].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[3].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[4].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[5].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[4].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[5].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[2].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852757702061416657, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
+      propertyPath: wallJumpProgress.m_Curve.Array.data[3].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6590025579627938566, guid: 69ae32bd9bb6d3949bdd92d903a2bb1c, type: 3}
       propertyPath: m_Name
       value: Player 1

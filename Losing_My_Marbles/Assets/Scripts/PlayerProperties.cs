@@ -117,7 +117,7 @@ public class PlayerProperties : Movement
         //TryMove(gameObject, 0, 1);
         if (hasKey == true)
         {
-            DroppKey();
+            DropKey();
         }
         if (TryMove(gameObject, 0, 1) == true)
         {
