@@ -164,7 +164,7 @@ public abstract class Movement : MonoBehaviour
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     TryMove(character, 1, 2);
-                    return false;// l�gg till recursion h�r'
+                    return false;
 
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
@@ -175,9 +175,21 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.PLAYER: // PLAYER rat is able to push player
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
-                    player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID);
-                    // Move(character, increment);
-                    break;
+                    if (player.GetComponent<PlayerProperties>().hasKey == true)
+                    {
+                        player.GetComponent<PlayerProperties>().StealKey();
+                        character.GetComponent<PlayerProperties>().hasKey = true;
+
+                        //steal key animation in steal key function?
+                    }
+                    if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
+                    {
+                        Move(gameObject, increment);
+                       
+                        return true;
+                    }
+                    
+                    return false;
 
                 case GridManager.ENEMY: // ENEMY
                     GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
@@ -201,7 +213,7 @@ public abstract class Movement : MonoBehaviour
                     GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
                     FindObjectOfType<GridGenerator>().UpdateGlitter();
                     Move(character, 1);
-                    break;
+                    return true;
 
                 case GridManager.HOLE:
                     if (gameObject.GetComponent<Movement>().hasKey == true)
@@ -216,9 +228,10 @@ public abstract class Movement : MonoBehaviour
                     }
                     else
                     {
-                        enemies.Clear();
+                        enemies.Clear(); //is a rat jumps down a hole every rat dies
                     }
-                    break;
+                    return true;
+      
 
                 case GridManager.WATER:
                     // do water stuff
@@ -345,4 +358,8 @@ public abstract class Movement : MonoBehaviour
     }
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);
+    public void StealKey()
+    {
+        hasKey = false;
+    }
 }

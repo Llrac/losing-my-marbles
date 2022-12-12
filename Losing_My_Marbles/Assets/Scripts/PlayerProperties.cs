@@ -109,20 +109,21 @@ public class PlayerProperties : Movement
         marbleEffect.Clear();
     }
 
-    public void Pushed(int dir)
+    public bool Pushed(int dir)
     {
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
-        //TryMove(gameObject, 0, 1);
-        if (hasKey == true)
-        {
-            DroppKey();
-        }
+
         if (TryMove(gameObject, 0, 1) == true)
         {
             currentDirectionID = savedDir;
             UpdateAnimation();
+            
+            return true;
         }
+        //currentDirectionID = savedDir;
+        UpdateAnimation();
+        return false;
     }
 
     
