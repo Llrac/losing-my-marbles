@@ -65,6 +65,7 @@ public class PlayerProperties : Movement
         if (hasKey)
             gridGen.UpdateGlitter();
     }
+
     public override char ChangeTag()
     {
         return 'P';
@@ -124,7 +125,5 @@ public class PlayerProperties : Movement
             UpdateAnimation();
         }
     }
-
-    
 }
 
