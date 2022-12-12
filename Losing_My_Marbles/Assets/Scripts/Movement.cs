@@ -11,6 +11,7 @@ public abstract class Movement : MonoBehaviour
 
     public Vector2 gridPosition = new(0, 0);
     public bool hasKey = false;
+    bool animationShouldPlay = true;
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
@@ -175,6 +176,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.PLAYER: // PLAYER rat is able to push player
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
                         player.GetComponent<PlayerProperties>().StealKey();
@@ -185,7 +187,7 @@ public abstract class Movement : MonoBehaviour
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
                         Move(gameObject, increment);
-                       
+
                         return true;
                     }
                     
@@ -295,7 +297,6 @@ public abstract class Movement : MonoBehaviour
         {
             multiplier *= -1;
         }
-
         UpdateAnimation();
 
         switch (currentDirectionID)

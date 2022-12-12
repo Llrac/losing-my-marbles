@@ -121,7 +121,6 @@ public class PlayerProperties : Movement
             
             return true;
         }
-        //currentDirectionID = savedDir;
         UpdateAnimation();
         return false;
     }
