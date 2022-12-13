@@ -142,7 +142,9 @@ public abstract class Movement : MonoBehaviour
                     {
                         Move(character, 1);
                         character.SetActive(false);
-                        FindObjectOfType<ResetManager>().ResetLevel();
+                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerId);
+                        // players should not be able to send more actions
+                      //  FindObjectOfType<ResetManager>().ResetLevel();
                     }
                     break;
 
