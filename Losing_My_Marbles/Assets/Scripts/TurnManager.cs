@@ -57,14 +57,14 @@ public class TurnManager : MonoBehaviour
     }
     private IEnumerator ExecuteTurn()
     {
-        Debug.Log(PlayerProperties.myActions.Count);
+        
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
-                Debug.Log(playerInList);
+               
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
-                {                                                // implement a if player is still alive.
+                {                                               
                     switch ((int)sortedPlayers[playerInList].marbleEffect[currentTurn].x)
                     {
                         case 0:
