@@ -6,14 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class ResetManager : MonoBehaviour
 {
-    public List<Sprite> winScreens = new List<Sprite> ();
-    public static List<Sprite> Screens = new List<Sprite> ();
-    [SerializeField] private GameObject winImage;
+    public List<Sprite> winScreens = new();
+    public static List<Sprite> Screens = new();
+    [SerializeField] private GameObject winImage = null;
     private static Image win;
     private void Start()
     {
         Screens = winScreens;
-        win = winImage.GetComponent<Image>();
+        if (winImage != null)
+            win = winImage.GetComponent<Image>();
     }
     void Update()
     {
@@ -31,8 +32,11 @@ public class ResetManager : MonoBehaviour
     }
     public static void PlayerWin(int playerID)
     {
-        win.sprite = Screens[playerID-1];
-        win.enabled = true;
+        if (win != null)
+        {
+            win.sprite = Screens[playerID - 1];
+            win.enabled = true;
+        }
     }
 
 }

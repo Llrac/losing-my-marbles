@@ -5,48 +5,41 @@ using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
-    // turn order
-
-    // player 1, 2, 3, 4
-
-    // enemy 1, 2, 3, etc
-    // all hazard tiles
-    // all environment tiles
-    int amountOfTurns = 5;
+    readonly int amountOfTurns = 5;
     public static float turnLength = .5f; // den här kan alltså ändras så att man hinner med en annan corroutine!!!
-    public static List <PlayerProperties> players = new List <PlayerProperties> ();
-    public static List <PlayerProperties> sortedPlayers = new List <PlayerProperties> ();
+    public static List <PlayerProperties> players = new();
+    public static List <PlayerProperties> sortedPlayers = new();
     public LogHandler logHandler;
     public GameObject readyAlert;
     
-    //add a sortet list here
     bool startTurn = true;
     int tracking = 0;
     int ratPathKeeping = 0;
+
     private void Update()
     {
-        if(PlayerProperties.ids.Count > tracking)
+        if (PlayerProperties.ids.Count > tracking)
         {
             logHandler.InstantiateMessage(tracking);
             Debug.Log("Player " + (PlayerProperties.ids[tracking]) + " has locked in");
             tracking++;
         }
         
-        if(PlayerProperties.myActions.Count == players.Count * 5 && PlayerProperties.myActions.Count != 0)
+        if (PlayerProperties.myActions.Count == players.Count * 5 && PlayerProperties.myActions.Count != 0)
         {
             for (int i = 0; i < players.Count; i++)
             {
                 for (int j = 0; j < players.Count; j++)
                 {
-                    if (PlayerProperties.ids[i] == players[j].playerId)
+                    if (PlayerProperties.ids[i] == players[j].playerID)
                     {
                         players[j].AddMarbles();
-                        sortedPlayers.Add (players[j]);
+                        sortedPlayers.Add(players[j]);
                     }
                 }
             }
             
-            if(startTurn == true)
+            if (startTurn == true)
             {
                 readyAlert.GetComponent<Image>().enabled = false;
                 StartCoroutine(ExecuteTurn()); 
@@ -55,9 +48,9 @@ public class TurnManager : MonoBehaviour
         }
         
     }
+
     private IEnumerator ExecuteTurn()
     {
-        
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
@@ -108,7 +101,6 @@ public class TurnManager : MonoBehaviour
             //Environment.Turn();
         }
 
-
         for(int i = 0; i < players.Count; i++)
         {
             players[i].ResetMarbles();
@@ -121,7 +113,4 @@ public class TurnManager : MonoBehaviour
         startTurn = true;
         readyAlert.GetComponent<Image>().enabled = true;
     }
-    
-    
-    
 }
