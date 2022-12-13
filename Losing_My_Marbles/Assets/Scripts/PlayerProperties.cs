@@ -119,12 +119,12 @@ public class PlayerProperties : Movement
         if (TryMove(gameObject, 0, 1) == true)
         {
             currentDirectionID = savedDir;
-            UpdateAnimation();
+            UpdateSkeleton();
             
             return true;
         }
         currentDirectionID = savedDir;
-        UpdateAnimation();
+        UpdateSkeleton();
         return false;
     }
     public void ShowMyIntent(int marbleID)
