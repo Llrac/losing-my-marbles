@@ -59,10 +59,7 @@ public class GridGenerator : MonoBehaviour
 
     public void UpdateGlitter(float keyPosX = 999, float keyPosY = 999)
     {
-        if (newKeyGlitter != null && keyPosX != 999 && keyPosY != 999)
-        {
-            Destroy(newKeyGlitter);
-        }
+        newKeyGlitter.transform.position = new Vector2(-100, 0);
         foreach (PlayerProperties playerScript in FindObjectsOfType<PlayerProperties>())
         {
             if (playerScript.hasKey)
@@ -75,7 +72,6 @@ public class GridGenerator : MonoBehaviour
 
         if (newKeyGlitter.transform.position != new Vector3(keyPosX, keyPosY) && keyPosX != 999 && keyPosY != 999)
         {
-            newKeyGlitter = Instantiate(keyGlitterParticle);
             newKeyGlitter.transform.position = new Vector2(keyPosX, keyPosY);
         }
     }
