@@ -13,7 +13,6 @@ public class Environment : MonoBehaviour
         {
             if(TurnManager.players[i].savedTile == 'W')
             {
-                
                 for (int j = 0; j < waterFlowDeciders.Count; j++)
                 {
                     if (TurnManager.players[i].gridPosition == waterFlowDeciders[j].gridPos)
@@ -24,7 +23,10 @@ public class Environment : MonoBehaviour
                     }
                 }
                 Debug.Log(waterFlow);
-                TurnManager.players[i].Pushed(waterFlow);
+                int savedDiD = TurnManager.players[i].currentDirectionID;
+                TurnManager.players[i].currentDirectionID = waterFlow;
+                TurnManager.players[i].TryMove(TurnManager.players[i].gameObject, 0, 1);
+                TurnManager.players[i].currentDirectionID = savedDiD;
             }
            
         }

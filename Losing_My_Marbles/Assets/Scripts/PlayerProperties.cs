@@ -11,6 +11,9 @@ public class PlayerProperties : Movement
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
 
+    GridGenerator gridGen;
+    SpriteRenderer FindIntentShower;
+    SetIntent intent;
     int act = 1;
   
     private void Awake()
@@ -19,6 +22,10 @@ public class PlayerProperties : Movement
 
         UpdateSkeleton();
         UpdateSkinBasedOnPlayerID();
+        
+        FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
+        intent = FindIntentShower.GetComponent<SetIntent>();
+
     }
 
     void Update()
@@ -74,7 +81,6 @@ public class PlayerProperties : Movement
     {
         for (int i = 0; i < 5; i++)
         {
-            
             switch (myActions[0])
             {
                 case 1: // Move 1
@@ -98,26 +104,36 @@ public class PlayerProperties : Movement
             myActions.RemoveAt(0);
         }
     }
-
+    
     public void ResetMarbles()
     {
         marbleEffect.Clear();
+        playerMarbles.Clear();
     }
 
-    public void Pushed(int dir)
+    public bool Pushed(int dir)
     {
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
-        //TryMove(gameObject, 0, 1);
-        if (hasKey == true)
-        {
-            DropKey();
-        }
+
         if (TryMove(gameObject, 0, 1) == true)
         {
             currentDirectionID = savedDir;
-            UpdateSkeleton();
+            UpdateAnimation();
+            
+            return true;
         }
+        currentDirectionID = savedDir;
+        UpdateAnimation();
+        return false;
+    }
+    public void ShowMyIntent(int marbleID)
+    {
+        intent.ShowIntent(Intent.GiveIntent(marbleID));
+    }
+    public void HideMyIntent()
+    {
+        intent.HideIntent();
     }
 }
 
