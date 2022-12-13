@@ -62,7 +62,9 @@ public class TurnManager : MonoBehaviour
         {
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
-               
+                //show intent
+                sortedPlayers[playerInList].ShowMyIntent(sortedPlayers[playerInList].playerMarbles[currentTurn]);
+                yield return new WaitForSeconds(turnLength);
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
                 {                                               
                     switch ((int)sortedPlayers[playerInList].marbleEffect[currentTurn].x)
@@ -77,6 +79,8 @@ public class TurnManager : MonoBehaviour
                     }
                     yield return new WaitForSeconds(turnLength);
                 }
+                //hide intent
+                sortedPlayers[playerInList].HideMyIntent();
                 yield return new WaitForSeconds(turnLength);
             }
             // enemy
@@ -108,7 +112,6 @@ public class TurnManager : MonoBehaviour
         for(int i = 0; i < players.Count; i++)
         {
             players[i].ResetMarbles();
-            Debug.Log("has reset " + players[i].marbleEffect.Count + " players marbles");
         }
 
         PlayerProperties.ids.Clear();
