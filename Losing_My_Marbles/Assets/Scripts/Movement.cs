@@ -11,7 +11,7 @@ public abstract class Movement : MonoBehaviour
 
     public Vector2 gridPosition = new(0, 0);
     public bool hasKey = false;
-    bool animationShouldPlay = true;
+   
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
