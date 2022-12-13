@@ -17,8 +17,10 @@ public abstract class Movement : MonoBehaviour
     public int currentDirectionID = 0;
 
     GridManager grid;
+    GridGenerator gg;
  
-    int multiplier;
+    int jumpMultiplier;
+    float wallJumpMultiplier;
 
     SkeletonAnimation frontSkeleton;
     SkeletonAnimation backSkeleton;
@@ -82,77 +84,7 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public void UpdateAnimation()
-    {
-        switch (currentDirectionID)
-        {
-            case 0:
-                Turn(false, false);
-                break;
-            case 1 or -3:
-                Turn(false, true);
-                break;
-            case 2 or -2:
-                Turn(true, true);
-                break;
-            case 3 or -1:
-                Turn(true, false);
-                break;
-            default:
-                Turn(false, false);
-                break;
-        }
-    }
-
-    void Turn(bool facingLeft, bool front)
-    {
-        if(CompareTag("Player"))
-        {
-            if (frontSkeleton == null || backSkeleton == null)
-            {
-                foreach (Transform child in transform)
-                {
-                    if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
-                    {
-                        frontSkeleton = child.GetComponent<SkeletonAnimation>();
-                    }
-                    else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
-                    {
-                        backSkeleton = child.GetComponent<SkeletonAnimation>();
-                    }
-                }
-            }
-
-            if (front)
-            {
-                nextIdleAnimation = frontIdle;
-                nextJumpAnimation = frontJump;
-                usingFrontSkeleton = true;
-            }
-            else
-            {
-                nextIdleAnimation = backIdle;
-                nextJumpAnimation = backJump;
-                usingFrontSkeleton = false;
-            }
-
-            if (usingFrontSkeleton)
-            {
-                frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
-                frontSkeleton.gameObject.SetActive(true);
-                backSkeleton.gameObject.SetActive(false);
-            }
-            else
-            {
-                backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
-                frontSkeleton.gameObject.SetActive(false);
-                backSkeleton.gameObject.SetActive(true);
-            }
-        }
-       
-    }
-
-    public bool TryMove(GameObject character, int dataID, int increment) // into bool?
+    public bool TryMove(GameObject character, int dataID, int increment)
     {
         // Set transform position
         if (dataID == 0)
@@ -161,12 +93,16 @@ public abstract class Movement : MonoBehaviour
             {
                 grid = FindObjectOfType<GridManager>();
             }
+            if (gg == null)
+            {
+                gg = FindObjectOfType<GridGenerator>();
+            }
             switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                    TryMove(character, 1, 2);
+                    FindObjectOfType<GridGenerator>().OnHitWall(character);
+                    Move(character, 1, true);
                     return false;
-
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
                     Move(character, 1);
@@ -222,7 +158,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.HOLE:
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
-                        DroppKey();
+                        DropKey();
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     if (CompareTag("Player"))
@@ -250,32 +186,139 @@ public abstract class Movement : MonoBehaviour
         {
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
-                multiplier = 1;
+                jumpMultiplier = 1;
                 if (increment < 0)
                 {
-                    multiplier *= -1;
+                    jumpMultiplier *= -1;
                 }
-                currentDirectionID += multiplier;
+                currentDirectionID += jumpMultiplier;
                 if (currentDirectionID <= -4 || currentDirectionID >= 4)
                 {
                     currentDirectionID = 0;
                 }
             }
 
-            UpdateAnimation();
-            
-            if (usingFrontSkeleton)
+            UpdateSkeleton();
+            SetAnimation(dataID, character);
+        }
+        return false;
+    }
+
+    public void UpdateSkeleton()
+    {
+        switch (currentDirectionID)
+        {
+            case 0:
+                SetSkeleton(false, false);
+                break;
+            case 1 or -3:
+                SetSkeleton(false, true);
+                break;
+            case 2 or -2:
+                SetSkeleton(true, true);
+                break;
+            case 3 or -1:
+                SetSkeleton(true, false);
+                break;
+            default:
+                SetSkeleton(false, false);
+                break;
+        }
+    }
+
+    void SetSkeleton(bool facingLeft, bool front)
+    {
+        if (CompareTag("Player"))
+        {
+            if (frontSkeleton == null || backSkeleton == null)
             {
-                frontSkeleton?.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+                foreach (Transform child in transform)
+                {
+                    if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                    {
+                        frontSkeleton = child.GetComponent<SkeletonAnimation>();
+                    }
+                    else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                    {
+                        backSkeleton = child.GetComponent<SkeletonAnimation>();
+                    }
+                }
+            }
+            
+            if (front)
+            {
+                nextIdleAnimation = frontIdle;
+                nextJumpAnimation = frontJump;
+                usingFrontSkeleton = true;
             }
             else
             {
-                backSkeleton?.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+                nextIdleAnimation = backIdle;
+                nextJumpAnimation = backJump;
+                usingFrontSkeleton = false;
             }
-            
-        }
 
-        return false;
+            if (usingFrontSkeleton)
+            {
+                frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
+                frontSkeleton.gameObject.SetActive(true);
+                backSkeleton.gameObject.SetActive(false);
+            }
+            else
+            {
+                backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
+                frontSkeleton.gameObject.SetActive(false);
+                backSkeleton.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false)
+    {
+        if (frontSkeleton == null || backSkeleton == null)
+        {
+            return;
+        }
+        switch (dataID)
+        {
+            case 0: // Jump forward
+                Animation animation = character.GetComponent<Animation>();
+                if (usingFrontSkeleton)
+                {
+                    frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
+                    if (wallJump)
+                    {
+                        frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.animationTimer;
+                    }
+                    frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
+                    frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+                }
+                else
+                {
+                    backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
+                    if (wallJump)
+                    {
+                        backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.animationTimer;
+                    }
+                    backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
+                    backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+                }
+                break;
+
+            case 1: // Rotate sideways
+                if (usingFrontSkeleton)
+                {
+                    frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+                }
+                else
+                {
+                    backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+                }
+                break;
+
+            default:
+                break;
+        }
     }
 
     public Vector2 RequestGridPosition(int currentDirectionID)
@@ -290,65 +333,49 @@ public abstract class Movement : MonoBehaviour
         };
     }
 
-    public void Move(GameObject character, int increment)
+    public void Move(GameObject character, int increment, bool isWallJumping = false, int dataID = 0)
     {
-        Animation animation = character.GetComponent<Animation>();
-
-        multiplier = 1;
+        jumpMultiplier = 1;
         if (increment < 0)
         {
-            multiplier *= -1;
+            jumpMultiplier *= -1;
         }
-        UpdateAnimation();
 
+        wallJumpMultiplier = 1;
+        if (!isWallJumping)
+        {
+            grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
+        }
+        else if (isWallJumping)
+        {
+            wallJumpMultiplier *= 0.5f;
+        }
+
+        Animation animation = character.GetComponent<Animation>();
         switch (currentDirectionID)
         {
             case 0:
-                animation.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
-                //character.transform.position = new Vector3(character.transform.position.x + jumpLength,
-                //    character.transform.position.y + jumpLength / 2, 0) * multiplier;
+                animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
+                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
                 break;
             case 1 or -3:
-                animation.TransitionFromTo(character, new Vector3(character.transform.position.x + jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
-                //character.transform.position = new Vector3(character.transform.position.x + jumpLength,
-                //    character.transform.position.y - jumpLength / 2, 0) * multiplier;
+                animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
+                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
                 break;
             case 2 or -2:
-                animation.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y - jumpLength / 2, 0) * multiplier);
-                //character.transform.position = new Vector3(character.transform.position.x - jumpLength,
-                //    character.transform.position.y - jumpLength / 2, 0) * multiplier;
+                animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
+                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
                 break;
             case 3 or -1:
-                animation.TransitionFromTo(character, new Vector3(character.transform.position.x - jumpLength,
-                    character.transform.position.y + jumpLength / 2, 0) * multiplier);
-                //character.transform.position = new Vector3(character.transform.position.x - jumpLength,
-                //    character.transform.position.y + jumpLength / 2, 0) * multiplier;
+                animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
+                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
                 break;
         }
-        grid.MoveInGridMatrix(character.GetComponent<Movement>(),
-            RequestGridPosition(currentDirectionID));
 
-        if(frontSkeleton != null || backSkeleton != null)
-        {
-            if (usingFrontSkeleton)
-            {
-                frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
-                frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, animation.jumpProgress.length);
-            }
-            else
-            {
-                backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
-                backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, animation.jumpProgress.length);
-            }
-        }
-        
+        UpdateSkeleton();
+        SetAnimation(dataID, character);
     }
-    public void DroppKey()
+    public void DropKey()
     {
         savedTile = 'K';
         hasKey = false;
@@ -357,7 +384,7 @@ public abstract class Movement : MonoBehaviour
         keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + 1.5f;
         GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
         GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
-        
+        gg.UpdateGlitter(keyPos.x, keyPos.y);
     }
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);

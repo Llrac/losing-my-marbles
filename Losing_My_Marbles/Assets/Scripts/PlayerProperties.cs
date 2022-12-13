@@ -19,9 +19,8 @@ public class PlayerProperties : Movement
     private void Awake()
     {
         TurnManager.players.Add(gameObject.GetComponent<PlayerProperties>());
-        gridGen = FindObjectOfType<GridGenerator>();
 
-        UpdateAnimation();
+        UpdateSkeleton();
         UpdateSkinBasedOnPlayerID();
         
         FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
@@ -66,9 +65,6 @@ public class PlayerProperties : Movement
                 TryMove(gameObject, 0, act);
             }
         }
-
-        if (hasKey)
-            gridGen.UpdateGlitter();
     }
 
     public override char ChangeTag()
@@ -123,12 +119,12 @@ public class PlayerProperties : Movement
         if (TryMove(gameObject, 0, 1) == true)
         {
             currentDirectionID = savedDir;
-            UpdateAnimation();
+            UpdateSkeleton();
             
             return true;
         }
         currentDirectionID = savedDir;
-        UpdateAnimation();
+        UpdateSkeleton();
         return false;
     }
     public void ShowMyIntent(int marbleID)

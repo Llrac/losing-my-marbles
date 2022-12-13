@@ -1275,9 +1275,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53bf17d877a15fe42971aa9e1564e0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileToCopy: {fileID: 2120634357754178640}
+  hitEffect: {fileID: 3940016480043197851, guid: feec62dcda6427b42bd3e8275a97eb23, type: 3}
   keyGlitterParticle: {fileID: 1672509437254162840, guid: 777c5ecf621c89741af44e0be2f6a94c, type: 3}
   playerGlitterParticle: {fileID: 5854443905180603826, guid: a39bf45293b20f14a879466e6f2d38a2, type: 3}
+  tileToCopy: {fileID: 2120634357754178640}
   tileSprites:
   - {fileID: 190675154, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
   - {fileID: 442020923, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
