@@ -115,10 +115,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
-                        player.GetComponent<PlayerProperties>().KeyStolen();
-                        character.GetComponent<PlayerProperties>().hasKey = true;
-
-                        //steal key animation in steal key function?
+                        player.GetComponent<Animation>().TakeFromGiveTo(character, player);
                     }
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
@@ -388,8 +385,4 @@ public abstract class Movement : MonoBehaviour
     }
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);
-    public void KeyStolen()
-    {
-        hasKey = false;
-    }
 }

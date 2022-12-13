@@ -105,4 +105,10 @@ public class Animation : MonoBehaviour
             this.wallJump = wallJump;
         }
     }
+
+    public void TakeFromGiveTo(GameObject takeFromCharacter, GameObject giveToCharacter)
+    {
+        takeFromCharacter.GetComponent<PlayerProperties>().hasKey = false;
+        giveToCharacter.GetComponent<PlayerProperties>().hasKey = true;
+    }
 }
