@@ -47,7 +47,7 @@ public abstract class Movement : MonoBehaviour
         PlayerProperties pp = GetComponent<PlayerProperties>();
         if (pp != null)
         {
-            switch (pp.playerId)
+            switch (pp.playerID)
             {
                 case 1:
                     frontSkeleton.initialSkinName = "red";
@@ -115,7 +115,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
-                        player.GetComponent<PlayerProperties>().StealKey();
+                        player.GetComponent<PlayerProperties>().KeyStolen();
                         character.GetComponent<PlayerProperties>().hasKey = true;
 
                         //steal key animation in steal key function?
@@ -142,7 +142,7 @@ public abstract class Movement : MonoBehaviour
                     {
                         Move(character, 1);
                         character.SetActive(false);
-                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerId);
+                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
                         // players should not be able to send more actions
                       //  FindObjectOfType<ResetManager>().ResetLevel();
                     }
@@ -388,7 +388,7 @@ public abstract class Movement : MonoBehaviour
     }
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);
-    public void StealKey()
+    public void KeyStolen()
     {
         hasKey = false;
     }

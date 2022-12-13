@@ -183,7 +183,7 @@ MonoBehaviour:
   backJump: {fileID: 11400000, guid: 8c4332a7956efb14e92d382ae814f355, type: 2}
   jumpLength: 1
   jumpAnimationSpeed: 4
-  playerId: 1
+  playerID: 1
   playerMarbles: 
   marbleEffect: []
 --- !u!114 &5348300030501963020

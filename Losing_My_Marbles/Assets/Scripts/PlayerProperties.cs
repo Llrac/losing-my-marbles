@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    public int playerId = 0; // playerID of (0) is null
+    public int playerID = 0; // playerID of (0) is null
 
     public static List<int> ids = new();
     public static List<int> myActions = new();
@@ -30,7 +30,7 @@ public class PlayerProperties : Movement
 
     void Update()
     {
-        if (playerId == 1)
+        if (playerID == 1)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -58,7 +58,7 @@ public class PlayerProperties : Movement
             }
         }
 
-        if (playerId == 2)
+        if (playerID == 2)
         {
             if (Input.GetButtonDown("Jump"))
             {
