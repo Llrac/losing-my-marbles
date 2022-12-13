@@ -40,8 +40,6 @@ public class GridManager : MonoBehaviour
             board[(int)TurnManager.players[i].gridPosition.x,
               (int)TurnManager.players[i].gridPosition.y] = PLAYER;
         }
-               
-
     }
    
     private void OnDrawGizmos()

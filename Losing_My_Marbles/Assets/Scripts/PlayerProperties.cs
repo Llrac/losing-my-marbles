@@ -11,16 +11,13 @@ public class PlayerProperties : Movement
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
 
-    GridGenerator gridGen;
-
     int act = 1;
   
     private void Awake()
     {
         TurnManager.players.Add(gameObject.GetComponent<PlayerProperties>());
-        gridGen = FindObjectOfType<GridGenerator>();
 
-        UpdateAnimation();
+        UpdateSkeleton();
         UpdateSkinBasedOnPlayerID();
     }
 
@@ -61,9 +58,6 @@ public class PlayerProperties : Movement
                 TryMove(gameObject, 0, act);
             }
         }
-
-        if (hasKey)
-            gridGen.UpdateGlitter();
     }
 
     public override char ChangeTag()
@@ -122,7 +116,7 @@ public class PlayerProperties : Movement
         if (TryMove(gameObject, 0, 1) == true)
         {
             currentDirectionID = savedDir;
-            UpdateAnimation();
+            UpdateSkeleton();
         }
     }
 }

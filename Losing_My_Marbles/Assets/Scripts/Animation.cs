@@ -5,54 +5,69 @@ using UnityEngine;
 public class Animation : MonoBehaviour
 {
     public AnimationCurve jumpProgress;
-    public AnimationCurve wallJumpProgress;
+    [HideInInspector] public float jumpProgressLength; // temp variable, unless we don't get time of last key
 
     // AnimateAction variables
-    GameObject character;
-    public float animTimer = 10f;
-
-    Vector2 destination;
-
     Vector2 startPosition;
+    GameObject character;
+    Vector2 destination;
+    [HideInInspector] public float animationTimer = 10f;
+
     bool wallJump = false;
     bool halfwayWallJump = false;
     bool hasWallJumpedHalfway = false;
 
-    // Update is called once per frame
+    GridGenerator gridGen;
+
+
+    void Start()
+    {
+        gridGen = FindObjectOfType<GridGenerator>();
+
+        if (jumpProgress != null)
+        {
+            jumpProgressLength = jumpProgress[jumpProgress.length - 1].time;
+        }
+    }
+
     void Update()
     {
-        animTimer += Time.deltaTime;
-        Debug.Log(animTimer);
-        Debug.Log(jumpProgress.length);
+        animationTimer += Time.deltaTime;
 
-        if (animTimer <= jumpProgress.length && !wallJump)
-        {
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(animTimer)),
-            Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(animTimer)));
-        }
-        // Before jumping of wall
-        else if (animTimer <= (wallJumpProgress.length / 2) && wallJump)
+        if (animationTimer <= jumpProgressLength && !wallJump)
         {
             if (halfwayWallJump)
-            {
                 halfwayWallJump = false;
-            }
             if (hasWallJumpedHalfway)
-            {
                 hasWallJumpedHalfway = false;
-            }
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, wallJumpProgress.Evaluate(animTimer)),
-            Mathf.Lerp(character.transform.position.y, destination.y, wallJumpProgress.Evaluate(animTimer)));
+            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(animationTimer)),
+            Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(animationTimer)));
+            if (character.GetComponent<Movement>().hasKey)
+                gridGen.UpdateGlitter();
         }
-        // After jumping from wall
-        else if (animTimer > (wallJumpProgress.length / 2) && animTimer <= wallJumpProgress.length && wallJump)
+        // Jumping INTO wall
+        else if (animationTimer <= (jumpProgressLength / 2) && wallJump)
+        {
+            if (halfwayWallJump)
+                halfwayWallJump = false;
+            if (hasWallJumpedHalfway)
+                hasWallJumpedHalfway = false;
+            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(animationTimer * 2)),
+            Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(animationTimer * 2)));
+            if (character.GetComponent<Movement>().hasKey)
+                gridGen.UpdateGlitter();
+        }
+        // Jumping FROM wall
+        else if (animationTimer > (jumpProgressLength / 2) && animationTimer <= jumpProgressLength && wallJump)
         {
             if (!halfwayWallJump)
                 halfwayWallJump = true;
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, startPosition.x, wallJumpProgress.Evaluate(animTimer)),
-            Mathf.Lerp(character.transform.position.y, startPosition.y, wallJumpProgress.Evaluate(animTimer)));
+            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, startPosition.x, jumpProgress.Evaluate(animationTimer)),
+            Mathf.Lerp(character.transform.position.y, startPosition.y, jumpProgress.Evaluate(animationTimer)));
+            if (character.GetComponent<Movement>().hasKey)
+                gridGen.UpdateGlitter();
         }
-        else if (animTimer > wallJumpProgress.length && wallJump)
+        else if (animationTimer > jumpProgressLength && wallJump)
         {
             wallJump = false;
             halfwayWallJump = false;
@@ -61,7 +76,6 @@ public class Animation : MonoBehaviour
 
         if (halfwayWallJump && !hasWallJumpedHalfway)
         {
-            Debug.Log("reset rotation");
             Movement m = GetComponent<Movement>();
 
             for (int i = 0; i < 2; i++)
@@ -73,7 +87,8 @@ public class Animation : MonoBehaviour
                 m.currentDirectionID++;
             }
             
-            m.UpdateAnimation();
+            m.UpdateSkeleton();
+            //m.SetAnimation(0, character, true);
             hasWallJumpedHalfway = true;
         }
     }
@@ -83,12 +98,11 @@ public class Animation : MonoBehaviour
         startPosition = character.transform.position;
         this.character = character;
         this.destination = destination;
-        animTimer = 0;
+        animationTimer = 0;
 
         if (wallJump)
         {
             this.wallJump = wallJump;
-            Debug.Log("destination: " + this.destination + ". startPosition: " + startPosition + ".");
         }
     }
 }
