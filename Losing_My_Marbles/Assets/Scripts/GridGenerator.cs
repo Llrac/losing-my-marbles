@@ -54,6 +54,7 @@ public class GridGenerator : MonoBehaviour
                 }
             }
         }
+        UpdateGlitter();
     }
 
     public void UpdateGlitter(float keyPosX = 999, float keyPosY = 999)
