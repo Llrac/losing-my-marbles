@@ -15,6 +15,7 @@ public class ActionHandler : MonoBehaviour
     {
         playerID = playerId.playerID;
         database.ListenForActions(InstantiateAction, Debug.Log);
+        database.ListenForNewHand(InstantiateNewHand, Debug.Log);
     }
 
     public void SendAction()
@@ -27,6 +28,30 @@ public class ActionHandler : MonoBehaviour
             {
                 // Action was sent!
             }, exception => { Debug.Log(exception); });
+
+            uiManager.confirmButton.interactable = false;
+            uiManager.PlayerCanInteractWithMarbles(false);
+        }
+    }
+
+    public void DrawNewHand(bool drawNewHand)
+    {
+        database.PostNewHand(new NewHandMessage(drawNewHand), () =>
+        {
+            // New hand was sent!
+        }, exception => { Debug.Log(exception);} );
+    }
+    
+    // This happens on the mobile side
+    private void InstantiateNewHand(NewHandMessage newHandMessage)
+    {
+        var drawNewHand = Convert.ToBoolean($"{newHandMessage.drawNewHand}");
+
+        if (drawNewHand)
+        {
+            uiManager.DiscardMarblesFromHand();
+            uiManager.FillHandWithMarbles();
+            uiManager.PlayerCanInteractWithMarbles(true);
         }
     }
     

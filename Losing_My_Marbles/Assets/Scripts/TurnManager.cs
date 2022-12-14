@@ -23,6 +23,8 @@ public class TurnManager : MonoBehaviour
     public GameObject information;
     private TextMeshProUGUI roundInformation;
 
+    public ActionHandler actionHandler;
+    
     //add a sorted list here
     bool startTurn = true;
     int tracking = 0;
@@ -159,5 +161,7 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         roundInformation.text = "Play your marbles!";
         startTurn = true;
+        
+        actionHandler.DrawNewHand(true);
     }
 }
