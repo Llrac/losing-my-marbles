@@ -72,8 +72,8 @@ public class TurnManager : MonoBehaviour
         
         for (int i = 0; i < sortedPlayers.Count; i++)
         {
-            uiDesktop.ToggleReadyShine(sortedPlayers[i].playerId, false);
-            uiDesktop.InstantiatePlayerOrder(sortedPlayers[i].playerId);
+            uiDesktop.ToggleReadyShine(sortedPlayers[i].playerID, false);
+            uiDesktop.InstantiatePlayerOrder(sortedPlayers[i].playerID);
             yield return new WaitForSeconds(0.3f);
         }
         

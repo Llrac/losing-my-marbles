@@ -101,7 +101,8 @@ public abstract class Movement : MonoBehaviour
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
-                    Move(character, 1, true);
+                    // Move(character, 1, true);
+                    TryMove(character, 1, 2);
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
@@ -117,6 +118,7 @@ public abstract class Movement : MonoBehaviour
                     {
                         player.GetComponent<Animation>().TakeFromGiveTo(character, player);
                     }
+                    
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
                         Move(gameObject, increment);
@@ -201,9 +203,9 @@ public abstract class Movement : MonoBehaviour
         return false;
     }
 
-    public void UpdateSkeleton()
+    public void UpdateSkeleton(int addToDirectionID = 0)
     {
-        switch (currentDirectionID)
+        switch (currentDirectionID + addToDirectionID)
         {
             case 0:
                 SetSkeleton(false, false);
