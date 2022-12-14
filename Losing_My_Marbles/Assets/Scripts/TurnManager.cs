@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TurnManager : MonoBehaviour
 {
@@ -19,16 +20,21 @@ public class TurnManager : MonoBehaviour
     public static List <PlayerProperties> sortedPlayers = new List <PlayerProperties> ();
     public UIDesktop uiDesktop;
     public GameObject readyAlert;
+    public GameObject information;
+    private TextMeshProUGUI roundInformation;
+
     public ActionHandler actionHandler;
     
     //add a sorted list here
     bool startTurn = true;
     int tracking = 0;
     int ratPathKeeping = 0;
+    int amountOfRounds = 0;
 
     private void Start()
     {
         uiDesktop.TurnOnMarbleBagAnimation();
+        roundInformation = information.GetComponent<TextMeshProUGUI>();
     }
     private void Update()
     {
@@ -66,11 +72,18 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator ExecuteTurn()
     {
-        
-        yield return new WaitForSeconds(2.5f);
+        amountOfRounds++;
+
+        yield return new WaitForSeconds(2f);
         uiDesktop.TogglePlayerBags(false);
-        //TODO Show "Round starts in..." here
-        
+       
+        for (int i = 3; i > 0; i--)
+        {
+            roundInformation.text = "Round " + amountOfRounds + " Starts in " + i;
+            yield return new WaitForSeconds(1f);
+        }
+        roundInformation.text = ""; // add sounds
+       
         for (int i = 0; i < sortedPlayers.Count; i++)
         {
             uiDesktop.ToggleReadyShine(sortedPlayers[i].playerID, false);
@@ -80,6 +93,7 @@ public class TurnManager : MonoBehaviour
         
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
+            roundInformation.text = "Marble " + (currentTurn + 1);
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
                 //show intent
@@ -124,7 +138,7 @@ public class TurnManager : MonoBehaviour
             //    ratPathKeeping = 0;
             //}
             yield return new WaitForSeconds(turnLength);
-           
+            
             //Environment.Turn();
         }
 
@@ -143,9 +157,11 @@ public class TurnManager : MonoBehaviour
 
         readyAlert.GetComponent<Image>().enabled = true;
         
+        roundInformation.text = "Round " + amountOfRounds + " is over";
+        yield return new WaitForSeconds(2f);
+        roundInformation.text = "Play your marbles!";
         startTurn = true;
         
-        //TODO Send message to mobile ui to clear hand and draw new marbles
         actionHandler.DrawNewHand(true);
     }
 }
