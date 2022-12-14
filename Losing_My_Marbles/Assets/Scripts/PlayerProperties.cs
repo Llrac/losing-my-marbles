@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
-    public int playerId = 0; // playerID of (0) is null
+    public int playerID = 0; // playerID of (0) is null
 
     public static List<int> ids = new();
     public static List<int> myActions = new();
@@ -12,21 +12,25 @@ public class PlayerProperties : Movement
     public List <Vector2> marbleEffect = new();
 
     GridGenerator gridGen;
-
+    SpriteRenderer FindIntentShower;
+    SetIntent intent;
     int act = 1;
   
     private void Awake()
     {
         TurnManager.players.Add(gameObject.GetComponent<PlayerProperties>());
-        gridGen = FindObjectOfType<GridGenerator>();
 
-        UpdateAnimation();
+        UpdateSkeleton();
         UpdateSkinBasedOnPlayerID();
+        
+        FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
+        intent = FindIntentShower.GetComponent<SetIntent>();
+
     }
 
     void Update()
     {
-        if (playerId == 1)
+        if (playerID == 1)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -54,16 +58,13 @@ public class PlayerProperties : Movement
             }
         }
 
-        if (playerId == 2)
+        if (playerID == 2)
         {
             if (Input.GetButtonDown("Jump"))
             {
                 TryMove(gameObject, 0, act);
             }
         }
-
-        if (hasKey)
-            gridGen.UpdateGlitter();
     }
 
     public override char ChangeTag()
@@ -80,7 +81,6 @@ public class PlayerProperties : Movement
     {
         for (int i = 0; i < 5; i++)
         {
-            
             switch (myActions[0])
             {
                 case 1: // Move 1
@@ -104,26 +104,36 @@ public class PlayerProperties : Movement
             myActions.RemoveAt(0);
         }
     }
-
+    
     public void ResetMarbles()
     {
         marbleEffect.Clear();
+        playerMarbles.Clear();
     }
 
-    public void Pushed(int dir)
+    public bool Pushed(int dir)
     {
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
-        //TryMove(gameObject, 0, 1);
-        if (hasKey == true)
-        {
-            DroppKey();
-        }
+
         if (TryMove(gameObject, 0, 1) == true)
         {
             currentDirectionID = savedDir;
-            UpdateAnimation();
+            UpdateSkeleton();
+            
+            return true;
         }
+        currentDirectionID = savedDir;
+        UpdateSkeleton();
+        return false;
+    }
+    public void ShowMyIntent(int marbleID)
+    {
+        intent.ShowIntent(Intent.GiveIntent(marbleID));
+    }
+    public void HideMyIntent()
+    {
+        intent.HideIntent();
     }
 }
 

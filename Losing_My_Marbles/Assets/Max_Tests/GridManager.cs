@@ -12,7 +12,7 @@ public class GridManager : MonoBehaviour
     public const char HOLE = 'H';
     public const char EMPTY='?';
     public const char WATER = 'W';
-    public char[,] board = new char[10, 10]
+    public char[,] board = new char[10, 10] // [column, row in column] or [y, x]
     {
             {'?','?','?','?','?','?','?','?','?','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
@@ -40,8 +40,6 @@ public class GridManager : MonoBehaviour
             board[(int)TurnManager.players[i].gridPosition.x,
               (int)TurnManager.players[i].gridPosition.y] = PLAYER;
         }
-               
-
     }
    
     private void OnDrawGizmos()

@@ -14,7 +14,7 @@ public class TurnManager : MonoBehaviour
     // all hazard tiles
     // all environment tiles
     int amountOfTurns = 5;
-    public static float turnLength = .5f; // den här kan alltså ändras så att man hinner med en annan coroutine!!!
+    public static float turnLength = .5f; // den hï¿½r kan alltsï¿½ ï¿½ndras sï¿½ att man hinner med en annan coroutine!!!
     public static List <PlayerProperties> players = new List <PlayerProperties> ();
     public static List <PlayerProperties> sortedPlayers = new List <PlayerProperties> ();
     public UIDesktop uiDesktop;
@@ -38,13 +38,13 @@ public class TurnManager : MonoBehaviour
             tracking++;
         }
         
-        if(PlayerProperties.myActions.Count == players.Count * 5 && PlayerProperties.myActions.Count != 0)
+        if (PlayerProperties.myActions.Count == players.Count * 5 && PlayerProperties.myActions.Count != 0)
         {
             for (int i = 0; i < players.Count; i++)
             {
                 for (int j = 0; j < players.Count; j++)
                 {
-                    if (PlayerProperties.ids[i] == players[j].playerId)
+                    if (PlayerProperties.ids[i] == players[j].playerID)
                     {
                         players[j].AddMarbles();
                         sortedPlayers.Add(players[j]);
@@ -52,7 +52,7 @@ public class TurnManager : MonoBehaviour
                 }
             }
             
-            if(startTurn == true)
+            if (startTurn == true)
             {
                 readyAlert.GetComponent<Image>().enabled = false;
                 StartCoroutine(ExecuteTurn()); 
@@ -62,6 +62,7 @@ public class TurnManager : MonoBehaviour
         
         
     }
+
     private IEnumerator ExecuteTurn()
     {
         
@@ -80,9 +81,11 @@ public class TurnManager : MonoBehaviour
         {
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
-
+                //show intent
+                sortedPlayers[playerInList].ShowMyIntent(sortedPlayers[playerInList].playerMarbles[currentTurn]);
+                yield return new WaitForSeconds(turnLength);
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
-                {                                                // implement a if player is still alive.
+                {                                               
                     switch ((int)sortedPlayers[playerInList].marbleEffect[currentTurn].x)
                     {
                         case 0:
@@ -95,6 +98,8 @@ public class TurnManager : MonoBehaviour
                     }
                     yield return new WaitForSeconds(turnLength);
                 }
+                //hide intent
+                sortedPlayers[playerInList].HideMyIntent();
                 yield return new WaitForSeconds(turnLength);
             }
             // enemy
@@ -122,11 +127,9 @@ public class TurnManager : MonoBehaviour
             //Environment.Turn();
         }
 
-
         for(int i = 0; i < players.Count; i++)
         {
             players[i].ResetMarbles();
-            Debug.Log("has reset " + players[i].marbleEffect.Count + " players marbles");
         }
 
         PlayerProperties.ids.Clear();

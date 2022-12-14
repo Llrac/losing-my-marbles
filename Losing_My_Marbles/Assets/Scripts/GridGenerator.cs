@@ -6,9 +6,12 @@ public class GridGenerator : MonoBehaviour
 {
     GridManager grid;
 
-    [SerializeField] GameObject tileToCopy;
+    [Header("Particle Effects")]
     [SerializeField] GameObject keyGlitterParticle = null;
     [SerializeField] GameObject playerGlitterParticle = null;
+    [SerializeField] GameObject hitEffect = null;
+
+    [SerializeField] GameObject tileToCopy;
     [SerializeField] Sprite[] tileSprites = new Sprite[17];
     [SerializeField] Sprite tileHoleSprite = null;
     readonly float tileSize = 1f;
@@ -16,6 +19,7 @@ public class GridGenerator : MonoBehaviour
     GameObject newTile;
     GameObject newKeyGlitter;
     GameObject newPlayerGlitter;
+    GameObject newHit;
 
     void Start()
     {
@@ -29,7 +33,7 @@ public class GridGenerator : MonoBehaviour
         {
             for (int y = 0; y < grid.board.GetLength(1); y++)
             {
-                if(grid.board[x, y] != GridManager.EMPTY && grid.board[x, y] != GridManager.DOOR)
+                if (grid.board[x, y] != GridManager.EMPTY && grid.board[x, y] != GridManager.DOOR)
                 {
                     newTile = Instantiate(tileToCopy);
                     float posX = ((x * tileSize + y * tileSize)) + tileToCopy.transform.position.x -1; // this is the actual x position of the tile
@@ -52,20 +56,31 @@ public class GridGenerator : MonoBehaviour
         }
     }
 
-    public void UpdateGlitter()
+    public void UpdateGlitter(float keyPosX = 999, float keyPosY = 999)
     {
-        if (newKeyGlitter != null)
-        {
-            Destroy(newKeyGlitter);
-        }
+        newKeyGlitter.transform.position = new Vector2(-100, 0);
         foreach (PlayerProperties playerScript in FindObjectsOfType<PlayerProperties>())
         {
             if (playerScript.hasKey)
             {
                 newPlayerGlitter.transform.position = playerScript.gameObject.transform.position;
-                //Debug.Log(playerScript.gameObject + " got the key!");
+                return;
             }
         }
+        newPlayerGlitter.transform.position = new Vector2(-100, 0);
+
+        if (newKeyGlitter.transform.position != new Vector3(keyPosX, keyPosY) && keyPosX != 999 && keyPosY != 999)
+        {
+            newKeyGlitter.transform.position = new Vector2(keyPosX, keyPosY);
+        }
     }
-   
+
+    public void OnHitWall(GameObject characterToApplyEffect)
+    {
+        if (hitEffect != null)
+        {
+            newHit = Instantiate(hitEffect);
+            newHit.transform.position = new Vector2(characterToApplyEffect.transform.position.x, characterToApplyEffect.transform.position.y);
+        }
+    }
 }
