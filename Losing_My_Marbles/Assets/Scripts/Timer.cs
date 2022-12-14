@@ -7,7 +7,13 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     public TMP_Text timerText;
-    public float timeValue = 20f;
+    public float timeValue;
+    public float playerTime = 20f;
+
+    private void Start()
+    {
+        timeValue = playerTime;
+    }
 
     private void Update()
     {
@@ -30,7 +36,15 @@ public class Timer : MonoBehaviour
             timeToDisplay = 0;
         }
 
-        float seconds = timeValue;
-        timerText.text = string.Format("{0:00}", timeToDisplay);
+        float minutes = timeValue / 60;
+        float seconds = timeValue % 60;
+        
+        
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public void ResetTimer()
+    {
+        timeValue = playerTime;
     }
 }

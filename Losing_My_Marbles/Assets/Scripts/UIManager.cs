@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class UIManager : MonoBehaviour
 {
     public PlayerID playerID;
+    
     [Header("Marbles & Slots")]
     public Transform[] marbleSlotsTop = new Transform[7];
     public Transform[] marbleSlotsBottom = new Transform[5];
@@ -16,10 +17,12 @@ public class UIManager : MonoBehaviour
 
     [Header("Background & Lights")]
     public GameObject background = null;
-
     public Button confirmButton = null;
     public Image insertAlert = null;
 
+    [Header("Timer")] 
+    public Timer timer;
+    
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
     [HideInInspector] public List<Marble> discardBag = new();
