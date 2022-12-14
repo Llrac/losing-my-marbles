@@ -3981,6 +3981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDesktop: {fileID: 116964547}
   readyAlert: {fileID: 453755223}
+  actionHandler: {fileID: 623496582}
 --- !u!4 &1552591137
 Transform:
   m_ObjectHideFlags: 0
@@ -4358,6 +4359,10 @@ PrefabInstance:
     - target: {fileID: 263476874749299614, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 416286498101845045, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: playerID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 416286498101845045, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: gridPosition.y
