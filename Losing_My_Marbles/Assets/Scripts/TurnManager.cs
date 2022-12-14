@@ -73,7 +73,7 @@ public class TurnManager : MonoBehaviour
         {
             uiDesktop.ToggleReadyShine(sortedPlayers[i].playerId, false);
             uiDesktop.InstantiatePlayerOrder(sortedPlayers[i].playerId);
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.3f);
         }
         
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
@@ -132,11 +132,13 @@ public class TurnManager : MonoBehaviour
         PlayerProperties.ids.Clear();
         tracking = 0;
         sortedPlayers.Clear();
+        
         uiDesktop.ClearPlayerOrder();
         uiDesktop.TurnOnMarbleBagAnimation();
-
-        startTurn = true;
         uiDesktop.TogglePlayerBags(true);
+
         readyAlert.GetComponent<Image>().enabled = true;
+        
+        startTurn = true;
     }
 }

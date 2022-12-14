@@ -8,10 +8,8 @@ public class UIDesktop : MonoBehaviour
     public Transform playLogTransform;
 
     public GameObject playerOrderPrefab;
-    public GameObject readyShinePrefab;
     public Sprite[] playerSprite;
-    public Transform playerUITransform;
-    
+
     public List<GameObject> playerBags = new();
     public List<GameObject> playerUIPosition = new();
     public List<Animator> playerBagsAnimator = new();
@@ -55,7 +53,8 @@ public class UIDesktop : MonoBehaviour
         child.SetActive(isShining);
         Debug.Log(child);
     }
-
+    
+    //TODO Add a function that toggles ALL ready shines
 
     public void TogglePlayerBags(bool showBags)
     {
