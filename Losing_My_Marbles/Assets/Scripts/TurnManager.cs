@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,21 +14,26 @@ public class TurnManager : MonoBehaviour
     // all hazard tiles
     // all environment tiles
     int amountOfTurns = 5;
-    public static float turnLength = .5f; // den här kan alltså ändras så att man hinner med en annan corroutine!!!
+    public static float turnLength = .5f; // den här kan alltså ändras så att man hinner med en annan coroutine!!!
     public static List <PlayerProperties> players = new List <PlayerProperties> ();
     public static List <PlayerProperties> sortedPlayers = new List <PlayerProperties> ();
-    public LogHandler logHandler;
+    public UIDesktop uiDesktop;
     public GameObject readyAlert;
     
-    //add a sortet list here
+    //add a sorted list here
     bool startTurn = true;
     int tracking = 0;
     int ratPathKeeping = 0;
+
+    private void Start()
+    {
+        uiDesktop.TurnOnMarbleBagAnimation();
+    }
     private void Update()
     {
-        if(PlayerProperties.ids.Count > tracking)
+        if (PlayerProperties.ids.Count > tracking)
         {
-            logHandler.InstantiateMessage(tracking);
+            uiDesktop.TurnOffMarbleBagAnimation(PlayerProperties.ids[tracking]);
             Debug.Log("Player " + (PlayerProperties.ids[tracking]) + " has locked in");
             tracking++;
         }
@@ -41,7 +47,7 @@ public class TurnManager : MonoBehaviour
                     if (PlayerProperties.ids[i] == players[j].playerId)
                     {
                         players[j].AddMarbles();
-                        sortedPlayers.Add (players[j]);
+                        sortedPlayers.Add(players[j]);
                     }
                 }
             }
@@ -54,15 +60,27 @@ public class TurnManager : MonoBehaviour
             }     
         }
         
+        
     }
     private IEnumerator ExecuteTurn()
     {
-        Debug.Log(PlayerProperties.myActions.Count);
+        
+        yield return new WaitForSeconds(2.5f);
+        uiDesktop.TogglePlayerBags(false);
+        //TODO Show "Round starts in..." here
+        
+        for (int i = 0; i < sortedPlayers.Count; i++)
+        {
+            uiDesktop.ToggleReadyShine(sortedPlayers[i].playerId, false);
+            uiDesktop.InstantiatePlayerOrder(sortedPlayers[i].playerId);
+            yield return new WaitForSeconds(0.2f);
+        }
+        
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
-                Debug.Log(playerInList);
+
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
                 {                                                // implement a if player is still alive.
                     switch ((int)sortedPlayers[playerInList].marbleEffect[currentTurn].x)
@@ -114,11 +132,11 @@ public class TurnManager : MonoBehaviour
         PlayerProperties.ids.Clear();
         tracking = 0;
         sortedPlayers.Clear();
+        uiDesktop.ClearPlayerOrder();
+        uiDesktop.TurnOnMarbleBagAnimation();
 
         startTurn = true;
+        uiDesktop.TogglePlayerBags(true);
         readyAlert.GetComponent<Image>().enabled = true;
     }
-    
-    
-    
 }
