@@ -15,8 +15,8 @@ public class TurnManager : MonoBehaviour
     // all environment tiles
     int amountOfTurns = 5;
     public static float turnLength = .5f; // den h�r kan allts� �ndras s� att man hinner med en annan coroutine!!!
-    public static List <PlayerProperties> players = new List <PlayerProperties> ();
-    public static List <PlayerProperties> sortedPlayers = new List <PlayerProperties> ();
+    public static List <PlayerProperties> players = new();
+    public static List <PlayerProperties> sortedPlayers = new();
     public UIDesktop uiDesktop;
     public GameObject readyAlert;
     

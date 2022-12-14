@@ -116,7 +116,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
-                        player.GetComponent<Animation>().TakeFromGiveTo(player, character);
+                        player.GetComponent<Animation>().StealKey(character, player); // character steals from player
                     }
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
@@ -157,7 +157,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.HOLE:
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
-                        DropKey();
+                        character.GetComponent<Animation>().DropKey(character);
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     if (CompareTag("Player"))
@@ -289,7 +289,7 @@ public abstract class Movement : MonoBehaviour
                     frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                     if (wallJump)
                     {
-                        frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.animationTimer;
+                        frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
                     frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
@@ -299,7 +299,7 @@ public abstract class Movement : MonoBehaviour
                     backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                     if (wallJump)
                     {
-                        backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.animationTimer;
+                        backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
                     backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
@@ -376,17 +376,7 @@ public abstract class Movement : MonoBehaviour
         UpdateSkeleton();
         SetAnimation(dataID, character);
     }
-    public void DropKey()
-    {
-        savedTile = 'K';
-        hasKey = false;
-        Vector2 keyPos;
-        keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7 - 1;
-        keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + 1.5f;
-        GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
-        GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
-        gg.UpdateGlitter(keyPos.x, keyPos.y);
-    }
+    
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);
 }
