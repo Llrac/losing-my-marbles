@@ -78,14 +78,14 @@ public class Animation : MonoBehaviour
         {
             Movement m = GetComponent<Movement>();
 
-            for (int i = 0; i < 2; i++)
-            {
-                if (m.currentDirectionID <= -4 || m.currentDirectionID >= 4)
-                {
-                    m.currentDirectionID = 0;
-                }
-                m.currentDirectionID++;
-            }
+            // for (int i = 0; i < 2; i++)
+            // {
+            //     if (m.currentDirectionID <= -4 || m.currentDirectionID >= 4)
+            //     {
+            //         m.currentDirectionID = 0;
+            //     }
+            //     m.currentDirectionID++;
+            // }
             
             m.UpdateSkeleton();
             //m.SetAnimation(0, character, true);
