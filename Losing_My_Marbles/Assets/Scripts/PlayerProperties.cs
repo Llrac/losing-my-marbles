@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerProperties : Movement
 {
     public int playerID = 0; // playerID of (0) is null
+    private Vector2 startingGridPosition = Vector2.zero;
+    private Vector2 startingWorldPosition = Vector2.zero;
 
     public static List<int> ids = new();
     public static List<int> myActions = new();
@@ -23,6 +25,8 @@ public class PlayerProperties : Movement
         
         FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
         intent = FindIntentShower.GetComponent<SetIntent>();
+        startingGridPosition = gridPosition;
+        startingWorldPosition = transform.position;
     }
 
     void Update()
@@ -123,6 +127,17 @@ public class PlayerProperties : Movement
     public void HideMyIntent()
     {
         intent.HideIntent();
+    }
+    public void Death()
+    {
+        marbleEffect.Clear();
+        for (int i = 0; i < 5; i++)
+        {
+            marbleEffect.Add(new Vector2(1, 0));
+        }
+        marbleEffect.Add(new Vector2(1,0));
+        transform.position = startingWorldPosition;
+        gridPosition = startingGridPosition;
     }
 }
 

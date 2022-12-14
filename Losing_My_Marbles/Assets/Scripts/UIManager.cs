@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -6,6 +7,7 @@ using Random = UnityEngine.Random;
 public class UIManager : MonoBehaviour
 {
     public PlayerID playerID;
+    
     [Header("Marbles & Slots")]
     public Transform[] marbleSlotsTop = new Transform[7];
     public Transform[] marbleSlotsBottom = new Transform[5];
@@ -15,10 +17,12 @@ public class UIManager : MonoBehaviour
 
     [Header("Background & Lights")]
     public GameObject background = null;
-
     public Button confirmButton = null;
     public Image insertAlert = null;
 
+    [Header("Timer")] 
+    public Timer timer;
+    
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
     [HideInInspector] public List<Marble> discardBag = new();
@@ -32,8 +36,6 @@ public class UIManager : MonoBehaviour
             background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID - 1];
         }
 
-       
-        
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
             availableMarbleSlotsTop[i] = true;
@@ -43,19 +45,14 @@ public class UIManager : MonoBehaviour
         {
             availableMarbleSlotsBottom[i] = true;
         }
+        
         if (insertAlert != null)
             insertAlert.enabled = true;
+        
         if (confirmButton != null)
             confirmButton.image.enabled = false;
+        
         FillHandWithMarbles();
-    }
-
-    private void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    FillHandWithMarbles();
-        //}
     }
 
     public void FillHandWithMarbles()
@@ -68,6 +65,7 @@ public class UIManager : MonoBehaviour
             {
                 Shuffle();
                 i--;
+                
                 if (marbleBag.Count <= 0)
                 {
                     return;
@@ -77,8 +75,10 @@ public class UIManager : MonoBehaviour
             {
                 Marble randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
                 randomMarble.topRowIndex = i;
+                
                 if (marbleSlotsTop[i] != null)
                     randomMarble.transform.position = marbleSlotsTop[i].position;
+                
                 randomMarble.isInHand = true;
                 availableMarbleSlotsTop[i] = false;
                 marbleBag.Remove(randomMarble);
@@ -98,11 +98,15 @@ public class UIManager : MonoBehaviour
                 availableMarbleSlotsBottom[i] = false;
                 orderID[i] = currentMarble.marbleID;
                 availableMarbleSlotsTop[currentMarble.topRowIndex] = true;
+                
                 if (confirmButton != null)
                     confirmButton.interactable = BottomRowFull();
+                
                 if (confirmButton != null)
                     confirmButton.image.enabled = BottomRowFull();
+                
                 marbleLights[i].enabled = true;
+                
                 return true;
             }
         }
@@ -121,11 +125,15 @@ public class UIManager : MonoBehaviour
                 currentMarble.topRowIndex = i;
                 availableMarbleSlotsTop[i] = false;
                 availableMarbleSlotsBottom[currentMarble.bottomRowIndex] = true;
+                
                 if (confirmButton != null)
                     confirmButton.interactable = BottomRowFull();
+                
                 if (confirmButton != null)
                     confirmButton.image.enabled = BottomRowFull();
+                
                 marbleLights[currentMarble.bottomRowIndex].enabled = false;
+                
                 return false;
             }
         }
@@ -141,11 +149,14 @@ public class UIManager : MonoBehaviour
             {
                 if (insertAlert != null)
                     insertAlert.enabled = true;
+                
                 return false;
             }
         }
+        
         if (insertAlert != null)
             insertAlert.enabled = false;
+        
         return true;
     }
 
@@ -189,8 +200,19 @@ public class UIManager : MonoBehaviour
         {
             availableMarbleSlotsBottom[i] = true;
             //marbleLights[i].enabled = false;
+            
             if (confirmButton != null)
                 confirmButton.interactable = false;
+        }
+    }
+
+    public void PlayerCanInteractWithMarbles(bool canPickMarbles)
+    {
+        Marble[] marblesInScene = FindObjectsOfType<Marble>();
+        
+        foreach (Marble marble in marblesInScene)
+        {
+            marble.GetComponent<Button>().interactable = canPickMarbles;
         }
     }
 

@@ -907,6 +907,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
+      propertyPath: timer
+      value: 
+      objectReference: {fileID: 1529174298}
+    - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
       propertyPath: playerID
       value: 
       objectReference: {fileID: 803238549}
@@ -1481,7 +1485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13adaa1761d4e44597e3eb08c05bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 1
+  playerID: 2
 --- !u!4 &803238550
 Transform:
   m_ObjectHideFlags: 0
@@ -2489,30 +2493,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 831956079}
-        m_TargetAssemblyTypeName: MarbleManager, Assembly-CSharp
-        m_MethodName: DiscardMarblesFromHand
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 831956079}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: FillHandWithMarbles
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1286677561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2777,7 +2757,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1529174297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2796,7 +2776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35, y: 23.6}
+  m_AnchoredPosition: {x: 35, y: -1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1529174298
@@ -2813,6 +2793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1812994859}
   timeValue: 20
+  playerTime: 20
 --- !u!224 &1586550100 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7812296077624100166, guid: 9ffd8c74f1728a0459fbb3dd1959bf67, type: 3}

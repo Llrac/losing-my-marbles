@@ -162,8 +162,9 @@ public abstract class Movement : MonoBehaviour
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     if (CompareTag("Player"))
                     {
-                        TurnManager.players.Remove(character.GetComponent<PlayerProperties>());
-                        character.SetActive(false);
+                        character.GetComponent<PlayerProperties>().Death();
+                        
+                        grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     }
                     else
                     {
