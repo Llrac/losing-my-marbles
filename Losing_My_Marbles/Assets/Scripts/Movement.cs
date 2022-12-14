@@ -84,7 +84,7 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public bool TryMove(GameObject character, int dataID, int increment)
+    public bool TryMove(GameObject character, int dataID, int increment, bool wallJump = false)
     {
         // Set transform position
         if (dataID == 0)
@@ -101,8 +101,8 @@ public abstract class Movement : MonoBehaviour
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
-                    // Move(character, 1, true);
-                    TryMove(character, 1, 2);
+                    Move(character, 1, true);
+                    TryMove(character, 1, 2, true);
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
@@ -198,7 +198,7 @@ public abstract class Movement : MonoBehaviour
             }
 
             UpdateSkeleton();
-            SetAnimation(dataID, character);
+            SetAnimation(dataID, character, wallJump);
         }
         return false;
     }
@@ -278,6 +278,8 @@ public abstract class Movement : MonoBehaviour
         {
             return;
         }
+        if (wallJump)
+            dataID = 0;
         switch (dataID)
         {
             case 0: // Jump forward
