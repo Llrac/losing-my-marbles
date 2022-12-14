@@ -116,7 +116,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
-                        player.GetComponent<Animation>().TakeFromGiveTo(character, player);
+                        player.GetComponent<Animation>().TakeFromGiveTo(player, character);
                     }
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
