@@ -1275,22 +1275,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53bf17d877a15fe42971aa9e1564e0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 3940016480043197851, guid: feec62dcda6427b42bd3e8275a97eb23, type: 3}
   keyGlitterParticle: {fileID: 1672509437254162840, guid: 777c5ecf621c89741af44e0be2f6a94c, type: 3}
   playerGlitterParticle: {fileID: 5854443905180603826, guid: a39bf45293b20f14a879466e6f2d38a2, type: 3}
+  hitEffect: {fileID: 0}
   tileToCopy: {fileID: 2120634357754178640}
   tileSprites:
+  - {fileID: -827519391, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
+  - {fileID: -495025428, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
+  - {fileID: -1365592080, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
+  - {fileID: -1465998222, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
+  - {fileID: -504318292, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
+  - {fileID: -827519391, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
+  - {fileID: -827519391, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
   - {fileID: 190675154, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
   - {fileID: 442020923, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
   - {fileID: -477652024, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
   - {fileID: -1410768679, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
   - {fileID: 1594301702, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
-  - {fileID: 190675154, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
-  - {fileID: 190675154, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
-  - {fileID: 190675154, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
-  - {fileID: 190675154, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
-  - {fileID: 190675154, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
-  - {fileID: 190675154, guid: f822e0c21ac607a49bc848daead1da4e, type: 3}
+  - {fileID: -2042959336, guid: 30db3518d29d58241a6b9c80d1f9dd35, type: 3}
+  - {fileID: 633945000, guid: 30db3518d29d58241a6b9c80d1f9dd35, type: 3}
+  - {fileID: 1886732947, guid: 30db3518d29d58241a6b9c80d1f9dd35, type: 3}
+  - {fileID: 579498033, guid: 30db3518d29d58241a6b9c80d1f9dd35, type: 3}
+  - {fileID: -486720961, guid: 30db3518d29d58241a6b9c80d1f9dd35, type: 3}
+  - {fileID: -2042959336, guid: 30db3518d29d58241a6b9c80d1f9dd35, type: 3}
+  - {fileID: -2042959336, guid: 30db3518d29d58241a6b9c80d1f9dd35, type: 3}
   tileHoleSprite: {fileID: 21300000, guid: 16c07d3c479f0ab4f8c935d495142d4b, type: 3}
 --- !u!1 &2120634357754178640
 GameObject:
