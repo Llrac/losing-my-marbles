@@ -13,6 +13,7 @@ public class DatabaseAPI : MonoBehaviour
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
         dbReference.SetValueAsync(null); //clears the database every play session
         dbReference.SetValueAsync("movement"); //makes sure we can post to movement
+        dbReference.SetValueAsync("new hand");
     }
 
     public void PostActions(ActionMessage actionMessage, Action callback, Action<AggregateException> fallback)
@@ -35,4 +36,27 @@ public class DatabaseAPI : MonoBehaviour
 
         dbReference.Child("movement").ChildAdded += CurrentListener;
     }
+    
+    public void PostNewHand(NewHandMessage newHandMessage, Action callback, Action<AggregateException> fallback)
+    {
+        var newHandJson = JsonUtility.ToJson(newHandMessage);
+        dbReference.Child("new hand").Push().SetRawJsonValueAsync(newHandJson).ContinueWith(task =>
+        {
+            if (task.IsCanceled || task.IsFaulted) fallback(task.Exception);
+            else callback();
+        });
+    }
+    
+    public void ListenForNewHand(Action<NewHandMessage> callback, Action<AggregateException> fallback)
+    {
+        void CurrentListener(object o, ChildChangedEventArgs args)
+        {
+            if (args.DatabaseError != null) fallback(new AggregateException(new Exception(args.DatabaseError.Message)));
+            else callback(JsonUtility.FromJson<NewHandMessage>(args.Snapshot.GetRawJsonValue()));
+        }
+
+        dbReference.Child("new hand").ChildAdded += CurrentListener;
+    }
 }
+
+    

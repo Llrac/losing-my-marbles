@@ -19,6 +19,7 @@ public class TurnManager : MonoBehaviour
     public static List <PlayerProperties> sortedPlayers = new List <PlayerProperties> ();
     public UIDesktop uiDesktop;
     public GameObject readyAlert;
+    public ActionHandler actionHandler;
     
     //add a sorted list here
     bool startTurn = true;
@@ -143,5 +144,8 @@ public class TurnManager : MonoBehaviour
         readyAlert.GetComponent<Image>().enabled = true;
         
         startTurn = true;
+        
+        //TODO Send message to mobile ui to clear hand and draw new marbles
+        actionHandler.DrawNewHand(true);
     }
 }
