@@ -3986,6 +3986,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiDesktop: {fileID: 116964547}
   readyAlert: {fileID: 453755223}
+  information: {fileID: 0}
+  actionHandler: {fileID: 0}
 --- !u!4 &1552591137
 Transform:
   m_ObjectHideFlags: 0
@@ -4823,6 +4825,7 @@ MonoBehaviour:
   background: {fileID: 0}
   confirmButton: {fileID: 538676333}
   insertAlert: {fileID: 1246574501}
+  timer: {fileID: 0}
   availableMarbleSlotsTop: 00000000000000
   availableMarbleSlotsBottom: 0000000000
   discardBag: []
