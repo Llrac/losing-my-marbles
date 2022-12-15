@@ -23,8 +23,7 @@ public class ActionHandler : MonoBehaviour
         if (uiManager != null)
         {
             database.PostActions(new ActionMessage(playerID, uiManager.orderID[0],
-                uiManager.orderID[1], uiManager.orderID[2],
-                uiManager.orderID[3], uiManager.orderID[4]), () =>
+                uiManager.orderID[1], uiManager.orderID[2]), () =>
             {
                 // Action was sent!
             }, exception => { Debug.Log(exception); });
@@ -73,7 +72,7 @@ public class ActionHandler : MonoBehaviour
 
         List<int> listOfActions = new()
         {
-            action1, action2, action3, action4, action5
+            action1, action2, action3
         };
         
         Debug.Log("Instantiate Action");

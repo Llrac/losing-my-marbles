@@ -1611,7 +1611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 42, y: 63.000122}
+  m_AnchoredPosition: {x: 42, y: 63.000244}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &453755225
@@ -1934,7 +1934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769845, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769851, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_RootOrder
@@ -4246,6 +4246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97fc61709491cdc42b3617689c1927bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amountOfTurns: 3
   uiDesktop: {fileID: 116964547}
   readyAlert: {fileID: 453755223}
   information: {fileID: 1072836623}
@@ -4836,7 +4837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1969670893450060763, guid: 4028aed999475864f9d17518108fc2c4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2638181450149673272, guid: 4028aed999475864f9d17518108fc2c4, type: 3}
       propertyPath: m_Mesh
@@ -5028,7 +5029,7 @@ MonoBehaviour:
   insertAlert: {fileID: 1246574501}
   timer: {fileID: 0}
   availableMarbleSlotsTop: 00000000000000
-  availableMarbleSlotsBottom: 0000000000
+  availableMarbleSlotsBottom: 000000
   discardBag: []
   orderID: 0000000000000000000000000000000000000000
 --- !u!1 &2135908857

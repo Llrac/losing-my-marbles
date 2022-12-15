@@ -1174,6 +1174,10 @@ PrefabInstance:
       propertyPath: marbleSlotsBottom.Array.data[4]
       value: 
       objectReference: {fileID: 230421052201985048}
+    - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
+      propertyPath: availableMarbleSlotsBottom.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6905902840411802057, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
@@ -1654,7 +1658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13adaa1761d4e44597e3eb08c05bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 3
+  playerID: 2
 --- !u!4 &803238550
 Transform:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     
     [Header("Marbles & Slots")]
     public Transform[] marbleSlotsTop = new Transform[7];
-    public Transform[] marbleSlotsBottom = new Transform[5];
+    public Transform[] marbleSlotsBottom = new Transform[3];
     public List<Marble> marbleBag = new();
     public Transform marbleBagTransform;
     public Image[] marbleLights;
@@ -24,9 +24,9 @@ public class UIManager : MonoBehaviour
     public Timer timer;
     
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
-    [HideInInspector] public bool[] availableMarbleSlotsBottom = new bool[5];
+    public bool[] availableMarbleSlotsBottom = new bool[3];
     [HideInInspector] public List<Marble> discardBag = new();
-    [HideInInspector] public int[] orderID = new int[5];
+    public int[] orderID = new int[3];
 
     private void Start()
     {
