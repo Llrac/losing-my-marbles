@@ -2471,6 +2471,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 14aa327bae580e34e8b1d8f575367bbc, type: 3}
   - {fileID: 21300000, guid: 2885fb4d5d163164da2340095ac41f04, type: 3}
   - {fileID: 21300000, guid: 43cd9aaa61efb00438febb1c3866cc0d, type: 3}
+  - {fileID: 21300000, guid: 12d989a5d1340b347b6378447f6adcdd, type: 3}
 --- !u!4 &850021766
 Transform:
   m_ObjectHideFlags: 0
@@ -4130,7 +4131,7 @@ MonoBehaviour:
   uiDesktop: {fileID: 116964547}
   readyAlert: {fileID: 453755223}
   information: {fileID: 1072836623}
-  actionHandler: {fileID: 0}
+  actionHandler: {fileID: 623496582}
 --- !u!4 &1552591137
 Transform:
   m_ObjectHideFlags: 0
@@ -4850,6 +4851,7 @@ MonoBehaviour:
   background: {fileID: 0}
   confirmButton: {fileID: 538676333}
   insertAlert: {fileID: 1246574501}
+  timer: {fileID: 0}
   availableMarbleSlotsTop: 00000000000000
   availableMarbleSlotsBottom: 0000000000
   discardBag: []
