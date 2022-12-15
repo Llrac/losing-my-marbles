@@ -121,7 +121,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
-                        player.GetComponent<Animation>().TakeFromGiveTo(player, character);
+                        player.GetComponent<Animation>().StealKey(character, player); // character steals from player
                     }
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
@@ -153,16 +153,14 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.KEY:
-                    character.GetComponent<Movement>().hasKey = true;
-                    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
-                    FindObjectOfType<GridGenerator>().UpdateGlitter();
-                    Move(character, increment);
+                    character.GetComponent<Animation>().PickupKey(character);
+                    Move(character, 1);
                     return true;
 
                 case GridManager.HOLE:
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
-                        DropKey();
+                        character.GetComponent<Animation>().DropKey(character);
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     if (CompareTag("Player"))
@@ -220,7 +218,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
-                        player.GetComponent<Animation>().TakeFromGiveTo(player, character);
+                        player.GetComponent<Animation>().StealKey(character, player);
                     }
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
@@ -263,8 +261,7 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.KEY:
-                    character.GetComponent<Movement>().hasKey = true;
-                    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
+                    character.GetComponent<Animation>().PickupKey(character);
                     Blink(increment);
                     FindObjectOfType<GridGenerator>().UpdateGlitter();
                     
@@ -405,7 +402,7 @@ public abstract class Movement : MonoBehaviour
                     frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                     if (wallJump)
                     {
-                        frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.animationTimer;
+                        frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
                     frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
@@ -415,7 +412,7 @@ public abstract class Movement : MonoBehaviour
                     backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                     if (wallJump)
                     {
-                        backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.animationTimer;
+                        backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
                     backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
