@@ -218,7 +218,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
-                        player.GetComponent<Animation>().TakeFromGiveTo(player, character);
+                        player.GetComponent<Animation>().StealKey(character, player);
                     }
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
@@ -261,8 +261,7 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.KEY:
-                    character.GetComponent<Movement>().hasKey = true;
-                    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
+                    character.GetComponent<Animation>().PickupKey(character);
                     Blink(increment);
                     FindObjectOfType<GridGenerator>().UpdateGlitter();
                     
