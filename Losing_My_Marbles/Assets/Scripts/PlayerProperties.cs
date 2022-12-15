@@ -55,17 +55,15 @@ public class PlayerProperties : Movement
             {
                 act--;
             }
-            if (Input.GetButtonDown("Jump"))
-            {
-                Pushed(-1);
-            }
+            
         }
 
-        if (playerID == 2)
+        if (playerID == 1)
         {
             if (Input.GetButtonDown("Jump"))
             {
-                TryMove(gameObject, 0, act);
+                //gameObject.GetComponent<Movement>().Blink(3);
+                TryMove(gameObject, 2, 3);
             }
         }
     }
@@ -100,6 +98,9 @@ public class PlayerProperties : Movement
                     break;
                 case 5: // Turn R
                     marbleEffect.Add(new Vector2(1, 1));
+                    break;
+                case 6: // Blink
+                    marbleEffect.Add(new Vector2(2, 3));
                     break;
             }
            // Debug.Log(myActions[0]);
@@ -145,7 +146,6 @@ public class PlayerProperties : Movement
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
-        marbleEffect.Add(new Vector2(1,0));
         transform.position = startingWorldPosition;
         gridPosition = startingGridPosition;
     }

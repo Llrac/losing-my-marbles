@@ -97,10 +97,15 @@ public abstract class Movement : MonoBehaviour
             {
                 gg = FindObjectOfType<GridGenerator>();
             }
-            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID)))
+            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
+                    if (dataID == 2)
+                    {
+                        TryMove(character, increment, 0); // if you blinked into a wall do nothing
+                    }
+                    
                     Move(character, 1, true);
                     TryMove(character, 1, 2, true);
                     return false;
@@ -111,7 +116,7 @@ public abstract class Movement : MonoBehaviour
                     return true;
 
                 case GridManager.PLAYER: // PLAYER rat is able to push player
-                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID)
+                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID,increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
@@ -121,7 +126,7 @@ public abstract class Movement : MonoBehaviour
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        Move(gameObject, increment);
+                        Move(gameObject, 1);
 
                         return true;
                     }
@@ -129,7 +134,7 @@ public abstract class Movement : MonoBehaviour
                     return false;
 
                 case GridManager.ENEMY: // ENEMY
-                    GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID)
+                    GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, enemies);
 
                     enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
@@ -151,7 +156,7 @@ public abstract class Movement : MonoBehaviour
                     character.GetComponent<Movement>().hasKey = true;
                     GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
                     FindObjectOfType<GridGenerator>().UpdateGlitter();
-                    Move(character, 1);
+                    Move(character, increment);
                     return true;
 
                 case GridManager.HOLE:
@@ -163,8 +168,7 @@ public abstract class Movement : MonoBehaviour
                     if (CompareTag("Player"))
                     {
                         character.GetComponent<PlayerProperties>().Death();
-                        
-                        grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+
                     }
                     else
                     {
@@ -175,12 +179,123 @@ public abstract class Movement : MonoBehaviour
 
                 case GridManager.WATER:
                     // do water stuff
-                    Move(character, 1);
+                    Move(character, increment);
                     savedTile = GridManager.WATER;
                     break;
             }
-        }
 
+        }
+        if (dataID == 2)
+        {
+            if (grid == null)
+            {
+                grid = FindObjectOfType<GridManager>();
+            }
+            if (gg == null)
+            {
+                gg = FindObjectOfType<GridGenerator>();
+            }
+            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
+            {
+                case GridManager.EMPTY: // EMPTY (walls, void, etc)
+                    for(int i = increment-1; i > 0; i--)
+                    {
+                        if(grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.EMPTY)
+                        {
+                            TryMove(character, 2, i);
+                            return true;
+                        }
+                    }
+                    
+                    return false;
+
+                case GridManager.WALKABLEGROUND: // WALKABLEGROUND
+                    Blink(increment);
+                    savedTile = 'X';
+                    return true;
+
+                case GridManager.PLAYER: // PLAYER rat is able to push player
+                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
+                        + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+
+                    if (player.GetComponent<PlayerProperties>().hasKey == true)
+                    {
+                        player.GetComponent<Animation>().TakeFromGiveTo(player, character);
+                    }
+
+                    if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
+                    {
+                        Blink(increment); // else blink increment--
+
+                        return true;
+                    }
+                    else
+                    {
+                        for (int i = increment - 1; i > 0; i--)
+                        {
+                            if (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.PLAYER)
+                            {
+                                TryMove(character, 2, i);
+                                return true;
+                            }
+                        }
+                        // if there is a
+                    }
+                    return false;
+
+                case GridManager.ENEMY: // ENEMY
+                    GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
+                        + character.GetComponent<Movement>().gridPosition, enemies);
+
+                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
+
+                    break;
+
+                case GridManager.DOOR:
+                    if (character.GetComponent<Movement>().hasKey == true)
+                    {
+                        Blink(increment);
+                        character.SetActive(false);
+                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
+                        // players should not be able to send more actions
+                        //  FindObjectOfType<ResetManager>().ResetLevel();
+                    }
+                    break;
+
+                case GridManager.KEY:
+                    character.GetComponent<Movement>().hasKey = true;
+                    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
+                    Blink(increment);
+                    FindObjectOfType<GridGenerator>().UpdateGlitter();
+                    
+                    return true;
+
+                case GridManager.HOLE:
+                   
+                    if (gameObject.GetComponent<Movement>().hasKey == true)
+                    {
+                        DropKey(); // add a special fix to dropp key maybe the key should be dropped based on the holes gp and its transform position
+                    }
+                    grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+                    if (CompareTag("Player"))
+                    {
+                        character.GetComponent<PlayerProperties>().Death();
+                    }
+                    else
+                    {
+                        enemies.Remove(this); //is a rat jumps down a hole every rat dies
+                    }
+                    return true;
+
+
+                case GridManager.WATER:
+                    // do water stuff
+                    Blink(increment);
+                    savedTile = GridManager.WATER;
+                    break;
+            }
+
+        }
         // Set character rotation
         if (dataID == 1)
         {
@@ -323,14 +438,14 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public Vector2 RequestGridPosition(int currentDirectionID)
+    public Vector2 RequestGridPosition(int currentDirectionID, float distance = 1) // change this to give take a float as well to change the x and y
     {
         return currentDirectionID switch
         {
-            0 => new Vector2(0, 1),
-            1 or -3 => new Vector2(1, 0),
-            2 or -2 => new Vector2(0, -1),
-            3 or -1 => new Vector2(-1, 0),
+            0 => new Vector2(0, distance),
+            1 or -3 => new Vector2(distance, 0),
+            2 or -2 => new Vector2(0, -distance),
+            3 or -1 => new Vector2(-distance, 0),
             _ => new Vector2(0, 0),
         };
     }
@@ -376,6 +491,32 @@ public abstract class Movement : MonoBehaviour
 
         UpdateSkeleton();
         SetAnimation(dataID, character);
+    }
+    public void Blink(int blinkDistanceMultiplier)
+    {
+        // needs recursion, if there is a wall check one tile back, if there is a 
+        grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
+        float blinkDistance = jumpLength * blinkDistanceMultiplier;
+        switch (currentDirectionID)
+        {
+            case 0:
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x + (blinkDistance),
+                    gameObject.transform.position.y + (blinkDistance)  / 2, 0);
+                break;
+            case 1 or -3:
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x + blinkDistance ,
+                    gameObject.transform.position.y - blinkDistance / 2, 0);
+                break;
+            case 2 or -2:
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x - blinkDistance ,
+                    gameObject.transform.position.y - blinkDistance  / 2, 0);
+                break;
+            case 3 or -1:
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x - blinkDistance ,
+                    gameObject.transform.position.y + blinkDistance / 2, 0);
+                break;
+        }
+
     }
     public void DropKey()
     {
