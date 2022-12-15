@@ -270,7 +270,7 @@ public abstract class Movement : MonoBehaviour
                    
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
-                        DropKey(); // add a special fix to dropp key maybe the key should be dropped based on the holes gp and its transform position
+                        character.GetComponent<Animation>().DropKey(character); // add a special fix to dropp key maybe the key should be dropped based on the holes gp and its transform position
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     if (CompareTag("Player"))
@@ -512,7 +512,7 @@ public abstract class Movement : MonoBehaviour
                     gameObject.transform.position.y + blinkDistance / 2, 0);
                 break;
         }
-
+        gg.UpdateGlitter();
     }
     public void DropKey()
     {

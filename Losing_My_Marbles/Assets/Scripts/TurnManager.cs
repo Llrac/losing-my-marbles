@@ -50,9 +50,10 @@ public class TurnManager : MonoBehaviour
             Debug.Log("Player " + (PlayerProperties.ids[tracking]) + " has locked in");
             tracking++;
         }
-        
+       
         if (PlayerProperties.myActions.Count == players.Count * 5 && PlayerProperties.myActions.Count != 0)
         {
+            Debug.Log(players.Count);
             for (int i = 0; i < players.Count; i++)
             {
                 for (int j = 0; j < players.Count; j++)
