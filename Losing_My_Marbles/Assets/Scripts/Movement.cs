@@ -265,8 +265,9 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.KEY:
                     character.GetComponent<Movement>().hasKey = true;
                     GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = false;
-                    FindObjectOfType<GridGenerator>().UpdateGlitter();
                     Blink(increment);
+                    FindObjectOfType<GridGenerator>().UpdateGlitter();
+                    
                     return true;
 
                 case GridManager.HOLE:
