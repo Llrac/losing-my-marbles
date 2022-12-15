@@ -106,7 +106,7 @@ public abstract class Movement : MonoBehaviour
                         TryMove(character, increment, 0); // if you blinked into a wall do nothing
                     }
                     
-                    Move(character, 1, true);
+                    Move(character, 1, 1);
                     TryMove(character, 1, 2, true);
                     return false;
 
@@ -161,16 +161,10 @@ public abstract class Movement : MonoBehaviour
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
                         character.GetComponent<Animation>().DropKey(character);
+                        Move(character, 1, 0, 2);
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
-                    if (CompareTag("Player"))
-                    {
-                        character.GetComponent<PlayerProperties>().Death();
-                    }
-                    else
-                    {
-                        enemies.Clear(); //is a rat jumps down a hole every rat dies
-                    }
+                    character.GetComponent<Movement>().savedTile = 'X';
                     return true;
       
 
@@ -267,22 +261,15 @@ public abstract class Movement : MonoBehaviour
                     return true;
 
                 case GridManager.HOLE:
-                   
+
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
-                        DropKey(); // add a special fix to dropp key maybe the key should be dropped based on the holes gp and its transform position
+                        character.GetComponent<Animation>().DropKey(character);
+                        Move(character, 1, 2, 2);
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
-                    if (CompareTag("Player"))
-                    {
-                        character.GetComponent<PlayerProperties>().Death();
-                    }
-                    else
-                    {
-                        enemies.Remove(this); //is a rat jumps down a hole every rat dies
-                    }
+                    character.GetComponent<Movement>().savedTile = 'X';
                     return true;
-
 
                 case GridManager.WATER:
                     // do water stuff
@@ -446,7 +433,7 @@ public abstract class Movement : MonoBehaviour
         };
     }
 
-    public void Move(GameObject character, int increment, bool isWallJumping = false, int dataID = 0)
+    public void Move(GameObject character, int increment, int dataID = 0, int typeID = 0)
     {
         jumpMultiplier = 1;
         if (increment < 0)
@@ -455,11 +442,11 @@ public abstract class Movement : MonoBehaviour
         }
 
         wallJumpMultiplier = 1;
-        if (!isWallJumping)
+        if (typeID == 0)
         {
             grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
         }
-        else if (isWallJumping)
+        else if (typeID == 1)
         {
             wallJumpMultiplier *= 0.5f;
         }
@@ -469,19 +456,19 @@ public abstract class Movement : MonoBehaviour
         {
             case 0:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
-                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
+                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
             case 1 or -3:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
-                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
+                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
             case 2 or -2:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
-                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
+                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
             case 3 or -1:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
-                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
+                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
         }
 

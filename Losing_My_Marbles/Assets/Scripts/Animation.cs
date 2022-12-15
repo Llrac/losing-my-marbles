@@ -31,6 +31,7 @@ public class Animation : MonoBehaviour
     GameObject keyGetter;
     GameObject thief;
     GameObject victim;
+    GameObject keyDropper;
     Vector2 keyDestination;
 
     int keyProgressID = 0; // 0 = Empty, 1 = StealKey, 2 = DropKey
@@ -160,20 +161,33 @@ public class Animation : MonoBehaviour
                 key.GetComponent<SpriteRenderer>().enabled = false;
                 thief.GetComponent<PlayerProperties>().hasKey = true;
                 thief = null;
+                victim = null;
+            }
+            else if (keyDropper != null)
+            {
+                if (CompareTag("Player"))
+                {
+                    keyDropper.GetComponent<PlayerProperties>().Death();
+                }
+                else
+                {
+                    Movement.enemies.Clear();
+                }
+                keyDropper = null;
             }
         }
         #endregion
     }
 
     #region Player Animation Functions
-    public void AnimateAction(GameObject character, Vector3 destination, bool wallJump = false)
+    public void AnimateAction(GameObject character, Vector3 destination, int typeID = 0)
     {
         jumpAnimTimer = 0;
         startPosition = character.transform.position;
         this.character = character;
         this.destination = destination;
 
-        if (wallJump)
+        if (typeID == 1)
         {
             wallJumpProgressID = 1;
         }
@@ -210,6 +224,7 @@ public class Animation : MonoBehaviour
     {
         keyProgressID = 3;
         keyAnimTimer = 0;
+        this.keyDropper = keyDropper;
         Movement m = keyDropper.GetComponent<Movement>();
         m.savedTile = 'K';
         m.hasKey = false;
