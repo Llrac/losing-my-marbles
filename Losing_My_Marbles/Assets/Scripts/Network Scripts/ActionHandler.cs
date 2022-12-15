@@ -31,6 +31,7 @@ public class ActionHandler : MonoBehaviour
 
             uiManager.confirmButton.interactable = false;
             uiManager.PlayerCanInteractWithMarbles(false);
+            
         }
     }
 
@@ -81,25 +82,7 @@ public class ActionHandler : MonoBehaviour
 
         foreach (int action in listOfActions)
         {
-            switch (action)
-            {
-                case 1: // Move 1
-                    PlayerProperties.myActions.Add(action);
-                    break;
-                case 2: // Move 2
-                    PlayerProperties.myActions.Add(action);
-                    break;
-                case 3: // Move 3
-                    PlayerProperties.myActions.Add(action);
-                    break;
-                case 4: // Turn L
-                    PlayerProperties.myActions.Add(action);
-                    break;
-                case 5: // Turn R
-                    PlayerProperties.myActions.Add(action);
-                    break;
-            }
-           
+            PlayerProperties.myActions.Add(action);
         }
     }
     
