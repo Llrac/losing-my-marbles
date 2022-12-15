@@ -22,8 +22,7 @@ public class Animation : MonoBehaviour
     GameObject character;
     Vector2 destination;
 
-    bool wallJump = false;
-    int normalJumpProgressID = 0;
+    int jumpProgressID = 0;
     int wallJumpProgressID = 0;
 
     // StealKey & DropKey variables
@@ -42,6 +41,8 @@ public class Animation : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 60;
+
         gridGen = FindObjectOfType<GridGenerator>();
 
         if (jumpProgress != null)
@@ -70,7 +71,7 @@ public class Animation : MonoBehaviour
 
         #region Jump Animations
         // Normal Jump
-        if (jumpAnimTimer < jumpProgressLength && !wallJump && normalJumpProgressID == 1)
+        if (jumpAnimTimer < jumpProgressLength && jumpProgressID == 1)
         {
             character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer)),
             Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer)));
@@ -78,16 +79,16 @@ public class Animation : MonoBehaviour
                 gridGen.UpdateGlitter();
         }
         // End of Normal Jump
-        else if (jumpAnimTimer >= jumpProgressLength && !wallJump && normalJumpProgressID >= 1)
+        else if (jumpAnimTimer >= jumpProgressLength && jumpProgressID >= 1)
         {
-            normalJumpProgressID = 0;
+            jumpProgressID = 0;
             character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer)),
             Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(jumpAnimTimer)));
             if (character.GetComponent<Movement>().hasKey)
                 gridGen.UpdateGlitter();
         }
         // Jumping INTO wall
-        else if (jumpAnimTimer < (jumpProgressLength / 2) && wallJump)
+        else if (jumpAnimTimer < (jumpProgressLength / 2) && wallJumpProgressID == 1)
         {
             character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer * 2)),
             Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer * 2)));
@@ -95,7 +96,7 @@ public class Animation : MonoBehaviour
                 gridGen.UpdateGlitter();
         }
         // Halfwaypoint Walljump
-        if (jumpAnimTimer >= (jumpProgressLength / 2) && wallJumpProgressID == 0 && wallJump)
+        if (jumpAnimTimer >= (jumpProgressLength / 2) && wallJumpProgressID == 1)
         {
             Movement m = GetComponent<Movement>();
 
@@ -108,11 +109,13 @@ public class Animation : MonoBehaviour
             //     m.currentDirectionID++;
             // }
 
+            Debug.Log(jumpProgress.Evaluate(jumpAnimTimer / jumpCurveDiff));
+
             m.UpdateSkeleton();
-            wallJumpProgressID = 1;
+            wallJumpProgressID = 2;
         }
         // Jumping FROM wall
-        if (wallJumpProgressID == 1 && wallJump)
+        if (jumpAnimTimer < jumpProgressLength && wallJumpProgressID == 2)
         {
             character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, startPosition.x, jumpProgress.Evaluate(jumpAnimTimer)),
             Mathf.Lerp(character.transform.position.y, startPosition.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer)));
@@ -120,10 +123,10 @@ public class Animation : MonoBehaviour
                 gridGen.UpdateGlitter();
         }
         // End of Walljump
-        if (jumpAnimTimer >= jumpProgressLength && wallJump)
+        if (jumpAnimTimer >= jumpProgressLength && wallJumpProgressID == 2)
         {
             wallJumpProgressID = 0;
-            wallJump = false;
+            character.transform.position = startPosition;
         }
         
         #endregion
@@ -167,7 +170,6 @@ public class Animation : MonoBehaviour
     #region Player Animation Functions
     public void AnimateAction(GameObject character, Vector3 destination, bool wallJump = false)
     {
-        normalJumpProgressID = 1;
         jumpAnimTimer = 0;
         startPosition = character.transform.position;
         this.character = character;
@@ -175,7 +177,11 @@ public class Animation : MonoBehaviour
 
         if (wallJump)
         {
-            this.wallJump = wallJump;
+            wallJumpProgressID = 1;
+        }
+        else
+        {
+            jumpProgressID = 1;
         }
     }
     #endregion
