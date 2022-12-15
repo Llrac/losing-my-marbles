@@ -35,6 +35,7 @@ public class TurnManager : MonoBehaviour
     {
         uiDesktop.TurnOnMarbleBagAnimation();
         roundInformation = information.GetComponent<TextMeshProUGUI>();
+        actionHandler.DrawNewHand(true);
     }
     private void Update()
     {

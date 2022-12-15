@@ -52,6 +52,11 @@ public class ActionHandler : MonoBehaviour
             uiManager.DiscardMarblesFromHand();
             uiManager.FillHandWithMarbles();
             uiManager.PlayerCanInteractWithMarbles(true);
+            
+            if (uiManager.timer != null)
+            {
+                uiManager.timer.ResetTimer();
+            }
         }
     }
     
