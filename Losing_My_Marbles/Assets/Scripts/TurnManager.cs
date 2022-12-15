@@ -14,7 +14,7 @@ public class TurnManager : MonoBehaviour
     // enemy 1, 2, 3, etc
     // all hazard tiles
     // all environment tiles
-    int amountOfTurns = 5;
+    public int amountOfTurns = 3;
     public static float turnLength = .5f; // den h�r kan allts� �ndras s� att man hinner med en annan coroutine!!!
     public static List <PlayerProperties> players = new();
     public static List <PlayerProperties> sortedPlayers = new();
@@ -51,8 +51,11 @@ public class TurnManager : MonoBehaviour
             tracking++;
         }
         
-        if (PlayerProperties.myActions.Count == players.Count * 5 && PlayerProperties.myActions.Count != 0)
+        if (PlayerProperties.myActions.Count == players.Count * amountOfTurns && PlayerProperties.myActions.Count != 0)
         {
+            Debug.Log(players.Count);
+            Debug.Log(players[0].marbleEffect.Count);
+            
             for (int i = 0; i < players.Count; i++)
             {
                 for (int j = 0; j < players.Count; j++)
@@ -119,7 +122,6 @@ public class TurnManager : MonoBehaviour
                             Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
                             steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y;
                             break;
-                            
                     }
                     yield return new WaitForSeconds(turnLength);
                 }
