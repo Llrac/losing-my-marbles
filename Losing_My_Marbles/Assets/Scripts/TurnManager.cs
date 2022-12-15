@@ -66,8 +66,6 @@ public class TurnManager : MonoBehaviour
                 startTurn = false;
             }     
         }
-        
-        
     }
 
     private IEnumerator ExecuteTurn()

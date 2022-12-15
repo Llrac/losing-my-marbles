@@ -1877,7 +1877,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769845, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769851, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_RootOrder
@@ -1922,6 +1922,14 @@ PrefabInstance:
     - target: {fileID: 4637896218025769851, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789614383092954685, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
+      propertyPath: gridPosition.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789614383092954685, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
+      propertyPath: gridPosition.y
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9192980682127434134, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_Mesh
@@ -4036,6 +4044,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2133818761148525459, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: savedTile
+      value: 88
+      objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743189, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4118,6 +4130,7 @@ MonoBehaviour:
   uiDesktop: {fileID: 116964547}
   readyAlert: {fileID: 453755223}
   information: {fileID: 1072836623}
+  actionHandler: {fileID: 0}
 --- !u!4 &1552591137
 Transform:
   m_ObjectHideFlags: 0
