@@ -166,7 +166,6 @@ public abstract class Movement : MonoBehaviour
                     if (CompareTag("Player"))
                     {
                         character.GetComponent<PlayerProperties>().Death();
-
                     }
                     else
                     {

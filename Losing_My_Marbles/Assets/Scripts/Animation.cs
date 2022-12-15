@@ -73,8 +73,8 @@ public class Animation : MonoBehaviour
         // Normal Jump
         if (jumpAnimTimer < jumpProgressLength && jumpProgressID == 1)
         {
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer)),
-            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer)));
+            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
+            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
             if (character.GetComponent<Movement>().hasKey)
                 gridGen.UpdateGlitter();
         }
@@ -82,16 +82,16 @@ public class Animation : MonoBehaviour
         else if (jumpAnimTimer >= jumpProgressLength && jumpProgressID >= 1)
         {
             jumpProgressID = 0;
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer)),
-            Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(jumpAnimTimer)));
+            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
+            Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
             if (character.GetComponent<Movement>().hasKey)
                 gridGen.UpdateGlitter();
         }
         // Jumping INTO wall
         else if (jumpAnimTimer < (jumpProgressLength / 2) && wallJumpProgressID == 1)
         {
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer * 2)),
-            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer * 2)));
+            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer * 2) * Time.deltaTime * Application.targetFrameRate),
+            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer * 2) * Time.deltaTime * Application.targetFrameRate));
             if (character.GetComponent<Movement>().hasKey)
                 gridGen.UpdateGlitter();
         }
@@ -109,16 +109,14 @@ public class Animation : MonoBehaviour
             //     m.currentDirectionID++;
             // }
 
-            Debug.Log(jumpProgress.Evaluate(jumpAnimTimer / jumpCurveDiff));
-
             m.UpdateSkeleton();
             wallJumpProgressID = 2;
         }
         // Jumping FROM wall
         if (jumpAnimTimer < jumpProgressLength && wallJumpProgressID == 2)
         {
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, startPosition.x, jumpProgress.Evaluate(jumpAnimTimer)),
-            Mathf.Lerp(character.transform.position.y, startPosition.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer)));
+            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, startPosition.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
+            Mathf.Lerp(character.transform.position.y, startPosition.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
             if (character.GetComponent<Movement>().hasKey)
                 gridGen.UpdateGlitter();
         }

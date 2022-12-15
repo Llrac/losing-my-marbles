@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2610747910663743189
 Transform:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   backIdle: {fileID: 11400000, guid: bab9b12edf5bd68408aaf91ab9ebfd3c, type: 2}
   backJump: {fileID: 11400000, guid: 8c4332a7956efb14e92d382ae814f355, type: 2}
   jumpLength: 1
-  jumpAnimationSpeed: 4
+  jumpAnimationSpeed: 3
   playerID: 1
   playerMarbles: 
   marbleEffect: []
@@ -237,15 +237,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 10
-      outSlope: 10
+      inSlope: 40
+      outSlope: 40
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.1
-      value: 1
+      time: 0.05
+      value: 2
       inSlope: -0.07284938
       outSlope: -0.07284938
       tangentMode: 0
@@ -253,7 +253,7 @@ MonoBehaviour:
       inWeight: 0.22321007
       outWeight: 0.0814594
     - serializedVersion: 3
-      time: 0.2
+      time: 0.1
       value: 0
       inSlope: 0
       outSlope: 0
