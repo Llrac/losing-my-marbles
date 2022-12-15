@@ -31,11 +31,16 @@ public class TurnManager : MonoBehaviour
     int ratPathKeeping = 0;
     int amountOfRounds = 0;
 
+    private void Awake()
+    {
+        actionHandler.DrawNewHand(true);
+        
+    }
+
     private void Start()
     {
         uiDesktop.TurnOnMarbleBagAnimation();
         roundInformation = information.GetComponent<TextMeshProUGUI>();
-        actionHandler.DrawNewHand(true);
     }
     private void Update()
     {
