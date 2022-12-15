@@ -54,6 +54,7 @@ public class TurnManager : MonoBehaviour
         if (PlayerProperties.myActions.Count == players.Count * 5 && PlayerProperties.myActions.Count != 0)
         {
             Debug.Log(players.Count);
+            Debug.Log(players[0].marbleEffect.Count);
             for (int i = 0; i < players.Count; i++)
             {
                 for (int j = 0; j < players.Count; j++)
