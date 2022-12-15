@@ -114,6 +114,12 @@ public class TurnManager : MonoBehaviour
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
                             Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
                             break;
+                        case 2:
+                            sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
+                            Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
+                            steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y;
+                            break;
+                            
                     }
                     yield return new WaitForSeconds(turnLength);
                 }
