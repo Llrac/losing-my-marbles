@@ -12,8 +12,6 @@ public class PlayerProperties : Movement
     public static List<int> myActions = new();
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
-
-    GridGenerator gridGen;
     SpriteRenderer FindIntentShower;
     SetIntent intent;
     int act = 1;
@@ -33,7 +31,7 @@ public class PlayerProperties : Movement
 
     void Update()
     {
-        if (playerID == 1)
+        if (playerID == DebugManager.playerToControl)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -55,11 +53,6 @@ public class PlayerProperties : Movement
             {
                 act--;
             }
-            
-        }
-
-        if (playerID == 1)
-        {
             if (Input.GetButtonDown("Jump"))
             {
                 //gameObject.GetComponent<Movement>().Blink(3);

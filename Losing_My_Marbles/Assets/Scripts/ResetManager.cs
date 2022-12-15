@@ -10,8 +10,20 @@ public class ResetManager : MonoBehaviour
     public static List<Sprite> Screens = new();
     [SerializeField] private GameObject winImage = null;
     private static Image win;
+
     private void Start()
     {
+        if (winImage == null)
+        {
+            Image[] images = FindObjectsOfType<Image>();
+            foreach (Image image in images)
+            {
+                if (image.name == "Win_Image")
+                {
+                    winImage = image.gameObject;
+                }
+            }
+        }
         Screens = winScreens;
         if (winImage != null)
             win = winImage.GetComponent<Image>();
