@@ -29,6 +29,7 @@ public class Animation : MonoBehaviour
     // StealKey & DropKey variables
     [HideInInspector] public float keyAnimTimer = 10f;
     GameObject key;
+    GameObject keyGetter;
     GameObject thief;
     GameObject victim;
     Vector2 keyDestination;
@@ -67,7 +68,7 @@ public class Animation : MonoBehaviour
         jumpAnimTimer += Time.deltaTime;
         keyAnimTimer += Time.deltaTime;
 
-        #region Jump
+        #region Jump Animations
         // Normal Jump
         if (jumpAnimTimer < jumpProgressLength && !wallJump && normalJumpProgressID == 1)
         {
@@ -127,27 +128,43 @@ public class Animation : MonoBehaviour
         
         #endregion
 
-        #region Key
-        // Steal Key
-        if (keyAnimTimer <= keyProgressLength && keyProgressID == 1)
+        #region Key Animations
+        // <Insert Key Animation> AnimationCurve
+        if (keyAnimTimer <= keyProgressLength && keyProgressID > 0)
         {
-            keyDestination = thief.transform.position;
+            if (keyGetter != null)
+                keyDestination = keyGetter.transform.position;
+            else if (thief != null)
+                keyDestination = thief.transform.position;
+            
             key.transform.position = new Vector2(Mathf.Lerp(key.transform.position.x, keyDestination.x, keyProgress.Evaluate(keyAnimTimer)),
             Mathf.Lerp(key.transform.position.y, keyDestination.y + keyHeight.Evaluate(keyAnimTimer / keyProgressLength), keyProgress.Evaluate(keyAnimTimer)));
             gridGen.UpdateGlitter(key.transform.position.x, key.transform.position.y);
         }
-        // End of Key AnimationCurve
+        // End of <Insert Key Animation> AnimationCurve
         else if (keyAnimTimer > keyProgressLength && keyProgressID > 0)
         {
             keyProgressID = 0;
-            key.GetComponent<SpriteRenderer>().enabled = false;
             key.GetComponent<SpriteRenderer>().sortingOrder = 2;
             gridGen.UpdateGlitter(keyDestination.x, keyDestination.y);
-            thief.GetComponent<PlayerProperties>().hasKey = true;
+            key.transform.position = keyDestination;
+            if (keyGetter != null)
+            {
+                key.GetComponent<SpriteRenderer>().enabled = false;
+                keyGetter.GetComponent<Movement>().hasKey = true;
+                keyGetter = null;
+            }
+            else if (thief != null)
+            {
+                key.GetComponent<SpriteRenderer>().enabled = false;
+                thief.GetComponent<PlayerProperties>().hasKey = true;
+                thief = null;
+            }
         }
         #endregion
     }
 
+    #region Player Animation Functions
     public void AnimateAction(GameObject character, Vector3 destination, bool wallJump = false)
     {
         normalJumpProgressID = 1;
@@ -161,10 +178,21 @@ public class Animation : MonoBehaviour
             this.wallJump = wallJump;
         }
     }
+    #endregion
+
+    #region Key Animation Functions
+    public void PickupKey(GameObject keyGetter)
+    {
+        keyProgressID = 1;
+        keyAnimTimer = 0;
+        this.keyGetter = keyGetter;
+        key.GetComponent<SpriteRenderer>().enabled = true;
+        key.GetComponent<SpriteRenderer>().sortingOrder++;
+    }
 
     public void StealKey(GameObject thief, GameObject victim)
     {
-        keyProgressID = 1;
+        keyProgressID = 2;
         keyAnimTimer = 0;
         this.thief = thief;
         this.victim = victim;
@@ -176,7 +204,8 @@ public class Animation : MonoBehaviour
 
     public void DropKey(GameObject keyDropper)
     {
-        keyProgressID = 2;
+        keyProgressID = 3;
+        keyAnimTimer = 0;
         Movement m = keyDropper.GetComponent<Movement>();
         m.savedTile = 'K';
         m.hasKey = false;
@@ -187,4 +216,5 @@ public class Animation : MonoBehaviour
         key.GetComponent<SpriteRenderer>().enabled = true;
         key.GetComponent<SpriteRenderer>().sortingOrder++;
     }
+    #endregion
 }
