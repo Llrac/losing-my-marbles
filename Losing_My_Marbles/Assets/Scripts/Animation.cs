@@ -134,11 +134,16 @@ public class Animation : MonoBehaviour
         // <Insert Key Animation> AnimationCurve
         if (keyAnimTimer <= keyProgressLength && keyProgressID > 0)
         {
-            if (keyGetter != null)
+            if (keyDropper != null)
+            {
+                if (!keyDropper.GetComponent<Movement>().hasKey)
+                    return;
+            }
+            // Everything below should ONLY trigger if keyDropper had key
+            else if (keyGetter != null)
                 keyDestination = keyGetter.transform.position;
             else if (thief != null)
                 keyDestination = thief.transform.position;
-            
             key.transform.position = new Vector2(Mathf.Lerp(key.transform.position.x, keyDestination.x, keyProgress.Evaluate(keyAnimTimer)),
             Mathf.Lerp(key.transform.position.y, keyDestination.y + keyHeight.Evaluate(keyAnimTimer / keyProgressLength), keyProgress.Evaluate(keyAnimTimer)));
             gridGen.UpdateGlitter(key.transform.position.x, key.transform.position.y);
@@ -147,6 +152,24 @@ public class Animation : MonoBehaviour
         else if (keyAnimTimer > keyProgressLength && keyProgressID > 0)
         {
             keyProgressID = 0;
+            if (keyDropper != null)
+            {
+                Movement m = keyDropper.GetComponent<Movement>();
+                if (CompareTag("Player"))
+                {
+                    keyDropper.GetComponent<PlayerProperties>().Death();
+                }
+                else
+                {
+                    Movement.enemies.Clear();
+                }
+                if (!m.hasKey)
+                {
+                    keyDropper = null;
+                    return;
+                }
+            }
+            // Everything below should ONLY trigger if keyDropper had key
             key.GetComponent<SpriteRenderer>().sortingOrder = 2;
             gridGen.UpdateGlitter(keyDestination.x, keyDestination.y);
             key.transform.position = keyDestination;
@@ -162,18 +185,6 @@ public class Animation : MonoBehaviour
                 thief.GetComponent<PlayerProperties>().hasKey = true;
                 thief = null;
                 victim = null;
-            }
-            else if (keyDropper != null)
-            {
-                if (CompareTag("Player"))
-                {
-                    keyDropper.GetComponent<PlayerProperties>().Death();
-                }
-                else
-                {
-                    Movement.enemies.Clear();
-                }
-                keyDropper = null;
             }
         }
         #endregion
@@ -226,14 +237,17 @@ public class Animation : MonoBehaviour
         keyAnimTimer = 0;
         this.keyDropper = keyDropper;
         Movement m = keyDropper.GetComponent<Movement>();
-        m.savedTile = 'K';
-        m.hasKey = false;
-        key.transform.position = keyDropper.transform.position;
-        keyDestination = new Vector2(
-            m.gridPosition.x * 1 + m.gridPosition.y * 1 + -7 - 1,
-            ((-m.gridPosition.x * 1 + m.gridPosition.y * 1) / 2) + 1.5f);
-        key.GetComponent<SpriteRenderer>().enabled = true;
-        key.GetComponent<SpriteRenderer>().sortingOrder++;
+        if (m.hasKey)
+        {
+            m.savedTile = 'K';
+            m.hasKey = false;
+            key.GetComponent<SpriteRenderer>().enabled = true;
+            key.GetComponent<SpriteRenderer>().sortingOrder++;
+            key.transform.position = keyDropper.transform.position;
+            keyDestination = new Vector2(
+                m.gridPosition.x * 1 + m.gridPosition.y * 1 + -7 - 1,
+                ((-m.gridPosition.x * 1 + m.gridPosition.y * 1) / 2) + 1.5f);
+        }
     }
     #endregion
 }

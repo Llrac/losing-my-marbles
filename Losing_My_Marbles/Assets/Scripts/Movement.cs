@@ -158,11 +158,8 @@ public abstract class Movement : MonoBehaviour
                     return true;
 
                 case GridManager.HOLE:
-                    if (gameObject.GetComponent<Movement>().hasKey == true)
-                    {
-                        character.GetComponent<Animation>().DropKey(character);
-                        Move(character, 1, 0, 2);
-                    }
+                    character.GetComponent<Animation>().DropKey(character);
+                    Move(character, 1, dataID, 2);
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     character.GetComponent<Movement>().savedTile = 'X';
                     return true;
@@ -261,12 +258,8 @@ public abstract class Movement : MonoBehaviour
                     return true;
 
                 case GridManager.HOLE:
-
-                    if (gameObject.GetComponent<Movement>().hasKey == true)
-                    {
-                        character.GetComponent<Animation>().DropKey(character);
-                        Move(character, 1, 2, 2);
-                    }
+                    character.GetComponent<Animation>().DropKey(character);
+                    Blink(increment, 1);
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     character.GetComponent<Movement>().savedTile = 'X';
                     return true;
@@ -475,10 +468,11 @@ public abstract class Movement : MonoBehaviour
         UpdateSkeleton();
         SetAnimation(dataID, character);
     }
-    public void Blink(int blinkDistanceMultiplier)
+    public void Blink(int blinkDistanceMultiplier, int typeID = 0)
     {
         // needs recursion, if there is a wall check one tile back, if there is a 
-        grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
+        if (typeID == 0)
+            grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
         float blinkDistance = jumpLength * blinkDistanceMultiplier;
         switch (currentDirectionID)
         {
