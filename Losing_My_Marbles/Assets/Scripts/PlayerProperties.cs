@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,26 +6,22 @@ using UnityEngine;
 public class PlayerProperties : Movement
 {
     public int playerID = 0; // playerID of (0) is null
-    public int amountOfTurns = 3;
-    
     private Vector2 startingGridPosition = Vector2.zero;
     private Vector2 startingWorldPosition = Vector2.zero;
 
     public static List<int> ids = new();
     public static List<int> myActions = new();
-
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
-    
     SpriteRenderer FindIntentShower;
     SetIntent intent;
+    GridManager gridManager;
     int act = 1;
   
     private void Awake()
     {
         TurnManager.players.Add(gameObject.GetComponent<PlayerProperties>());
-
-        UpdateSkeleton();
+        gridManager = FindObjectOfType<GridManager>();
         UpdateSkinBasedOnPlayerID();
         
         FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
@@ -33,6 +30,16 @@ public class PlayerProperties : Movement
         startingWorldPosition = transform.position;
     }
 
+    private void Start()
+    {
+        UpdateSkeleton();
+    }
+
+    private void OnDestroy()
+    {
+        TurnManager.players.Remove(this);
+        TurnManager.sortedPlayers.Remove(this);
+    }
     void Update()
     {
         if (playerID == DebugManager.playerToControl)
@@ -77,7 +84,7 @@ public class PlayerProperties : Movement
     
     public void AddMarbles()
     {
-        for (int i = 0; i < amountOfTurns; i++)
+        for (int i = 0; i < 5; i++)
         {
             switch (myActions[0])
             {
@@ -138,13 +145,17 @@ public class PlayerProperties : Movement
     }
     public void Death()
     {
+       
+        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
         marbleEffect.Clear();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
         transform.position = startingWorldPosition;
         gridPosition = startingGridPosition;
+        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
+        savedTile = GridManager.WALKABLEGROUND;
         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().characterFall);
     }
 }
