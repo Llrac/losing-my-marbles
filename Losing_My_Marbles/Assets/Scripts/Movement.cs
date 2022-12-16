@@ -105,8 +105,7 @@ public abstract class Movement : MonoBehaviour
                     {
                         TryMove(character, increment, 0); // if you blinked into a wall do nothing
                     }
-                    
-                    Move(character, 1, 1);
+                    Move(character, 1, dataID, 1);
                     TryMove(character, 1, 2, true);
                     return false;
 
@@ -142,13 +141,20 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.DOOR:
+                    Move(character, 1);
                     if (character.GetComponent<Movement>().hasKey == true)
                     {
-                        Move(character, 1);
+                        character.GetComponent<Movement>().hasKey = false;
                         character.SetActive(false);
+                        gg.UpdateGlitter();
                         ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
                         // players should not be able to send more actions
                       //  FindObjectOfType<ResetManager>().ResetLevel();
+                    }
+                    else
+                    {
+                        savedTile = 'D';
+                        return true;
                     }
                     break;
 
@@ -158,8 +164,8 @@ public abstract class Movement : MonoBehaviour
                     return true;
 
                 case GridManager.HOLE:
-                    character.GetComponent<Animation>().DropKey(character);
                     Move(character, 1, dataID, 2);
+                    character.GetComponent<Animation>().DropKey(character);
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     character.GetComponent<Movement>().savedTile = 'X';
                     return true;
@@ -240,26 +246,33 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.DOOR:
+                    Blink(increment);
                     if (character.GetComponent<Movement>().hasKey == true)
                     {
-                        Blink(increment);
+                        character.GetComponent<Movement>().hasKey = false;
                         character.SetActive(false);
+                        gg.UpdateGlitter();
                         ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
                         // players should not be able to send more actions
                         //  FindObjectOfType<ResetManager>().ResetLevel();
+                    }
+                    else
+                    {
+                        savedTile = 'D';
+                        return true;
                     }
                     break;
 
                 case GridManager.KEY:
                     character.GetComponent<Animation>().PickupKey(character);
                     Blink(increment);
-                    FindObjectOfType<GridGenerator>().UpdateGlitter();
+                    gg.UpdateGlitter();
                     
                     return true;
 
                 case GridManager.HOLE:
+                    Blink(increment, 2);
                     character.GetComponent<Animation>().DropKey(character);
-                    Blink(increment, 1);
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     character.GetComponent<Movement>().savedTile = 'X';
                     return true;
@@ -427,6 +440,9 @@ public abstract class Movement : MonoBehaviour
     }
 
     public void Move(GameObject character, int increment, int dataID = 0, int typeID = 0)
+    // typeID 0 = Normal Jump
+    // typeID 1 = Wall Jump
+    // typeID 2 = Ghost Jump
     {
         jumpMultiplier = 1;
         if (increment < 0)
@@ -449,19 +465,19 @@ public abstract class Movement : MonoBehaviour
         {
             case 0:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
-                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
+                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, dataID, typeID);
                 break;
             case 1 or -3:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
-                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
+                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, dataID, typeID);
                 break;
             case 2 or -2:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
-                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
+                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, dataID, typeID);
                 break;
             case 3 or -1:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
-                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
+                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, dataID, typeID);
                 break;
         }
 
@@ -469,28 +485,31 @@ public abstract class Movement : MonoBehaviour
         SetAnimation(dataID, character);
     }
     public void Blink(int blinkDistanceMultiplier, int typeID = 0)
+        // typeID 0 = Normal Blink
+        // typeID 2 = Ghost Blink
     {
-        // needs recursion, if there is a wall check one tile back, if there is a 
         if (typeID == 0)
             grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
         float blinkDistance = jumpLength * blinkDistanceMultiplier;
+
+        Animation animation = gameObject.GetComponent<Animation>();
         switch (currentDirectionID)
         {
             case 0:
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x + (blinkDistance),
-                    gameObject.transform.position.y + (blinkDistance)  / 2, 0);
+                animation.AnimateAction(gameObject, new Vector3(gameObject.transform.position.x + (blinkDistance),
+                    gameObject.transform.position.y + (blinkDistance) / 2, 0), 2, typeID);
                 break;
             case 1 or -3:
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x + blinkDistance ,
-                    gameObject.transform.position.y - blinkDistance / 2, 0);
+                animation.AnimateAction(gameObject, new Vector3(gameObject.transform.position.x + (blinkDistance),
+                    gameObject.transform.position.y - (blinkDistance) / 2, 0), 2, typeID);
                 break;
             case 2 or -2:
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x - blinkDistance ,
-                    gameObject.transform.position.y - blinkDistance  / 2, 0);
+                animation.AnimateAction(gameObject, new Vector3(gameObject.transform.position.x - (blinkDistance),
+                    gameObject.transform.position.y - (blinkDistance) / 2, 0), 2, typeID);
                 break;
             case 3 or -1:
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x - blinkDistance ,
-                    gameObject.transform.position.y + blinkDistance / 2, 0);
+                animation.AnimateAction(gameObject, new Vector3(gameObject.transform.position.x - (blinkDistance),
+                    gameObject.transform.position.y + (blinkDistance) / 2, 0), 2, typeID);
                 break;
         }
 
