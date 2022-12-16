@@ -5,17 +5,13 @@ using UnityEngine;
 public class PlayerProperties : Movement
 {
     public int playerID = 0; // playerID of (0) is null
-    public int amountOfTurns = 3;
-    
     private Vector2 startingGridPosition = Vector2.zero;
     private Vector2 startingWorldPosition = Vector2.zero;
 
     public static List<int> ids = new();
     public static List<int> myActions = new();
-
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
-    
     SpriteRenderer FindIntentShower;
     SetIntent intent;
     GridManager gridManager;
@@ -33,7 +29,11 @@ public class PlayerProperties : Movement
         startingGridPosition = gridPosition;
         startingWorldPosition = transform.position;
     }
-
+    private void OnDestroy()
+    {
+        TurnManager.players.Remove(this);
+        TurnManager.sortedPlayers.Remove(this);
+    }
     void Update()
     {
         if (playerID == DebugManager.playerToControl)
@@ -78,7 +78,7 @@ public class PlayerProperties : Movement
     
     public void AddMarbles()
     {
-        for (int i = 0; i < amountOfTurns; i++)
+        for (int i = 0; i < 5; i++)
         {
             switch (myActions[0])
             {
@@ -141,7 +141,7 @@ public class PlayerProperties : Movement
     {
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = GridManager.WALKABLEGROUND;
         marbleEffect.Clear();
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
