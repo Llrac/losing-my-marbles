@@ -4168,6 +4168,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5348300030501963020, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: keyProgress.m_Curve.Array.data[1].time
+      value: 0.24056587
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348300030501963020, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: keyProgress.m_Curve.Array.data[1].value
+      value: 1.0045245
+      objectReference: {fileID: 0}
     - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Mesh
       value: 

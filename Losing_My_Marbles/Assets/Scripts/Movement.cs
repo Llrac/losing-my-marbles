@@ -282,7 +282,6 @@ public abstract class Movement : MonoBehaviour
                         
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
-                    savedTile = 'X';
                     if (CompareTag("Player"))
                     {
                         character.GetComponent<PlayerProperties>().Death();
