@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: f6f4397de7494104882017d25359ad51, type: 2}
-  initialSkinName: "BL\xC5 front/Bl\xE5 front"
+  initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
   initialFlipY: 0
@@ -113,8 +113,8 @@ MonoBehaviour:
   disableRenderingOnOverride: 1
   updateTiming: 1
   unscaledTime: 0
-  _animationName: Idle
-  loop: 0
+  _animationName: Idle_basic
+  loop: 1
   timeScale: 1
 --- !u!33 &7028541642445619394
 MeshFilter:

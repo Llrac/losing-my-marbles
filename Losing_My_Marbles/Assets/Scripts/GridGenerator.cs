@@ -33,7 +33,7 @@ public class GridGenerator : MonoBehaviour
         {
             for (int y = 0; y < grid.board.GetLength(1); y++)
             {
-                if (grid.board[x, y] != GridManager.EMPTY && grid.board[x, y] != GridManager.DOOR)
+                if (grid.board[x, y] != GridManager.EMPTY) //&& grid.board[x, y] != GridManager.DOOR
                 {
                     newTile = Instantiate(tileToCopy);
                     float posX = ((x * tileSize + y * tileSize)) + tileToCopy.transform.position.x -1; // this is the actual x position of the tile

@@ -101,8 +101,6 @@ public abstract class Movement : MonoBehaviour
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
-                   
-                    
                     Move(character, 1, true);
                     TryMove(character, 1, 2, true);
                     return false;
@@ -139,10 +137,12 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.DOOR:
+                    Move(character, 1);
                     if (character.GetComponent<Movement>().hasKey == true)
                     {
-                        Move(character, 1);
+                        character.GetComponent<Movement>().hasKey = false;
                         character.SetActive(false);
+                        gg.UpdateGlitter();
                         ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
                         // players should not be able to send more actions
                       //  FindObjectOfType<ResetManager>().ResetLevel();
@@ -251,10 +251,12 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.DOOR:
+                    Blink(increment);
                     if (character.GetComponent<Movement>().hasKey == true)
                     {
-                        Blink(increment);
+                        character.GetComponent<Movement>().hasKey = false;
                         character.SetActive(false);
+                        gg.UpdateGlitter();
                         ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
                         // players should not be able to send more actions
                         //  FindObjectOfType<ResetManager>().ResetLevel();
@@ -275,7 +277,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.KEY:
                     character.GetComponent<Animation>().PickupKey(character);
                     Blink(increment);
-                    FindObjectOfType<GridGenerator>().UpdateGlitter();
+                    gg.UpdateGlitter();
                     
                     return true;
 
@@ -297,7 +299,6 @@ public abstract class Movement : MonoBehaviour
                         enemies.Remove(this); //is a rat jumps down a hole every rat dies
                     }
                     return true;
-
 
                 case GridManager.WATER:
                     // do water stuff
@@ -461,7 +462,10 @@ public abstract class Movement : MonoBehaviour
         };
     }
 
-    public void Move(GameObject character, int increment, bool isWallJumping = false, int dataID = 0)
+    public void Move(GameObject character, int increment, int dataID = 0, int typeID = 0)
+    // typeID 0 = Normal Jump
+    // typeID 1 = Wall Jump
+    // typeID 2 = Ghost Jump
     {
         jumpMultiplier = 1;
         if (increment < 0)
@@ -470,11 +474,11 @@ public abstract class Movement : MonoBehaviour
         }
 
         wallJumpMultiplier = 1;
-        if (!isWallJumping)
+        if (typeID == 0)
         {
             grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
         }
-        else if (isWallJumping)
+        else if (typeID == 1)
         {
             wallJumpMultiplier *= 0.5f;
         }
@@ -484,47 +488,51 @@ public abstract class Movement : MonoBehaviour
         {
             case 0:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
-                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
+                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, dataID, typeID);
                 break;
             case 1 or -3:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
-                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
+                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, dataID, typeID);
                 break;
             case 2 or -2:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
-                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
+                    character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, dataID, typeID);
                 break;
             case 3 or -1:
                 animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
-                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, isWallJumping);
+                    character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, dataID, typeID);
                 break;
         }
 
         UpdateSkeleton();
         SetAnimation(dataID, character);
     }
-    public void Blink(int blinkDistanceMultiplier)
+    public void Blink(int blinkDistanceMultiplier, int typeID = 0)
+        // typeID 0 = Normal Blink
+        // typeID 2 = Ghost Blink
     {
-        // needs recursion, if there is a wall check one tile back, if there is a 
-        grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
+        if (typeID == 0)
+            grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
         float blinkDistance = jumpLength * blinkDistanceMultiplier;
+
+        Animation animation = gameObject.GetComponent<Animation>();
         switch (currentDirectionID)
         {
             case 0:
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x + (blinkDistance),
-                    gameObject.transform.position.y + (blinkDistance)  / 2, 0);
+                animation.AnimateAction(gameObject, new Vector3(gameObject.transform.position.x + (blinkDistance),
+                    gameObject.transform.position.y + (blinkDistance) / 2, 0), 2, typeID);
                 break;
             case 1 or -3:
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x + blinkDistance ,
-                    gameObject.transform.position.y - blinkDistance / 2, 0);
+                animation.AnimateAction(gameObject, new Vector3(gameObject.transform.position.x + (blinkDistance),
+                    gameObject.transform.position.y - (blinkDistance) / 2, 0), 2, typeID);
                 break;
             case 2 or -2:
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x - blinkDistance ,
-                    gameObject.transform.position.y - blinkDistance  / 2, 0);
+                animation.AnimateAction(gameObject, new Vector3(gameObject.transform.position.x - (blinkDistance),
+                    gameObject.transform.position.y - (blinkDistance) / 2, 0), 2, typeID);
                 break;
             case 3 or -1:
-                gameObject.transform.position = new Vector3(gameObject.transform.position.x - blinkDistance ,
-                    gameObject.transform.position.y + blinkDistance / 2, 0);
+                animation.AnimateAction(gameObject, new Vector3(gameObject.transform.position.x - (blinkDistance),
+                    gameObject.transform.position.y + (blinkDistance) / 2, 0), 2, typeID);
                 break;
         }
         gg.UpdateGlitter();

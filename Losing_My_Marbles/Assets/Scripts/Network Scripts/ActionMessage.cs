@@ -14,7 +14,7 @@ public class ActionMessage
     public int fourthAction;
     public int fifthAction;
 
-    public ActionMessage(int playerID, int firstAction, int secondAction, int thirdAction, int fourthAction, int fifthAction)
+    public ActionMessage(int playerID, int firstAction, int secondAction, int thirdAction)
     {
         this.playerID = playerID;
         this.firstAction = firstAction;

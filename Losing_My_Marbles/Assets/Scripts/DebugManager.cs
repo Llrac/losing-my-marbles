@@ -15,19 +15,19 @@ public class DebugManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && TurnManager.players.Count >= 1)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             playerToControl = 1;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && TurnManager.players.Count >= 2)
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             playerToControl = 2;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && TurnManager.players.Count >= 3)
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             playerToControl = 3;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4) && TurnManager.players.Count >= 4)
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             playerToControl = 4;
         }
