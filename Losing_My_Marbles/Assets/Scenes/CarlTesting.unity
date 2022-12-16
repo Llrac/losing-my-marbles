@@ -4150,6 +4150,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5348300030501963020, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: jumpProgress.m_Curve.Array.data[2].time
+      value: 0.2713318
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348300030501963020, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: jumpProgress.m_Curve.Array.data[2].value
+      value: 0.99292374
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348300030501963020, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: jumpProgress.m_Curve.Array.data[2].inSlope
+      value: 5.7953267
+      objectReference: {fileID: 0}
+    - target: {fileID: 5348300030501963020, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: jumpProgress.m_Curve.Array.data[2].outSlope
+      value: 5.7953267
+      objectReference: {fileID: 0}
     - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Mesh
       value: 
