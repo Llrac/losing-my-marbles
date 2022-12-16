@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
 {
     public TMP_Text timerText;
     public float timeValue;
-    public float playerTime = 20f;
+    public float playerTime = 30f;
 
     private void Start()
     {
@@ -36,11 +36,16 @@ public class Timer : MonoBehaviour
             timeToDisplay = 0;
         }
 
+        if (timeToDisplay <= 10f)
+        {
+            timerText.color = Color.red;
+        }
+        
         float minutes = timeValue / 60;
         float seconds = timeValue % 60;
         
         
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("{0:00}", seconds);
     }
 
     public void ResetTimer()
