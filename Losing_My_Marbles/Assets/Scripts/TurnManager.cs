@@ -33,8 +33,7 @@ public class TurnManager : MonoBehaviour
 
     private void Awake()
     {
-       // actionHandler.DrawNewHand(true);
-        
+        actionHandler.DrawNewHand(true);
     }
 
     private void Start()
