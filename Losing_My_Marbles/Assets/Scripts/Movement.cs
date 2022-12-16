@@ -101,10 +101,7 @@ public abstract class Movement : MonoBehaviour
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
-                    if (dataID == 2)
-                    {
-                        TryMove(character, increment, 0); // if you blinked into a wall do nothing
-                    }
+                   
                     
                     Move(character, 1, true);
                     TryMove(character, 1, 2, true);
@@ -150,6 +147,11 @@ public abstract class Movement : MonoBehaviour
                         // players should not be able to send more actions
                       //  FindObjectOfType<ResetManager>().ResetLevel();
                     }
+                    else
+                    {
+                        Move(character, 1, true);
+                        TryMove(character, 1, 2, true);
+                    }
                     break;
 
                 case GridManager.KEY:
@@ -161,8 +163,10 @@ public abstract class Movement : MonoBehaviour
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
                         character.GetComponent<Animation>().DropKey(character);
+                        
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+                    savedTile = 'X';
                     if (CompareTag("Player"))
                     {
                         character.GetComponent<PlayerProperties>().Death();
@@ -222,20 +226,18 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        Blink(increment); // else blink increment--
+                        Blink(increment);  
 
                         return true;
                     }
                     else
                     {
-                        for (int i = increment - 1; i > 0; i--)
+                        if(RequestGridPosition(currentDirectionID, increment) == gridPosition)
                         {
-                            if (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.PLAYER)
-                            {
-                                TryMove(character, 2, i);
-                                return true;
-                            }
+                            Blink(increment);
+                            return true;
                         }
+                        TryMove(character, 2, increment - 1); // it sees itself if standing next to the player
                         // if there is a
                     }
                     return false;
@@ -257,6 +259,17 @@ public abstract class Movement : MonoBehaviour
                         // players should not be able to send more actions
                         //  FindObjectOfType<ResetManager>().ResetLevel();
                     }
+                    else
+                    {
+                        for (int i = increment - 1; i > 0; i--)
+                        {
+                            if (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.EMPTY)
+                            {
+                                TryMove(character, 2, i);
+                                return true;
+                            }
+                        }
+                    }
                     break;
 
                 case GridManager.KEY:
@@ -271,8 +284,10 @@ public abstract class Movement : MonoBehaviour
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
                         character.GetComponent<Animation>().DropKey(character); // add a special fix to dropp key maybe the key should be dropped based on the holes gp and its transform position
+                        
                     }
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+                    savedTile = 'X';
                     if (CompareTag("Player"))
                     {
                         character.GetComponent<PlayerProperties>().Death();

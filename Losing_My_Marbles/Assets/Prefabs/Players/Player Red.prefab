@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2610747910663743189
 Transform:
   m_ObjectHideFlags: 0
@@ -286,8 +286,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
+      time: 0.49761543
+      value: 1.0165102
       inSlope: 0
       outSlope: 0
       tangentMode: 0

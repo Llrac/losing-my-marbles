@@ -14,12 +14,13 @@ public class PlayerProperties : Movement
     public List <Vector2> marbleEffect = new();
     SpriteRenderer FindIntentShower;
     SetIntent intent;
+    GridManager gridManager;
     int act = 1;
   
     private void Awake()
     {
         TurnManager.players.Add(gameObject.GetComponent<PlayerProperties>());
-
+        gridManager = FindObjectOfType<GridManager>();
         UpdateSkeleton();
         UpdateSkinBasedOnPlayerID();
         
@@ -134,6 +135,7 @@ public class PlayerProperties : Movement
     }
     public void Death()
     {
+        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = GridManager.WALKABLEGROUND;
         marbleEffect.Clear();
         for (int i = 0; i < 5; i++)
         {
@@ -141,6 +143,7 @@ public class PlayerProperties : Movement
         }
         transform.position = startingWorldPosition;
         gridPosition = startingGridPosition;
+        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
     }
 }
 
