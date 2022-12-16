@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2610747910663743189
 Transform:
   m_ObjectHideFlags: 0
@@ -220,10 +220,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: 2.5
-      outSlope: 2.5
+      time: 0.2713318
+      value: 0.99292374
+      inSlope: 5.7953267
+      outSlope: 5.7953267
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -237,15 +237,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 40
-      outSlope: 40
+      inSlope: 29.663006
+      outSlope: 29.663006
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.05
-      value: 2
+      time: 0.13885956
+      value: 4.118992
       inSlope: -0.07284938
       outSlope: -0.07284938
       tangentMode: 0
@@ -253,8 +253,8 @@ MonoBehaviour:
       inWeight: 0.22321007
       outWeight: 0.0814594
     - serializedVersion: 3
-      time: 0.1
-      value: 0
+      time: 0.38199005
+      value: -0.028656006
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -264,8 +264,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.5
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.24282703
+      outSlope: 0.24282703
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -286,8 +286,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 1
-      value: 1
+      time: 0.49761543
+      value: 1.0165102
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -350,7 +350,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   jumpProgressLength: 1
   keyProgressLength: 0
-  keyHeightLength: 0
   jumpAnimTimer: 10
   keyAnimTimer: 10
 --- !u!50 &2610747910663743188
