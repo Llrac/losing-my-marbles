@@ -97,6 +97,7 @@ public abstract class Movement : MonoBehaviour
             {
                 gg = FindObjectOfType<GridGenerator>();
             }
+            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().playerJump);
             switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
@@ -107,6 +108,7 @@ public abstract class Movement : MonoBehaviour
                     }
                     Move(character, 1, dataID, 1);
                     TryMove(character, 1, 2, true);
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
@@ -115,7 +117,7 @@ public abstract class Movement : MonoBehaviour
                     return true;
 
                 case GridManager.PLAYER: // PLAYER rat is able to push player
-                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID,increment)
+                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
@@ -126,6 +128,7 @@ public abstract class Movement : MonoBehaviour
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
                         Move(gameObject, 1);
+                        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
                         return true;
                     }
@@ -197,6 +200,7 @@ public abstract class Movement : MonoBehaviour
                         if(grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.EMPTY)
                         {
                             TryMove(character, 2, i);
+                            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
                             return true;
                         }
                     }
@@ -220,7 +224,7 @@ public abstract class Movement : MonoBehaviour
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
                         Blink(increment); // else blink increment--
-
+                        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
                         return true;
                     }
                     else

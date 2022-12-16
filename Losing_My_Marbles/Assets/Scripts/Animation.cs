@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Animation : MonoBehaviour
 {
+    public AudioSource mediumAudio;
+    public AudioSource quiterAudio;
+    public AudioSource louderAudio;
+
     public AnimationCurve jumpProgress;
     public AnimationCurve jumpHeight;
     public AnimationCurve keyProgress;
@@ -207,6 +212,7 @@ public class Animation : MonoBehaviour
         this.keyGetter = keyGetter;
         key.GetComponent<SpriteRenderer>().enabled = true;
         key.GetComponent<SpriteRenderer>().sortingOrder++;
+        quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().pickupKey);
     }
 
     public void StealKey(GameObject thief, GameObject victim)
@@ -239,6 +245,7 @@ public class Animation : MonoBehaviour
                 ((-m.gridPosition.x * 1 + m.gridPosition.y * 1) / 2) + 1.5f);
         }
         this.keyDropper = keyDropper;
+        mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().dropKey);
     }
     #endregion
 }

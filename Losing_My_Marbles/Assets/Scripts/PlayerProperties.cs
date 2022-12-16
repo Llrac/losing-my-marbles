@@ -145,6 +145,7 @@ public class PlayerProperties : Movement
         }
         transform.position = startingWorldPosition;
         gridPosition = startingGridPosition;
+        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().characterFall);
     }
 }
 

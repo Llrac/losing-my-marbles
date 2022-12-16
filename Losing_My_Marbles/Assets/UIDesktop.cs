@@ -43,7 +43,9 @@ public class UIDesktop : MonoBehaviour
         playerBags[playerID - 1].GetComponent<Animator>().SetBool("chosen marbles", true);
         
         ToggleReadyShine(playerID, true);
-        
+
+        if (GetComponent<AudioSource>() != null)
+            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().playerReady);
     }
 
     public void ToggleReadyShine(int playerID, bool isShining)
