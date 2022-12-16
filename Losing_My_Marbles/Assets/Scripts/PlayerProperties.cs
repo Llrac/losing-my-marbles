@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,6 @@ public class PlayerProperties : Movement
     {
         TurnManager.players.Add(gameObject.GetComponent<PlayerProperties>());
         gridManager = FindObjectOfType<GridManager>();
-        UpdateSkeleton();
         UpdateSkinBasedOnPlayerID();
         
         FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
@@ -29,6 +29,12 @@ public class PlayerProperties : Movement
         startingGridPosition = gridPosition;
         startingWorldPosition = transform.position;
     }
+
+    private void Start()
+    {
+        UpdateSkeleton();
+    }
+
     private void OnDestroy()
     {
         TurnManager.players.Remove(this);
