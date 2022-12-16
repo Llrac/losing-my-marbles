@@ -11,7 +11,6 @@ public class Animation : MonoBehaviour
 
     [HideInInspector] public float jumpProgressLength;
     [HideInInspector] public float keyProgressLength;
-    [HideInInspector] public float keyHeightLength;
 
     float jumpHeightLength;
     float jumpCurveDiff;
@@ -22,8 +21,9 @@ public class Animation : MonoBehaviour
     GameObject character;
     Vector2 destination;
 
-    int jumpProgressID = 0;
+    int normalJumpProgressID = 0;
     int wallJumpProgressID = 0;
+    int ghostJumpProgressID = 0;
 
     // StealKey & DropKey variables
     [HideInInspector] public float keyAnimTimer = 10f;
@@ -32,13 +32,13 @@ public class Animation : MonoBehaviour
     GameObject thief;
     GameObject victim;
     GameObject keyDropper;
+    bool hadKey = false;
     Vector2 keyDestination;
 
     int keyProgressID = 0; // 0 = Empty, 1 = StealKey, 2 = DropKey
 
     // Other Scripts
     GridGenerator gridGen;
-
 
     void Start()
     {
@@ -72,7 +72,7 @@ public class Animation : MonoBehaviour
 
         #region Jump Animations
         // Normal Jump
-        if (jumpAnimTimer < jumpProgressLength && jumpProgressID == 1)
+        if (jumpAnimTimer < jumpProgressLength && normalJumpProgressID == 1)
         {
             character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
             Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
@@ -80,9 +80,9 @@ public class Animation : MonoBehaviour
                 gridGen.UpdateGlitter();
         }
         // End of Normal Jump
-        else if (jumpAnimTimer >= jumpProgressLength && jumpProgressID >= 1)
+        else if (jumpAnimTimer >= jumpProgressLength && normalJumpProgressID >= 1)
         {
-            jumpProgressID = 0;
+            normalJumpProgressID = 0;
             character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
             Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
             if (character.GetComponent<Movement>().hasKey)
@@ -91,8 +91,8 @@ public class Animation : MonoBehaviour
         // Jumping INTO wall
         else if (jumpAnimTimer < (jumpProgressLength / 2) && wallJumpProgressID == 1)
         {
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer * 2) * Time.deltaTime * Application.targetFrameRate),
-            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer * 2) * Time.deltaTime * Application.targetFrameRate));
+            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer * 1.5f) * Time.deltaTime * Application.targetFrameRate),
+            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer * 1.5f) * Time.deltaTime * Application.targetFrameRate));
             if (character.GetComponent<Movement>().hasKey)
                 gridGen.UpdateGlitter();
         }
@@ -100,16 +100,6 @@ public class Animation : MonoBehaviour
         if (jumpAnimTimer >= (jumpProgressLength / 2) && wallJumpProgressID == 1)
         {
             Movement m = GetComponent<Movement>();
-
-            // for (int i = 0; i < 2; i++)
-            // {
-            //     if (m.currentDirectionID <= -4 || m.currentDirectionID >= 4)
-            //     {
-            //         m.currentDirectionID = 0;
-            //     }
-            //     m.currentDirectionID++;
-            // }
-
             m.UpdateSkeleton();
             wallJumpProgressID = 2;
         }
@@ -122,28 +112,32 @@ public class Animation : MonoBehaviour
                 gridGen.UpdateGlitter();
         }
         // End of Walljump
-        if (jumpAnimTimer >= jumpProgressLength && wallJumpProgressID == 2)
+        else if (jumpAnimTimer >= jumpProgressLength && wallJumpProgressID == 2)
         {
             wallJumpProgressID = 0;
             character.transform.position = startPosition;
+            if (character.GetComponent<Movement>().hasKey)
+                gridGen.UpdateGlitter();
         }
-        
         #endregion
 
         #region Key Animations
         // <Insert Key Animation> AnimationCurve
         if (keyAnimTimer <= keyProgressLength && keyProgressID > 0)
         {
-            if (keyDropper != null)
+            if (keyDropper != null && !hadKey)
             {
-                if (!keyDropper.GetComponent<Movement>().hasKey)
-                    return;
+                return;
             }
             // Everything below should ONLY trigger if keyDropper had key
             else if (keyGetter != null)
+            {
                 keyDestination = keyGetter.transform.position;
+            }
             else if (thief != null)
+            {
                 keyDestination = thief.transform.position;
+            }
             key.transform.position = new Vector2(Mathf.Lerp(key.transform.position.x, keyDestination.x, keyProgress.Evaluate(keyAnimTimer)),
             Mathf.Lerp(key.transform.position.y, keyDestination.y + keyHeight.Evaluate(keyAnimTimer / keyProgressLength), keyProgress.Evaluate(keyAnimTimer)));
             gridGen.UpdateGlitter(key.transform.position.x, key.transform.position.y);
@@ -154,18 +148,10 @@ public class Animation : MonoBehaviour
             keyProgressID = 0;
             if (keyDropper != null)
             {
-                Movement m = keyDropper.GetComponent<Movement>();
-                if (CompareTag("Player"))
+                keyDropper.GetComponent<PlayerProperties>().Death();
+                keyDropper = null;
+                if (!hadKey)
                 {
-                    keyDropper.GetComponent<PlayerProperties>().Death();
-                }
-                else
-                {
-                    Movement.enemies.Clear();
-                }
-                if (!m.hasKey)
-                {
-                    keyDropper = null;
                     return;
                 }
             }
@@ -186,12 +172,16 @@ public class Animation : MonoBehaviour
                 thief = null;
                 victim = null;
             }
+            hadKey = false;
         }
         #endregion
     }
 
     #region Player Animation Functions
     public void AnimateAction(GameObject character, Vector3 destination, int typeID = 0)
+        // dataID is the same as from Movement
+        // dataID 0 = Jump, dataID 1 = Empty, dataID 2 = Blink
+        // typeID 0 = Normal Jump, typeID 1 = Wall Jump
     {
         jumpAnimTimer = 0;
         startPosition = character.transform.position;
@@ -204,7 +194,7 @@ public class Animation : MonoBehaviour
         }
         else
         {
-            jumpProgressID = 1;
+            normalJumpProgressID = 1;
         }
     }
     #endregion
@@ -235,19 +225,17 @@ public class Animation : MonoBehaviour
     {
         keyProgressID = 3;
         keyAnimTimer = 0;
-        this.keyDropper = keyDropper;
         Movement m = keyDropper.GetComponent<Movement>();
-        if (m.hasKey)
-        {
-            m.savedTile = 'K';
-            m.hasKey = false;
-            key.GetComponent<SpriteRenderer>().enabled = true;
-            key.GetComponent<SpriteRenderer>().sortingOrder++;
-            key.transform.position = keyDropper.transform.position;
-            keyDestination = new Vector2(
-                m.gridPosition.x * 1 + m.gridPosition.y * 1 + -7 - 1,
-                ((-m.gridPosition.x * 1 + m.gridPosition.y * 1) / 2) + 1.5f);
-        }
+        m.savedTile = 'K';
+        m.hasKey = false;
+        hadKey = true;
+        key.GetComponent<SpriteRenderer>().enabled = true;
+        key.GetComponent<SpriteRenderer>().sortingOrder++;
+        key.transform.position = keyDropper.transform.position;
+        keyDestination = new Vector2(
+            m.gridPosition.x * 1 + m.gridPosition.y * 1 + -7 - 1,
+            ((-m.gridPosition.x * 1 + m.gridPosition.y * 1) / 2) + 1.5f);
+        this.keyDropper = keyDropper;
     }
     #endregion
 }

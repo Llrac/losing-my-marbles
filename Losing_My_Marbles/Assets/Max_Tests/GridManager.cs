@@ -10,7 +10,7 @@ public class GridManager : MonoBehaviour
     public const char DOOR = 'D';
     public const char KEY = 'K';
     public const char HOLE = 'H';
-    public const char EMPTY='?';
+    public const char EMPTY ='?';
     public const char WATER = 'W';
     public char[,] board = new char[10, 10] // [column, row in column] or [y, x]
     {
