@@ -164,10 +164,11 @@ public abstract class Movement : MonoBehaviour
                     if (gameObject.GetComponent<Movement>().hasKey == true)
                     {
                         character.GetComponent<Animation>().DropKey(character);
-                        character.GetComponent<Movement>().savedTile = GridManager.KEY;
+                        savedTile = GridManager.KEY;
                     }
-                    grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
-                    savedTile = 'X';
+                    
+                    grid.MoveInGridMatrix(gameObject.GetComponent<Movement>(), new Vector2(0, 0));
+                    
                     if (CompareTag("Player"))
                     {
                         character.GetComponent<PlayerProperties>().Death();
@@ -527,17 +528,17 @@ public abstract class Movement : MonoBehaviour
         }
         gg.UpdateGlitter();
     }
-    public void DropKey()
-    {
-        savedTile = 'K';
-        hasKey = false;
-        Vector2 keyPos;
-        keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7 - 1;
-        keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + 1.5f;
-        GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
-        GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
-        gg.UpdateGlitter(keyPos.x, keyPos.y);
-    }
+    //public void DropKey()
+    //{
+    //    savedTile = 'K';
+    //    hasKey = false;
+    //    Vector2 keyPos;
+    //    keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7 - 1;
+    //    keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + 1.5f;
+    //    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
+    //    GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
+    //    gg.UpdateGlitter(keyPos.x, keyPos.y);
+    //}
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);
 }

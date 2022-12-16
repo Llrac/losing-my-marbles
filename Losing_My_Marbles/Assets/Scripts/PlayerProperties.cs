@@ -139,7 +139,8 @@ public class PlayerProperties : Movement
     }
     public void Death()
     {
-        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = GridManager.WALKABLEGROUND;
+       
+        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
         marbleEffect.Clear();
         for (int i = 0; i < 5; i++)
         {
@@ -148,6 +149,7 @@ public class PlayerProperties : Movement
         transform.position = startingWorldPosition;
         gridPosition = startingGridPosition;
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
+        savedTile = GridManager.WALKABLEGROUND;
     }
 }
 
