@@ -5,13 +5,17 @@ using UnityEngine;
 public class PlayerProperties : Movement
 {
     public int playerID = 0; // playerID of (0) is null
+    public int amountOfTurns = 3;
+    
     private Vector2 startingGridPosition = Vector2.zero;
     private Vector2 startingWorldPosition = Vector2.zero;
 
     public static List<int> ids = new();
     public static List<int> myActions = new();
+
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
+    
     SpriteRenderer FindIntentShower;
     SetIntent intent;
     int act = 1;
@@ -73,7 +77,7 @@ public class PlayerProperties : Movement
     
     public void AddMarbles()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < amountOfTurns; i++)
         {
             switch (myActions[0])
             {
@@ -135,7 +139,7 @@ public class PlayerProperties : Movement
     public void Death()
     {
         marbleEffect.Clear();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
