@@ -257,8 +257,6 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.DOOR:
-                    Blink(increment);
-                    savedTile = GridManager.DOOR;
                     if (character.GetComponent<Movement>().hasKey == true)
                     {
                         character.GetComponent<Movement>().hasKey = false;
@@ -267,6 +265,12 @@ public abstract class Movement : MonoBehaviour
                         ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
                         // players should not be able to send more actions
                         //  FindObjectOfType<ResetManager>().ResetLevel();
+                    }
+                    else
+                    {
+                        Blink(increment);
+                        savedTile = 'D';
+                        return true;
                     }
                     
                     break;

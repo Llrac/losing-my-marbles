@@ -53,7 +53,7 @@ public class UIDesktop : MonoBehaviour
         GameObject child = playerUIPosition[playerID - 1].transform.GetChild(0).gameObject;
         
         child.SetActive(isShining);
-        Debug.Log(child);
+        //Debug.Log(child);
     }
     
     //TODO Add a function that toggles ALL ready shines

@@ -20,7 +20,7 @@ public class ActionMessage
         this.firstAction = firstAction;
         this.secondAction = secondAction;
         this.thirdAction = thirdAction;
-        this.fourthAction = fourthAction;
-        this.fifthAction = fifthAction;
+        //this.fourthAction = fourthAction;
+        //this.fifthAction = fifthAction;
     }
 }
