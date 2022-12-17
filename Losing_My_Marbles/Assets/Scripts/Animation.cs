@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Animation : MonoBehaviour
 {
+    public AudioSource mediumAudio;
+    public AudioSource quiterAudio;
+    public AudioSource louderAudio;
+
     public AnimationCurve jumpProgress;
     public AnimationCurve jumpHeight;
     public AnimationCurve keyProgress;
@@ -23,7 +28,6 @@ public class Animation : MonoBehaviour
 
     int normalJumpProgressID = 0;
     int wallJumpProgressID = 0;
-    int ghostJumpProgressID = 0;
 
     // StealKey & DropKey variables
     [HideInInspector] public float keyAnimTimer = 10f;
@@ -91,8 +95,8 @@ public class Animation : MonoBehaviour
         // Jumping INTO wall
         else if (jumpAnimTimer < (jumpProgressLength / 2) && wallJumpProgressID == 1)
         {
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer * 1.5f) * Time.deltaTime * Application.targetFrameRate),
-            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer * 1.5f) * Time.deltaTime * Application.targetFrameRate));
+            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
+            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
             if (character.GetComponent<Movement>().hasKey)
                 gridGen.UpdateGlitter();
         }
@@ -148,7 +152,6 @@ public class Animation : MonoBehaviour
             keyProgressID = 0;
             if (keyDropper != null)
             {
-                keyDropper.GetComponent<PlayerProperties>().Death();
                 keyDropper = null;
                 if (!hadKey)
                 {
@@ -207,6 +210,7 @@ public class Animation : MonoBehaviour
         this.keyGetter = keyGetter;
         key.GetComponent<SpriteRenderer>().enabled = true;
         key.GetComponent<SpriteRenderer>().sortingOrder++;
+        quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().pickupKey);
     }
 
     public void StealKey(GameObject thief, GameObject victim)
@@ -236,6 +240,7 @@ public class Animation : MonoBehaviour
             m.gridPosition.x * 1 + m.gridPosition.y * 1 + -7 - 1,
             ((-m.gridPosition.x * 1 + m.gridPosition.y * 1) / 2) + 1.5f);
         this.keyDropper = keyDropper;
+        mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().dropKey);
     }
     #endregion
 }

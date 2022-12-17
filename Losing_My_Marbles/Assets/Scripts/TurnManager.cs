@@ -28,7 +28,7 @@ public class TurnManager : MonoBehaviour
     //add a sorted list here
     bool startTurn = true;
     int tracking = 0;
-    int ratPathKeeping = 0;
+    //int ratPathKeeping = 0;
     int amountOfRounds = 0;
 
     private void Awake()
@@ -46,14 +46,14 @@ public class TurnManager : MonoBehaviour
         if (PlayerProperties.ids.Count > tracking)
         {
             uiDesktop.TurnOffMarbleBagAnimation(PlayerProperties.ids[tracking]);
-            Debug.Log("Player " + (PlayerProperties.ids[tracking]) + " has locked in");
+            //Debug.Log("Player " + (PlayerProperties.ids[tracking]) + " has locked in");
             tracking++;
         }
         
         if (PlayerProperties.myActions.Count == players.Count * amountOfTurns && PlayerProperties.myActions.Count != 0)
         {
-            Debug.Log(players.Count);
-            Debug.Log(players[0].marbleEffect.Count);
+            //Debug.Log(players.Count);
+            //Debug.Log(players[0].marbleEffect.Count);
             
             for (int i = 0; i < players.Count; i++)
             {
@@ -114,11 +114,11 @@ public class TurnManager : MonoBehaviour
                             break;
                         case 1:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
-                            Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
+                            //Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
                             break;
                         case 2:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
-                            Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
+                            //Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
                             steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y;
                             break;
                     }
@@ -155,6 +155,7 @@ public class TurnManager : MonoBehaviour
 
         for(int i = 0; i < players.Count; i++)
         {
+            players[i].GetComponent<PlayerProperties>().isAlive = true;
             players[i].ResetMarbles();
         }
 

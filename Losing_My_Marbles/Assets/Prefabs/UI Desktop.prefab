@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6905902840411802054
+--- !u!1 &5815408277541116926
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6905902840411802055}
-  - component: {fileID: 6905902840411802056}
-  - component: {fileID: 831956080}
+  - component: {fileID: 5815408277541116920}
+  - component: {fileID: 5815408277541116927}
+  - component: {fileID: 5815408277541116921}
   m_Layer: 0
-  m_Name: MarbleManager
+  m_Name: UI Desktop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6905902840411802055
+--- !u!4 &5815408277541116920
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6905902840411802054}
+  m_GameObject: {fileID: 5815408277541116926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,73 +33,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6905902840411802056
+--- !u!114 &5815408277541116927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6905902840411802054}
+  m_GameObject: {fileID: 5815408277541116926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37c22a03e202c8b48a837526d34c4db8, type: 3}
+  m_Script: {fileID: 11500000, guid: 37b7769a0f8aa824194ba5c8cef7aba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: {fileID: 0}
-  marbleSlotsTop:
+  playLogTransform: {fileID: 0}
+  playerOrderPrefab: {fileID: 2289388166846186781, guid: 4c516e3871547c346b4766b606b06fb1, type: 3}
+  playerSprite:
+  - {fileID: 21300000, guid: eafc6ee1c44c9ca4a8142d3da5e1da53, type: 3}
+  - {fileID: 21300000, guid: e51e358a3525ecc40b3b7feddefdef90, type: 3}
+  - {fileID: 21300000, guid: 89a681d7429fa2c40a3f40f758f98509, type: 3}
+  - {fileID: 21300000, guid: ec4d6e6ab958c4f4a90a2aa45dfb9444, type: 3}
+  playerBags:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  marbleSlotsBottom:
-  - {fileID: 0}
+  playerUIPosition:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  marbleBag:
+  playerBagsAnimator:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  marbleBagTransform: {fileID: 0}
-  marbleLights:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  background: {fileID: 0}
-  confirmButton: {fileID: 0}
-  insertAlert: {fileID: 0}
-  timer: {fileID: 0}
-  availableMarbleSlotsTop: 00000000000000
-  availableMarbleSlotsBottom: 000000
-  discardBag: []
-  orderID: 0000000000000000000000000000000000000000
---- !u!82 &831956080
+--- !u!82 &5815408277541116921
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6905902840411802054}
+  m_GameObject: {fileID: 5815408277541116926}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 6026a884a398704458ef4808b39c7753, type: 2}

@@ -39,7 +39,7 @@ public class DebugManager : MonoBehaviour
                 playerToControl++;
             else
                 playerToControl = 1;
-            Debug.Log("Player " + playerToControl);
+            //Debug.Log("Player " + playerToControl);
         }
     }
 }

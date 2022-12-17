@@ -57,6 +57,8 @@ public class UIManager : MonoBehaviour
 
     public void FillHandWithMarbles()
     {
+        if (GetComponent<AudioSource>() != null)
+            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().newMarbles);
         SetAllSlotsToAvailable();
         
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
@@ -88,6 +90,8 @@ public class UIManager : MonoBehaviour
 
     public bool MoveMarbleToBottomRow(GameObject marble)
     {
+        if (GetComponent<AudioSource>() != null)
+            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectMarble);
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             if (availableMarbleSlotsBottom[i])
@@ -116,6 +120,8 @@ public class UIManager : MonoBehaviour
     
     public bool MoveMarbleToTopRow(GameObject marble)
     {
+        if (GetComponent<AudioSource>() != null)
+            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectMarble);
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
             if (availableMarbleSlotsTop[i])
@@ -156,7 +162,8 @@ public class UIManager : MonoBehaviour
         
         if (insertAlert != null)
             insertAlert.enabled = false;
-        
+        if (GetComponent<AudioSource>() != null)
+            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().marblesReady);
         return true;
     }
 
@@ -216,4 +223,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void OnConfirmButtonClick()
+    {
+        if (GetComponent<AudioSource>() != null)
+            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pressGo);
+    }
 }

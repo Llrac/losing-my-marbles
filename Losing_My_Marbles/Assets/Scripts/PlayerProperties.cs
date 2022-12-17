@@ -17,6 +17,7 @@ public class PlayerProperties : Movement
     SetIntent intent;
     GridManager gridManager;
     int act = 1;
+    public bool isAlive;
   
     private void Awake()
     {
@@ -84,7 +85,7 @@ public class PlayerProperties : Movement
     
     public void AddMarbles()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 3; i++)
         {
             switch (myActions[0])
             {
@@ -137,7 +138,7 @@ public class PlayerProperties : Movement
     }
     public void ShowMyIntent(int marbleID)
     {
-        intent.ShowIntent(Intent.GiveIntent(marbleID));
+        intent.ShowIntent(Intent.GiveIntent(marbleID), !isAlive);
     }
     public void HideMyIntent()
     {
@@ -145,7 +146,6 @@ public class PlayerProperties : Movement
     }
     public void Death()
     {
-       
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
         marbleEffect.Clear();
         for (int i = 0; i < 5; i++)
@@ -156,6 +156,8 @@ public class PlayerProperties : Movement
         gridPosition = startingGridPosition;
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
         savedTile = GridManager.WALKABLEGROUND;
+        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().characterFall);
+        isAlive = false;
     }
 }
 

@@ -1521,6 +1521,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ab44efde216094691b98bbe4835813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerJump: {fileID: 0}
+  pickupKey: {fileID: 0}
+  dropKey: {fileID: 0}
+  characterFall: {fileID: 0}
+  pushHit: {fileID: 0}
+  wallHit: {fileID: 0}
+  playerReady: {fileID: 0}
+  newMarbles: {fileID: 0}
+  selectMarble: {fileID: 0}
+  marblesReady: {fileID: 0}
+  pressGo: {fileID: 0}
 --- !u!82 &755038334
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1662,7 +1673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13adaa1761d4e44597e3eb08c05bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 2
+  playerID: 1
 --- !u!4 &803238550
 Transform:
   m_ObjectHideFlags: 0

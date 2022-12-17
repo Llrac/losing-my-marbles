@@ -43,7 +43,9 @@ public class UIDesktop : MonoBehaviour
         playerBags[playerID - 1].GetComponent<Animator>().SetBool("chosen marbles", true);
         
         ToggleReadyShine(playerID, true);
-        
+
+        if (GetComponent<AudioSource>() != null)
+            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().playerReady);
     }
 
     public void ToggleReadyShine(int playerID, bool isShining)
@@ -51,7 +53,7 @@ public class UIDesktop : MonoBehaviour
         GameObject child = playerUIPosition[playerID - 1].transform.GetChild(0).gameObject;
         
         child.SetActive(isShining);
-        Debug.Log(child);
+        //Debug.Log(child);
     }
     
     //TODO Add a function that toggles ALL ready shines
