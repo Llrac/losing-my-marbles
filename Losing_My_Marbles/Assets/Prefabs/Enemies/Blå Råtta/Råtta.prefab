@@ -486,7 +486,7 @@ MonoBehaviour:
   gridPosition: {x: 3, y: 3}
   hasKey: 0
   currentDirectionID: 0
-  frontIdle: {fileID: 11400000, guid: 1449b6416dd55d24782fbbb7e63c762d, type: 2}
+  frontIdle: {fileID: 11400000, guid: 1c1698bce268d764e995d22675ac1ebd, type: 2}
   frontJump: {fileID: 11400000, guid: 1449b6416dd55d24782fbbb7e63c762d, type: 2}
   backIdle: {fileID: 11400000, guid: 4fcdfc35fb1925f47a64a0a3aa826d93, type: 2}
   backJump: {fileID: 11400000, guid: 3af9c980106b40a4babdb0f74cf2a8db, type: 2}
@@ -533,10 +533,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.2713318
+      time: 1.5
       value: 0.99292374
-      inSlope: 5.7953267
-      outSlope: 5.7953267
+      inSlope: 0.70923126
+      outSlope: 0.70923126
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

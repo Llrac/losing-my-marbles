@@ -214,25 +214,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 21904643, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
-      propertyPath: frontIdle
-      value: 
-      objectReference: {fileID: 11400000, guid: 1449b6416dd55d24782fbbb7e63c762d, type: 2}
     - target: {fileID: 949488757463896915, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4275283614362212228, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
-      propertyPath: jumpProgress.m_Curve.Array.data[2].time
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4275283614362212228, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
-      propertyPath: jumpProgress.m_Curve.Array.data[2].inSlope
-      value: 0.70923126
-      objectReference: {fileID: 0}
-    - target: {fileID: 4275283614362212228, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
-      propertyPath: jumpProgress.m_Curve.Array.data[2].outSlope
-      value: 0.70923126
       objectReference: {fileID: 0}
     - target: {fileID: 7028541642445619393, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
       propertyPath: m_RootOrder
@@ -282,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "R\xE5tta"
       objectReference: {fileID: 0}
+    - target: {fileID: 7079113148080597387, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 7064127189265369304, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
 --- !u!1 &36617716
@@ -4223,6 +4211,10 @@ PrefabInstance:
     - target: {fileID: 2610747910663743195, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Name
       value: Player Red
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
