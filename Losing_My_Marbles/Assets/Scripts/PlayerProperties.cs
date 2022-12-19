@@ -68,7 +68,7 @@ public class PlayerProperties : Movement
             if (Input.GetButtonDown("Jump"))
             {
                 //gameObject.GetComponent<Movement>().Blink(3);
-                TryMove(gameObject, 2, 3);
+                StartCoroutine(SpecialMarble.Bomb(this)); 
             }
         }
     }
@@ -107,6 +107,11 @@ public class PlayerProperties : Movement
                 case 6: // Blink
                     marbleEffect.Add(new Vector2(2, 3));
                     break;
+                case 7: //Turn 180
+                    marbleEffect.Add(new Vector2(1, 2));
+                    break;
+                //Aggressive marbles here
+
             }
            // Debug.Log(myActions[0]);
             playerMarbles.Add(myActions[0]);

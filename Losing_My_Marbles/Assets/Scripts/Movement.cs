@@ -123,7 +123,7 @@ public abstract class Movement : MonoBehaviour
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        Move(gameObject, 1);
+                        TryMove(gameObject,0, 1);
                         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
                         return true;
