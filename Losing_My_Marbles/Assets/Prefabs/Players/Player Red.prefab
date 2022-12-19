@@ -138,7 +138,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 40e4daebd0c3a9345a104875dcae24ec, type: 2}
+  - {fileID: 2100000, guid: 1f557ebb7fe7f894286b9d88c75e9e3a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: c633d827aeeaa9d4a856aa5f793a965a, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 347eee8041fe2a74d813dd6777d30317, type: 2}
   initialSkinName: red
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 1
@@ -265,10 +265,10 @@ MonoBehaviour:
   gridPosition: {x: 9, y: 5}
   hasKey: 0
   currentDirectionID: 3
-  frontIdle: {fileID: 11400000, guid: 89c9a43523241f045843d25082d3dd5f, type: 2}
-  frontJump: {fileID: 11400000, guid: 683f0ce70a17327419e196ba029867e2, type: 2}
-  backIdle: {fileID: 11400000, guid: bab9b12edf5bd68408aaf91ab9ebfd3c, type: 2}
-  backJump: {fileID: 11400000, guid: 8c4332a7956efb14e92d382ae814f355, type: 2}
+  frontIdle: {fileID: 11400000, guid: 84744c1528e3477498f63f586ff48d8a, type: 2}
+  frontJump: {fileID: 11400000, guid: 977ce56902a7a3f4c8a7a1e84914fb0f, type: 2}
+  backIdle: {fileID: 11400000, guid: 4cfc657623d05cc4bb8d75f055c0c5f6, type: 2}
+  backJump: {fileID: 11400000, guid: c6f0ef5b783165e4797ea69dec34bf12, type: 2}
   jumpLength: 1
   jumpAnimationSpeed: 3
   playerID: 1
@@ -904,7 +904,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b091433e2847bcd409f140686e035342, type: 2}
+  - {fileID: 2100000, guid: fc6f6e57693da77409e5dfefeeec38da, type: 2}
+  - {fileID: 2100000, guid: 7e22ec25625f5894ca46626141d00563, type: 2}
+  - {fileID: 2100000, guid: fc6f6e57693da77409e5dfefeeec38da, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -938,7 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 11a5846cf2cd77543a4aa55f971fc2e2, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: ec08fe27a4d5f34488493be00a4e7a85, type: 2}
   initialSkinName: red
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 1

@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2896779765247206855
 Transform:
   m_ObjectHideFlags: 0
@@ -319,11 +319,11 @@ GameObject:
   - component: {fileID: 949488757463896915}
   m_Layer: 0
   m_Name: Front_Skeleton
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8780911737957181103
 Transform:
   m_ObjectHideFlags: 0
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 21904637}
   m_Layer: 0
   m_Name: "R\xE5tta"
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -485,11 +485,11 @@ MonoBehaviour:
   savedTile: 88
   gridPosition: {x: 3, y: 3}
   hasKey: 0
-  currentDirectionID: 1
-  frontIdle: {fileID: 11400000, guid: 89c9a43523241f045843d25082d3dd5f, type: 2}
-  frontJump: {fileID: 11400000, guid: 683f0ce70a17327419e196ba029867e2, type: 2}
-  backIdle: {fileID: 11400000, guid: bab9b12edf5bd68408aaf91ab9ebfd3c, type: 2}
-  backJump: {fileID: 11400000, guid: 8c4332a7956efb14e92d382ae814f355, type: 2}
+  currentDirectionID: 0
+  frontIdle: {fileID: 11400000, guid: 1449b6416dd55d24782fbbb7e63c762d, type: 2}
+  frontJump: {fileID: 11400000, guid: 1449b6416dd55d24782fbbb7e63c762d, type: 2}
+  backIdle: {fileID: 11400000, guid: 4fcdfc35fb1925f47a64a0a3aa826d93, type: 2}
+  backJump: {fileID: 11400000, guid: 3af9c980106b40a4babdb0f74cf2a8db, type: 2}
   jumpLength: 1
   jumpAnimationSpeed: 3
   playerID: 5
@@ -550,39 +550,21 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 29.663006
-      outSlope: 29.663006
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.13885956
-      value: 4.118992
-      inSlope: -0.07284938
-      outSlope: -0.07284938
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.22321007
-      outWeight: 0.0814594
-    - serializedVersion: 3
-      time: 0.38199005
-      value: -0.028656006
+      time: 1
+      value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 0
-      inSlope: 0.24282703
-      outSlope: 0.24282703
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

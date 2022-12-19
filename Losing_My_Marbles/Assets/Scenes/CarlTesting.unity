@@ -215,24 +215,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 21904643, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
-      propertyPath: currentDirectionID
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: frontIdle
+      value: 
+      objectReference: {fileID: 11400000, guid: 1449b6416dd55d24782fbbb7e63c762d, type: 2}
     - target: {fileID: 949488757463896915, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 1355702852763188328, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 4275283614362212228, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
+      propertyPath: jumpProgress.m_Curve.Array.data[2].time
+      value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3349797781307354676, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 4275283614362212228, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
+      propertyPath: jumpProgress.m_Curve.Array.data[2].inSlope
+      value: 0.70923126
       objectReference: {fileID: 0}
-    - target: {fileID: 3349797781307354676, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
-      propertyPath: m_TagString
-      value: Player
+    - target: {fileID: 4275283614362212228, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
+      propertyPath: jumpProgress.m_Curve.Array.data[2].outSlope
+      value: 0.70923126
       objectReference: {fileID: 0}
     - target: {fileID: 7028541642445619393, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
       propertyPath: m_RootOrder
@@ -281,10 +281,6 @@ PrefabInstance:
     - target: {fileID: 7028541642445619398, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
       propertyPath: m_Name
       value: "R\xE5tta"
-      objectReference: {fileID: 0}
-    - target: {fileID: 7079113148080597387, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cbf8366c93b85f4798e8b5fa368fdb3, type: 3}
@@ -1951,7 +1947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769845, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769851, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_RootOrder
@@ -2233,7 +2229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &623496581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4228,10 +4224,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Red
       objectReference: {fileID: 0}
-    - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
 --- !u!1001 &1576236452
@@ -4860,7 +4852,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4350784977135210877, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427964913557210658, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
@@ -5014,7 +5010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1969670893450060763, guid: 4028aed999475864f9d17518108fc2c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2518154864918441619, guid: 4028aed999475864f9d17518108fc2c4, type: 3}
       propertyPath: gridPosition.y

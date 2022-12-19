@@ -420,7 +420,14 @@ public abstract class Movement : MonoBehaviour
                         frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                    frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+                    if (GetComponent<PlayerProperties>().playerID == 5)
+                    {
+                        frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, animation.jumpProgressLength);
+                    }
+                    else
+                    {
+                        frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+                    }
                 }
                 else
                 {
@@ -430,7 +437,14 @@ public abstract class Movement : MonoBehaviour
                         backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                    backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+                    if (GetComponent<PlayerProperties>().playerID == 5)
+                    {
+                        backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, false, animation.jumpProgressLength);
+                    }
+                    else
+                    {
+                        backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+                    }
                 }
                 break;
 
