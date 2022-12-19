@@ -868,7 +868,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9173625994925322629
 Transform:
   m_ObjectHideFlags: 0
@@ -939,7 +939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonDataAsset: {fileID: 11400000, guid: 11a5846cf2cd77543a4aa55f971fc2e2, type: 2}
-  initialSkinName: 
+  initialSkinName: red
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 1
   initialFlipY: 0
