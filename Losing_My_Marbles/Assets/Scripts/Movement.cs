@@ -75,10 +75,10 @@ public abstract class Movement : MonoBehaviour
                     backSkeleton.Initialize(true);
                     break;
                 default:
-                    frontSkeleton.initialSkinName = "default";
-                    frontSkeleton.Initialize(true);
-                    backSkeleton.initialSkinName = "default";
-                    backSkeleton.Initialize(true);
+                    //frontSkeleton.initialSkinName = "default";
+                    //frontSkeleton.Initialize(true);
+                    //backSkeleton.initialSkinName = "default";
+                    //backSkeleton.Initialize(true);
                     break;
             }
         }
