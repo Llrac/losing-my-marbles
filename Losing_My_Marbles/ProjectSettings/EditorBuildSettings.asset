@@ -11,13 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CarlTesting.unity
     guid: bc3ba598db9b83e4997b89fbebde361f
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Mobile Interface.unity
     guid: 709712042b8d49845b81549c790ede8d
-  - enabled: 0
-    path: Assets/Scenes/EmilTesting.unity
+  - enabled: 1
+    path: Assets/Scenes/Matchmaking Desktop.unity
     guid: ebf742b98d1fcf54989f595fc3f22a10
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Mobile matchmaking.unity
+    guid: 38c084b35f8f3cf4eb775bdc3f26f087
   m_configObjects: {}
