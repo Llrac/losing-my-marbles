@@ -68,7 +68,7 @@ public class PlayerProperties : Movement
             if (Input.GetButtonDown("Jump"))
             {
                 //gameObject.GetComponent<Movement>().Blink(3);
-                StartCoroutine(SpecialMarble.Bomb(this)); 
+                
             }
         }
     }
@@ -109,6 +109,34 @@ public class PlayerProperties : Movement
                     break;
                 case 7: //Turn 180
                     marbleEffect.Add(new Vector2(1, 2));
+                    break;
+                case 8:
+                    marbleEffect.Add(new Vector2(3, 1));
+                    //earthquake
+                    break;
+                case 9:
+                    marbleEffect.Add(new Vector2(4, 3));
+                    //bomb
+                    break;
+                case 10:
+                    marbleEffect.Add(new Vector2(5, 0));
+                    //Daze
+                    break;
+                case 11:
+                    marbleEffect.Add(new Vector2(6, 0));
+                    //drop key
+                    break;
+                case 12:
+                    marbleEffect.Add(new Vector2(7, 0));
+                    //amplify
+                    break;
+                case 13:
+                    marbleEffect.Add(new Vector2(8, 0));
+                    //BlockMove
+                    break;
+                case 14:
+                    marbleEffect.Add(new Vector2(9, 0));
+                    //Swap
                     break;
                 //Aggressive marbles here
 

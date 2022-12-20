@@ -20,16 +20,21 @@ public class SpecialMarble : MonoBehaviour
             }
         }
     }
-    public static void Earthquake(PlayerProperties user)
+    public static void Earthquake(PlayerProperties user, float extraEarthquakes = 1)
     {
-        for (int i = 0; i < TurnManager.players.Count; i++)
+        for (int j = 0; j < extraEarthquakes; j++)
         {
-            if (TurnManager.players[i] != user)
+            for (int i = 0; i < TurnManager.players.Count; i++)
             {
-                TurnManager.players[i].GetComponent<PlayerProperties>().Pushed(user.currentDirectionID);
+                if (TurnManager.players[i] != user)
+                {
+                    TurnManager.players[i].GetComponent<PlayerProperties>().Pushed(user.currentDirectionID);
+                }
+                // maybe add a way to not actually play an animation
             }
-            // maybe adda a way to not actually play an animation
+
         }
+       
     }
     public static void Magnet(PlayerProperties user)
     {
@@ -89,14 +94,14 @@ public class SpecialMarble : MonoBehaviour
             return;
         }
     }
-    public static IEnumerator Bomb(PlayerProperties user)
+    public IEnumerator Bomb(PlayerProperties user, float area = 3)
     {
         GridManager gm = FindObjectOfType<GridManager>().GetComponent<GridManager>();
         GridGenerator gg = FindObjectOfType<GridGenerator>();
         PlayerProperties player = user;
         float zones = 1;
         Vector2 blastDir = user.gridPosition;
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < area; i++)
         {
             for(int j = 2; j < 6; j++)
             {
@@ -105,7 +110,6 @@ public class SpecialMarble : MonoBehaviour
                 {
                     result = gm.GetNexTile(user.gameObject, new Vector2(zones, 0));
                     blastDir = new Vector2(zones, 0);
-                    Debug.Log(new Vector2(zones, 0));
                     if (result == GridManager.PLAYER)
                     {
                         for (int k = 0; k < TurnManager.players.Count; k++)
@@ -190,7 +194,35 @@ public class SpecialMarble : MonoBehaviour
             victim.marbleEffect[currentTurn + 1] = new Vector2(1, 0);
         }
     }
-
+    public static void RollerSkates(PlayerProperties user)
+    {
+        for (int i = 0; i < user.marbleEffect.Count; i++)
+        {
+            if(user.marbleEffect[i] != null && user.marbleEffect[i].x == 0)
+            {
+                user.marbleEffect[i] += new Vector2(0,3);
+            }
+        }
+    }
+    public static void Amplifier(PlayerProperties user)
+    {
+        for(int i = 0; i < user.marbleEffect.Count; i++)
+        {
+            switch (user.marbleEffect[i].x)
+            {
+                case 2: // blink
+                    user.marbleEffect[i] += new Vector2(0, 3);
+                    return;
+                case 3: // earthquake
+                    user.marbleEffect[i] += new Vector2(0, 2);
+                    return;
+                case 4: // bomb
+                    user.marbleEffect[i] += new Vector2(0, 2);
+                    return;
+               
+            }
+        }
+    }
     private static PlayerProperties RandomizedPlayer (PlayerProperties user)
     {
         if (TurnManager.players.Count <= 0)
@@ -216,5 +248,32 @@ public class SpecialMarble : MonoBehaviour
             return TurnManager.players[p];
         }
         return null; // something went wrong return null
+    }
+    public void ExecuteSpecialMarble(PlayerProperties user, float type, float amount = 1)
+    {
+        switch (type)
+        {
+            case 3:
+                Earthquake(user, amount);
+                break;
+            case 4:
+                StartCoroutine(Bomb(user, amount));
+                break;
+            case 5:
+                Daze(user);
+                break;
+            case 6:
+                Magnet(user);
+                break;
+            case 7:
+                Amplifier(user);
+                break;
+            case 8:
+                BlockMove(user, 2); //default blocks the last move
+                break;
+            case 9:
+                Swap(user);
+                break;
+        }
     }
 }
