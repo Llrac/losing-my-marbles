@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 757809725262252686, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: initialSkinName
+      value: yellow
+      objectReference: {fileID: 0}
     - target: {fileID: 2013711928739953720, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -25,11 +29,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2133818761148525459, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: gridPosition.y
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2133818761148525459, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: currentDirectionID
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743189, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_RootOrder
@@ -82,6 +86,10 @@ PrefabInstance:
     - target: {fileID: 5410755133457316768, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: initialSkinName
       value: yellow
+      objectReference: {fileID: 0}
+    - target: {fileID: 8143639634547672033, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Mesh
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Mesh
