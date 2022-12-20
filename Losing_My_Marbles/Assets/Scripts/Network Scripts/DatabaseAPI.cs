@@ -40,7 +40,7 @@ public class DatabaseAPI : MonoBehaviour
     public void PostNewHand(NewHandMessage newHandMessage, Action callback, Action<AggregateException> fallback)
     {
         var newHandJson = JsonUtility.ToJson(newHandMessage);
-        dbReference.Child("new hand").Push().SetRawJsonValueAsync(newHandJson).ContinueWith(task =>
+        dbReference?.Child("new hand").Push().SetRawJsonValueAsync(newHandJson).ContinueWith(task =>
         {
             if (task.IsCanceled || task.IsFaulted) fallback(task.Exception);
             else callback();

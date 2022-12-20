@@ -6,13 +6,6 @@ public class DebugManager : MonoBehaviour
 {
     public static int playerToControl = 1;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -31,15 +24,13 @@ public class DebugManager : MonoBehaviour
         {
             playerToControl = 4;
         }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            playerToControl = 5;
+        }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            if (playerToControl >= 5)
-                playerToControl = 0;
-            if (TurnManager.players.Count >= playerToControl + 1)
-                playerToControl++;
-            else
-                playerToControl = 1;
-            //Debug.Log("Player " + playerToControl);
+            // Switch between players by number order
         }
     }
 }

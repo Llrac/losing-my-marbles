@@ -57,10 +57,7 @@ public class RatProperties : Movement
     {
         for(int i = 0; i < killZone.Count; i++)
         {
-            if(gridManager == null)
-            {
-                gridManager.GetComponent<GridManager>();
-            }
+            gridManager?.GetComponent<GridManager>();
             if (gridManager.GetNexTile(gameObject, killZone[i]) == 'P')
             {
                 //kill that player
