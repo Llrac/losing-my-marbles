@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class SpecialMarble : MonoBehaviour
 {
+    private GridGenerator gg;
+    private void Start()
+    {
+        
+    }
     public static void Daze(PlayerProperties user)
     {
         for (int i = 0; i < TurnManager.players.Count; i++)
@@ -45,7 +50,6 @@ public class SpecialMarble : MonoBehaviour
     {
         if (TurnManager.players.Count <= 0)
         {
-            Debug.Log("hig");
             return;
         }
 
@@ -88,8 +92,10 @@ public class SpecialMarble : MonoBehaviour
     public static IEnumerator Bomb(PlayerProperties user)
     {
         GridManager gm = FindObjectOfType<GridManager>().GetComponent<GridManager>();
+        GridGenerator gg = FindObjectOfType<GridGenerator>();
         PlayerProperties player = user;
         float zones = 1;
+        Vector2 blastDir = user.gridPosition;
         for(int i = 0; i < 3; i++)
         {
             for(int j = 2; j < 6; j++)
@@ -98,7 +104,8 @@ public class SpecialMarble : MonoBehaviour
                 if (j % 2 == 0)
                 {
                     result = gm.GetNexTile(user.gameObject, new Vector2(zones, 0));
-                    
+                    blastDir = new Vector2(zones, 0);
+                    Debug.Log(new Vector2(zones, 0));
                     if (result == GridManager.PLAYER)
                     {
                         for (int k = 0; k < TurnManager.players.Count; k++)
@@ -125,11 +132,12 @@ public class SpecialMarble : MonoBehaviour
                 else
                 {
                     result = gm.GetNexTile(user.gameObject, new Vector2(0, zones)); // not working get back to it
+                    blastDir = new Vector2(0, zones);
                     if (result == GridManager.PLAYER)
                     {
                         for (int k = 0; k < TurnManager.players.Count; k++)
                         {
-                            if (TurnManager.players[k].gridPosition == user.gridPosition + new Vector2(zones, 0))
+                            if (TurnManager.players[k].gridPosition == user.gridPosition + new Vector2(0, zones))
                             {
                                 player = TurnManager.players[k];
                             }
@@ -147,12 +155,66 @@ public class SpecialMarble : MonoBehaviour
                         }
                     }
                 }
-                
+                //add some texture
+                gg.DeployBomb(user.gridPosition + blastDir);
             }
+            yield return new WaitForSeconds(.5f);
             
             zones++;
         }
-        yield return new WaitForSeconds(2f);
+        
+    }
+    public static void BlockMove(PlayerProperties user, int currentTurn) // needs the current turn in turnmanager.
+    {
+        PlayerProperties victim = RandomizedPlayer(user); // needs to be sorted players
+        int myIndex = 0;
+        int opponentIndex = 0;
+        for(int i = 0; i < TurnManager.players.Count; i++)
+        {
+            if(TurnManager.players[i] == user)
+            {
+                myIndex = i;
+            }
+            if (TurnManager.players[i] == victim)
+            {
+                opponentIndex = i;
+            }
+        }
+
+        if(opponentIndex > myIndex)
+        {
+            victim.marbleEffect[currentTurn] = new Vector2(1, 0); // adds a scrap marble this turn
+        }
+        else if (opponentIndex < myIndex && currentTurn!= 2)
+        {
+            victim.marbleEffect[currentTurn + 1] = new Vector2(1, 0);
+        }
     }
 
+    private static PlayerProperties RandomizedPlayer (PlayerProperties user)
+    {
+        if (TurnManager.players.Count <= 0)
+        {
+            return null;
+        }
+
+        int p = Random.Range(0, TurnManager.players.Count);
+
+        if (TurnManager.players[p] == user)
+        {
+            while (TurnManager.players[p] == user)
+            {
+                p = Random.Range(0, TurnManager.players.Count);
+                if (TurnManager.players[p] != user)
+                {
+                    return TurnManager.players[p];
+                }
+            }
+        }
+        else
+        {
+            return TurnManager.players[p];
+        }
+        return null; // something went wrong return null
+    }
 }

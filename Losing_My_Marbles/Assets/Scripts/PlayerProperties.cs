@@ -130,7 +130,7 @@ public class PlayerProperties : Movement
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
 
-        if (TryMove(gameObject, 0, 1) == true)
+        if (TryMove(gameObject, 0, 1, 2) == true)
         {
             currentDirectionID = savedDir;
             UpdateSkeleton();

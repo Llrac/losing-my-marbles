@@ -144,8 +144,5 @@ public class GridManager : MonoBehaviour
         }
         return null;
     }
-    public void DeployBomb(Vector2 gp)
-    {
-
-    }
+  
 }

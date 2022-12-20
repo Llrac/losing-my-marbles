@@ -84,7 +84,7 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public bool TryMove(GameObject character, int dataID, int increment, bool wallJump = false)
+    public bool TryMove(GameObject character, int dataID, int increment, int typeID = 0)
     {
         // Set transform position
         if (dataID == 0)
@@ -103,7 +103,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
                     Move(character, 1, 1);
-                    TryMove(character, 1, 2, true);
+                    TryMove(character, 1, 2, 1);
                     GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
                     return false;
 
@@ -326,7 +326,10 @@ public abstract class Movement : MonoBehaviour
             }
 
             UpdateSkeleton();
-            SetAnimation(dataID, character, wallJump);
+            if(typeID == 1)
+                SetAnimation(dataID, character, true);
+            else
+                SetAnimation(dataID, character, false);
         }
         return false;
     }
@@ -465,7 +468,7 @@ public abstract class Movement : MonoBehaviour
     public void Move(GameObject character, int increment, int typeID = 0)
     // typeID 0 = Normal Jump
     // typeID 1 = Wall Jump
-    // typeID 2 = Ghost Jump
+    // typeID 2 = Forced jump
     {
         jumpMultiplier = 1;
         if (increment < 0)
@@ -484,6 +487,7 @@ public abstract class Movement : MonoBehaviour
         }
 
         Animation animation = character.GetComponent<Animation>();
+       
         switch (currentDirectionID)
         {
             case 0:
@@ -505,7 +509,12 @@ public abstract class Movement : MonoBehaviour
         }
 
         UpdateSkeleton();
-        SetAnimation(typeID, character);
+        Debug.Log(typeID);
+        if(typeID != 2)
+        {
+            SetAnimation(typeID, character);
+        }
+       
     }
     public void Blink(int blinkDistanceMultiplier)
     {
