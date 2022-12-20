@@ -1,10 +1,12 @@
 using System;
 using Firebase.Database;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DatabaseAPI : MonoBehaviour
 {
     private DatabaseReference dbReference;
+    public static string matchMakingCode = "123456";
 
     private void Awake()
     {
@@ -57,6 +59,12 @@ public class DatabaseAPI : MonoBehaviour
 
         dbReference.Child("new hand").ChildAdded += CurrentListener;
     }
+    
+    public void GenerateMatchMakingCode()
+    {
+        matchMakingCode = "123456"; //Random.Range(000000, 999999);
+    }
+    
 }
 
     
