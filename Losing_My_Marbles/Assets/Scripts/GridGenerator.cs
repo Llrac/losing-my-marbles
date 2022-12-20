@@ -12,6 +12,7 @@ public class GridGenerator : MonoBehaviour
     [SerializeField] GameObject hitEffect = null;
 
     [SerializeField] GameObject tileToCopy;
+    [SerializeField] GameObject bomb;
     [SerializeField] Sprite[] tileSprites = new Sprite[17];
     [SerializeField] Sprite tileHoleSprite = null;
     readonly float tileSize = 1f;
@@ -86,5 +87,11 @@ public class GridGenerator : MonoBehaviour
             newHit = Instantiate(hitEffect);
             newHit.transform.position = new Vector2(characterToApplyEffect.transform.position.x, characterToApplyEffect.transform.position.y);
         }
+    }
+    public void DeployBomb(Vector2 destination)
+    {
+        float posX = ((destination.x * tileSize + destination.y * tileSize)) + tileToCopy.transform.position.x - 1; // this is the actual x position of the tile
+        float posY = ((-destination.x * tileSize + destination.y * tileSize) / 2) + tileToCopy.transform.position.y + 1.5f;
+        Instantiate(bomb, new Vector3(posX, posY, 0), Quaternion.identity);
     }
 }

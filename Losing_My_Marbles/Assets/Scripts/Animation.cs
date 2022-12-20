@@ -40,7 +40,7 @@ public class Animation : MonoBehaviour
     Vector2 keyDestination;
 
     int keyProgressID = 0; // 0 = Empty, 1 = StealKey, 2 = DropKey
-
+    int typeID;
     // Other Scripts
     GridGenerator gridGen;
 
@@ -78,8 +78,17 @@ public class Animation : MonoBehaviour
         // Normal Jump
         if (jumpAnimTimer < jumpProgressLength && normalJumpProgressID == 1)
         {
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
-            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
+            if(typeID == 2)
+            {
+                character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
+                Mathf.Lerp(character.transform.position.y, destination.y , jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
+            }
+            else
+            {
+                character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
+                Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
+            }
+          
             if (character.GetComponent<Movement>().hasKey)
                 gridGen.UpdateGlitter();
         }
@@ -87,8 +96,7 @@ public class Animation : MonoBehaviour
         else if (jumpAnimTimer >= jumpProgressLength && normalJumpProgressID >= 1)
         {
             normalJumpProgressID = 0;
-            character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
-            Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
+            character.transform.position = destination;
             if (character.GetComponent<Movement>().hasKey)
                 gridGen.UpdateGlitter();
         }
@@ -190,7 +198,7 @@ public class Animation : MonoBehaviour
         startPosition = character.transform.position;
         this.character = character;
         this.destination = destination;
-
+        this.typeID = typeID; 
         if (typeID == 1)
         {
             wallJumpProgressID = 1;
