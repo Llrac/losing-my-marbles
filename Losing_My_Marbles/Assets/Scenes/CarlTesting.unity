@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 36617718}
   - component: {fileID: 36617717}
+  - component: {fileID: 36617719}
   m_Layer: 0
   m_Name: ResetManager
   m_TagString: Untagged
@@ -241,6 +242,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d34698314f3047349868ace72531cd39, type: 3}
   - {fileID: 21300000, guid: ebd527e08d394084eb4ebbee7cf17046, type: 3}
   - {fileID: 21300000, guid: 1c70d402199f0c144b65cfe14480453a, type: 3}
+  databaseAPI: {fileID: 36617719}
   winImage: {fileID: 1791015179}
 --- !u!4 &36617718
 Transform:
@@ -257,6 +259,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &36617719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 36617716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77930cb8d3f18b54782a5c72c7ed3321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &53796597 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5305041797103877173, guid: 4c516e3871547c346b4766b606b06fb1, type: 3}
@@ -4793,7 +4807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4350784977135210877, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7427964913557210658, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: m_Mesh
@@ -4947,7 +4961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1969670893450060763, guid: 4028aed999475864f9d17518108fc2c4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2518154864918441619, guid: 4028aed999475864f9d17518108fc2c4, type: 3}
       propertyPath: gridPosition.y
@@ -5236,6 +5250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: {fileID: 1073630579}
+  actionHandler: {fileID: 0}
   marbleSlotsTop: []
   marbleSlotsBottom: []
   marbleBag: []

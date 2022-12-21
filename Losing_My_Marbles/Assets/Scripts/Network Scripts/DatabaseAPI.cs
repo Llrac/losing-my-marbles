@@ -6,6 +6,8 @@ public class DatabaseAPI : MonoBehaviour
 {
     private DatabaseReference dbReference;
 
+    public static bool hasBeenRestarted;
+
     private void Awake()
     {
         // Gets an instance of the database
@@ -28,6 +30,12 @@ public class DatabaseAPI : MonoBehaviour
 
     public void ListenForActions(Action<ActionMessage> callback, Action<AggregateException> fallback)
     {
+        if (hasBeenRestarted)
+        {
+            Debug.Log("dont add again");
+            return;
+        }
+
         void CurrentListener(object o, ChildChangedEventArgs args)
         {
             if (args.DatabaseError != null) fallback(new AggregateException(new Exception(args.DatabaseError.Message)));
@@ -36,7 +44,7 @@ public class DatabaseAPI : MonoBehaviour
 
         dbReference.Child("movement").ChildAdded += CurrentListener;
     }
-    
+
     public void PostNewHand(NewHandMessage newHandMessage, Action callback, Action<AggregateException> fallback)
     {
         var newHandJson = JsonUtility.ToJson(newHandMessage);
@@ -46,9 +54,11 @@ public class DatabaseAPI : MonoBehaviour
             else callback();
         });
     }
-    
+
     public void ListenForNewHand(Action<NewHandMessage> callback, Action<AggregateException> fallback)
     {
+        
+
         void CurrentListener(object o, ChildChangedEventArgs args)
         {
             if (args.DatabaseError != null) fallback(new AggregateException(new Exception(args.DatabaseError.Message)));
@@ -58,5 +68,3 @@ public class DatabaseAPI : MonoBehaviour
         dbReference.Child("new hand").ChildAdded += CurrentListener;
     }
 }
-
-    

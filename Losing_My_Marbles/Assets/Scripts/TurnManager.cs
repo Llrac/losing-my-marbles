@@ -26,7 +26,7 @@ public class TurnManager : MonoBehaviour
     public ActionHandler actionHandler;
 
     private SpecialMarble specialMarbles;
-    //add a sorted list here
+    //TODO add a sorted list here
     bool startTurn = true;
     int tracking = 0;
     //int ratPathKeeping = 0;
@@ -90,7 +90,8 @@ public class TurnManager : MonoBehaviour
             roundInformation.text = "Round " + amountOfRounds + " Starts in " + i;
             yield return new WaitForSeconds(1f);
         }
-        roundInformation.text = ""; // add sounds
+        
+        roundInformation.text = ""; // TODO add sounds
        
         for (int i = 0; i < sortedPlayers.Count; i++)
         {

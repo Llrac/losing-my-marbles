@@ -233,8 +233,7 @@ public class UIManager : MonoBehaviour
         {
             availableMarbleSlotsBottom[i] = true;
             
-            if (marbleLights != null)
-                marbleLights[i].enabled = false;
+            //marbleLights[i].enabled = false;
             
             if (confirmButton != null)
                 confirmButton.interactable = false;

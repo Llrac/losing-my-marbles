@@ -8,6 +8,7 @@ public class ResetManager : MonoBehaviour
 {
     public List<Sprite> winScreens = new();
     public static List<Sprite> Screens = new();
+    public DatabaseAPI databaseAPI;
     [SerializeField] private GameObject winImage = null;
     private static Image win;
 
@@ -24,10 +25,13 @@ public class ResetManager : MonoBehaviour
                 }
             }
         }
+
         Screens = winScreens;
+
         if (winImage != null)
             win = winImage.GetComponent<Image>();
     }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
@@ -38,14 +42,15 @@ public class ResetManager : MonoBehaviour
 
     public void ResetLevel()
     {
+        PlayerProperties.ids.Clear();
         PlayerProperties.myActions.Clear();
         TurnManager.sortedPlayers.Clear();
         TurnManager.players.Clear();
-        PlayerProperties.ids.Clear();
         DebugManager.playerToControl = 1;
-        
-        SceneManager.LoadScene(0);
+        DatabaseAPI.hasBeenRestarted = true;
+        SceneManager.LoadScene("MainMenu");
     }
+
     public static void PlayerWin(int playerID)
     {
         if (win != null)
@@ -54,5 +59,4 @@ public class ResetManager : MonoBehaviour
             win.enabled = true;
         }
     }
-
 }

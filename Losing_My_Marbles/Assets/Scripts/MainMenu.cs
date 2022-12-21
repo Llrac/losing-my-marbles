@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private GameObject creditsGO;
+    public DatabaseAPI databaseAPI;
     private TextMeshProUGUI creditsText;
     private void Start()
     {
