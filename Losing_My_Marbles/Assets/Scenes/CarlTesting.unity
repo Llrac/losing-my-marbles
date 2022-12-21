@@ -2469,6 +2469,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2885fb4d5d163164da2340095ac41f04, type: 3}
   - {fileID: 21300000, guid: 43cd9aaa61efb00438febb1c3866cc0d, type: 3}
   - {fileID: 21300000, guid: 12d989a5d1340b347b6378447f6adcdd, type: 3}
+  - {fileID: 21300000, guid: 96a73bdee3d9aca44893a4ca39deeaee, type: 3}
 --- !u!4 &850021766
 Transform:
   m_ObjectHideFlags: 0
@@ -3745,6 +3746,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 510053272, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
+      propertyPath: bomb
+      value: 
+      objectReference: {fileID: 1235644451853953641, guid: 2055a5d6e07642b48a11d8eb233bff65, type: 3}
+    - target: {fileID: 510053272, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
       propertyPath: hitEffect
       value: 
       objectReference: {fileID: 0}
@@ -4163,6 +4168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1552591137}
   - component: {fileID: 1552591136}
+  - component: {fileID: 1552591138}
   m_Layer: 0
   m_Name: TurnManager
   m_TagString: Untagged
@@ -4202,6 +4208,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1552591138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552591135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f1375449df4134c9ff4e387ce01b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1576236452
 PrefabInstance:
   m_ObjectHideFlags: 0

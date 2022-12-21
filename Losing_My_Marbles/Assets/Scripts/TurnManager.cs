@@ -24,7 +24,8 @@ public class TurnManager : MonoBehaviour
     private TextMeshProUGUI roundInformation;
 
     public ActionHandler actionHandler;
-    
+
+    private SpecialMarble specialMarbles;
     //add a sorted list here
     bool startTurn = true;
     int tracking = 0;
@@ -40,6 +41,7 @@ public class TurnManager : MonoBehaviour
     {
         uiDesktop.TurnOnMarbleBagAnimation();
         roundInformation = information.GetComponent<TextMeshProUGUI>();
+        specialMarbles = gameObject.GetComponent<SpecialMarble>();
     }
     private void Update()
     {
@@ -106,7 +108,7 @@ public class TurnManager : MonoBehaviour
                 sortedPlayers[playerInList].ShowMyIntent(sortedPlayers[playerInList].playerMarbles[currentTurn]);
                 yield return new WaitForSeconds(turnLength);
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
-                {                                               
+                {                                                                                                                                                         //extra actions is for rollerskates
                     switch ((int)sortedPlayers[playerInList].marbleEffect[currentTurn].x)
                     {
                         case 0:
@@ -114,12 +116,15 @@ public class TurnManager : MonoBehaviour
                             break;
                         case 1:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
-                            //Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
+                            
                             break;
                         case 2:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
-                            //Debug.Log((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
                             steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y;
+                            break;
+                        default:
+                            specialMarbles.ExecuteSpecialMarble(sortedPlayers[playerInList], sortedPlayers[playerInList].marbleEffect[currentTurn].x, sortedPlayers[playerInList].marbleEffect[currentTurn].y);
+                            //special marbles
                             break;
                     }
                     yield return new WaitForSeconds(turnLength);
