@@ -21,15 +21,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2133818761148525459, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: gridPosition.x
-      value: 1
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2133818761148525459, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: gridPosition.y
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2133818761148525459, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: currentDirectionID
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743189, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_RootOrder
@@ -37,11 +37,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743189, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743189, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743189, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_LocalPosition.z
@@ -79,9 +79,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Purple
       objectReference: {fileID: 0}
+    - target: {fileID: 2610747910663743195, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5410755133457316768, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: initialSkinName
       value: purple
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173625994920220928, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Size.x
+      value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 9173625994920220928, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Size.y
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Mesh
