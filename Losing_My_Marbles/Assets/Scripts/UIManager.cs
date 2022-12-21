@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,6 +8,7 @@ using Random = UnityEngine.Random;
 public class UIManager : MonoBehaviour
 {
     public PlayerID playerID;
+    public ActionHandler actionHandler;
     
     [Header("Marbles & Slots")]
     public Transform[] marbleSlotsTop = new Transform[7];
@@ -21,7 +23,7 @@ public class UIManager : MonoBehaviour
     public Image insertAlert = null;
 
     [Header("Timer")] 
-    public Timer timer;
+    public Timer timer = null;
     
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     public bool[] availableMarbleSlotsBottom = new bool[3];
@@ -55,11 +57,34 @@ public class UIManager : MonoBehaviour
         FillHandWithMarbles();
     }
 
+    private void Update()
+    {
+        if (timer != null)
+        {
+            if (timer.timeValue <= 0)
+            {
+                if (BottomRowFull() == false)
+                    ChooseRandomMarble();
+
+                else if (timer.timerOn && confirmButton.interactable)
+                {
+                    actionHandler.SendAction();
+                    timer.timerOn = false;
+                }
+            }
+        }
+        
+    }
+
     public void FillHandWithMarbles()
     {
         if (GetComponent<AudioSource>() != null)
             GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().newMarbles);
-        SetAllSlotsToAvailable();
+        
+        SetBottomSlotsToAvailable();
+        
+        if (timer != null)
+            timer.timerOn = true;
         
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
@@ -82,6 +107,7 @@ public class UIManager : MonoBehaviour
                     randomMarble.transform.position = marbleSlotsTop[i].position;
                 
                 randomMarble.isInHand = true;
+                randomMarble.isOnTopRow = true;
                 availableMarbleSlotsTop[i] = false;
                 marbleBag.Remove(randomMarble);
             }
@@ -99,6 +125,7 @@ public class UIManager : MonoBehaviour
                 Marble currentMarble = marble.GetComponent<Marble>();
                 currentMarble.transform.position = marbleSlotsBottom[i].position;
                 currentMarble.bottomRowIndex = i;
+                currentMarble.isOnTopRow = false;
                 availableMarbleSlotsBottom[i] = false;
                 orderID[i] = currentMarble.marbleID;
                 availableMarbleSlotsTop[currentMarble.topRowIndex] = true;
@@ -129,6 +156,7 @@ public class UIManager : MonoBehaviour
                 Marble currentMarble = marble.GetComponent<Marble>();
                 currentMarble.transform.position = marbleSlotsTop[i].position;
                 currentMarble.topRowIndex = i;
+                currentMarble.isOnTopRow = true;
                 availableMarbleSlotsTop[i] = false;
                 availableMarbleSlotsBottom[currentMarble.bottomRowIndex] = true;
                 
@@ -162,8 +190,10 @@ public class UIManager : MonoBehaviour
         
         if (insertAlert != null)
             insertAlert.enabled = false;
+        
         if (GetComponent<AudioSource>() != null)
             GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().marblesReady);
+        
         return true;
     }
 
@@ -186,27 +216,25 @@ public class UIManager : MonoBehaviour
 
         foreach (Marble marble in marblesInScene)
         {
-            if (marble.isInHand)
+            if (marble.isOnBottomRow)
             {
                 discardBag.Add(marble);
                 marble.isInHand = false;
+                marble.isOnTopRow = false;
                 marble.isOnBottomRow = false;
                 marble.gameObject.transform.position = new Vector2(-5000, -5000);
             }
         }
     }
 
-    private void SetAllSlotsToAvailable()
+    private void SetBottomSlotsToAvailable()
     {
-        for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
-        {
-            availableMarbleSlotsTop[i] = true;
-        }
-        
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             availableMarbleSlotsBottom[i] = true;
-            //marbleLights[i].enabled = false;
+            
+            if (marbleLights != null)
+                marbleLights[i].enabled = false;
             
             if (confirmButton != null)
                 confirmButton.interactable = false;
@@ -227,5 +255,21 @@ public class UIManager : MonoBehaviour
     {
         if (GetComponent<AudioSource>() != null)
             GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pressGo);
+    }
+
+    public void ChooseRandomMarble()
+    {
+        Marble[] marblesInScene = FindObjectsOfType<Marble>();
+
+        var randomMarble = Random.Range(0, marblesInScene.Length);
+
+        if (marblesInScene[randomMarble].isOnTopRow)
+        {
+            marblesInScene[randomMarble].SelectMarble();
+        }
+        else
+        {
+            ChooseRandomMarble();
+        }
     }
 }
