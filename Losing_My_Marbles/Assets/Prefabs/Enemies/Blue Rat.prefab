@@ -262,9 +262,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savedTile: 88
-  gridPosition: {x: 2, y: 3}
+  gridPosition: {x: 3, y: 0}
   hasKey: 0
-  currentDirectionID: 0
+  currentDirectionID: 2
   frontIdle: {fileID: 11400000, guid: e764bb005bf9b3f4aba4ff1b8cf16cf8, type: 2}
   frontJump: {fileID: 11400000, guid: a1761e528e25f04408b1156741247a09, type: 2}
   backIdle: {fileID: 11400000, guid: f90330068b079dd4cbe92c1c6bbf0e75, type: 2}
@@ -272,7 +272,16 @@ MonoBehaviour:
   jumpLength: 1
   jumpAnimationSpeed: 3
   enemyID: 5
-  moves: []
+  moves:
+  - {x: 1, y: 2}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
 --- !u!114 &4824100951751452370
 MonoBehaviour:
   m_ObjectHideFlags: 0
