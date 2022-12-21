@@ -138,7 +138,11 @@ public class PlayerProperties : Movement
                     marbleEffect.Add(new Vector2(9, 0));
                     //Swap
                     break;
-                //Aggressive marbles here
+                case 15:
+                    marbleEffect.Add(new Vector2(10, 0));
+                    //RollerSkates
+                    break;
+                
 
             }
            // Debug.Log(myActions[0]);

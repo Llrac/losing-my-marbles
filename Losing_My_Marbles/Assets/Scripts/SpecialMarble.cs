@@ -157,7 +157,11 @@ public class SpecialMarble : MonoBehaviour
                     }
                 }
                 //add some texture
-                gg.DeployBomb(user.gridPosition + blastDir);
+                if(result != GridManager.EMPTY)
+                {
+                    gg.DeployBomb(user.gridPosition + blastDir);
+                }
+                
             }
             yield return new WaitForSeconds(.5f);
             
@@ -270,6 +274,9 @@ public class SpecialMarble : MonoBehaviour
                 break;
             case 9:
                 Swap(user);
+                break;
+            case 10:
+                RollerSkates(user);
                 break;
         }
     }
