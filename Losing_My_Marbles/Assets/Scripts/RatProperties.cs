@@ -47,7 +47,7 @@ public class RatProperties : Movement
         {
             gameObject.GetComponent<RatProperties>().currentDirectionID = savedDir;
         }
-        if(gameObject.GetComponent<RatProperties>().isActiveAndEnabled == true)
+        if (gameObject.GetComponent<RatProperties>().isActiveAndEnabled == true)
         {
             StartCoroutine(CheckForKills());
         }
@@ -71,11 +71,7 @@ public class RatProperties : Movement
                 TurnManager.players.Remove(player.GetComponent<PlayerProperties>()); // remove player from the player list
                 player.GetComponent<PlayerProperties>().marbleEffect.Clear(); // clear their marble effects
                 player.SetActive(false); // turn them off
-
-               
             }
-           
         }
-        
     }
 }

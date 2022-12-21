@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: "BL\xC5_R\xE5tta_delar_f\xF6r_spine2_SkeletonData"
+  m_Name: "BL\xC5_R\xE5tta_delar_f\xF6r_spine_SkeletonData"
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 24ccb1a80891e76428fa987c31f3e369, type: 2}
-  scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: ea7d5cca418ad72459367ac3ea137d0e, type: 3}
+  - {fileID: 11400000, guid: 09023953d85420349bee475ff1abd277, type: 2}
+  scale: 0.002
+  skeletonJSON: {fileID: 4900000, guid: f236f7671ed9ea44d9054eec54d296ae, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0
