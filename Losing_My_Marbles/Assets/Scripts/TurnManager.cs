@@ -29,7 +29,7 @@ public class TurnManager : MonoBehaviour
     //add a sorted list here
     bool startTurn = true;
     int tracking = 0;
-    //int ratPathKeeping = 0;
+    int ratPathKeeping = 0;
     int amountOfRounds = 0;
 
     private void Awake()
@@ -146,21 +146,20 @@ public class TurnManager : MonoBehaviour
             {
                 for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
                 {
-                    //float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
-                    //float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
-                    
-                    //Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
+                    float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
+                    float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
+
+                    Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
                     yield return new WaitForSeconds(turnLength);
                 }
             }
-            
 
-            //ratPathKeeping++;
-            //Debug.Log(ratPathKeeping.ToString());
-            //if(ratPathKeeping >= 7)
-            //{
-            //    ratPathKeeping = 0;
-            //}
+            ratPathKeeping++;
+            Debug.Log(ratPathKeeping.ToString());
+            if (ratPathKeeping >= FindObjectOfType<RatProperties>().moves.Count)
+            {
+                ratPathKeeping = 0;
+            }
             yield return new WaitForSeconds(turnLength);
             
             //Environment.Turn();

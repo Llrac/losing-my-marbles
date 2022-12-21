@@ -3,21 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Video;
 
 public class Timer : MonoBehaviour
 {
     public TMP_Text timerText;
     public float timeValue;
-    public float playerTime = 30f;
+    public float playerTime = 5f;
+
+    public bool timerOn;
 
     private void Start()
     {
         timeValue = playerTime;
+        timerOn = true;
     }
 
     private void Update()
     {
-        if (timeValue > 0)
+        if (timeValue > 0 && timerOn)
         {
             timeValue -= Time.deltaTime;
         }

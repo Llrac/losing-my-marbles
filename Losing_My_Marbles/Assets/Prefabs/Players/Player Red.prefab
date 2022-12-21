@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1950525978668078085}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2610747910663743189}
@@ -138,7 +138,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 40e4daebd0c3a9345a104875dcae24ec, type: 2}
+  - {fileID: 2100000, guid: fb1d4cc58f8b2f548bcf7987b1338741, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: c633d827aeeaa9d4a856aa5f793a965a, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 9330c9a329fd83940a0559b05517edc3, type: 2}
   initialSkinName: red
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 1
@@ -229,7 +229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2610747910663743189
 Transform:
   m_ObjectHideFlags: 0
@@ -265,10 +265,10 @@ MonoBehaviour:
   gridPosition: {x: 9, y: 5}
   hasKey: 0
   currentDirectionID: 3
-  frontIdle: {fileID: 11400000, guid: 89c9a43523241f045843d25082d3dd5f, type: 2}
-  frontJump: {fileID: 11400000, guid: 683f0ce70a17327419e196ba029867e2, type: 2}
-  backIdle: {fileID: 11400000, guid: bab9b12edf5bd68408aaf91ab9ebfd3c, type: 2}
-  backJump: {fileID: 11400000, guid: 8c4332a7956efb14e92d382ae814f355, type: 2}
+  frontIdle: {fileID: 11400000, guid: edd9c916421247c45a8e6b06319f44c9, type: 2}
+  frontJump: {fileID: 11400000, guid: 0930d8a4bbfea8848bbee47140ab284c, type: 2}
+  backIdle: {fileID: 11400000, guid: 7d0720039636f074aacde32e9b507134, type: 2}
+  backJump: {fileID: 11400000, guid: 1d5031ffcdae4834fbb257dd6dc60d64, type: 2}
   jumpLength: 1
   jumpAnimationSpeed: 3
   playerID: 1
@@ -312,10 +312,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.2713318
-      value: 0.99292374
-      inSlope: 5.7953267
-      outSlope: 5.7953267
+      time: 0.25
+      value: 1
+      inSlope: 6.6666665
+      outSlope: 6.6666665
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -780,7 +780,7 @@ Transform:
   m_GameObject: {fileID: 9173625994920220935}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2610747910663743189}
@@ -904,7 +904,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b091433e2847bcd409f140686e035342, type: 2}
+  - {fileID: 2100000, guid: a5b8115690e92954f873819b6a3980aa, type: 2}
+  - {fileID: 2100000, guid: c40c1621c7b399f4282a7076fbf4f337, type: 2}
+  - {fileID: 2100000, guid: a5b8115690e92954f873819b6a3980aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -938,8 +940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 11a5846cf2cd77543a4aa55f971fc2e2, type: 2}
-  initialSkinName: 
+  skeletonDataAsset: {fileID: 11400000, guid: 681ec3d8d933493428abfb5ca9c111cf, type: 2}
+  initialSkinName: red
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 1
   initialFlipY: 0

@@ -123,7 +123,7 @@ public abstract class Movement : MonoBehaviour
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        TryMove(gameObject,0, 1);
+                        TryMove(gameObject, 0, 1);
                         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
                         return true;
@@ -224,6 +224,11 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.PLAYER: // PLAYER rat is able to push player
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+
+                    if (character.GetComponent<Movement>().hasKey && player.GetComponent<Movement>().savedTile == GridManager.DOOR)
+                    {
+                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
+                    }
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
@@ -358,36 +363,36 @@ public abstract class Movement : MonoBehaviour
 
     void SetSkeleton(bool facingLeft, bool front)
     {
-        if (CompareTag("Player"))
+        if (frontSkeleton == null || backSkeleton == null)
         {
-            if (frontSkeleton == null || backSkeleton == null)
+            foreach (Transform child in transform)
             {
-                foreach (Transform child in transform)
+                if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
                 {
-                    if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
-                    {
-                        frontSkeleton = child.GetComponent<SkeletonAnimation>();
-                    }
-                    else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
-                    {
-                        backSkeleton = child.GetComponent<SkeletonAnimation>();
-                    }
+                    frontSkeleton = child.GetComponent<SkeletonAnimation>();
+                }
+                else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                {
+                    backSkeleton = child.GetComponent<SkeletonAnimation>();
                 }
             }
-            
-            if (front)
-            {
-                nextIdleAnimation = frontIdle;
-                nextJumpAnimation = frontJump;
-                usingFrontSkeleton = true;
-            }
-            else
-            {
-                nextIdleAnimation = backIdle;
-                nextJumpAnimation = backJump;
-                usingFrontSkeleton = false;
-            }
+        }
 
+        if (front)
+        {
+            nextIdleAnimation = frontIdle;
+            nextJumpAnimation = frontJump;
+            usingFrontSkeleton = true;
+        }
+        else
+        {
+            nextIdleAnimation = backIdle;
+            nextJumpAnimation = backJump;
+            usingFrontSkeleton = false;
+        }
+
+        if (CompareTag("Player"))
+        {
             if (usingFrontSkeleton)
             {
                 frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
@@ -399,6 +404,29 @@ public abstract class Movement : MonoBehaviour
                 backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
                 frontSkeleton.gameObject.SetActive(false);
                 backSkeleton.gameObject.SetActive(true);
+            }
+        }
+        else if (CompareTag("Enemy"))
+        {
+            if (usingFrontSkeleton)
+            {
+                frontSkeleton.gameObject.SetActive(true);
+                backSkeleton.gameObject.SetActive(false);
+                frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
+                if (facingLeft)
+                    frontSkeleton.transform.eulerAngles = new Vector3(0, 0, -13);
+                else
+                    frontSkeleton.transform.eulerAngles = new Vector3(0, 0, 13);
+            }
+            else
+            {
+                frontSkeleton.gameObject.SetActive(false);
+                backSkeleton.gameObject.SetActive(true);
+                backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
+                if (facingLeft)
+                    backSkeleton.transform.eulerAngles = new Vector3(0, 0, 13);
+                else
+                    backSkeleton.transform.eulerAngles = new Vector3(0, 0, -13);
             }
         }
     }
@@ -509,7 +537,6 @@ public abstract class Movement : MonoBehaviour
         }
 
         UpdateSkeleton();
-        Debug.Log(typeID);
         if(typeID != 2)
         {
             SetAnimation(typeID, character);

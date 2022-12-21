@@ -10,7 +10,7 @@ public class SetIntent : MonoBehaviour
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        foreach (Transform childInPlayer in GetComponentInParent<PlayerProperties>().gameObject.transform)
+        foreach (Transform childInPlayer in GetComponentInParent<Movement>().gameObject.transform)
         {
             if (childInPlayer.name == "Cross" && childInPlayer.GetComponent<SpriteRenderer>() != null)
             {
