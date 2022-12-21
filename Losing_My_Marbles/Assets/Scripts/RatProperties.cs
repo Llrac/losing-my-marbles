@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Spine.Unity;
 
 public class RatProperties : Movement
 {
@@ -54,6 +55,20 @@ public class RatProperties : Movement
     public override char ChangeTag()
     {
         return 'E';
+    }
+
+    public void Death()
+    {
+        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
+        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().characterFall);
+        enemies.Remove(this);
+        foreach (Transform child in transform)
+        {
+            if (child.GetComponent<SkeletonAnimation>() && (child.name == "Front_Skeleton" || child.name == "Back_Skeleton"))
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
     }
 
     public override void DoAMove(int dataID, int increment , int dir)

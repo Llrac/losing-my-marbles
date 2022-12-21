@@ -84,7 +84,7 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public bool TryMove(GameObject character, int dataID, int increment, int typeID = 0)
+    public bool TryMove(GameObject character, int dataID, int increment)
     {
         // Set transform position
         if (dataID == 0)
@@ -103,7 +103,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
                     Move(character, 1, 1);
-                    TryMove(character, 1, 2, 1);
+                    TryMove(character, 1, 2);
                     GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
                     return false;
 
@@ -159,8 +159,16 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.KEY:
-                    character.GetComponent<Animation>().PickupKey(character);
-                    Move(character, 1);
+                    if (CompareTag("Player"))
+                    {
+                        character.GetComponent<Animation>().PickupKey(character);
+                        Move(character, 1);
+                    }
+                    else if (CompareTag("Enemy"))
+                    {
+
+                    }
+                    
                     return true;
 
                 case GridManager.HOLE:
@@ -176,9 +184,9 @@ public abstract class Movement : MonoBehaviour
                     {
                         character.GetComponent<PlayerProperties>().Death();
                     }
-                    else
+                    else if (CompareTag("Enemy"))
                     {
-                        enemies.Clear(); //is a rat jumps down a hole every rat dies
+                        character.GetComponent<RatProperties>().Death();
                     }
                     return true;
       
@@ -331,10 +339,7 @@ public abstract class Movement : MonoBehaviour
             }
 
             UpdateSkeleton();
-            if(typeID == 1)
-                SetAnimation(dataID, character, true);
-            else
-                SetAnimation(dataID, character, false);
+            SetAnimation(dataID, character);
         }
         return false;
     }
@@ -431,15 +436,15 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public void SetAnimation(int typeID, GameObject character = null, bool wallJump = false)
+    public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false)
     {
         if (frontSkeleton == null || backSkeleton == null)
         {
             return;
         }
         if (wallJump)
-            typeID = 0;
-        switch (typeID)
+            dataID = 0;
+        switch (dataID)
         {
             case 0: // Jump forward
                 Animation animation = character.GetComponent<Animation>();
@@ -519,29 +524,32 @@ public abstract class Movement : MonoBehaviour
         switch (currentDirectionID)
         {
             case 0:
-                animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
+                animation.ForwardJump(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
                     character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
             case 1 or -3:
-                animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
+                animation.ForwardJump(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
                     character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
             case 2 or -2:
-                animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
+                animation.ForwardJump(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
                     character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
             case 3 or -1:
-                animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
+                animation.ForwardJump(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
                     character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
         }
 
         UpdateSkeleton();
-        if(typeID != 2)
+        if(typeID == 0)
         {
             SetAnimation(typeID, character);
         }
-       
+        else if (typeID == 1)
+        {
+            SetAnimation(typeID, character, true);
+        }
     }
     public void Blink(int blinkDistanceMultiplier)
     {
@@ -549,7 +557,6 @@ public abstract class Movement : MonoBehaviour
         grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
         float blinkDistance = jumpLength * blinkDistanceMultiplier;
 
-        Animation animation = gameObject.GetComponent<Animation>();
         switch (currentDirectionID)
         {
             case 0:
@@ -569,19 +576,7 @@ public abstract class Movement : MonoBehaviour
                     gameObject.transform.position.y + (blinkDistance) / 2, 0);
                 break;
         }
-        gg.UpdateGlitter();
     }
-    //public void DropKey()
-    //{
-    //    savedTile = 'K';
-    //    hasKey = false;
-    //    Vector2 keyPos;
-    //    keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7 - 1;
-    //    keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + 1.5f;
-    //    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
-    //    GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
-    //    gg.UpdateGlitter(keyPos.x, keyPos.y);
-    //}
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);
 }
