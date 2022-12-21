@@ -13,6 +13,7 @@ public class Marble : MonoBehaviour
     
     public bool isInHand = false;
     [HideInInspector] public bool isOnBottomRow = false;
+    [HideInInspector] public bool isOnTopRow;
 
     UIManager uiManager;
 
