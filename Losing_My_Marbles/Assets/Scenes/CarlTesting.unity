@@ -4107,6 +4107,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
 --- !u!1 &1552591135
@@ -4727,6 +4731,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 237428050316895139, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 263476874749299614, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -4793,11 +4801,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4350784977135210877, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7427964913557210658, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427964913562611361, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427964913562611366, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_Size.x
+      value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427964913562611366, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_Size.y
+      value: 1.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427964913562611366, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7427964913562611366, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
@@ -5302,6 +5330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Rat
       objectReference: {fileID: 0}
+    - target: {fileID: 3238477012892353797, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3238477012892353803, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -5753,6 +5785,10 @@ PrefabInstance:
     - target: {fileID: 7772963788211389755, guid: 56f8681a161199748926c267cb9cdabe, type: 3}
       propertyPath: m_Name
       value: ActionHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 7772963788211389755, guid: 56f8681a161199748926c267cb9cdabe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56f8681a161199748926c267cb9cdabe, type: 3}
