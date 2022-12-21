@@ -189,9 +189,7 @@ public class Animation : MonoBehaviour
     }
 
     #region Player Animation Functions
-    public void AnimateAction(GameObject character, Vector3 destination, int typeID = 0)
-        // dataID is the same as from Movement
-        // dataID 0 = Jump, dataID 1 = Empty, dataID 2 = Blink
+    public void ForwardJump(GameObject character, Vector3 destination, int typeID = 0)
         // typeID 0 = Normal Jump, typeID 1 = Wall Jump
     {
         jumpAnimTimer = 0;
