@@ -42,7 +42,7 @@ public class ResetManager : MonoBehaviour
         TurnManager.sortedPlayers.Clear();
         TurnManager.players.Clear();
         PlayerProperties.ids.Clear();
-        DebugManager.playerToControl = 1;
+        DebugManager.characterToControl = 1;
         
         SceneManager.LoadScene(0);
     }
