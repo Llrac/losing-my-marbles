@@ -3098,7 +3098,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1812994859}
   timeValue: 20
-  playerTime: 5
+  playerTime: 30
+  timerOn: 0
 --- !u!224 &1586550100 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7812296077624100166, guid: 9ffd8c74f1728a0459fbb3dd1959bf67, type: 3}
