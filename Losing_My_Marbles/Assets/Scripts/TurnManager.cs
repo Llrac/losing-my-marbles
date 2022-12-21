@@ -45,6 +45,13 @@ public class TurnManager : MonoBehaviour
     }
     private void Update()
     {
+        //Debugging
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            StartCoroutine(ExecuteTurn());
+        }
+
+        // end of debugging
         if (PlayerProperties.ids.Count > tracking)
         {
             uiDesktop.TurnOffMarbleBagAnimation(PlayerProperties.ids[tracking]);
@@ -109,7 +116,7 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(turnLength);
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
                 {                                                                                                                                                         //extra actions is for rollerskates
-                    switch ((int)sortedPlayers[playerInList].marbleEffect[currentTurn].x)
+                    switch (sortedPlayers[playerInList].marbleEffect[currentTurn].x)
                     {
                         case 0:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, 1);

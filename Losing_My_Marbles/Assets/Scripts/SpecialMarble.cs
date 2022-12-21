@@ -17,8 +17,10 @@ public class SpecialMarble : MonoBehaviour
             }
         }
     }
-    public static void Earthquake(PlayerProperties user, float extraEarthquakes = 1)
+    public IEnumerator Earthquake(PlayerProperties user, float extraEarthquakes = 1)
     {
+        float savedTurnLenght = TurnManager.turnLength; 
+        TurnManager.turnLength = extraEarthquakes * .5f;
         for (int j = 0; j < extraEarthquakes; j++)
         {
             for (int i = 0; i < TurnManager.players.Count; i++)
@@ -27,11 +29,11 @@ public class SpecialMarble : MonoBehaviour
                 {
                     TurnManager.players[i].GetComponent<PlayerProperties>().Pushed(user.currentDirectionID);
                 }
-                // maybe add a way to not actually play an animation
+                // maybe add a way to not actually play an animation // make into a coroutine
             }
-
+            yield return new WaitForSeconds(.5f);
         }
-       
+        TurnManager.turnLength = savedTurnLenght;
     }
     public static void Magnet(PlayerProperties user)
     {
@@ -50,7 +52,8 @@ public class SpecialMarble : MonoBehaviour
     }
     public static void Swap(PlayerProperties user)
     {
-        if (TurnManager.players.Count <= 1)
+       
+        if (TurnManager.players.Count <= 0)
         {
             return;
         }
@@ -63,16 +66,20 @@ public class SpecialMarble : MonoBehaviour
             {
                 p = Random.Range(0, TurnManager.players.Count);
                 if (TurnManager.players[p] != user)
-                {
+                { //save used variables
                     Vector2 targetDestination = TurnManager.players[p].GetComponent<PlayerProperties>().gridPosition;
                     Vector2 myPosition = user.gridPosition;
                     Vector2 targetWorldPosition = TurnManager.players[p].gameObject.transform.position;
                     Vector2 worldPosition = user.gameObject.transform.position;
-
+                    char mySavedTile = user.savedTile;
+                    char opponentSavedTile = TurnManager.players[p].savedTile;
+                 //use saved variables
                     user.gridPosition = targetDestination;
                     user.gameObject.transform.position = targetWorldPosition;
                     TurnManager.players[p].gridPosition = myPosition;
                     TurnManager.players[p].transform.position = worldPosition;
+                    user.savedTile = opponentSavedTile;
+                    TurnManager.players[p].savedTile = mySavedTile;
                     return;
                 }
             }
@@ -83,11 +90,15 @@ public class SpecialMarble : MonoBehaviour
             Vector2 myPosition = user.gridPosition;
             Vector2 targetWorldPosition = TurnManager.players[p].gameObject.transform.position;
             Vector2 worldPosition = user.gameObject.transform.position;
+            char mySavedTile = user.savedTile;
+            char opponentSavedTile = TurnManager.players[p].savedTile;
 
             user.gridPosition = targetDestination;
             user.gameObject.transform.position = targetWorldPosition;
             TurnManager.players[p].gridPosition = myPosition;
             TurnManager.players[p].transform.position = worldPosition;
+            user.savedTile = opponentSavedTile;
+            TurnManager.players[p].savedTile = mySavedTile;
             return;
         }
     }
@@ -95,6 +106,9 @@ public class SpecialMarble : MonoBehaviour
     {
         GridManager gm = FindObjectOfType<GridManager>().GetComponent<GridManager>();
         GridGenerator gg = FindObjectOfType<GridGenerator>();
+
+        TurnManager.turnLength = area * .5f; // makes sure the effect gets played before the next person begins their next move
+
         PlayerProperties player = user;
         float zones = 1;
         Vector2 blastDir = user.gridPosition;
@@ -167,7 +181,7 @@ public class SpecialMarble : MonoBehaviour
             
             zones++;
         }
-        
+        TurnManager.turnLength = .5f;
     }
     public static void BlockMove(PlayerProperties user, int currentTurn) // needs the current turn in turnmanager.
     {
@@ -213,14 +227,14 @@ public class SpecialMarble : MonoBehaviour
             {
                 case 2: // blink
                     user.marbleEffect[i] += new Vector2(0, 3);
-                    return;
+                    break;
                 case 3: // earthquake
                     user.marbleEffect[i] += new Vector2(0, 2);
-                    return;
+                    Debug.Log(user.marbleEffect[i]);
+                    break;
                 case 4: // bomb
                     user.marbleEffect[i] += new Vector2(0, 2);
-                    return;
-               
+                    break;
             }
         }
     }
@@ -255,7 +269,7 @@ public class SpecialMarble : MonoBehaviour
         switch (type)
         {
             case 3:
-                Earthquake(user, amount);
+                StartCoroutine(Earthquake(user, amount));
                 break;
             case 4:
                 StartCoroutine(Bomb(user, amount));
@@ -270,7 +284,7 @@ public class SpecialMarble : MonoBehaviour
                 Amplifier(user);
                 break;
             case 8:
-                BlockMove(user, currentTurn); //default blocks the last move
+                BlockMove(user, currentTurn); 
                 break;
             case 9:
                 Swap(user);

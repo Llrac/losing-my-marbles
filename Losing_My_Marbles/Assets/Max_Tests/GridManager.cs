@@ -23,7 +23,7 @@ public class GridManager : MonoBehaviour
             {'H','X','X','X','X','H','X','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
             {'X','X','X','X','X','X','X','X','D','?'},
-            {'X','P','X','P','X','P','X','P','X','?'}
+            {'X','X','X','X','X','X','X','X','X','?'}
     };
 
     void Start()
