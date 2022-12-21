@@ -31,29 +31,29 @@ public class PlayerProperties : Movement
         startingWorldPosition = transform.position;
         //Debugging
 
-        TurnManager.sortedPlayers.Add(this);
-        if(playerID == 1)
-        {
-            playerMarbles = new List<int>()
-            {
-                15,1,8
-            };
-            marbleEffect = new List<Vector2>()
-            {
-                new Vector2(10, 1), new Vector2(0,1), new Vector2(3, 1)
-            };
-        }
-        else
-        {
-            playerMarbles = new List<int>()
-            {
-                5,5,5
-            };
-            marbleEffect = new List<Vector2>()
-            {
-                new Vector2(1,1), new Vector2(1,1), new Vector2(1,1)
-            };
-        }
+        //TurnManager.sortedPlayers.Add(this);
+        //if(playerID == 1)
+        //{
+        //    playerMarbles = new List<int>()
+        //    {
+        //        15,1,8
+        //    };
+        //    marbleEffect = new List<Vector2>()
+        //    {
+        //        new Vector2(10, 1), new Vector2(0,1), new Vector2(3, 1)
+        //    };
+        //}
+        //else
+        //{
+        //    playerMarbles = new List<int>()
+        //    {
+        //        5,5,5
+        //    };
+        //    marbleEffect = new List<Vector2>()
+        //    {
+        //        new Vector2(1,1), new Vector2(1,1), new Vector2(1,1)
+        //    };
+        //}
         
         //Debugging
     }

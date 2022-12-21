@@ -142,25 +142,25 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(turnLength);
             }
             // enemy
-            if(Movement.enemies.Count > 0)
-            {
-                for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
-                {
-                    float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
-                    float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
+            //if(Movement.enemies.Count > 0)
+            //{
+            //    for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
+            //    {
+            //        float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
+            //        float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
 
-                    Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
-                    yield return new WaitForSeconds(turnLength);
-                }
-            }
+            //        Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
+            //        yield return new WaitForSeconds(turnLength);
+            //    }
+            //}
 
-            ratPathKeeping++;
-            Debug.Log(ratPathKeeping.ToString());
-            if (ratPathKeeping >= FindObjectOfType<RatProperties>().moves.Count)
-            {
-                ratPathKeeping = 0;
-            }
-            yield return new WaitForSeconds(turnLength);
+            //ratPathKeeping++;
+            //Debug.Log(ratPathKeeping.ToString());
+            //if (ratPathKeeping >= FindObjectOfType<RatProperties>().moves.Count)
+            //{
+            //    ratPathKeeping = 0;
+            //}
+            //yield return new WaitForSeconds(turnLength);
             
             //Environment.Turn();
         }
