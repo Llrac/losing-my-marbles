@@ -56,12 +56,12 @@ public class RatProperties : Movement
         return 'E';
     }
 
-    public override void DoAMove(int id, int inc , int dir)
+    public override void DoAMove(int dataID, int increment , int dir)
     {
         savedDir = gameObject.GetComponent<RatProperties>().currentDirectionID;
         gameObject.GetComponent<RatProperties>().currentDirectionID = dir;
          
-        if (TryMove(gameObject, id, inc) == true)
+        if (TryMove(gameObject, dataID, increment) == true)
         {
             gameObject.GetComponent<RatProperties>().currentDirectionID = savedDir;
         }
@@ -81,14 +81,11 @@ public class RatProperties : Movement
             }
             if (gridManager.GetNexTile(gameObject, killZone[i]) == 'P')
             {
-                //kill that player
+                // add animation
                 yield return new WaitForSeconds(0.5f); // viktigt att notera, du kan inte ha denna timern för seg för då missar du den andra coroutinen.
                 GameObject player = gridManager.FindPlayerInMatrix(killZone[i] // find player with your grid pos and the tile you detected player on
                         + gridPosition, TurnManager.players);
-                gridManager.MoveInGridMatrix(player.GetComponent<PlayerProperties>(), new Vector2(0, 0)); // make the player stomp on itself
-                TurnManager.players.Remove(player.GetComponent<PlayerProperties>()); // remove player from the player list
-                player.GetComponent<PlayerProperties>().marbleEffect.Clear(); // clear their marble effects
-                player.SetActive(false); // turn them off
+                player.GetComponent<PlayerProperties>().Death();
             }
         }
     }
