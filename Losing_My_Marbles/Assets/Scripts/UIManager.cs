@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour
         if (GetComponent<AudioSource>() != null)
             GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().newMarbles);
         
-        SetAllSlotsToAvailable();
+        SetBottomSlotsToAvailable();
         
         if (timer != null)
             timer.timerOn = true;
@@ -216,7 +216,7 @@ public class UIManager : MonoBehaviour
 
         foreach (Marble marble in marblesInScene)
         {
-            if (marble.isInHand)
+            if (marble.isOnBottomRow)
             {
                 discardBag.Add(marble);
                 marble.isInHand = false;
@@ -227,17 +227,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void SetAllSlotsToAvailable()
+    private void SetBottomSlotsToAvailable()
     {
-        for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
-        {
-            availableMarbleSlotsTop[i] = true;
-        }
-        
         for (int i = 0; i < availableMarbleSlotsBottom.Length; i++)
         {
             availableMarbleSlotsBottom[i] = true;
-            //marbleLights[i].enabled = false;
+            
+            if (marbleLights != null)
+                marbleLights[i].enabled = false;
             
             if (confirmButton != null)
                 confirmButton.interactable = false;
