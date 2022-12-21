@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: character for spine_front_merged_Material
+  m_Name: character for spine_front_merged_character for spine_front_merged_2
   m_Shader: {fileID: 4800000, guid: 1e8a610c9e01c3648bac42585e5fc676, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -22,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d66e08f5b635e024580e3c32c198115a, type: 3}
+        m_Texture: {fileID: 2800000, guid: a1753646774cece44aae21dc2a0cbfc6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
