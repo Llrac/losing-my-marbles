@@ -4,30 +4,48 @@ using UnityEngine;
 
 public class RatProperties : Movement
 {
+    public int enemyID = 0;
+
     int savedDir;
+
     GridManager gridManager;
-    readonly List <Vector2> killZone = new List<Vector2>() 
+
+    readonly List <Vector2> killZone = new() 
     { 
         new Vector2 (0, 1), new Vector2( 0, -1), new Vector2 ( 1, 0), new Vector2 (-1, 0)
     };
-    public List<Vector2> moves = new List<Vector2>();
-    private void Update()
-    {
-        if (Input.GetButtonDown("Jump"))
-        {
-            TryMove(gameObject, 0, 1);
-        }
-    }
+    public List<Vector2> moves = new();
+    
     private void Awake()
     {
-        Movement.enemies.Add(this);
+        enemies.Add(this);
     }
+
     private void Start()
     {
-        
         gridManager = FindObjectOfType<GridManager>().GetComponent<GridManager>();
+        UpdateSkeleton();
     }
-     
+
+    private void Update()
+    {
+        if (enemyID == DebugManager.characterToControl)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                TryMove(gameObject, 0, 1);
+            }
+            else if (Input.GetKeyDown(KeyCode.A))
+            {
+                TryMove(gameObject, 1, -1);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                TryMove(gameObject, 1, 1);
+            }
+        }
+    }
+
     private void OnDestroy()
     {
         Movement.enemies.Remove(this);

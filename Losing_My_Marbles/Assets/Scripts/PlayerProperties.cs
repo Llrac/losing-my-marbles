@@ -43,7 +43,7 @@ public class PlayerProperties : Movement
     }
     void Update()
     {
-        if (playerID == DebugManager.playerToControl)
+        if (playerID == DebugManager.characterToControl)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {

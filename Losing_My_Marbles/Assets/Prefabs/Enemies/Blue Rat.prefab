@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 633420726097404218}
   m_Layer: 0
   m_Name: Blue Rat
-  m_TagString: Player
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -265,12 +265,13 @@ MonoBehaviour:
   gridPosition: {x: 2, y: 3}
   hasKey: 0
   currentDirectionID: 0
-  frontIdle: {fileID: 0}
-  frontJump: {fileID: 0}
-  backIdle: {fileID: 0}
-  backJump: {fileID: 0}
+  frontIdle: {fileID: 11400000, guid: e764bb005bf9b3f4aba4ff1b8cf16cf8, type: 2}
+  frontJump: {fileID: 11400000, guid: a1761e528e25f04408b1156741247a09, type: 2}
+  backIdle: {fileID: 11400000, guid: f90330068b079dd4cbe92c1c6bbf0e75, type: 2}
+  backJump: {fileID: 11400000, guid: 3b0deef53b30724408ee3c5a746a2982, type: 2}
   jumpLength: 1
-  jumpAnimationSpeed: 5
+  jumpAnimationSpeed: 3
+  enemyID: 5
   moves: []
 --- !u!114 &4824100951751452370
 MonoBehaviour:
@@ -309,10 +310,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.2713318
-      value: 0.99292374
-      inSlope: 5.7953267
-      outSlope: 5.7953267
+      time: 1
+      value: 1
+      inSlope: 1.1111112
+      outSlope: 1.1111112
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -326,39 +327,21 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 29.663006
-      outSlope: 29.663006
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.13885956
-      value: 4.118992
-      inSlope: -0.07284938
-      outSlope: -0.07284938
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.22321007
-      outWeight: 0.0814594
-    - serializedVersion: 3
-      time: 0.38199005
-      value: -0.028656006
+      time: 1
+      value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 0
-      inSlope: 0.24282703
-      outSlope: 0.24282703
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

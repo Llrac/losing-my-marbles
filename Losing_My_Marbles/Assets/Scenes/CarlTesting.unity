@@ -4051,10 +4051,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2013711928739953720, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743189, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -4102,14 +4098,6 @@ PrefabInstance:
     - target: {fileID: 2610747910663743195, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Name
       value: Player Red
-      objectReference: {fileID: 0}
-    - target: {fileID: 2610747910663743195, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
@@ -5306,10 +5294,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blue Rat
       objectReference: {fileID: 0}
-    - target: {fileID: 3238477012892353797, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 3238477012892353803, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -5354,26 +5338,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4824100951751452371, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
-      propertyPath: backIdle
+    - target: {fileID: 8612317307832832602, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
+      propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 11400000, guid: f90330068b079dd4cbe92c1c6bbf0e75, type: 2}
-    - target: {fileID: 4824100951751452371, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
-      propertyPath: backJump
-      value: 
-      objectReference: {fileID: 11400000, guid: 3b0deef53b30724408ee3c5a746a2982, type: 2}
-    - target: {fileID: 4824100951751452371, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
-      propertyPath: frontIdle
-      value: 
-      objectReference: {fileID: 11400000, guid: e764bb005bf9b3f4aba4ff1b8cf16cf8, type: 2}
-    - target: {fileID: 4824100951751452371, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
-      propertyPath: frontJump
-      value: 
-      objectReference: {fileID: 11400000, guid: a1761e528e25f04408b1156741247a09, type: 2}
-    - target: {fileID: 4824100951751452371, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7064127189265369304, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
 --- !u!1001 &2784891092753096943
