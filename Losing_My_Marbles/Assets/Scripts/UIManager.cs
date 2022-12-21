@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     public Image insertAlert = null;
 
     [Header("Timer")] 
-    public Timer timer;
+    public Timer timer = null;
     
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     public bool[] availableMarbleSlotsBottom = new bool[3];
@@ -59,23 +59,21 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        
-        if (timer.timeValue > 0)
+        if (timer != null)
         {
-            return;
-        }
-
-        if (timer.timeValue <= 0)
-        {
-            if (BottomRowFull() == false)
-                ChooseRandomMarble();
-
-            else if (timer.timerOn)
+            if (timer.timeValue <= 0)
             {
-                actionHandler.SendAction();
-                timer.timerOn = false;
+                if (BottomRowFull() == false)
+                    ChooseRandomMarble();
+
+                else if (timer.timerOn && confirmButton.interactable)
+                {
+                    actionHandler.SendAction();
+                    timer.timerOn = false;
+                }
             }
         }
+        
     }
 
     public void FillHandWithMarbles()
@@ -84,7 +82,9 @@ public class UIManager : MonoBehaviour
             GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().newMarbles);
         
         SetAllSlotsToAvailable();
-        timer.timerOn = true;
+        
+        if (timer != null)
+            timer.timerOn = true;
         
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
