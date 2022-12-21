@@ -122,7 +122,7 @@ public class TurnManager : MonoBehaviour
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, 1);
                             if(sortedPlayers[playerInList].marbleEffect[currentTurn].y > 1)
                             {
-                                steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y;
+                                steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y; // added for 180  turn
                             }
                             break;
                         case 1:

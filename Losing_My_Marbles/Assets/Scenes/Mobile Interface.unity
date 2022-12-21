@@ -720,6 +720,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Marble Turn L 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2715080449656330558, guid: 9ffd8c74f1728a0459fbb3dd1959bf67, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7812296077624100166, guid: 9ffd8c74f1728a0459fbb3dd1959bf67, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -816,6 +820,10 @@ PrefabInstance:
     - target: {fileID: 2715080449656330558, guid: 319d94c0e693c1d42a686eadac0b548b, type: 3}
       propertyPath: m_Name
       value: Marble Turn R (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715080449656330558, guid: 319d94c0e693c1d42a686eadac0b548b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7812296077624100166, guid: 319d94c0e693c1d42a686eadac0b548b, type: 3}
       propertyPath: m_Pivot.x
@@ -991,6 +999,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
+      propertyPath: turns.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
       propertyPath: marbleBagTransform
       value: 
       objectReference: {fileID: 5202426837805719269}
@@ -998,6 +1010,14 @@ PrefabInstance:
       propertyPath: orderID.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
+      propertyPath: turns.Array.data[0]
+      value: 
+      objectReference: {fileID: 1120985300}
+    - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
+      propertyPath: turns.Array.data[1]
+      value: 
+      objectReference: {fileID: 743793486}
     - target: {fileID: 6905902840411802056, guid: 3483c58946f6ba04b8fbab2da54fb778, type: 3}
       propertyPath: marbleBag.Array.size
       value: 26
@@ -1745,7 +1765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13adaa1761d4e44597e3eb08c05bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 2
+  playerID: 1
 --- !u!4 &803238550
 Transform:
   m_ObjectHideFlags: 0
@@ -2493,6 +2513,10 @@ PrefabInstance:
     - target: {fileID: 2715080449656330558, guid: 9ffd8c74f1728a0459fbb3dd1959bf67, type: 3}
       propertyPath: m_Name
       value: Marble Turn L 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715080449656330558, guid: 9ffd8c74f1728a0459fbb3dd1959bf67, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7812296077624100166, guid: 9ffd8c74f1728a0459fbb3dd1959bf67, type: 3}
       propertyPath: m_Pivot.x
@@ -4176,6 +4200,10 @@ PrefabInstance:
     - target: {fileID: 2715080449656330558, guid: 319d94c0e693c1d42a686eadac0b548b, type: 3}
       propertyPath: m_Name
       value: Marble Turn R (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715080449656330558, guid: 319d94c0e693c1d42a686eadac0b548b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7812296077624100166, guid: 319d94c0e693c1d42a686eadac0b548b, type: 3}
       propertyPath: m_Pivot.x
