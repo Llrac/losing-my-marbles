@@ -123,7 +123,7 @@ public abstract class Movement : MonoBehaviour
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        TryMove(gameObject,0, 1);
+                        TryMove(gameObject, 0, 1);
                         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
                         return true;
@@ -224,6 +224,11 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.PLAYER: // PLAYER rat is able to push player
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+
+                    if (character.GetComponent<Movement>().hasKey && player.GetComponent<Movement>().savedTile == GridManager.DOOR)
+                    {
+                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
+                    }
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
@@ -509,7 +514,6 @@ public abstract class Movement : MonoBehaviour
         }
 
         UpdateSkeleton();
-        Debug.Log(typeID);
         if(typeID != 2)
         {
             SetAnimation(typeID, character);
