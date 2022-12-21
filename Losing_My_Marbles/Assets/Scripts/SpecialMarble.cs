@@ -5,10 +5,7 @@ using UnityEngine;
 public class SpecialMarble : MonoBehaviour
 {
     private GridGenerator gg;
-    private void Start()
-    {
-        
-    }
+    // sorted players 
     public static void Daze(PlayerProperties user)
     {
         for (int i = 0; i < TurnManager.players.Count; i++)
@@ -16,7 +13,7 @@ public class SpecialMarble : MonoBehaviour
             if(TurnManager.players[i] != user)
             {
                 int turn = Random.Range(1, 3);
-                TurnManager.players[i].GetComponent<Movement>().TryMove(TurnManager.players[i].gameObject, 1,turn);
+                TurnManager.players[i].GetComponent<Movement>().TryMove(TurnManager.players[i].gameObject, 1, turn);
             }
         }
     }
@@ -53,7 +50,7 @@ public class SpecialMarble : MonoBehaviour
     }
     public static void Swap(PlayerProperties user)
     {
-        if (TurnManager.players.Count <= 0)
+        if (TurnManager.players.Count <= 1)
         {
             return;
         }
@@ -189,7 +186,7 @@ public class SpecialMarble : MonoBehaviour
         {
             victim.marbleEffect[currentTurn] = new Vector2(1, 0); // adds a scrap marble this turn
         }
-        else if (opponentIndex < myIndex && currentTurn!= 2)
+        else if (opponentIndex < myIndex && currentTurn!= 2) 
         {
             victim.marbleEffect[currentTurn + 1] = new Vector2(1, 0);
         }
@@ -249,7 +246,7 @@ public class SpecialMarble : MonoBehaviour
         }
         return null; // something went wrong return null
     }
-    public void ExecuteSpecialMarble(PlayerProperties user, float type, float amount = 1)
+    public void ExecuteSpecialMarble(PlayerProperties user, float type, float amount = 1) // turnkeeper
     {
         switch (type)
         {

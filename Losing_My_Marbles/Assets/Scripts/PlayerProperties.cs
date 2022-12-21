@@ -68,7 +68,7 @@ public class PlayerProperties : Movement
             if (Input.GetButtonDown("Jump"))
             {
                 //gameObject.GetComponent<Movement>().Blink(3);
-                
+                StartCoroutine(FindObjectOfType<SpecialMarble>().Bomb(this));
             }
         }
     }
