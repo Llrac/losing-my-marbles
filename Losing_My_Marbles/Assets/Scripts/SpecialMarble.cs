@@ -250,7 +250,7 @@ public class SpecialMarble : MonoBehaviour
         }
         return null; // something went wrong return null
     }
-    public void ExecuteSpecialMarble(PlayerProperties user, float type, float amount = 1) // turnkeeper
+    public void ExecuteSpecialMarble(PlayerProperties user, float type, float amount = 1, int currentTurn = 0) // turnkeeper
     {
         switch (type)
         {
@@ -270,7 +270,7 @@ public class SpecialMarble : MonoBehaviour
                 Amplifier(user);
                 break;
             case 8:
-                BlockMove(user, 2); //default blocks the last move
+                BlockMove(user, currentTurn); //default blocks the last move
                 break;
             case 9:
                 Swap(user);

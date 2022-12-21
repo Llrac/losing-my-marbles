@@ -123,7 +123,8 @@ public class TurnManager : MonoBehaviour
                             steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y;
                             break;
                         default:
-                            specialMarbles.ExecuteSpecialMarble(sortedPlayers[playerInList], sortedPlayers[playerInList].marbleEffect[currentTurn].x, sortedPlayers[playerInList].marbleEffect[currentTurn].y);
+                            specialMarbles.ExecuteSpecialMarble(sortedPlayers[playerInList], sortedPlayers[playerInList].marbleEffect[currentTurn].x, sortedPlayers[playerInList].marbleEffect[currentTurn].y, currentTurn);
+                            steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y;
                             //special marbles
                             break;
                     }
