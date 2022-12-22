@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    [Header("Ambience")]
+    public AudioClip ambience = null;
+
     [Header("Desktop FX")]
     public AudioClip playerJump = null;
     public AudioClip pickupKey = null;
@@ -28,4 +31,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip selectMarble = null;
     public AudioClip marblesReady = null;
     public AudioClip pressGo = null;
+
+    private void Start()
+    {
+        GetComponent<AudioSource>().PlayOneShot(ambience);
+    }
 }

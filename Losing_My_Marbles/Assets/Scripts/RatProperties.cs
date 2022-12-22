@@ -90,23 +90,36 @@ public class RatProperties : Movement
             StartCoroutine(CheckForKills());
         }
     }
-    
-    public IEnumerator CheckForKills() 
+
+    public IEnumerator CheckForKills()
     {
-        for(int i = 0; i < killZone.Count; i++)
+        Vector2 killZone = new();
+        switch (currentDirectionID)
         {
-            if(gridManager == null)
-            {
-                gridManager.GetComponent<GridManager>();
-            }
-            if (gridManager.GetNexTile(gameObject, killZone[i]) == 'P')
-            {
-                // add animation
-                yield return new WaitForSeconds(0.5f); // viktigt att notera, du kan inte ha denna timern för seg för då missar du den andra coroutinen.
-                GameObject player = gridManager.FindPlayerInMatrix(killZone[i] // find player with your grid pos and the tile you detected player on
-                        + gridPosition, TurnManager.players);
-                player.GetComponent<PlayerProperties>().Death(player.transform.position);
-            }
+            case 0:
+                killZone = new Vector2(0, 1);
+                break;
+            case 1 or -3:
+                killZone = new Vector2(1, 0);
+                break;
+            case 2 or -2:
+                killZone = new Vector2(0, -1);
+                break;
+            case 3 or -1:
+                killZone = new Vector2(-1, 0);
+                break;
+        }
+        if (gridManager == null)
+        {
+            gridManager.GetComponent<GridManager>();
+        }
+        if (gridManager.GetNexTile(gameObject, killZone) == 'P')
+        {
+            // add animation
+            yield return new WaitForSeconds(0.5f); // viktigt att notera, du kan inte ha denna timern för seg för då missar du den andra coroutinen.
+            GameObject player = gridManager.FindPlayerInMatrix(killZone // find player with your grid pos and the tile you detected player on
+                    + gridPosition, TurnManager.players);
+            player.GetComponent<PlayerProperties>().Death(player.transform.position);
         }
     }
 }
