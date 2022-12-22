@@ -279,17 +279,17 @@ public class SpecialMarble : MonoBehaviour
             case 3:
                 StartCoroutine(Earthquake(user, amount));
                 if (GetComponent<AudioSource>() != null)
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectEarthquake);
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerEarthquake);
                 break;
             case 4:
                 StartCoroutine(Bomb(user, amount));
                 if (GetComponent<AudioSource>() != null)
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectBomb);
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerBomb);
                 break;
             case 5:
                 Daze(user);
                 if (GetComponent<AudioSource>() != null)
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectDaze);
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerDaze);
                 break;
             case 6:
                 Magnet(user);
@@ -297,22 +297,22 @@ public class SpecialMarble : MonoBehaviour
             case 7:
                 Amplifier(user);
                 if (GetComponent<AudioSource>() != null)
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectAmplifier);
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerAmplifier);
                 break;
             case 8:
                 BlockMove(user, currentTurn);
                 if (GetComponent<AudioSource>() != null)
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectBlock);
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerBlock);
                 break;
             case 9:
                 Swap(user);
                 if (GetComponent<AudioSource>() != null)
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectSwap);
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerSwap);
                 break;
             case 10:
                 RollerSkates(user);
                 if (GetComponent<AudioSource>() != null)
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectRollerskates);
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerRollerskates);
                 break;
         }
     }

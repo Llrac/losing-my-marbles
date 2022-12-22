@@ -1279,6 +1279,7 @@ MonoBehaviour:
   playerGlitterParticle: {fileID: 5854443905180603826, guid: a39bf45293b20f14a879466e6f2d38a2, type: 3}
   hitEffect: {fileID: 0}
   tileToCopy: {fileID: 2120634357754178640}
+  bomb: {fileID: 1235644451853953641, guid: 2055a5d6e07642b48a11d8eb233bff65, type: 3}
   tileSprites:
   - {fileID: -827519391, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
   - {fileID: -495025428, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}

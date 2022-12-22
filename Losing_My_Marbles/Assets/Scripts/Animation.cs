@@ -24,7 +24,7 @@ public class Animation : MonoBehaviour
     [HideInInspector] public float jumpAnimTimer = 10f;
     Vector2 startPosition;
     GameObject character;
-    Vector2 destination;
+    [HideInInspector] public Vector2 destination;
 
     int normalJumpProgressID = 0;
     int wallJumpProgressID = 0;

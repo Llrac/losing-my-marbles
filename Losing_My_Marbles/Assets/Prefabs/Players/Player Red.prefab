@@ -231,7 +231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2610747910663743189
 Transform:
   m_ObjectHideFlags: 0
@@ -267,6 +267,9 @@ MonoBehaviour:
   gridPosition: {x: 9, y: 5}
   hasKey: 0
   currentDirectionID: 3
+  mediumAudio: {fileID: 2011480802}
+  quiterAudio: {fileID: 2011480804}
+  louderAudio: {fileID: 2011480803}
   frontIdle: {fileID: 11400000, guid: 4c2dcc70f73f0ac4bab865b6774ff167, type: 2}
   frontJump: {fileID: 11400000, guid: f7b07ad5bbc2eff419767965cfd9967b, type: 2}
   backIdle: {fileID: 11400000, guid: bb75fce215ca3084088e0c1434fc91c9, type: 2}
@@ -276,6 +279,7 @@ MonoBehaviour:
   playerID: 1
   playerMarbles: 
   marbleEffect: []
+  deathPoof: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
   isAlive: 1
 --- !u!114 &5348300030501963020
 MonoBehaviour:
@@ -445,6 +449,7 @@ MonoBehaviour:
   jumpProgressLength: 1
   keyProgressLength: 0
   jumpAnimTimer: 10
+  destination: {x: 0, y: 0}
   keyAnimTimer: 10
 --- !u!50 &2610747910663743188
 Rigidbody2D:
