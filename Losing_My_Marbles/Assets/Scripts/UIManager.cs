@@ -239,6 +239,7 @@ public class UIManager : MonoBehaviour
         {
             availableMarbleSlotsBottom[i] = true;
             
+
            
             marbleLights[i].enabled = false;
             
