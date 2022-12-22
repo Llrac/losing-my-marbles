@@ -21,7 +21,7 @@ public class SetIntent : MonoBehaviour
     public void ShowIntent(Sprite intent, bool displayCross)
     {
         spriteRenderer.sprite = intent;
-        if (displayCross && cross != null)
+        if (!displayCross && cross != null)
         {
             cross.SetActive(true);
         }

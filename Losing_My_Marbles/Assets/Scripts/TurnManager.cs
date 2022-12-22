@@ -171,7 +171,7 @@ public class TurnManager : MonoBehaviour
 
         for(int i = 0; i < players.Count; i++)
         {
-            players[i].GetComponent<PlayerProperties>().isAlive = true;
+            players[i].GetComponent<PlayerProperties>().isBlocked = false;
             players[i].ResetMarbles();
         }
 

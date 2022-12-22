@@ -19,7 +19,7 @@ public class PlayerProperties : Movement
     SetIntent intent;
     GridManager gridManager;
     int act = 1;
-    public bool isAlive;
+    public bool isBlocked = false;
   
     private void Awake()
     {
@@ -181,7 +181,7 @@ public class PlayerProperties : Movement
     }
     public void ShowMyIntent(int marbleID)
     {
-        intent.ShowIntent(Intent.GiveIntent(marbleID), !isAlive);
+        intent.ShowIntent(Intent.GiveIntent(marbleID), isBlocked);
     }
     public void HideMyIntent()
     {
@@ -215,7 +215,7 @@ public class PlayerProperties : Movement
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
         savedTile = GridManager.WALKABLEGROUND;
         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().characterFall);
-        isAlive = false;
+        isBlocked = true;
     }
 }
 
