@@ -39,6 +39,8 @@ public class SpecialMarble : MonoBehaviour
                 }
                 // maybe add a way to not actually play an animation // make into a coroutine
             }
+            
+            //TODO add screenshake and call to the server for phone rumble
             yield return new WaitForSeconds(.5f);
         }
         TurnManager.turnLength = savedTurnLenght;
