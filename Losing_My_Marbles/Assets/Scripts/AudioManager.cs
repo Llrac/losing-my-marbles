@@ -13,6 +13,15 @@ public class AudioManager : MonoBehaviour
     public AudioClip wallHit = null;
     public AudioClip playerReady = null;
 
+    [Header("Special Marbles")]
+    public AudioClip selectAmplifier = null;
+    public AudioClip selectBlink = null;
+    public AudioClip selectBlock = null;
+    public AudioClip selectBomb = null;
+    public AudioClip selectDaze = null;
+    public AudioClip selectEarthquake = null;
+    public AudioClip selectSwap = null;
+
     [Header("Mobile FX")]
     public AudioClip newMarbles = null;
     public AudioClip selectMarble = null;
