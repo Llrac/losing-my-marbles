@@ -46,7 +46,7 @@ public class ResetManager : MonoBehaviour
         PlayerProperties.myActions.Clear();
         TurnManager.sortedPlayers.Clear();
         TurnManager.players.Clear();
-        DebugManager.playerToControl = 1;
+        DebugManager.characterToControl = 1;
         DatabaseAPI.hasBeenRestarted = true;
         SceneManager.LoadScene("MainMenu");
 
