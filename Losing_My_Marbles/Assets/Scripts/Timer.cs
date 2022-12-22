@@ -55,5 +55,6 @@ public class Timer : MonoBehaviour
     public void ResetTimer()
     {
         timeValue = playerTime;
+        timerText.color = Color.white;
     }
 }

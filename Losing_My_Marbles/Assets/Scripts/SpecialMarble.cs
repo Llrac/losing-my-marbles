@@ -5,7 +5,15 @@ using UnityEngine;
 public class SpecialMarble : MonoBehaviour
 {
     private GridGenerator gg;
+    GameObject turnManager;
+
     // sorted players 
+
+    private void Start()
+    {
+        turnManager = FindObjectOfType<SpecialMarble>().gameObject;
+    }
+    
     public static void Daze(PlayerProperties user)
     {
         for (int i = 0; i < TurnManager.players.Count; i++)
@@ -31,6 +39,8 @@ public class SpecialMarble : MonoBehaviour
                 }
                 // maybe add a way to not actually play an animation // make into a coroutine
             }
+            
+            //TODO add screenshake and call to the server for phone rumble
             yield return new WaitForSeconds(.5f);
         }
         TurnManager.turnLength = savedTurnLenght;
@@ -270,27 +280,41 @@ public class SpecialMarble : MonoBehaviour
         {
             case 3:
                 StartCoroutine(Earthquake(user, amount));
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectEarthquake);
                 break;
             case 4:
                 StartCoroutine(Bomb(user, amount));
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectBomb);
                 break;
             case 5:
                 Daze(user);
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectDaze);
                 break;
             case 6:
                 Magnet(user);
                 break;
             case 7:
                 Amplifier(user);
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectAmplifier);
                 break;
             case 8:
-                BlockMove(user, currentTurn); 
+                BlockMove(user, currentTurn);
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectBlock);
                 break;
             case 9:
                 Swap(user);
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectSwap);
                 break;
             case 10:
                 RollerSkates(user);
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectRollerskates);
                 break;
         }
     }
