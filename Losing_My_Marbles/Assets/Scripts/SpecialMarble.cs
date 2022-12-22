@@ -311,6 +311,8 @@ public class SpecialMarble : MonoBehaviour
                 break;
             case 10:
                 RollerSkates(user);
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().selectRollerskates);
                 break;
         }
     }

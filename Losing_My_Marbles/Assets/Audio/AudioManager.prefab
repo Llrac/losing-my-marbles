@@ -51,13 +51,14 @@ MonoBehaviour:
   pushHit: {fileID: 8300000, guid: 5ec5d6900558d9c47ad234f8e7e6501d, type: 3}
   wallHit: {fileID: 8300000, guid: 9739f9a51639c0540a2cb0a638dd41ee, type: 3}
   playerReady: {fileID: 8300000, guid: 763748d0c3782304f8caea3aa4ba296c, type: 3}
-  selectAmplifier: {fileID: 8300000, guid: c27b64adc3a7d1d4b992753f50ce1f91, type: 3}
-  selectBlink: {fileID: 8300000, guid: 123ed7ddf9e117a43a77e0df5d61c744, type: 3}
-  selectBlock: {fileID: 8300000, guid: d0f885895b10cf84ba4c847c66cf3a75, type: 3}
-  selectBomb: {fileID: 8300000, guid: f8a2d3f6ba0a2174c8e5227de1e4cb8c, type: 3}
-  selectDaze: {fileID: 8300000, guid: 7f8d50de3f8ee21478660e0da099851b, type: 3}
-  selectEarthquake: {fileID: 8300000, guid: f5f30d852ff6ca84dbb5ab4aefb3e361, type: 3}
-  selectSwap: {fileID: 8300000, guid: c65c3674d3a2643489f43aa002ccbb61, type: 3}
+  selectAmplifier: {fileID: 8300000, guid: 124334ee275927343a7f36d0f3a512e7, type: 3}
+  selectBlink: {fileID: 8300000, guid: ccb397993e889af4f89abd5ee76e6f68, type: 3}
+  selectBlock: {fileID: 8300000, guid: 51e524474b080b04fb4deebf9edcd7f5, type: 3}
+  selectBomb: {fileID: 8300000, guid: 29d8b42666db2c744a3f16d2b45f8857, type: 3}
+  selectDaze: {fileID: 8300000, guid: bac9974a8bb0a154d960001256e8bcb9, type: 3}
+  selectEarthquake: {fileID: 8300000, guid: c0d527d57b29d484b830df3f3e494c6f, type: 3}
+  selectRollerskates: {fileID: 8300000, guid: d2c4fe40c15a8094a83740af2a9fee6a, type: 3}
+  selectSwap: {fileID: 8300000, guid: f124a0abf200b0342983c9b783f57149, type: 3}
   newMarbles: {fileID: 8300000, guid: 45289102eedb37d489c02b0a34e65037, type: 3}
   selectMarble: {fileID: 8300000, guid: 62a0083d0c8f5074a97d5082d83c9d2b, type: 3}
   marblesReady: {fileID: 8300000, guid: d6f73a746d69b2a4fb882da03a2f1d95, type: 3}

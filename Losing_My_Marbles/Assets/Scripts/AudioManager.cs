@@ -20,6 +20,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip selectBomb = null;
     public AudioClip selectDaze = null;
     public AudioClip selectEarthquake = null;
+    public AudioClip selectRollerskates = null;
     public AudioClip selectSwap = null;
 
     [Header("Mobile FX")]
