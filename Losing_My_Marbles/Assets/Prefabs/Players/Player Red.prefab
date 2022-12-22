@@ -231,7 +231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2610747910663743189
 Transform:
   m_ObjectHideFlags: 0
@@ -280,7 +280,7 @@ MonoBehaviour:
   playerMarbles: 
   marbleEffect: []
   deathPoof: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
-  isBlocked: 0
+  isAlive: 1
 --- !u!114 &5348300030501963020
 MonoBehaviour:
   m_ObjectHideFlags: 0
