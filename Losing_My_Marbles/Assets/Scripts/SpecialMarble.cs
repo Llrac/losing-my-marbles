@@ -214,11 +214,10 @@ public class SpecialMarble : MonoBehaviour
         {
             victim.marbleEffect[currentTurn] = new Vector2(1, 0); // adds a scrap marble this turn
         }
-        else if (opponentIndex < myIndex && currentTurn!= 2)
+        else if (opponentIndex < myIndex && currentTurn!= 2) 
         {
             victim.marbleEffect[currentTurn + 1] = new Vector2(1, 0);
         }
-        victim.GetComponent<PlayerProperties>().isBlocked = true;
     }
     public static void RollerSkates(PlayerProperties user)
     {
