@@ -1620,6 +1620,14 @@ MonoBehaviour:
   pushHit: {fileID: 0}
   wallHit: {fileID: 0}
   playerReady: {fileID: 0}
+  selectAmplifier: {fileID: 0}
+  selectBlink: {fileID: 0}
+  selectBlock: {fileID: 0}
+  selectBomb: {fileID: 0}
+  selectDaze: {fileID: 0}
+  selectEarthquake: {fileID: 0}
+  selectRollerskates: {fileID: 0}
+  selectSwap: {fileID: 0}
   newMarbles: {fileID: 0}
   selectMarble: {fileID: 0}
   marblesReady: {fileID: 0}
@@ -3274,7 +3282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.7, y: -150.7}
+  m_AnchoredPosition: {x: 53.9, y: -150.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1529174298
@@ -3958,7 +3966,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0.48
+  m_characterSpacing: 38.65
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
