@@ -224,7 +224,9 @@ public class UIManager : MonoBehaviour
         {
             if (marble.isOnBottomRow)
             {
-                discardBag.Add(marble);
+                if (marble.marbleID != 4 || marble.marbleID != 5)
+                    discardBag.Add(marble);
+                
                 marble.isInHand = false;
                 marble.isOnTopRow = false;
                 marble.isOnBottomRow = false;
@@ -239,8 +241,6 @@ public class UIManager : MonoBehaviour
         {
             availableMarbleSlotsBottom[i] = true;
             
-
-           
             marbleLights[i].enabled = false;
             
             if (confirmButton != null)
