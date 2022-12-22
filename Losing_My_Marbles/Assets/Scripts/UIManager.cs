@@ -101,7 +101,8 @@ public class UIManager : MonoBehaviour
             }
             else if (availableMarbleSlotsTop[i])
             {
-                Marble randomMarble = checkForTurns();
+                Marble randomMarble = CheckForTurns();
+
                 if(randomMarble == null)
                 {
                     randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
@@ -238,8 +239,8 @@ public class UIManager : MonoBehaviour
         {
             availableMarbleSlotsBottom[i] = true;
             
-            if (marbleLights != null)
-                marbleLights[i].enabled = false;
+           
+            marbleLights[i].enabled = false;
             
             if (confirmButton != null)
                 confirmButton.interactable = false;
@@ -277,7 +278,7 @@ public class UIManager : MonoBehaviour
             ChooseRandomMarble();
         }
     }
-    public Marble checkForTurns()
+    public Marble CheckForTurns()
     {
         Marble[] marblesInScene = FindObjectsOfType<Marble>();
         bool isHoldingRightTurn = false;
