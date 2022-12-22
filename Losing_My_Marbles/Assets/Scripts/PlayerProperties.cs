@@ -8,6 +8,7 @@ public class PlayerProperties : Movement
     public int playerID = 0; // playerID of (0) is null
     private Vector2 startingGridPosition = Vector2.zero;
     private Vector2 startingWorldPosition = Vector2.zero;
+    private int startingDirection = 0;
 
     public static List<int> ids = new();
     public static List<int> myActions = new();
@@ -30,33 +31,7 @@ public class PlayerProperties : Movement
         intent = FindIntentShower.GetComponent<SetIntent>();
         startingGridPosition = gridPosition;
         startingWorldPosition = transform.position;
-        //Debugging
-
-        //TurnManager.sortedPlayers.Add(this);
-        //if(playerID == 1)
-        //{
-        //    playerMarbles = new List<int>()
-        //    {
-        //        15,1,8
-        //    };
-        //    marbleEffect = new List<Vector2>()
-        //    {
-        //        new Vector2(10, 1), new Vector2(0,1), new Vector2(3, 1)
-        //    };
-        //}
-        //else
-        //{
-        //    playerMarbles = new List<int>()
-        //    {
-        //        5,5,5
-        //    };
-        //    marbleEffect = new List<Vector2>()
-        //    {
-        //        new Vector2(1,1), new Vector2(1,1), new Vector2(1,1)
-        //    };
-        //}
-        
-        //Debugging
+        startingDirection = currentDirectionID;
     }
 
     private void Start()
@@ -225,9 +200,18 @@ public class PlayerProperties : Movement
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
+        for(int i = 0; i < TurnManager.players.Count; i++)
+        {
+            if(TurnManager.players[i].gridPosition == startingGridPosition)
+            {
+                TurnManager.players[i].Pushed(startingDirection);
+            }
+        }
+        currentDirectionID = startingDirection;
         transform.position = startingWorldPosition;
         Debug.Log(startingWorldPosition);
         gridPosition = startingGridPosition;
+        UpdateSkeleton();
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
         savedTile = GridManager.WALKABLEGROUND;
         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().characterFall);
