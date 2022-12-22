@@ -272,6 +272,7 @@ MonoBehaviour:
   jumpLength: 1
   jumpAnimationSpeed: 3
   enemyID: 5
+  deathPoof: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
   moves:
   - {x: 1, y: 2}
   - {x: 0, y: 1}

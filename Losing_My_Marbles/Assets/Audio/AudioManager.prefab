@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 209725965087590388}
   - component: {fileID: 209725965087590389}
+  - component: {fileID: 1305786580}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -44,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ab44efde216094691b98bbe4835813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ambience: {fileID: 8300000, guid: f1fcf5de018582c4f8b360dea37f3654, type: 3}
   playerJump: {fileID: 8300000, guid: 9bd973b5666fa7547a66ce8941cc266b, type: 3}
   pickupKey: {fileID: 8300000, guid: f14213a0b28489e4fa239672d6d9f436, type: 3}
   dropKey: {fileID: 8300000, guid: e3e650f861bfaca4db2fe669c4a80d32, type: 3}
@@ -51,15 +53,111 @@ MonoBehaviour:
   pushHit: {fileID: 8300000, guid: 5ec5d6900558d9c47ad234f8e7e6501d, type: 3}
   wallHit: {fileID: 8300000, guid: 9739f9a51639c0540a2cb0a638dd41ee, type: 3}
   playerReady: {fileID: 8300000, guid: 763748d0c3782304f8caea3aa4ba296c, type: 3}
-  selectAmplifier: {fileID: 8300000, guid: 124334ee275927343a7f36d0f3a512e7, type: 3}
-  selectBlink: {fileID: 8300000, guid: ccb397993e889af4f89abd5ee76e6f68, type: 3}
-  selectBlock: {fileID: 8300000, guid: 51e524474b080b04fb4deebf9edcd7f5, type: 3}
-  selectBomb: {fileID: 8300000, guid: 29d8b42666db2c744a3f16d2b45f8857, type: 3}
-  selectDaze: {fileID: 8300000, guid: bac9974a8bb0a154d960001256e8bcb9, type: 3}
-  selectEarthquake: {fileID: 8300000, guid: c0d527d57b29d484b830df3f3e494c6f, type: 3}
-  selectRollerskates: {fileID: 8300000, guid: d2c4fe40c15a8094a83740af2a9fee6a, type: 3}
-  selectSwap: {fileID: 8300000, guid: f124a0abf200b0342983c9b783f57149, type: 3}
+  triggerAmplifier: {fileID: 8300000, guid: 124334ee275927343a7f36d0f3a512e7, type: 3}
+  triggerBlink: {fileID: 8300000, guid: ccb397993e889af4f89abd5ee76e6f68, type: 3}
+  triggerBlock: {fileID: 8300000, guid: 51e524474b080b04fb4deebf9edcd7f5, type: 3}
+  triggerBomb: {fileID: 8300000, guid: 29d8b42666db2c744a3f16d2b45f8857, type: 3}
+  triggerDaze: {fileID: 8300000, guid: bac9974a8bb0a154d960001256e8bcb9, type: 3}
+  triggerEarthquake: {fileID: 8300000, guid: c0d527d57b29d484b830df3f3e494c6f, type: 3}
+  triggerRollerskates: {fileID: 8300000, guid: d2c4fe40c15a8094a83740af2a9fee6a, type: 3}
+  triggerSwap: {fileID: 8300000, guid: f124a0abf200b0342983c9b783f57149, type: 3}
   newMarbles: {fileID: 8300000, guid: 45289102eedb37d489c02b0a34e65037, type: 3}
   selectMarble: {fileID: 8300000, guid: 62a0083d0c8f5074a97d5082d83c9d2b, type: 3}
   marblesReady: {fileID: 8300000, guid: d6f73a746d69b2a4fb882da03a2f1d95, type: 3}
   pressGo: {fileID: 8300000, guid: 17a74cfba51fdeb48bc1b8269bb62d2d, type: 3}
+--- !u!82 &1305786580
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209725965087590391}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: bc92cea61e43ed44a8edb976f5ff4607, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

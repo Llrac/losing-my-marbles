@@ -95,4 +95,12 @@ public class GridGenerator : MonoBehaviour
         GameObject newBomb = Instantiate(bomb, new Vector3(posX, posY, 0), Quaternion.identity);
         Destroy(newBomb, 1.5f);
     }
+
+    public Vector2 GetRealWorldPosition(Vector2 gridPosition)
+    {
+        float posX = ((gridPosition.x * tileSize + gridPosition.y * tileSize)) + tileToCopy.transform.position.x - 1;
+        float posY = ((-gridPosition.x * tileSize + gridPosition.y * tileSize) / 2) + tileToCopy.transform.position.y + 1.5f;
+
+        return new Vector2(posX, posY);
+    }
 }

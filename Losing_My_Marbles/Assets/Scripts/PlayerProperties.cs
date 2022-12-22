@@ -14,6 +14,7 @@ public class PlayerProperties : Movement
     public static List<int> myActions = new();
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
+    public GameObject deathPoof = null;
     SpriteRenderer FindIntentShower;
     SetIntent intent;
     GridManager gridManager;
@@ -69,8 +70,11 @@ public class PlayerProperties : Movement
             }
             if (Input.GetButtonDown("Jump"))
             {
-                //gameObject.GetComponent<Movement>().Blink(3);
                 SpecialMarble.Amplifier(this);
+            }
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                TryMove(gameObject, 2, 3);
             }
         }
     }
@@ -183,8 +187,13 @@ public class PlayerProperties : Movement
     {
         intent.HideIntent();
     }
-    public void Death()
+    public void Death(Vector2 effect)
     {
+        if (deathPoof != null)
+        {
+            GameObject newPoof = Instantiate(deathPoof, effect, transform.rotation);
+            Destroy(newPoof, 1f);
+        }
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
         marbleEffect.Clear();
         for (int i = 0; i < 5; i++)
@@ -200,6 +209,7 @@ public class PlayerProperties : Movement
         }
         currentDirectionID = startingDirection;
         transform.position = startingWorldPosition;
+        Debug.Log(startingWorldPosition);
         gridPosition = startingGridPosition;
         UpdateSkeleton();
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();

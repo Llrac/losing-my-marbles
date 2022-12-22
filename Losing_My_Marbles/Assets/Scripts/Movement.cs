@@ -16,6 +16,10 @@ public abstract class Movement : MonoBehaviour
 
     public int currentDirectionID = 0;
 
+    public AudioSource mediumAudio;
+    public AudioSource quiterAudio;
+    public AudioSource louderAudio;
+
     GridManager grid;
     GridGenerator gg;
  
@@ -97,14 +101,16 @@ public abstract class Movement : MonoBehaviour
             {
                 gg = FindObjectOfType<GridGenerator>();
             }
-            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().playerJump);
+            if (mediumAudio != null)
+                mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().playerJump);
             switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
                     Move(character, 1, 1);
                     TryMove(character, 1, 2);
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
+                    if (mediumAudio != null)
+                        mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
@@ -124,7 +130,8 @@ public abstract class Movement : MonoBehaviour
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
                         TryMove(gameObject, 0, 1);
-                        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
+                        if (mediumAudio != null)
+                            mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
                         return true;
                     }
@@ -182,7 +189,7 @@ public abstract class Movement : MonoBehaviour
                     
                     if (CompareTag("Player"))
                     {
-                        character.GetComponent<PlayerProperties>().Death();
+                        character.GetComponent<PlayerProperties>().Death(gg.GetRealWorldPosition(gridPosition + RequestGridPosition(currentDirectionID)) + new Vector2(0, 0.7f));
                     }
                     else if (CompareTag("Enemy"))
                     {
@@ -209,6 +216,7 @@ public abstract class Movement : MonoBehaviour
             {
                 gg = FindObjectOfType<GridGenerator>();
             }
+            quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().triggerBlink);
             switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
@@ -217,7 +225,8 @@ public abstract class Movement : MonoBehaviour
                         if(grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.EMPTY)
                         {
                             TryMove(character, 2, i);
-                            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
+                            if (mediumAudio != null)
+                                mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
                             return true;
                         }
                     }
@@ -246,7 +255,8 @@ public abstract class Movement : MonoBehaviour
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
                         Blink(increment); // else blink increment--
-                        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
+                        if (mediumAudio != null)
+                            mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
                         return true;
                     }
                     else
@@ -305,7 +315,7 @@ public abstract class Movement : MonoBehaviour
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     if (CompareTag("Player"))
                     {
-                        character.GetComponent<PlayerProperties>().Death();
+                        character.GetComponent<PlayerProperties>().Death(gg.GetRealWorldPosition(gridPosition + RequestGridPosition(currentDirectionID, 3)) + new Vector2(0, 0.7f));
                     }
                     else
                     {

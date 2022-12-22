@@ -24,7 +24,7 @@ public class Animation : MonoBehaviour
     [HideInInspector] public float jumpAnimTimer = 10f;
     Vector2 startPosition;
     GameObject character;
-    Vector2 destination;
+    [HideInInspector] public Vector2 destination;
 
     int normalJumpProgressID = 0;
     int wallJumpProgressID = 0;
@@ -182,6 +182,7 @@ public class Animation : MonoBehaviour
                 thief.GetComponent<PlayerProperties>().hasKey = true;
                 thief = null;
                 victim = null;
+                quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().pickupKey);
             }
             hadKey = false;
         }
@@ -229,6 +230,7 @@ public class Animation : MonoBehaviour
         key.transform.position = victim.transform.position;
         key.GetComponent<SpriteRenderer>().enabled = true;
         key.GetComponent<SpriteRenderer>().sortingOrder++;
+        //quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().dropKey);
     }
 
     public void DropKey(GameObject keyDropper)
