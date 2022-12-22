@@ -158,14 +158,14 @@ public class TurnManager : MonoBehaviour
             //    }
             //}
 
-            //ratPathKeeping++;
-            //Debug.Log(ratPathKeeping.ToString());
-            //if (ratPathKeeping >= FindObjectOfType<RatProperties>().moves.Count)
-            //{
-            //    ratPathKeeping = 0;
-            //}
-            //yield return new WaitForSeconds(turnLength);
-            
+            ratPathKeeping++;
+            Debug.Log(ratPathKeeping.ToString());
+            if (ratPathKeeping >= FindObjectOfType<RatProperties>().moves.Count)
+            {
+                ratPathKeeping = 0;
+            }
+            yield return new WaitForSeconds(turnLength);
+
             //Environment.Turn();
         }
 
