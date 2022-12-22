@@ -84,7 +84,7 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public bool TryMove(GameObject character, int dataID, int increment, int typeID = 0)
+    public bool TryMove(GameObject character, int dataID, int increment)
     {
         // Set transform position
         if (dataID == 0)
@@ -103,7 +103,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
                     Move(character, 1, 1);
-                    TryMove(character, 1, 2, 1);
+                    TryMove(character, 1, 2);
                     GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
                     return false;
 
@@ -123,7 +123,7 @@ public abstract class Movement : MonoBehaviour
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        TryMove(gameObject,0, 1);
+                        TryMove(gameObject, 0, 1);
                         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
                         return true;
@@ -159,8 +159,16 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.KEY:
-                    character.GetComponent<Animation>().PickupKey(character);
-                    Move(character, 1);
+                    if (CompareTag("Player"))
+                    {
+                        character.GetComponent<Animation>().PickupKey(character);
+                        Move(character, 1);
+                    }
+                    else if (CompareTag("Enemy"))
+                    {
+
+                    }
+                    
                     return true;
 
                 case GridManager.HOLE:
@@ -176,9 +184,9 @@ public abstract class Movement : MonoBehaviour
                     {
                         character.GetComponent<PlayerProperties>().Death();
                     }
-                    else
+                    else if (CompareTag("Enemy"))
                     {
-                        enemies.Clear(); //is a rat jumps down a hole every rat dies
+                        character.GetComponent<RatProperties>().Death();
                     }
                     return true;
       
@@ -224,6 +232,11 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.PLAYER: // PLAYER rat is able to push player
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+
+                    if (character.GetComponent<Movement>().hasKey && player.GetComponent<Movement>().savedTile == GridManager.DOOR)
+                    {
+                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
+                    }
 
                     if (player.GetComponent<PlayerProperties>().hasKey == true)
                     {
@@ -326,10 +339,7 @@ public abstract class Movement : MonoBehaviour
             }
 
             UpdateSkeleton();
-            if(typeID == 1)
-                SetAnimation(dataID, character, true);
-            else
-                SetAnimation(dataID, character, false);
+            SetAnimation(dataID, character);
         }
         return false;
     }
@@ -358,36 +368,36 @@ public abstract class Movement : MonoBehaviour
 
     void SetSkeleton(bool facingLeft, bool front)
     {
-        if (CompareTag("Player"))
+        if (frontSkeleton == null || backSkeleton == null)
         {
-            if (frontSkeleton == null || backSkeleton == null)
+            foreach (Transform child in transform)
             {
-                foreach (Transform child in transform)
+                if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
                 {
-                    if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>())
-                    {
-                        frontSkeleton = child.GetComponent<SkeletonAnimation>();
-                    }
-                    else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
-                    {
-                        backSkeleton = child.GetComponent<SkeletonAnimation>();
-                    }
+                    frontSkeleton = child.GetComponent<SkeletonAnimation>();
+                }
+                else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>())
+                {
+                    backSkeleton = child.GetComponent<SkeletonAnimation>();
                 }
             }
-            
-            if (front)
-            {
-                nextIdleAnimation = frontIdle;
-                nextJumpAnimation = frontJump;
-                usingFrontSkeleton = true;
-            }
-            else
-            {
-                nextIdleAnimation = backIdle;
-                nextJumpAnimation = backJump;
-                usingFrontSkeleton = false;
-            }
+        }
 
+        if (front)
+        {
+            nextIdleAnimation = frontIdle;
+            nextJumpAnimation = frontJump;
+            usingFrontSkeleton = true;
+        }
+        else
+        {
+            nextIdleAnimation = backIdle;
+            nextJumpAnimation = backJump;
+            usingFrontSkeleton = false;
+        }
+
+        if (CompareTag("Player"))
+        {
             if (usingFrontSkeleton)
             {
                 frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
@@ -401,17 +411,40 @@ public abstract class Movement : MonoBehaviour
                 backSkeleton.gameObject.SetActive(true);
             }
         }
+        else if (CompareTag("Enemy"))
+        {
+            if (usingFrontSkeleton)
+            {
+                frontSkeleton.gameObject.SetActive(true);
+                backSkeleton.gameObject.SetActive(false);
+                frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
+                if (facingLeft)
+                    frontSkeleton.transform.eulerAngles = new Vector3(0, 0, -13);
+                else
+                    frontSkeleton.transform.eulerAngles = new Vector3(0, 0, 13);
+            }
+            else
+            {
+                frontSkeleton.gameObject.SetActive(false);
+                backSkeleton.gameObject.SetActive(true);
+                backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
+                if (facingLeft)
+                    backSkeleton.transform.eulerAngles = new Vector3(0, 0, 13);
+                else
+                    backSkeleton.transform.eulerAngles = new Vector3(0, 0, -13);
+            }
+        }
     }
 
-    public void SetAnimation(int typeID, GameObject character = null, bool wallJump = false)
+    public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false)
     {
         if (frontSkeleton == null || backSkeleton == null)
         {
             return;
         }
         if (wallJump)
-            typeID = 0;
-        switch (typeID)
+            dataID = 0;
+        switch (dataID)
         {
             case 0: // Jump forward
                 Animation animation = character.GetComponent<Animation>();
@@ -491,30 +524,32 @@ public abstract class Movement : MonoBehaviour
         switch (currentDirectionID)
         {
             case 0:
-                animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
+                animation.ForwardJump(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
                     character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
             case 1 or -3:
-                animation.AnimateAction(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
+                animation.ForwardJump(character, new Vector3(character.transform.position.x + jumpLength * wallJumpMultiplier,
                     character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
             case 2 or -2:
-                animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
+                animation.ForwardJump(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
                     character.transform.position.y - jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
             case 3 or -1:
-                animation.AnimateAction(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
+                animation.ForwardJump(character, new Vector3(character.transform.position.x - jumpLength * wallJumpMultiplier,
                     character.transform.position.y + jumpLength * wallJumpMultiplier / 2, 0) * jumpMultiplier, typeID);
                 break;
         }
 
         UpdateSkeleton();
-        Debug.Log(typeID);
-        if(typeID != 2)
+        if(typeID == 0)
         {
             SetAnimation(typeID, character);
         }
-       
+        else if (typeID == 1)
+        {
+            SetAnimation(typeID, character, true);
+        }
     }
     public void Blink(int blinkDistanceMultiplier)
     {
@@ -522,7 +557,6 @@ public abstract class Movement : MonoBehaviour
         grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
         float blinkDistance = jumpLength * blinkDistanceMultiplier;
 
-        Animation animation = gameObject.GetComponent<Animation>();
         switch (currentDirectionID)
         {
             case 0:
@@ -542,19 +576,7 @@ public abstract class Movement : MonoBehaviour
                     gameObject.transform.position.y + (blinkDistance) / 2, 0);
                 break;
         }
-        gg.UpdateGlitter();
     }
-    //public void DropKey()
-    //{
-    //    savedTile = 'K';
-    //    hasKey = false;
-    //    Vector2 keyPos;
-    //    keyPos.x = ((gridPosition.x * 1 + gridPosition.y * 1)) + -7 - 1;
-    //    keyPos.y = ((-gridPosition.x * 1 + gridPosition.y * 1) / 2) + 1.5f;
-    //    GameObject.FindGameObjectWithTag("Key").GetComponent<SpriteRenderer>().enabled = true;
-    //    GameObject.FindGameObjectWithTag("Key").transform.position = keyPos;
-    //    gg.UpdateGlitter(keyPos.x, keyPos.y);
-    //}
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);
 }

@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public Transform[] marbleSlotsTop = new Transform[7];
     public Transform[] marbleSlotsBottom = new Transform[3];
     public List<Marble> marbleBag = new();
+    public List<Marble> turns = new();
     public Transform marbleBagTransform;
     public Image[] marbleLights;
 
@@ -100,9 +101,14 @@ public class UIManager : MonoBehaviour
             }
             else if (availableMarbleSlotsTop[i])
             {
-                Marble randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
+                Marble randomMarble = CheckForTurns();
+
+                if(randomMarble == null)
+                {
+                    randomMarble = marbleBag[Random.Range(0, marbleBag.Count)];
+                }
+               
                 randomMarble.topRowIndex = i;
-                
                 if (marbleSlotsTop[i] != null)
                     randomMarble.transform.position = marbleSlotsTop[i].position;
                 
@@ -233,7 +239,9 @@ public class UIManager : MonoBehaviour
         {
             availableMarbleSlotsBottom[i] = true;
             
-            //marbleLights[i].enabled = false;
+
+           
+            marbleLights[i].enabled = false;
             
             if (confirmButton != null)
                 confirmButton.interactable = false;
@@ -270,5 +278,34 @@ public class UIManager : MonoBehaviour
         {
             ChooseRandomMarble();
         }
+    }
+    public Marble CheckForTurns()
+    {
+        Marble[] marblesInScene = FindObjectsOfType<Marble>();
+        bool isHoldingRightTurn = false;
+        bool isHoldingLeftTurn = false;
+        for (int i = 0; i < marblesInScene.Length; i++)
+        {
+            if(marblesInScene[i].isOnTopRow && marblesInScene[i].marbleID == 4)
+            {
+                isHoldingLeftTurn = true;
+            }
+           
+            if(marblesInScene[i].isOnTopRow && marblesInScene[i].marbleID == 5)
+            {
+                isHoldingRightTurn = true;
+            }
+           
+        }
+        if(isHoldingLeftTurn == false)
+        {
+            return turns[0];
+        }
+        else if(isHoldingRightTurn == false)
+        {
+            return turns[1];
+        }
+        return null;
+        //reaches down here if nothing was true
     }
 }

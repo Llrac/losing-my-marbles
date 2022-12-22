@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 11
   m_Sprite: {fileID: 21300000, guid: 86807167d8ba465489deac2c57fd08fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -138,7 +138,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb1d4cc58f8b2f548bcf7987b1338741, type: 2}
+  - {fileID: 2100000, guid: 5ee91f18b36aaf44199e93f12396dd39, type: 2}
+  - {fileID: 2100000, guid: 7d14c73a826782a47a46a1a76a5ef112, type: 2}
+  - {fileID: 2100000, guid: 5ee91f18b36aaf44199e93f12396dd39, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -229,7 +231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2610747910663743189
 Transform:
   m_ObjectHideFlags: 0
@@ -265,10 +267,10 @@ MonoBehaviour:
   gridPosition: {x: 9, y: 5}
   hasKey: 0
   currentDirectionID: 3
-  frontIdle: {fileID: 11400000, guid: edd9c916421247c45a8e6b06319f44c9, type: 2}
-  frontJump: {fileID: 11400000, guid: 0930d8a4bbfea8848bbee47140ab284c, type: 2}
-  backIdle: {fileID: 11400000, guid: 7d0720039636f074aacde32e9b507134, type: 2}
-  backJump: {fileID: 11400000, guid: 1d5031ffcdae4834fbb257dd6dc60d64, type: 2}
+  frontIdle: {fileID: 11400000, guid: 4c2dcc70f73f0ac4bab865b6774ff167, type: 2}
+  frontJump: {fileID: 11400000, guid: f7b07ad5bbc2eff419767965cfd9967b, type: 2}
+  backIdle: {fileID: 11400000, guid: bb75fce215ca3084088e0c1434fc91c9, type: 2}
+  backJump: {fileID: 11400000, guid: 9da017614ed6fc046b9c27d7be96ba09, type: 2}
   jumpLength: 1
   jumpAnimationSpeed: 3
   playerID: 1
@@ -312,10 +314,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.2713318
-      value: 0.99292374
-      inSlope: 5.7953267
-      outSlope: 5.7953267
+      time: 0.25
+      value: 1
+      inSlope: 6.6666665
+      outSlope: 6.6666665
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

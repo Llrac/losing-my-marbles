@@ -49,6 +49,8 @@ public class ResetManager : MonoBehaviour
         DebugManager.playerToControl = 1;
         DatabaseAPI.hasBeenRestarted = true;
         SceneManager.LoadScene("MainMenu");
+
+
     }
 
     public static void PlayerWin(int playerID)
