@@ -226,6 +226,7 @@ public class PlayerProperties : Movement
             marbleEffect.Add(new Vector2(1, 0));
         }
         transform.position = startingWorldPosition;
+        Debug.Log(startingWorldPosition);
         gridPosition = startingGridPosition;
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
         savedTile = GridManager.WALKABLEGROUND;
