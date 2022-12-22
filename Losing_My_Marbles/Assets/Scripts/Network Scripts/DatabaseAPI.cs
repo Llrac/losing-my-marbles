@@ -57,8 +57,6 @@ public class DatabaseAPI : MonoBehaviour
 
     public void ListenForNewHand(Action<NewHandMessage> callback, Action<AggregateException> fallback)
     {
-        
-
         void CurrentListener(object o, ChildChangedEventArgs args)
         {
             if (args.DatabaseError != null) fallback(new AggregateException(new Exception(args.DatabaseError.Message)));
