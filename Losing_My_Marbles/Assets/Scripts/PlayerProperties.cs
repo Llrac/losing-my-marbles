@@ -29,6 +29,33 @@ public class PlayerProperties : Movement
         intent = FindIntentShower.GetComponent<SetIntent>();
         startingGridPosition = gridPosition;
         startingWorldPosition = transform.position;
+        //Debugging
+
+        //TurnManager.sortedPlayers.Add(this);
+        //if(playerID == 1)
+        //{
+        //    playerMarbles = new List<int>()
+        //    {
+        //        15,1,8
+        //    };
+        //    marbleEffect = new List<Vector2>()
+        //    {
+        //        new Vector2(10, 1), new Vector2(0,1), new Vector2(3, 1)
+        //    };
+        //}
+        //else
+        //{
+        //    playerMarbles = new List<int>()
+        //    {
+        //        5,5,5
+        //    };
+        //    marbleEffect = new List<Vector2>()
+        //    {
+        //        new Vector2(1,1), new Vector2(1,1), new Vector2(1,1)
+        //    };
+        //}
+        
+        //Debugging
     }
 
     private void Start()
@@ -68,7 +95,7 @@ public class PlayerProperties : Movement
             if (Input.GetButtonDown("Jump"))
             {
                 //gameObject.GetComponent<Movement>().Blink(3);
-                StartCoroutine(FindObjectOfType<SpecialMarble>().Bomb(this));
+                SpecialMarble.Amplifier(this);
             }
         }
     }
@@ -119,26 +146,30 @@ public class PlayerProperties : Movement
                     //bomb
                     break;
                 case 10:
-                    marbleEffect.Add(new Vector2(5, 0));
+                    marbleEffect.Add(new Vector2(5, 1));
                     //Daze
                     break;
                 case 11:
-                    marbleEffect.Add(new Vector2(6, 0));
+                    marbleEffect.Add(new Vector2(6, 1));
                     //drop key
                     break;
                 case 12:
-                    marbleEffect.Add(new Vector2(7, 0));
+                    marbleEffect.Add(new Vector2(7, 1));
                     //amplify
                     break;
                 case 13:
-                    marbleEffect.Add(new Vector2(8, 0));
+                    marbleEffect.Add(new Vector2(8, 1));
                     //BlockMove
                     break;
                 case 14:
-                    marbleEffect.Add(new Vector2(9, 0));
+                    marbleEffect.Add(new Vector2(9, 1));
                     //Swap
                     break;
-                //Aggressive marbles here
+                case 15:
+                    marbleEffect.Add(new Vector2(10, 1));
+                    //RollerSkates
+                    break;
+                
 
             }
            // Debug.Log(myActions[0]);

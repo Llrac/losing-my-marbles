@@ -45,6 +45,13 @@ public class TurnManager : MonoBehaviour
     }
     private void Update()
     {
+        //Debugging
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            StartCoroutine(ExecuteTurn());
+        }
+
+        // end of debugging
         if (PlayerProperties.ids.Count > tracking)
         {
             uiDesktop.TurnOffMarbleBagAnimation(PlayerProperties.ids[tracking]);
@@ -109,21 +116,26 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(turnLength);
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
                 {                                                                                                                                                         //extra actions is for rollerskates
-                    switch ((int)sortedPlayers[playerInList].marbleEffect[currentTurn].x)
+                    switch (sortedPlayers[playerInList].marbleEffect[currentTurn].x)
                     {
                         case 0:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, 1);
+                           
                             break;
                         case 1:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
-                            
+                            if (sortedPlayers[playerInList].marbleEffect[currentTurn].y > 1)
+                            {
+                                steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y; // added for 180  turn
+                            }
                             break;
                         case 2:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
                             steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y;
                             break;
                         default:
-                            specialMarbles.ExecuteSpecialMarble(sortedPlayers[playerInList], sortedPlayers[playerInList].marbleEffect[currentTurn].x, sortedPlayers[playerInList].marbleEffect[currentTurn].y);
+                            specialMarbles.ExecuteSpecialMarble(sortedPlayers[playerInList], sortedPlayers[playerInList].marbleEffect[currentTurn].x, sortedPlayers[playerInList].marbleEffect[currentTurn].y, currentTurn);
+                            steps = (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y;
                             //special marbles
                             break;
                     }
@@ -134,17 +146,17 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(turnLength);
             }
             // enemy
-            if(Movement.enemies.Count > 0)
-            {
-                for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
-                {
-                    float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
-                    float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
+            //if(Movement.enemies.Count > 0)
+            //{
+            //    for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
+            //    {
+            //        float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
+            //        float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
 
-                    Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
-                    yield return new WaitForSeconds(turnLength);
-                }
-            }
+            //        Movement.enemies[enemyCounter].DoAMove((int)pathForRatx, (int)pathForRaty, Movement.enemies[enemyCounter].currentDirectionID);
+            //        yield return new WaitForSeconds(turnLength);
+            //    }
+            //}
 
             ratPathKeeping++;
             if (ratPathKeeping >= FindObjectOfType<RatProperties>().moves.Count)
@@ -152,7 +164,7 @@ public class TurnManager : MonoBehaviour
                 ratPathKeeping = 0;
             }
             yield return new WaitForSeconds(turnLength);
-            
+
             //Environment.Turn();
         }
 
