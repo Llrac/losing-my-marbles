@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Glitter
       objectReference: {fileID: 0}
+    - target: {fileID: 1672509437254162840, guid: 777c5ecf621c89741af44e0be2f6a94c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1672509437254162842, guid: 777c5ecf621c89741af44e0be2f6a94c, type: 3}
       propertyPath: moveWithTransform
       value: 1

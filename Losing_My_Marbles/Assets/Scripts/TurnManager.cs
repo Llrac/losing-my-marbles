@@ -14,7 +14,8 @@ public class TurnManager : MonoBehaviour
     // enemy 1, 2, 3, etc
     // all hazard tiles
     // all environment tiles
-    public int amountOfTurns = 3;
+    public static int amountOfTurns = 3;
+    public static int marblesToWin = 3;
     public static float turnLength = .5f; // den h�r kan allts� �ndras s� att man hinner med en annan coroutine!!!
     public static List <PlayerProperties> players = new();
     public static List <PlayerProperties> sortedPlayers = new();

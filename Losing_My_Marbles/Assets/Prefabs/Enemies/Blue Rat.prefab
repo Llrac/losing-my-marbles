@@ -263,8 +263,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   savedTile: 88
   gridPosition: {x: 3, y: 0}
-  hasKey: 0
+  specialMarbleCount: 0
   currentDirectionID: 2
+  mediumAudio: {fileID: 633420726097404220}
+  quiterAudio: {fileID: 633420726097404218}
+  louderAudio: {fileID: 633420726097404221}
   frontIdle: {fileID: 11400000, guid: e764bb005bf9b3f4aba4ff1b8cf16cf8, type: 2}
   frontJump: {fileID: 11400000, guid: a1761e528e25f04408b1156741247a09, type: 2}
   backIdle: {fileID: 11400000, guid: f90330068b079dd4cbe92c1c6bbf0e75, type: 2}
@@ -355,7 +358,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  keyProgress:
+  marbleTravelProgress:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -363,18 +366,27 @@ MonoBehaviour:
       value: 0
       inSlope: 2
       outSlope: 2
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.24056587
-      value: 1.0045245
+      time: 0.5
+      value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2
+      outSlope: -2
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -431,9 +443,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpProgressLength: 1
-  keyProgressLength: 0
+  marbleTravelLength: 0
   jumpAnimTimer: 10
-  keyAnimTimer: 10
+  destination: {x: 0, y: 0}
+  marbleAnimTimer: 10
 --- !u!50 &3238477012892353802
 Rigidbody2D:
   serializedVersion: 4

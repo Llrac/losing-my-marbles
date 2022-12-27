@@ -196,7 +196,7 @@ public class PlayerProperties : Movement
         }
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
         marbleEffect.Clear();
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < TurnManager.amountOfTurns; i++)
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
@@ -209,7 +209,6 @@ public class PlayerProperties : Movement
         }
         currentDirectionID = startingDirection;
         transform.position = startingWorldPosition;
-        Debug.Log(startingWorldPosition);
         gridPosition = startingGridPosition;
         UpdateSkeleton();
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();

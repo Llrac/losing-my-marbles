@@ -7,8 +7,7 @@ public class GridGenerator : MonoBehaviour
     GridManager grid;
 
     [Header("Particle Effects")]
-    [SerializeField] GameObject keyGlitterParticle = null;
-    [SerializeField] GameObject playerGlitterParticle = null;
+    [SerializeField] GameObject mysteryMarble = null;
     [SerializeField] GameObject hitEffect = null;
 
     [SerializeField] GameObject tileToCopy;
@@ -18,15 +17,11 @@ public class GridGenerator : MonoBehaviour
     readonly float tileSize = 1f;
     int tileSpriteChosen;
     GameObject newTile;
-    GameObject newKeyGlitter;
-    GameObject newPlayerGlitter;
+    GameObject newMysteryMarble;
     GameObject newHit;
 
     void Start()
     {
-        newPlayerGlitter = Instantiate(playerGlitterParticle);
-        newPlayerGlitter.transform.position = new Vector2(-100, 0);
-
         tileToCopy.GetComponent<SpriteRenderer>().sortingOrder = 0;
         grid = transform.GetComponentInParent<GridManager>();
 
@@ -47,36 +42,13 @@ public class GridGenerator : MonoBehaviour
                     {
                         newTile.GetComponent<SpriteRenderer>().sprite = tileHoleSprite;
                     }
-                    else if (grid.board[x, y] == GridManager.KEY && keyGlitterParticle != null)
+                    else if (grid.board[x, y] == GridManager.MARBLE && mysteryMarble != null)
                     {
-                        newKeyGlitter = Instantiate(keyGlitterParticle);
-                        newKeyGlitter.transform.position = new Vector2(newTile.transform.position.x, newTile.transform.position.y + 1);
+                        newMysteryMarble = Instantiate(mysteryMarble);
+                        newMysteryMarble.transform.position = new Vector2(newTile.transform.position.x, newTile.transform.position.y + 1);
                     }
                 }
             }
-        }
-    }
-
-    public void UpdateGlitter(float keyPosX = 999, float keyPosY = 999)
-    {
-        if (keyPosX == 999 && keyPosY == 999)
-        {
-            newKeyGlitter.transform.position = new Vector2(-100, 0);
-        }
-        
-        foreach (PlayerProperties playerScript in FindObjectsOfType<PlayerProperties>())
-        {
-            if (playerScript.hasKey)
-            {
-                newPlayerGlitter.transform.position = playerScript.gameObject.transform.position;
-                return;
-            }
-        }
-        newPlayerGlitter.transform.position = new Vector2(-100, 0);
-
-        if (newKeyGlitter.transform.position != new Vector3(keyPosX, keyPosY) && keyPosX != 999 && keyPosY != 999)
-        {
-            newKeyGlitter.transform.position = new Vector2(keyPosX, keyPosY);
         }
     }
 
@@ -90,7 +62,7 @@ public class GridGenerator : MonoBehaviour
     }
     public void DeployBomb(Vector2 destination)
     {
-        float posX = ((destination.x * tileSize + destination.y * tileSize)) + tileToCopy.transform.position.x - 1; // this is the actual x position of the tile
+        float posX = destination.x * tileSize + destination.y * tileSize + tileToCopy.transform.position.x - 1; // this is the actual x position of the tile
         float posY = ((-destination.x * tileSize + destination.y * tileSize) / 2) + tileToCopy.transform.position.y + 1.5f;
         GameObject newBomb = Instantiate(bomb, new Vector3(posX, posY, 0), Quaternion.identity);
         Destroy(newBomb, 1.5f);
@@ -98,7 +70,7 @@ public class GridGenerator : MonoBehaviour
 
     public Vector2 GetRealWorldPosition(Vector2 gridPosition)
     {
-        float posX = ((gridPosition.x * tileSize + gridPosition.y * tileSize)) + tileToCopy.transform.position.x - 1;
+        float posX = gridPosition.x * tileSize + gridPosition.y * tileSize + tileToCopy.transform.position.x - 1;
         float posY = ((-gridPosition.x * tileSize + gridPosition.y * tileSize) / 2) + tileToCopy.transform.position.y + 1.5f;
 
         return new Vector2(posX, posY);

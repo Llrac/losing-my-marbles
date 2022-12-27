@@ -47,18 +47,18 @@ public class SpecialMarble : MonoBehaviour
     }
     public static void Magnet(PlayerProperties user)
     {
-        if(user.hasKey == false)
-        {
-            for (int i = 0; i < TurnManager.players.Count; i++)
-            {
-                if (TurnManager.players[i] != user && TurnManager.players[i].hasKey == true)
-                {
-                    TurnManager.players[i].GetComponent<PlayerProperties>().GetComponent<Animation>().DropKey(TurnManager.players[i].gameObject);
-                    return;
-                }   
-            }
-            //maybe add a particle effect indicating you didnt steal a key
-        }
+        //if(user.hasKey == false)
+        //{
+        //    for (int i = 0; i < TurnManager.players.Count; i++)
+        //    {
+        //        if (TurnManager.players[i] != user && TurnManager.players[i].hasKey == true)
+        //        {
+        //            TurnManager.players[i].GetComponent<PlayerProperties>().GetComponent<Animation>().DropKey(TurnManager.players[i].gameObject);
+        //            return;
+        //        }   
+        //    }
+        //    //maybe add a particle effect indicating you didnt steal a key
+        //}
     }
     public static void Swap(PlayerProperties user)
     {
