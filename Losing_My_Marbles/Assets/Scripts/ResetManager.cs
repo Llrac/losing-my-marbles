@@ -11,7 +11,8 @@ public class ResetManager : MonoBehaviour
     public DatabaseAPI databaseAPI;
     [SerializeField] private GameObject winImage = null;
     private static Image win;
-
+    private float timer = 2;
+    bool starting = false;
     private void Start()
     {
         if (winImage == null)
@@ -38,6 +39,11 @@ public class ResetManager : MonoBehaviour
         {
             ResetLevel();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            //pause game
+            PauseGame();
+        }
     }
 
     public void ResetLevel()
@@ -49,8 +55,6 @@ public class ResetManager : MonoBehaviour
         DebugManager.characterToControl = 1;
         DatabaseAPI.hasBeenRestarted = true;
         SceneManager.LoadScene("MainMenu");
-
-
     }
 
     public static void PlayerWin(int playerID)
@@ -59,6 +63,28 @@ public class ResetManager : MonoBehaviour
         {
             win.sprite = Screens[playerID - 1];
             win.enabled = true;
+        }
+    }
+    public void PauseGame()
+    {
+        GameObject pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
+        if (TurnManager.isPaused == false)
+        {
+            TurnManager.isPaused = true;
+            pauseScreen.GetComponent<Image>().enabled = true;
+            foreach(Transform child in pauseScreen.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            TurnManager.isPaused = false;
+            pauseScreen.GetComponent<Image>().enabled = false;
+            foreach (Transform child in pauseScreen.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
         }
     }
 }
