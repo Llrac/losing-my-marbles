@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+using TMPro;
 
 public class Scenehandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameSession gameSession;
+    public TMP_InputField sessionCode;
+    
+    public void JoinGame()
     {
+        var sessionID = gameSession.sessionID.ToString();
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        if (sessionCode.text == sessionID)
+            SceneManager.LoadScene("Mobile Interface");
         
+        else 
+            Debug.Log("You died!");
     }
 }
