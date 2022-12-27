@@ -13,11 +13,36 @@ public class DatabaseAPI : MonoBehaviour
         // Gets an instance of the database
         FirebaseDatabase.GetInstance("https://losing-my-marbles-620eb-default-rtdb.europe-west1.firebasedatabase.app/");
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
-        dbReference.SetValueAsync(null); //clears the database every play session
-        dbReference.SetValueAsync("movement"); //makes sure we can post to movement
+        //dbReference.SetValueAsync(null); //clears the database every play session
+        dbReference.SetValueAsync("game session");
         dbReference.SetValueAsync("new hand");
+        dbReference.SetValueAsync("movement"); //makes sure we can post to movement
     }
 
+    public void CreateGameSession(GameSessionMessage gameSessionMessage, Action callback, Action<AggregateException> fallback)
+    {
+        if (dbReference == null)
+            dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        
+        var gameSessionJson = JsonUtility.ToJson(gameSessionMessage);
+        dbReference.Child("game session").Push().SetRawJsonValueAsync(gameSessionJson).ContinueWith(task =>
+        {
+            if (task.IsCanceled || task.IsFaulted) fallback(task.Exception);
+            else callback();
+        });
+    }
+
+    // public void ListenForGameSession(Action<GameSessionMessage> callback, Action<AggregateException> fallback)
+    // {
+    //     void CurrentListener(object o, ChildChangedEventArgs args)
+    //     {
+    //         if (args.DatabaseError != null) fallback(new AggregateException(new Exception(args.DatabaseError.Message)));
+    //         else callback(JsonUtility.FromJson<GameSessionMessage>(args.Snapshot.GetRawJsonValue()));
+    //     }
+    //
+    //     dbReference.Child("game session").ChildAdded += CurrentListener;
+    // }
+    //
     public void PostActions(ActionMessage actionMessage, Action callback, Action<AggregateException> fallback)
     {
         var actionJson = JsonUtility.ToJson(actionMessage);

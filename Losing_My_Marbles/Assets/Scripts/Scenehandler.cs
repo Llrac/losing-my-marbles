@@ -11,14 +11,19 @@ public class Scenehandler : MonoBehaviour
     public GameSession gameSession;
     public TMP_InputField sessionCode;
     
-    public void JoinGame()
+    public void JoinGameMobile()
     {
         var sessionID = GameSession.sessionID.ToString();
         
-        if (sessionCode.text == sessionID)
-            SceneManager.LoadScene("Mobile Interface");
+         if (sessionCode.text == sessionID)
+             SceneManager.LoadScene("Mobile Interface");
         
-        else 
-            Debug.Log("You died!");
+         else 
+             Debug.Log("You died!");
+    }
+
+    public void LoadDesktopMatchmaking()
+    {
+        SceneManager.LoadScene("Desktop Matchmaking");
     }
 }

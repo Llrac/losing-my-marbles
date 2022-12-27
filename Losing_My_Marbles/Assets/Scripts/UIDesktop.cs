@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIDesktop : MonoBehaviour
 {
+    [Header("In game")]
     public Transform playLogTransform;
 
     public GameObject playerOrderPrefab;
@@ -13,7 +16,7 @@ public class UIDesktop : MonoBehaviour
     public List<GameObject> playerBags = new();
     public List<GameObject> playerUIPosition = new();
     public List<Animator> playerBagsAnimator = new();
-
+    
     public void InstantiatePlayerOrder(int playerId)
     {
        var newPlayerPosition = Instantiate(playerOrderPrefab, transform.position, Quaternion.identity);
@@ -75,5 +78,7 @@ public class UIDesktop : MonoBehaviour
             }
         }
     }
+    
+    
 
 }
