@@ -90,7 +90,7 @@ public class TurnManager : MonoBehaviour
         amountOfRounds++;
 
         yield return new WaitForSeconds(2f);
-        uiDesktop.TogglePlayerBags(false);
+        
        
         for (int i = 3; i > 0; i--)
         {
@@ -102,6 +102,7 @@ public class TurnManager : MonoBehaviour
        
         for (int i = 0; i < sortedPlayers.Count; i++)
         {
+            uiDesktop.TogglePlayerBags(false, sortedPlayers[i].playerID);
             uiDesktop.ToggleReadyShine(sortedPlayers[i].playerID, false);
             uiDesktop.InstantiatePlayerOrder(sortedPlayers[i].playerID);
             yield return new WaitForSeconds(0.3f);

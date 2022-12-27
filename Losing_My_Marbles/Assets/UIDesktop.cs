@@ -58,21 +58,22 @@ public class UIDesktop : MonoBehaviour
     
     //TODO Add a function that toggles ALL ready shines
 
-    public void TogglePlayerBags(bool showBags)
+    public void TogglePlayerBags(bool showBags, int playerID = 0)
     {
         if (showBags)
-        {
+        {// this code should run at once
             foreach (GameObject playerBag in playerBags)
             {
                 playerBag.GetComponent<Image>().enabled = true;
             }
         }
         else
-        {
-            foreach (GameObject playerBag in playerBags)
-            {
-                playerBag.GetComponent<Image>().enabled = false;
-            }
+        {//this code should run asynchronolsly
+            playerUIPosition[playerID - 1].transform.GetChild(1).gameObject.SetActive(false);
+            //foreach (GameObject playerBag in playerBags)
+            //{
+            //    playerBag.GetComponent<Image>().enabled = false;
+            //}
         }
     }
 
