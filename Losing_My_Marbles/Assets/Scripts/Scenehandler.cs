@@ -13,7 +13,7 @@ public class Scenehandler : MonoBehaviour
     
     public void JoinGame()
     {
-        var sessionID = gameSession.sessionID.ToString();
+        var sessionID = GameSession.sessionID.ToString();
         
         if (sessionCode.text == sessionID)
             SceneManager.LoadScene("Mobile Interface");
