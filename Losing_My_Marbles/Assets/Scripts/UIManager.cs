@@ -224,8 +224,10 @@ public class UIManager : MonoBehaviour
         {
             if (marble.isOnBottomRow)
             {
-                if (marble.marbleID != 4 || marble.marbleID != 5)
+                if (marble.marbleID != 4 && marble.marbleID != 5)
+                {
                     discardBag.Add(marble);
+                }
                 
                 marble.isInHand = false;
                 marble.isOnTopRow = false;
