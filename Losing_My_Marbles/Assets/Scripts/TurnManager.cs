@@ -47,12 +47,6 @@ public class TurnManager : MonoBehaviour
     }
     private void Update()
     {
-        //Debugging
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            StartCoroutine(ExecuteTurn());
-        }
-
         // end of debugging
         if (PlayerProperties.ids.Count > tracking)
         {
