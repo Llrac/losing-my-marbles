@@ -4742,6 +4742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97fc61709491cdc42b3617689c1927bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amountOfTurns: 3
   uiDesktop: {fileID: 1997739543}
   readyAlert: {fileID: 453755223}
   information: {fileID: 1072836623}
