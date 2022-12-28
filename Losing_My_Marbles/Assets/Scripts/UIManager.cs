@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     public bool[] availableMarbleSlotsBottom = new bool[3];
-    [HideInInspector] public List<Marble> discardBag = new();
+    public List<Marble> discardBag = new();
     public int[] orderID = new int[3];
 
     private void Start()
