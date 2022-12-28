@@ -196,7 +196,7 @@ public class PlayerProperties : Movement
         }
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
         marbleEffect.Clear();
-        for (int i = 0; i < TurnManager.amountOfTurns; i++)
+        for (int i = 0; i < FindObjectOfType<TurnManager>().amountOfTurns; i++)
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
