@@ -47,7 +47,6 @@ public class GridGenerator : MonoBehaviour
                         newMysteryMarble = Instantiate(mysteryMarble);
                         newMysteryMarble.transform.position = new Vector2(newTile.transform.position.x, newTile.transform.position.y + 1);
                         newMysteryMarble.GetComponent<MysteryMarble>().gridPosition = new Vector2(x, y); // maybe swap x & y if it doesn't work
-                        Debug.Log(newMysteryMarble.GetComponent<MysteryMarble>().gridPosition);
                     }
                 }
             }

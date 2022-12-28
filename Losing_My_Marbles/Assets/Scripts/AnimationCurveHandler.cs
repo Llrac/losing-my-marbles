@@ -178,7 +178,6 @@ public class AnimationCurveHandler : MonoBehaviour
                 character.GetComponent<Movement>().gridPosition + character.GetComponent<Movement>().RequestGridPosition(character.GetComponent<Movement>().currentDirectionID, increment))
             {
                 marble = transformInScene.gameObject;
-                Debug.Log(marble.transform.position);
                 return marble;
             }
         }

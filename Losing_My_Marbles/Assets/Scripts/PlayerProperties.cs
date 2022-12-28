@@ -202,7 +202,7 @@ public class PlayerProperties : Movement
         }
         for(int i = 0; i < TurnManager.players.Count; i++)
         {
-            if(TurnManager.players[i].gridPosition == startingGridPosition)
+            if(TurnManager.players[i].gridPosition == startingGridPosition && TurnManager.players[i].playerID != playerID)
             {
                 TurnManager.players[i].Pushed(startingDirection);
             }
