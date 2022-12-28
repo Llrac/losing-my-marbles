@@ -8,50 +8,109 @@ public class GridManager : MonoBehaviour
     public const char PLAYER = 'P';            // 2
     public const char ENEMY = 'E';             // 3
     public const char DOOR = 'D';
-    public const char MARBLE = 'K';
+    public const char MARBLE = 'M';
     public const char HOLE = 'H';
     public const char EMPTY ='?';
     public const char WATER = 'W';
-    public char[,] board = new char[10, 10] // [column, row in column] or [y, x]
+
+    public static int currentLevel = 0;
+  
+    public static char[,] board = new char[10, 10] // [column, row in column] or [y, x]
     {
             {'?','?','?','?','?','?','?','?','?','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
-            {'X','X','X','X','K','X','K','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
-            {'X','X','X','H','X','X','X','X','H','?'},
+            {'X','X','M','H','X','X','X','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
-            {'H','X','X','X','X','H','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'H','H','X','X','X','X','X','H','H','?'},
+            {'X','X','X','X','H','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'}
+    };
+    public static char[,] level1 = new char[10, 10]
+    {
+            {'?','?','?','?','?','?','?','?','?','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','H','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','H','X','M','X','H','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','H','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'}
+    };
+    public static char[,] level2 = new char[10, 10]
+    {
+            {'?','?','?','?','?','?','?','?','?','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','M','X','X','X','X','X','X','?'},
+            {'X','X','H','X','X','X','X','M','X','?'},
+            {'X','X','X','X','X','H','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','X','H','X','X','X','?'},
+            {'X','X','X','X','X','H','X','X','X','?'},
+            {'X','X','X','X','X','H','X','X','X','?'},
+            {'X','X','X','X','X','H','X','X','X','?'}
+    };
+    public static char[,] level3 = new char[10, 10]
+    {
+            {'?','?','?','?','?','?','?','?','?','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','H','M','H','X','H','M','H','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'}
     };
-
+    public static char[,] level4 = new char[10, 10]
+   {
+            {'?','?','?','?','?','?','?','?','?','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','H','X','X','X','X','?'},
+            {'H','X','X','X','X','X','X','X','H','?'},
+            {'X','H','X','X','X','X','X','H','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'}
+   };
+   
+    public char[][,] levels = new char[5][,]
+    {
+        board, level1, level2, level3, level4
+    };
+  
     void Start()
     {
         for (int i = 0; i < Movement.enemies.Count; i++)
         {
-            board[(int)Movement.enemies[i].gridPosition.x,
+            levels[currentLevel][(int)Movement.enemies[i].gridPosition.x,
                 (int)Movement.enemies[i].gridPosition.y] = ENEMY;
-
-            
         }
+
         for (int i = 0; i < TurnManager.players.Count; i++)
         {
-            board[(int)TurnManager.players[i].gridPosition.x,
+            levels[currentLevel][(int)TurnManager.players[i].gridPosition.x,
               (int)TurnManager.players[i].gridPosition.y] = PLAYER;
         }
     }
    
     private void OnDrawGizmos()
     {
-        if (board == null) return;
-        if (board.Length == 0) return;
+        if (levels[currentLevel] == null) return;
+        if (levels[currentLevel].Length == 0) return;
 
-        for (int y = 0; y < board.GetLength(0); y++)
+        for (int y = 0; y < levels[currentLevel].GetLength(0); y++)
         {
-            for (int x = 0; x < board.GetLength(1); x++)
+            for (int x = 0; x < levels[currentLevel].GetLength(1); x++)
             {
-                switch (board[y, x])
+                switch (levels[currentLevel][y, x])
                 {
                     case PLAYER:
                         Gizmos.color = Color.green;
@@ -91,10 +150,10 @@ public class GridManager : MonoBehaviour
         int x = (int)moveScript.gridPosition.x + (int)requestedTile.x;
         int y = (int)moveScript.gridPosition.y + (int)requestedTile.y;
 
-        if (x >= board.GetLength(0) || x < 0 || y >= board.GetLength(0) || y < 0)
+        if (x >= levels[currentLevel].GetLength(0) || x < 0 || y >= levels[currentLevel].GetLength(0) || y < 0)
             return EMPTY;
 
-        return board[x, y] switch
+        return levels[currentLevel][x, y] switch
         {
             WALKABLEGROUND => WALKABLEGROUND,
             PLAYER => PLAYER,
@@ -115,8 +174,8 @@ public class GridManager : MonoBehaviour
         int newX = (int)character.gridPosition.x + (int)requestedTile.x;
         int newY = (int)character.gridPosition.y + (int)requestedTile.y;
 
-        board[newX, newY] = character.ChangeTag();
-        board[(int)oldX, (int)oldY] = character.savedTile;
+        levels[currentLevel][newX, newY] = character.ChangeTag();
+        levels[currentLevel][(int)oldX, (int)oldY] = character.savedTile;
 
         character.gridPosition += requestedTile;
     }

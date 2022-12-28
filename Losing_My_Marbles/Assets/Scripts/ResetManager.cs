@@ -43,6 +43,7 @@ public class ResetManager : MonoBehaviour
         {
             //pause game
             PauseGame();
+            
         }
     }
 
@@ -55,6 +56,7 @@ public class ResetManager : MonoBehaviour
         DebugManager.characterToControl = 1;
         DatabaseAPI.hasBeenRestarted = true;
         SceneManager.LoadScene("MainMenu");
+        GridManager.currentLevel++;
     }
 
     public static void PlayerWin(int playerID)
