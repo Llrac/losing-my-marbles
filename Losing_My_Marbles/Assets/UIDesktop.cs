@@ -69,7 +69,7 @@ public class UIDesktop : MonoBehaviour
         }
         else
         {//this code should run asynchronolsly
-            playerUIPosition[playerID - 1].transform.GetChild(1).gameObject.SetActive(false);
+            playerUIPosition[playerID - 1].transform.GetChild(1).GetComponent<Image>().enabled = false;
             //foreach (GameObject playerBag in playerBags)
             //{
             //    playerBag.GetComponent<Image>().enabled = false;
