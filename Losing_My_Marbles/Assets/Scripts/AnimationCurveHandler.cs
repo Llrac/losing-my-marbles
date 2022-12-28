@@ -8,7 +8,7 @@ public class AnimationCurveHandler : MonoBehaviour
     public AnimationCurve jumpProgress;
     public AnimationCurve jumpHeight;
     public AnimationCurve marbleTravelProgress;
-    public AnimationCurve keyHeight;
+    public AnimationCurve marbleTravelHeight;
 
     [HideInInspector] public float jumpProgressLength;
     [HideInInspector] public float marbleTravelLength;
@@ -120,21 +120,20 @@ public class AnimationCurveHandler : MonoBehaviour
                 marbleDestination = marbleGetter.transform.position;
             }
             marble.transform.position = new Vector2(Mathf.Lerp(marble.transform.position.x, marbleDestination.x, marbleTravelProgress.Evaluate(marbleAnimTimer)),
-            Mathf.Lerp(marble.transform.position.y, marbleDestination.y + keyHeight.Evaluate(marbleAnimTimer / marbleTravelLength), marbleTravelProgress.Evaluate(marbleAnimTimer)));
+            Mathf.Lerp(marble.transform.position.y, marbleDestination.y + marbleTravelHeight.Evaluate(marbleAnimTimer / marbleTravelLength), marbleTravelProgress.Evaluate(marbleAnimTimer)));
         }
         // End of <Insert Key Animation> AnimationCurve
         else if (marbleAnimTimer > marbleTravelLength && marbleTravelProgressID > 0 && marble != null)
         {
+            EnableMarbleVisuals(false);
             marbleTravelProgressID = 0;
-            marble.GetComponent<SpriteRenderer>().sortingOrder = 2;
             marble.transform.position = marbleDestination;
+            marble = null;
             if (marbleGetter != null)
             {
-                marble.GetComponent<SpriteRenderer>().enabled = false;
                 marbleGetter.GetComponent<Movement>().specialMarbleCount++;
                 marbleGetter = null;
             }
-            marble = null;
         }
         #endregion
     }
@@ -159,28 +158,60 @@ public class AnimationCurveHandler : MonoBehaviour
     }
     #endregion
 
-    public void PickupMarble(GameObject marbleGetter, Vector3 positionToCheck)
+    public void PickupMarble(GameObject marbleGetter, int increment = 1)
     {
         if (marble == null)
-            GetSpecificMarbleInScene(positionToCheck);
+            marble = GetSpecificMarbleInScene(marbleGetter, increment);
+
         marbleTravelProgressID = 1;
         marbleAnimTimer = 0;
         this.marbleGetter = marbleGetter;
-        marble.GetComponent<SpriteRenderer>().enabled = true;
-        marble.GetComponent<SpriteRenderer>().sortingOrder++;
+        EnableMarbleVisuals(true);
         GetComponent<Movement>().quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().pickupMarble);
     }
 
-    public void GetSpecificMarbleInScene(Vector2 gridPosition)
+    public GameObject GetSpecificMarbleInScene(GameObject character, int increment = 1)
     {
         foreach (Transform transformInScene in FindObjectsOfType<Transform>())
         {
-            if (transformInScene.gameObject.CompareTag("Special Marble") && (gameObject.GetComponent<Movement>().RequestGridPosition(gameObject.GetComponent<Movement>().currentDirectionID)
-                + new Vector2(transform.position.x, transform.position.y) == gridPosition))
+            if (transformInScene.gameObject.CompareTag("Special Marble") && transformInScene.gameObject.GetComponent<MysteryMarble>().gridPosition ==
+                character.GetComponent<Movement>().gridPosition + character.GetComponent<Movement>().RequestGridPosition(character.GetComponent<Movement>().currentDirectionID, increment))
             {
                 marble = transformInScene.gameObject;
-                Debug.Log(marble);
-                return;
+                Debug.Log(marble.transform.position);
+                return marble;
+            }
+        }
+        return null;
+    }
+
+    void EnableMarbleVisuals(bool enable)
+    {
+        foreach (Transform child in marble.transform)
+        {
+            if (child.gameObject.GetComponent<SpriteRenderer>() != null)
+            {
+                if (enable)
+                {
+                    child.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                    child.gameObject.GetComponent<SpriteRenderer>().sortingOrder++;
+                }
+                else
+                {
+                    child.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                    child.gameObject.GetComponent<SpriteRenderer>().sortingOrder--;
+                }
+            }
+            else if (child.gameObject.GetComponent<ParticleSystem>() != null && child.gameObject.name == "Marble Glitter")
+            {
+                if (enable)
+                {
+                    child.gameObject.GetComponent<ParticleSystem>().Play();
+                }
+                else
+                {
+                    child.gameObject.GetComponent<ParticleSystem>().Stop();
+                }
             }
         }
     }

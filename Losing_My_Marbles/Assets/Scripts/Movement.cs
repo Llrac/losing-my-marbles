@@ -187,7 +187,7 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.MARBLE:
                     if (CompareTag("Player"))
                     {
-                        character.GetComponent<AnimationCurveHandler>().PickupMarble(character, gg.GetRealWorldPosition(gridPosition + RequestGridPosition(currentDirectionID)) + new Vector2(0, 0f));
+                        character.GetComponent<AnimationCurveHandler>().PickupMarble(character, increment);
                         Move(character, 1);
                     }
                     else if (CompareTag("Enemy"))
@@ -318,8 +318,11 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.MARBLE:
-                    character.GetComponent<AnimationCurveHandler>().PickupMarble(character, new Vector2(character.transform.position.x, character.transform.position.y) + character.GetComponent<Movement>().RequestGridPosition(currentDirectionID));
-                    Blink(increment);
+                    if (CompareTag("Player"))
+                    {
+                        character.GetComponent<AnimationCurveHandler>().PickupMarble(character, increment);
+                        Blink(increment);
+                    }
                     
                     return true;
 

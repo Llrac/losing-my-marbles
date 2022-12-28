@@ -32,7 +32,7 @@ public class GridGenerator : MonoBehaviour
                 if (grid.board[x, y] != GridManager.EMPTY) //&& grid.board[x, y] != GridManager.DOOR
                 {
                     newTile = Instantiate(tileToCopy);
-                    float posX = ((x * tileSize + y * tileSize)) + tileToCopy.transform.position.x -1; // this is the actual x position of the tile
+                    float posX = x * tileSize + y * tileSize + tileToCopy.transform.position.x -1; // this is the actual x position of the tile
                     float posY = ((-x * tileSize + y * tileSize) / 2) + tileToCopy.transform.position.y + .5f; // this is the actual y position of the tile
                     newTile.transform.position = new Vector3(posX, posY, 0);
                     newTile.transform.parent = gameObject.transform;
@@ -46,6 +46,8 @@ public class GridGenerator : MonoBehaviour
                     {
                         newMysteryMarble = Instantiate(mysteryMarble);
                         newMysteryMarble.transform.position = new Vector2(newTile.transform.position.x, newTile.transform.position.y + 1);
+                        newMysteryMarble.GetComponent<MysteryMarble>().gridPosition = new Vector2(x, y); // maybe swap x & y if it doesn't work
+                        Debug.Log(newMysteryMarble.GetComponent<MysteryMarble>().gridPosition);
                     }
                 }
             }
