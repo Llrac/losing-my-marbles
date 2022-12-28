@@ -34,6 +34,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<AudioSource>().PlayOneShot(ambience);
+        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (sceneName != "Mobile Interface")
+            GetComponent<AudioSource>().PlayOneShot(ambience);
     }
 }

@@ -107,7 +107,7 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public bool TryMove(GameObject character, int dataID, int increment)
+    public bool TryMove(GameObject character, int dataID, int increment, int  forcedJump = 0)
     {
         // Set transform position
         if (dataID == 0)
@@ -133,7 +133,7 @@ public abstract class Movement : MonoBehaviour
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
-                    Move(character, 1);
+                    Move(character, 1, forcedJump);
                     savedTile = 'X';
                     return true;
 
@@ -148,7 +148,7 @@ public abstract class Movement : MonoBehaviour
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        TryMove(gameObject, 0, 1);
+                        TryMove(gameObject, 0, 1, forcedJump);
                         if (mediumAudio != null)
                             mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
@@ -541,7 +541,7 @@ public abstract class Movement : MonoBehaviour
         }
 
         wallJumpMultiplier = 1;
-        if (typeID == 0)
+        if (typeID == 0 || typeID == 2)
         {
             grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
         }
