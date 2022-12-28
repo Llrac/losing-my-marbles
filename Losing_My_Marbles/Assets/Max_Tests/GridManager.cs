@@ -88,6 +88,7 @@ public class GridManager : MonoBehaviour
   
     void Start()
     {
+        currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex - 1;
         for (int i = 0; i < Movement.enemies.Count; i++)
         {
             levels[currentLevel][(int)Movement.enemies[i].gridPosition.x,
@@ -103,6 +104,7 @@ public class GridManager : MonoBehaviour
    
     private void OnDrawGizmos()
     {
+        currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex - 1;
         if (levels[currentLevel] == null) return;
         if (levels[currentLevel].Length == 0) return;
 

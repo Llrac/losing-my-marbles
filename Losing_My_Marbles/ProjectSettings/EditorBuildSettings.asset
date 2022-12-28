@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CarlTesting.unity
     guid: bc3ba598db9b83e4997b89fbebde361f
+  - enabled: 1
+    path: Assets/Scenes/level2.unity
+    guid: e413bd9d44e752149aa0870f534aed6f
   - enabled: 0
     path: Assets/Scenes/Mobile Interface.unity
     guid: 709712042b8d49845b81549c790ede8d

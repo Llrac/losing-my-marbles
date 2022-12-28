@@ -22,6 +22,7 @@ public class GridGenerator : MonoBehaviour
 
     void Start()
     {
+        GridManager.currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex - 1;
         tileToCopy.GetComponent<SpriteRenderer>().sortingOrder = 0;
         grid = transform.GetComponentInParent<GridManager>();
 
