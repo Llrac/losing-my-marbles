@@ -8,7 +8,7 @@ public class GridManager : MonoBehaviour
     public const char PLAYER = 'P';            // 2
     public const char ENEMY = 'E';             // 3
     public const char DOOR = 'D';
-    public const char KEY = 'K';
+    public const char MARBLE = 'K';
     public const char HOLE = 'H';
     public const char EMPTY ='?';
     public const char WATER = 'W';
@@ -16,13 +16,13 @@ public class GridManager : MonoBehaviour
     {
             {'?','?','?','?','?','?','?','?','?','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
-            {'X','X','X','X','K','X','X','X','X','?'},
+            {'X','X','X','X','K','X','K','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
             {'X','X','X','H','X','X','X','X','H','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
             {'H','X','X','X','X','H','X','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
-            {'X','X','X','X','X','X','X','X','D','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'}
     };
 
@@ -65,7 +65,7 @@ public class GridManager : MonoBehaviour
                     case DOOR:
                         Gizmos.color = Color.white;
                         break;
-                    case KEY:
+                    case MARBLE:
                         Gizmos.color = Color.yellow;
                         break;
                     case HOLE:
@@ -100,7 +100,7 @@ public class GridManager : MonoBehaviour
             PLAYER => PLAYER,
             ENEMY => ENEMY,
             DOOR => DOOR,
-            KEY => KEY,
+            MARBLE => MARBLE,
             HOLE => HOLE,
             WATER => WATER,
             _ => EMPTY,

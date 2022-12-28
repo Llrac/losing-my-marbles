@@ -1275,8 +1275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53bf17d877a15fe42971aa9e1564e0b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyGlitterParticle: {fileID: 1672509437254162840, guid: 777c5ecf621c89741af44e0be2f6a94c, type: 3}
-  playerGlitterParticle: {fileID: 5854443905180603826, guid: a39bf45293b20f14a879466e6f2d38a2, type: 3}
+  mysteryMarble: {fileID: 8756952064762342944, guid: 2883a5ee764854943aff4cb78df25efc, type: 3}
   hitEffect: {fileID: 0}
   tileToCopy: {fileID: 2120634357754178640}
   bomb: {fileID: 1235644451853953641, guid: 2055a5d6e07642b48a11d8eb233bff65, type: 3}

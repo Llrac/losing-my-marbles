@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Desktop FX")]
     public AudioClip playerJump = null;
-    public AudioClip pickupKey = null;
+    public AudioClip pickupMarble = null;
     public AudioClip dropKey = null;
     public AudioClip characterFall = null;
     public AudioClip pushHit = null;

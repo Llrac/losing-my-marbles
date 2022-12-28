@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ambience: {fileID: 8300000, guid: f1fcf5de018582c4f8b360dea37f3654, type: 3}
   playerJump: {fileID: 8300000, guid: 9bd973b5666fa7547a66ce8941cc266b, type: 3}
-  pickupKey: {fileID: 8300000, guid: f14213a0b28489e4fa239672d6d9f436, type: 3}
+  pickupMarble: {fileID: 8300000, guid: f14213a0b28489e4fa239672d6d9f436, type: 3}
   dropKey: {fileID: 8300000, guid: e3e650f861bfaca4db2fe669c4a80d32, type: 3}
   characterFall: {fileID: 8300000, guid: b8f5c7580901aa74488a86e902a17da2, type: 3}
   pushHit: {fileID: 8300000, guid: 5ec5d6900558d9c47ad234f8e7e6501d, type: 3}
