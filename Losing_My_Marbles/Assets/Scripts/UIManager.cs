@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     
     [HideInInspector] public bool[] availableMarbleSlotsTop = new bool[7];
     public bool[] availableMarbleSlotsBottom = new bool[3];
-    [HideInInspector] public List<Marble> discardBag = new();
+    public List<Marble> discardBag = new();
     public int[] orderID = new int[3];
 
     private void Start()
@@ -224,8 +224,10 @@ public class UIManager : MonoBehaviour
         {
             if (marble.isOnBottomRow)
             {
-                if (marble.marbleID != 4 || marble.marbleID != 5)
+                if (marble.marbleID != 4 && marble.marbleID != 5)
+                {
                     discardBag.Add(marble);
+                }
                 
                 marble.isInHand = false;
                 marble.isOnTopRow = false;
