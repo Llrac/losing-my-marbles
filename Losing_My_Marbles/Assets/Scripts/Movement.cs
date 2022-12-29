@@ -10,8 +10,6 @@ public abstract class Movement : MonoBehaviour
     public char savedTile = 'X';
 
     public Vector2 gridPosition = new(0, 0);
-    public int specialMarbleCount = 0;
-   
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
@@ -261,7 +259,7 @@ public abstract class Movement : MonoBehaviour
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
 
-                    if (character.GetComponent<Movement>().specialMarbleCount >= TurnManager.marblesToWin)
+                    if (character.GetComponent<PlayerProperties>().specialMarbleCount >= TurnManager.marblesToWin)
                     {
                         ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
                     }

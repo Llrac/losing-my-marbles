@@ -131,7 +131,8 @@ public class AnimationCurveHandler : MonoBehaviour
             marble = null;
             if (marbleGetter != null)
             {
-                marbleGetter.GetComponent<Movement>().specialMarbleCount++;
+                marbleGetter.GetComponent<PlayerProperties>().specialMarbleCount++;
+                FindObjectOfType<UIDesktop>().UpdatePickupMarbles(marbleGetter);
                 marbleGetter = null;
             }
         }

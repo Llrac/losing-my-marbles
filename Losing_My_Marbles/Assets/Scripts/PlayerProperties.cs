@@ -9,6 +9,7 @@ public class PlayerProperties : Movement
     private Vector2 startingGridPosition = Vector2.zero;
     private Vector2 startingWorldPosition = Vector2.zero;
     private int startingDirection = 0;
+    public int specialMarbleCount = 0;
 
     public static List<int> ids = new();
     public static List<int> myActions = new();
