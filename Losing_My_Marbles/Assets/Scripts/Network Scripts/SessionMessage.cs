@@ -8,12 +8,10 @@ using UnityEngine;
 public class SessionMessage
 {
     public int gameSessionID;
-    public int playerID;
-    
+
     public SessionMessage(int gameSessionID)
     {
         this.gameSessionID = gameSessionID;
-        this.playerID = playerID;
     }
     
     
