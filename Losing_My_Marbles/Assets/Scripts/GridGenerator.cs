@@ -22,14 +22,15 @@ public class GridGenerator : MonoBehaviour
 
     void Start()
     {
+        GridManager.currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex - 1;
         tileToCopy.GetComponent<SpriteRenderer>().sortingOrder = 0;
         grid = transform.GetComponentInParent<GridManager>();
 
-        for (int x = 0; x < grid.board.GetLength(0); x++)
+        for (int x = 0; x < grid.levels[GridManager.currentLevel].GetLength(0); x++)
         {
-            for (int y = 0; y < grid.board.GetLength(1); y++)
+            for (int y = 0; y < grid.levels[GridManager.currentLevel].GetLength(1); y++)
             {
-                if (grid.board[x, y] != GridManager.EMPTY) //&& grid.board[x, y] != GridManager.DOOR
+                if (grid.levels[GridManager.currentLevel][x, y] != GridManager.EMPTY) //&& grid.board[x, y] != GridManager.DOOR
                 {
                     newTile = Instantiate(tileToCopy);
                     float posX = x * tileSize + y * tileSize + tileToCopy.transform.position.x -1; // this is the actual x position of the tile
@@ -38,11 +39,11 @@ public class GridGenerator : MonoBehaviour
                     newTile.transform.parent = gameObject.transform;
                     tileSpriteChosen = Random.Range(0, tileSprites.Length);
                     newTile.GetComponent<SpriteRenderer>().sprite = tileSprites[tileSpriteChosen];
-                    if (grid.board[x, y] == GridManager.HOLE && tileHoleSprite != null)
+                    if (grid.levels[GridManager.currentLevel][x, y] == GridManager.HOLE && tileHoleSprite != null)
                     {
                         newTile.GetComponent<SpriteRenderer>().sprite = tileHoleSprite;
                     }
-                    else if (grid.board[x, y] == GridManager.MARBLE && mysteryMarble != null)
+                    else if (grid.levels[GridManager.currentLevel][x, y] == GridManager.MARBLE && mysteryMarble != null)
                     {
                         newMysteryMarble = Instantiate(mysteryMarble);
                         newMysteryMarble.transform.position = new Vector2(newTile.transform.position.x, newTile.transform.position.y + 1);

@@ -194,8 +194,9 @@ public class PlayerProperties : Movement
             GameObject newPoof = Instantiate(deathPoof, effect, transform.rotation);
             Destroy(newPoof, 1f);
         }
-        
-        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
+
+        gridManager.levels[GridManager.currentLevel][(int)gridPosition.x, (int)gridPosition.y] = savedTile;
+
         marbleEffect.Clear();
         
         for (int i = 0; i < 5; i++)
@@ -216,7 +217,7 @@ public class PlayerProperties : Movement
         Debug.Log(startingWorldPosition);
         gridPosition = startingGridPosition;
         UpdateSkeleton();
-        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
+        gridManager.levels[GridManager.currentLevel][(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
         savedTile = GridManager.WALKABLEGROUND;
         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().characterFall);
         isAlive = false;

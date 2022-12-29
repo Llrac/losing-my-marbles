@@ -26,10 +26,12 @@ public class DatabaseAPI : MonoBehaviour
         // Gets an instance of the database
         FirebaseDatabase.GetInstance("https://losing-my-marbles-620eb-default-rtdb.europe-west1.firebasedatabase.app/");
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+
         // dbReference.SetValueAsync(null); //clears the database every play session
         // dbReference.SetValueAsync("game session");
         // dbReference.SetValueAsync("new hand");
         // dbReference.SetValueAsync("movement"); //makes sure we can post to movement
+
     }
 
     public void CreateGameSession(GameSessionMessage gameSessionMessage, Action callback, Action<AggregateException> fallback)
