@@ -1278,7 +1278,7 @@ MonoBehaviour:
   mysteryMarble: {fileID: 8756952064762342944, guid: 2883a5ee764854943aff4cb78df25efc, type: 3}
   hitEffect: {fileID: 0}
   tileToCopy: {fileID: 2120634357754178640}
-  bomb: {fileID: 1235644451853953641, guid: 2055a5d6e07642b48a11d8eb233bff65, type: 3}
+  bomb: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
   tileSprites:
   - {fileID: -827519391, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
   - {fileID: -495025428, guid: 3c5616490d8286e4ebd86aa2f73a3c11, type: 3}
