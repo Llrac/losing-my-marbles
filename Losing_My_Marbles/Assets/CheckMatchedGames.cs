@@ -11,7 +11,7 @@ public class CheckMatchedGames : MonoBehaviour
         if (matchedGame)
         {
             Debug.Log(matchedGame);
-            SceneManager.LoadScene("CarlTesting");
+            SceneManager.LoadScene("level1");
         }
         
     }

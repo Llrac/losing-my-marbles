@@ -50,6 +50,9 @@ public class ActionHandler : MonoBehaviour
     {
         var drawNewHand = Convert.ToBoolean($"{newHandMessage.drawNewHand}");
 
+        if (uiManager == null)
+            return;
+        
         if (drawNewHand)
         {
             uiManager.DiscardMarblesFromHand();
