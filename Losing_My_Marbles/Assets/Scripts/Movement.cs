@@ -18,6 +18,10 @@ public abstract class Movement : MonoBehaviour
     public AudioSource quiterAudio;
     public AudioSource louderAudio;
 
+    public GameObject deathPoof = null;
+    public GameObject blinkEffect = null;
+    public GameObject swapEffect = null;
+
     GridManager grid;
     GridGenerator gg;
  
@@ -121,8 +125,6 @@ public abstract class Movement : MonoBehaviour
             {
                 gg = FindObjectOfType<GridGenerator>();
             }
-            if (mediumAudio != null)
-                mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().playerJump);
             switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
@@ -236,7 +238,6 @@ public abstract class Movement : MonoBehaviour
             {
                 gg = FindObjectOfType<GridGenerator>();
             }
-            quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().triggerBlink);
             switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
@@ -559,6 +560,9 @@ public abstract class Movement : MonoBehaviour
     // typeID 1 = Wall Jump
     // typeID 2 = Forced jump
     {
+        if (mediumAudio != null)
+            mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().playerJump);
+
         jumpMultiplier = 1;
         if (increment < 0)
         {
@@ -607,12 +611,29 @@ public abstract class Movement : MonoBehaviour
             SetAnimation(typeID, character, true);
         }
     }
-    public void Blink(int blinkDistanceMultiplier)
+    public void Blink(int blinkDistanceMultiplier) // you could think of this as part 1/2 of the whole blink process
     {
-       
+        if (quiterAudio != null)
+            quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().triggerBlink);
+        if (blinkEffect != null)
+        {
+            GameObject newBlinkEffect = Instantiate(blinkEffect, transform.position, transform.rotation);
+            Destroy(newBlinkEffect, 1f);
+        }
+        if (GetComponent<Animator>() != null)
+        {
+            GetComponent<Animator>().SetTrigger("shrink");
+        }
+
         grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
         float blinkDistance = jumpLength * blinkDistanceMultiplier;
 
+        StartCoroutine(BlinkAnimation(blinkDistance));
+    }
+
+    IEnumerator BlinkAnimation(float blinkDistance)
+    {
+        yield return new WaitForSeconds(0.8f);
         switch (currentDirectionID)
         {
             case 0:
@@ -632,6 +653,19 @@ public abstract class Movement : MonoBehaviour
                     gameObject.transform.position.y + (blinkDistance) / 2, 0);
                 break;
         }
+
+        if (blinkEffect != null)
+        {
+            GameObject newBlinkEffect = Instantiate(blinkEffect, transform.position, transform.rotation);
+            newBlinkEffect.GetComponent<Animator>().SetTrigger("blink_to");
+            Destroy(newBlinkEffect, 1f);
+        }
+        if (GetComponent<Animator>() != null)
+        {
+            GetComponent<Animator>().SetTrigger("grow");
+        }
+
+        yield return null;
     }
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);

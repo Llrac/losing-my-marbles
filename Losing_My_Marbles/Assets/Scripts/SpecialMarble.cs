@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class SpecialMarble : MonoBehaviour
 {
-    private GridGenerator gg;
-    GameObject turnManager;
-
-    // sorted players 
-
-    private void Start()
-    {
-        turnManager = FindObjectOfType<SpecialMarble>().gameObject;
-    }
-    
     public static void Daze(PlayerProperties user)
     {
         for (int i = 0; i < TurnManager.players.Count; i++)
