@@ -15,7 +15,7 @@ public class GridManager : MonoBehaviour
 
     public static int currentLevel = 0;
   
-    public static char[,] board = new char[10, 10] // [column, row in column] or [y, x]
+    public static char[,] level0 = new char[10, 10] // [column, row in column] or [y, x]
     {
             {'?','?','?','?','?','?','?','?','?','?'},
             {'X','X','X','X','X','X','X','X','X','?'},
@@ -83,7 +83,7 @@ public class GridManager : MonoBehaviour
    
     public char[][,] levels = new char[5][,]
     {
-        board, level1, level2, level3, level4
+        level0, level1, level2, level3, level4
     };
   
     void Start()
