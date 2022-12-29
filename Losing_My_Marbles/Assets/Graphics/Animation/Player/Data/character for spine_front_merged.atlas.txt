@@ -1,134 +1,153 @@
 character for spine_front_merged.png
-size:2005,2029
+size:2047,1869
 filter:Linear,Linear
 pma:true
 scale:0.6
 back
-bounds:2,1258,326,769
-back2
-bounds:2,487,326,769
-back3
-bounds:2,159,326,769
+bounds:2,2,326,769
 rotate:90
-back4
-bounds:885,1701,326,769
-rotate:90
+backpack
+bounds:1758,1440,287,217
 blur arm
-bounds:1495,1392,86,307
+bounds:2,1697,86,307
+rotate:90
 blur arm2
-bounds:586,1054,86,307
+bounds:311,1697,86,307
+rotate:90
 blur arm3
-bounds:1324,1147,86,307
+bounds:620,1697,86,307
+rotate:90
 blur arm4
-bounds:858,660,86,307
+bounds:929,1697,86,307
 rotate:90
 blur body
-bounds:330,1512,254,515
+bounds:2,619,254,515
+rotate:90
 blur body2
-bounds:330,995,254,515
+bounds:519,615,254,515
+rotate:90
 blur body3
-bounds:1656,1512,254,515
+bounds:1036,440,254,515
+rotate:90
 blur body4
-bounds:330,739,254,515
+bounds:2,363,254,515
 rotate:90
 blur foot left
-bounds:1151,575,83,131
+bounds:1507,1784,83,131
 rotate:90
 blur foot right
-bounds:1015,573,85,134
+bounds:1640,1782,85,134
 rotate:90
 blur head
-bounds:1412,1038,280,227
+bounds:530,1369,280,227
 blur head2
-bounds:1694,1038,280,227
+bounds:812,1369,280,227
+blur head3
+bounds:1094,1365,280,227
+blur head4
+bounds:1376,1327,280,227
 blur right arm
-bounds:586,1696,82,331
+bounds:175,1785,82,331
+rotate:90
 blur right arm2
-bounds:670,1696,82,331
+bounds:508,1785,82,331
+rotate:90
 blur right arm3
-bounds:586,1363,82,331
+bounds:841,1785,82,331
+rotate:90
 blur right arm4
-bounds:670,1363,82,331
+bounds:1174,1785,82,331
+rotate:90
 blur side body
-bounds:773,255,283,420
+bounds:1553,411,283,420
 rotate:90
 blur side body2
-bounds:754,1033,283,420
+bounds:519,330,283,420
+rotate:90
 blur side body3
-bounds:847,748,283,420
+bounds:941,155,283,420
 rotate:90
 blur side body4
-bounds:1039,1034,283,420
+bounds:1363,126,283,420
+rotate:90
 blur side feet
-bounds:330,540,197,526
+bounds:2,1402,197,526
 rotate:90
 blur side head
-bounds:1613,538,245,316
+bounds:1178,1080,245,316
 rotate:90
 blur side head2
-bounds:1687,791,245,316
+bounds:1496,949,245,316
 rotate:90
 blur side head3
-bounds:872,1456,243,321
+bounds:2,1157,243,321
 rotate:90
 blur side head4
-bounds:1583,1267,243,321
+bounds:325,1124,243,321
 rotate:90
 body
-bounds:1072,2,251,421
+bounds:1526,696,251,421
 rotate:90
 body2
-bounds:1195,326,247,416
+bounds:272,875,247,416
 rotate:90
 body3
-bounds:1495,77,247,416
+bounds:690,871,247,416
 rotate:90
 body4
-bounds:1269,785,247,416
+bounds:1108,700,247,416
 rotate:90
+eyelids
+bounds:57,1808,116,59
+head
+bounds:2,907,268,248
+head2
+bounds:1658,1196,263,242
 head3
-bounds:1195,1456,263,243
+bounds:648,1124,263,243
+head4
+bounds:913,1120,263,243
 left arm
-bounds:2,56,101,290
+bounds:1466,1556,101,290
 rotate:90
 left arm2
-bounds:598,60,97,285
+bounds:605,1598,97,285
 rotate:90
 left arm3
-bounds:773,1742,97,285
-left arm4
-bounds:773,1455,97,285
-left foot
-bounds:858,541,117,155
+bounds:892,1598,97,285
 rotate:90
+left arm4
+bounds:1179,1594,97,285
+rotate:90
+left foot
+bounds:1776,1750,117,155
+rotate:90
+mouth
+bounds:2,1831,53,36
 right arm
-bounds:294,63,94,302
+bounds:301,1601,94,302
 rotate:90
 right arm2
-bounds:1912,1730,89,297
+bounds:1238,1693,89,297
+rotate:90
 right arm3
-bounds:1912,1431,89,297
+bounds:1723,1659,89,297
+rotate:90
 right arm4
-bounds:773,164,89,297
+bounds:2,1606,89,297
 rotate:90
 right foot
-bounds:885,42,120,184
+bounds:1537,1660,120,184
 rotate:90
 
 character for spine_front_merged_2.png
-size:855,481
+size:986,773
 filter:Linear,Linear
 pma:true
 scale:0.6
-backpack
-bounds:2,262,287,217
-blur head3
-bounds:291,252,280,227
-blur head4
-bounds:573,252,280,227
-head
-bounds:532,2,268,248
-head2
-bounds:2,18,263,242
-head4
-bounds:267,7,263,243
+back2
+bounds:2,2,326,769
+back3
+bounds:330,2,326,769
+back4
+bounds:658,2,326,769

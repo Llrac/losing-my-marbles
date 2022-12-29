@@ -168,7 +168,7 @@ public class PlayerProperties : Movement
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
 
-        if (TryMove(gameObject, 0, 1, 2) == true)
+        if (TryMove(gameObject, 0, 1) == true)
         {
             currentDirectionID = savedDir;
             UpdateSkeleton();
@@ -194,21 +194,27 @@ public class PlayerProperties : Movement
             GameObject newPoof = Instantiate(deathPoof, effect, transform.rotation);
             Destroy(newPoof, 1f);
         }
+
         gridManager.levels[GridManager.currentLevel][(int)gridPosition.x, (int)gridPosition.y] = savedTile;
+
         marbleEffect.Clear();
-        for (int i = 0; i < FindObjectOfType<TurnManager>().amountOfTurns; i++)
+        
+        for (int i = 0; i < 5; i++)
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
-        for(int i = 0; i < TurnManager.players.Count; i++)
+        
+        for (int i = 0; i < TurnManager.players.Count; i++)
         {
-            if(TurnManager.players[i].gridPosition == startingGridPosition && TurnManager.players[i].playerID != playerID)
+            if (TurnManager.players[i].gridPosition == startingGridPosition && TurnManager.players[i].playerID != playerID)
             {
                 TurnManager.players[i].Pushed(startingDirection);
             }
         }
+        
         currentDirectionID = startingDirection;
         transform.position = startingWorldPosition;
+        Debug.Log(startingWorldPosition);
         gridPosition = startingGridPosition;
         UpdateSkeleton();
         gridManager.levels[GridManager.currentLevel][(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
