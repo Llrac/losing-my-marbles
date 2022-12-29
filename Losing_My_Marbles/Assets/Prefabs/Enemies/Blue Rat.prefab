@@ -262,8 +262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savedTile: 88
-  gridPosition: {x: 3, y: 0}
-  currentDirectionID: 2
+  gridPosition: {x: 6, y: 2}
+  currentDirectionID: 0
   mediumAudio: {fileID: 633420726097404220}
   quiterAudio: {fileID: 633420726097404218}
   louderAudio: {fileID: 633420726097404221}
@@ -278,15 +278,11 @@ MonoBehaviour:
   enemyID: 5
   deathPoof: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
   moves:
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
   - {x: 1, y: 2}
-  - {x: 0, y: 1}
-  - {x: 0, y: 1}
-  - {x: 0, y: 1}
-  - {x: 0, y: 1}
-  - {x: 0, y: 1}
-  - {x: 0, y: 1}
-  - {x: 0, y: 1}
-  - {x: 0, y: 1}
 --- !u!114 &4824100951751452370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -919,8 +915,8 @@ MonoBehaviour:
   disableRenderingOnOverride: 1
   updateTiming: 1
   unscaledTime: 0
-  _animationName: Attack
-  loop: 0
+  _animationName: Idle_basic
+  loop: 1
   timeScale: 1
 --- !u!33 &8612317307832832602
 MeshFilter:
