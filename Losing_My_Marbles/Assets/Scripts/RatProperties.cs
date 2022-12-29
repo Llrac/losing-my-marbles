@@ -36,7 +36,7 @@ public class RatProperties : Movement
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
-                TryMove(gameObject, 0, 1);
+                DoAMove(0, 1, currentDirectionID);
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
@@ -115,7 +115,7 @@ public class RatProperties : Movement
         }
         if (gridManager.GetNexTile(gameObject, killZone) == 'P')
         {
-            // add animation
+            SetAnimation(0, gameObject, false, true);
             yield return new WaitForSeconds(0.5f); // viktigt att notera, du kan inte ha denna timern för seg för då missar du den andra coroutinen.
             GameObject player = gridManager.FindPlayerInMatrix(killZone // find player with your grid pos and the tile you detected player on
                     + gridPosition, TurnManager.players);

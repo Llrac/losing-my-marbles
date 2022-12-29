@@ -28,10 +28,13 @@ public abstract class Movement : MonoBehaviour
     SkeletonAnimation backSkeleton;
     bool usingFrontSkeleton = false;
     public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump; // TODO: implement idle2 and idle3
+    public AnimationReferenceAsset frontAttack = null, backAttack = null; // rats only
+
     public float jumpLength = 1;
     public float jumpAnimationSpeed = 5f;
     Spine.Animation nextIdleAnimation;
     Spine.Animation nextJumpAnimation;
+    Spine.Animation nextAttackAnimation; // rats only
 
     public void UpdateSkinBasedOnPlayerID()
     {
@@ -444,6 +447,10 @@ public abstract class Movement : MonoBehaviour
         {
             if (usingFrontSkeleton)
             {
+                if (frontAttack != null)
+                {
+                    nextAttackAnimation = frontAttack;
+                }
                 frontSkeleton.gameObject.SetActive(true);
                 backSkeleton.gameObject.SetActive(false);
                 frontSkeleton.Skeleton.ScaleX = facingLeft ? -1f : 1f;
@@ -454,6 +461,10 @@ public abstract class Movement : MonoBehaviour
             }
             else
             {
+                if (backAttack != null)
+                {
+                    nextAttackAnimation = backAttack;
+                }
                 frontSkeleton.gameObject.SetActive(false);
                 backSkeleton.gameObject.SetActive(true);
                 backSkeleton.Skeleton.ScaleX = facingLeft ? 1f : -1f;
@@ -465,7 +476,7 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false)
+    public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false, bool ratAttack = false)
     {
         if (frontSkeleton == null || backSkeleton == null)
         {
@@ -473,6 +484,22 @@ public abstract class Movement : MonoBehaviour
         }
         if (wallJump)
             dataID = 0;
+        if (ratAttack)
+        {
+            AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
+
+            if (usingFrontSkeleton)
+            {
+                frontSkeleton.AnimationState.SetAnimation(0, nextAttackAnimation, false).TimeScale = jumpAnimationSpeed;
+                frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+            }
+            else
+            {
+                backSkeleton.AnimationState.SetAnimation(0, nextAttackAnimation, false).TimeScale = jumpAnimationSpeed;
+                backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+            }
+            return;
+        }
         switch (dataID)
         {
             case 0: // Jump forward
