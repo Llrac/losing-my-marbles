@@ -8,7 +8,7 @@ public class GameSession : MonoBehaviour
 {
     public static int sessionID = 0;
     public DatabaseAPI database;
-    public int numberOfPlayers = 4;
+    public int numberOfPlayers = 1;
     public int activePlayers = 0;
 
 
