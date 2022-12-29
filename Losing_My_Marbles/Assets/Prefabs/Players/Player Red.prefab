@@ -357,10 +357,16 @@ MonoBehaviour:
   louderAudio: {fileID: 2011480803}
   frontIdle: {fileID: 11400000, guid: 4c2dcc70f73f0ac4bab865b6774ff167, type: 2}
   frontJump: {fileID: 11400000, guid: f7b07ad5bbc2eff419767965cfd9967b, type: 2}
+  frontTurnRight: {fileID: 11400000, guid: d52b9cb6a2cdfcf4b995e65cf06dc0b2, type: 2}
+  frontTurnBack: {fileID: 11400000, guid: 1c3713e75f08e2d40bd63e0477d0d52c, type: 2}
   backIdle: {fileID: 11400000, guid: bb75fce215ca3084088e0c1434fc91c9, type: 2}
   backJump: {fileID: 11400000, guid: 9da017614ed6fc046b9c27d7be96ba09, type: 2}
+  backTurnRight: {fileID: 11400000, guid: a5fc60036556b0940a8a94289c75cb7e, type: 2}
+  backTurnFront: {fileID: 11400000, guid: 15ecf1ab3e38b0e4c91959a6e0b41c96, type: 2}
   jumpLength: 1
   jumpAnimationSpeed: 3
+  playInReverse: 0
+  lastCurrentDirectionID: 0
   playerID: 1
   playerMarbles: 
   marbleEffect: []

@@ -72,6 +72,10 @@ public class PlayerProperties : Movement
             {
                 SpecialMarble.Amplifier(this);
             }
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                StartCoroutine(FindObjectOfType<SpecialMarble>().Bomb(this));
+            }
             if (Input.GetKeyDown(KeyCode.B))
             {
                 TryMove(gameObject, 2, 3);

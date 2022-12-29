@@ -168,6 +168,17 @@ public class AnimationCurveHandler : MonoBehaviour
         this.marbleGetter = marbleGetter;
         EnableMarbleVisuals(true);
         GetComponent<Movement>().quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().pickupMarble);
+
+        //foreach (Transform transformInScene in FindObjectsOfType<Transform>())
+        //{
+        //    if (transformInScene.gameObject.CompareTag("Special Marble"))
+        //    {
+        //        foreach (Transform child in transformInScene.gameObject.transform)
+        //        {
+
+        //        }
+        //    }
+        //}
     }
 
     public GameObject GetSpecificMarbleInScene(GameObject character, int increment = 1)
