@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIDesktop : MonoBehaviour
 {
+    [Header("In game")]
     public Transform playLogTransform;
 
     public GameObject playerOrderPrefab;
@@ -22,7 +25,7 @@ public class UIDesktop : MonoBehaviour
     {
         //tm = FindObjectOfType<TurnManager>();
     }
-
+    
     public void InstantiatePlayerOrder(int playerId)
     {
        var newPlayerPosition = Instantiate(playerOrderPrefab, transform.position, Quaternion.identity);
@@ -85,7 +88,7 @@ public class UIDesktop : MonoBehaviour
             //}
         }
     }
-
+    
     public void UpdatePickupMarbles(GameObject player)
     {
         for (int i = 0; i < player.GetComponent<PlayerProperties>().specialMarbleCount; i++)
@@ -98,4 +101,7 @@ public class UIDesktop : MonoBehaviour
             // insert load next scene function here
         }
     }
+    
+    
+
 }

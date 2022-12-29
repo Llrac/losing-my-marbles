@@ -61,7 +61,7 @@ public class RatProperties : Movement
 
     public void Death()
     {
-        gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
+        gridManager.levels[GridManager.currentLevel][(int)gridPosition.x, (int)gridPosition.y] = savedTile;
         enemies.Remove(this);
         foreach (Transform child in transform)
         {

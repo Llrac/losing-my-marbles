@@ -11,8 +11,6 @@ public class ActionMessage
     public int firstAction;
     public int secondAction;
     public int thirdAction;
-    public int fourthAction;
-    public int fifthAction;
 
     public ActionMessage(int playerID, int firstAction, int secondAction, int thirdAction)
     {
@@ -20,7 +18,7 @@ public class ActionMessage
         this.firstAction = firstAction;
         this.secondAction = secondAction;
         this.thirdAction = thirdAction;
-        //this.fourthAction = fourthAction;
-        //this.fifthAction = fifthAction;
     }
+    
+    
 }
