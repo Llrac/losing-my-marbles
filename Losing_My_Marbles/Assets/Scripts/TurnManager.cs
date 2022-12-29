@@ -98,7 +98,7 @@ public class TurnManager : MonoBehaviour
        
         for (int i = 0; i < sortedPlayers.Count; i++)
         {
-            uiDesktop.TogglePlayerBags(false, sortedPlayers[i].playerID);
+           // uiDesktop.TogglePlayerBags(false, sortedPlayers[i].playerID);
             uiDesktop.ToggleReadyShine(sortedPlayers[i].playerID, false);
             uiDesktop.InstantiatePlayerOrder(sortedPlayers[i].playerID);
             yield return new WaitForSeconds(0.3f);
@@ -189,7 +189,7 @@ public class TurnManager : MonoBehaviour
         
         uiDesktop.ClearPlayerOrder();
         uiDesktop.TurnOnMarbleBagAnimation();
-        uiDesktop.TogglePlayerBags(true);
+        //uiDesktop.TogglePlayerBags(true);
 
         readyAlert.GetComponent<Image>().enabled = true;
         

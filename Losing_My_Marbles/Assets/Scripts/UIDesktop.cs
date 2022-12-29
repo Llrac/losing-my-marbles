@@ -18,6 +18,7 @@ public class UIDesktop : MonoBehaviour
     public List<Animator> playerBagsAnimator = new();
     public List<GameObject> playerPickupMarbles = new();
 
+    private bool playerWin = false;
     // references
     //TurnManager tm;
 
@@ -95,10 +96,17 @@ public class UIDesktop : MonoBehaviour
         {
             GameObject child = playerPickupMarbles[player.GetComponent<PlayerProperties>().playerID - 1].transform.GetChild(i).gameObject;
             child.SetActive(true);
+            if (player.GetComponent<PlayerProperties>().specialMarbleCount >= 3)
+            {
+                ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID);
+                playerWin = true;
+            }
         }
-        if (FindObjectOfType<MysteryMarble>() == null) // if no mystery marbles in scene, do ...
+        
+        if (FindObjectOfType<MysteryMarble>() == null && playerWin == false) // if no mystery marbles in scene, do ...
         {
-            // insert load next scene function here
+           
+         // insert load next scene function here
         }
     }
     
