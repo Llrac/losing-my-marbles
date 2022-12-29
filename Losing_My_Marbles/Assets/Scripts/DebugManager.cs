@@ -42,9 +42,6 @@ public class DebugManager : MonoBehaviour
             RatProperties.enemies[0].DoAMove((int)RatProperties.enemies[0].gameObject.GetComponent<RatProperties>().moves[iss].x, (int)RatProperties.enemies[0].gameObject.GetComponent<RatProperties>().moves[iss].y, RatProperties.enemies[0].currentDirectionID);
             iss++;
         }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1);
-        }
+        
     }
 }
