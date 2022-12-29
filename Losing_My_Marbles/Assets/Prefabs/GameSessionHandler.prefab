@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   database: {fileID: 3595657728527228812, guid: 074f5c79d01908a49864194835d09f68, type: 3}
-  numberOfPlayers: 1
+  numberOfPlayers: 4
   activePlayers: 0
