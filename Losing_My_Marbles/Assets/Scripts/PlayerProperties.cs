@@ -194,19 +194,23 @@ public class PlayerProperties : Movement
             GameObject newPoof = Instantiate(deathPoof, effect, transform.rotation);
             Destroy(newPoof, 1f);
         }
+        
         gridManager.board[(int)gridPosition.x, (int)gridPosition.y] = savedTile;
         marbleEffect.Clear();
+        
         for (int i = 0; i < 5; i++)
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
-        for(int i = 0; i < TurnManager.players.Count; i++)
+        
+        for (int i = 0; i < TurnManager.players.Count; i++)
         {
-            if(TurnManager.players[i].gridPosition == startingGridPosition)
+            if (TurnManager.players[i].gridPosition == startingGridPosition && TurnManager.players[i].playerID != playerID)
             {
                 TurnManager.players[i].Pushed(startingDirection);
             }
         }
+        
         currentDirectionID = startingDirection;
         transform.position = startingWorldPosition;
         Debug.Log(startingWorldPosition);

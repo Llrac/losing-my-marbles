@@ -8,12 +8,8 @@ public class GameSession : MonoBehaviour
 {
     public static int sessionID = 0;
     public DatabaseAPI database;
-    public int numberOfPlayers;
+    public int numberOfPlayers = 0;
 
-    public void Start()
-    {
-        //database.ListenForGameSession(InstantiateSession, Debug.Log);
-    }
 
     public void CreateSession()
     {
@@ -22,12 +18,38 @@ public class GameSession : MonoBehaviour
         {
             // session created
         }, exception => { Debug.Log(exception); });
+        
+        database.ListenForGameSession(InstantiateGameSession, Debug.Log);
     }
+
+    public void JoinGame()
+    {
+        database.JoinGameSession(new SessionMessage(sessionID), () =>
+        {
+            
+        }, exception => { Debug.Log(exception); });
+    }
+
+    private void InstantiateGameSession(SessionMessage sessionMessage)
+    {
+        Debug.Log("I'm listening!");
+        
+        var gameSession = Int32.Parse($"{sessionMessage.gameSessionID}");
+        
+        if (gameSession == sessionID)
+        {
+            numberOfPlayers++;
+        }
+        
+        if (numberOfPlayers == 2)
+            CheckMatchedGames.matchedGame = true;
+    }
+    
+    
 
     // private void InstantiateSession(GameSessionMessage gameSessionMessage)
     // {
-    //     var sessionID = ($"{gameSessionMessage.gameSessionID}");
-    //     
+    //     sessionID = Int32.Parse($"{gameSessionMessage.gameSessionID}");
     // }
 
     public void GenerateSessionID()
@@ -36,3 +58,5 @@ public class GameSession : MonoBehaviour
     }
     
 }
+
+
