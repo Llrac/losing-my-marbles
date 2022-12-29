@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("Desktop FX")]
     public AudioClip playerJump = null;
-    public AudioClip pickupKey = null;
+    public AudioClip pickupMarble = null;
     public AudioClip dropKey = null;
     public AudioClip characterFall = null;
     public AudioClip pushHit = null;
@@ -34,6 +34,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<AudioSource>().PlayOneShot(ambience);
+        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (sceneName != "Mobile Interface")
+            GetComponent<AudioSource>().PlayOneShot(ambience);
     }
 }

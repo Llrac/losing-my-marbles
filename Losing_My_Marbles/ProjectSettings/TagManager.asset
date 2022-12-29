@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Key
   - Enemy
+  - Special Marble
+  - PauseScreen
   layers:
   - Default
   - TransparentFX

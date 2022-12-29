@@ -14,7 +14,9 @@ public class TurnManager : MonoBehaviour
     // enemy 1, 2, 3, etc
     // all hazard tiles
     // all environment tiles
+    public static bool isPaused = false;
     public int amountOfTurns = 3;
+    public static int marblesToWin = 3;
     public static float turnLength = .5f; // den h�r kan allts� �ndras s� att man hinner med en annan coroutine!!!
     public static List <PlayerProperties> players = new();
     public static List <PlayerProperties> sortedPlayers = new();
@@ -45,12 +47,6 @@ public class TurnManager : MonoBehaviour
     }
     private void Update()
     {
-        //Debugging
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            StartCoroutine(ExecuteTurn());
-        }
-
         // end of debugging
         if (PlayerProperties.ids.Count > tracking)
         {
@@ -90,7 +86,7 @@ public class TurnManager : MonoBehaviour
         amountOfRounds++;
 
         yield return new WaitForSeconds(2f);
-        uiDesktop.TogglePlayerBags(false);
+        
        
         for (int i = 3; i > 0; i--)
         {
@@ -102,6 +98,7 @@ public class TurnManager : MonoBehaviour
        
         for (int i = 0; i < sortedPlayers.Count; i++)
         {
+            uiDesktop.TogglePlayerBags(false, sortedPlayers[i].playerID);
             uiDesktop.ToggleReadyShine(sortedPlayers[i].playerID, false);
             uiDesktop.InstantiatePlayerOrder(sortedPlayers[i].playerID);
             yield return new WaitForSeconds(0.3f);
@@ -117,6 +114,10 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(turnLength);
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
                 {                                                                                                                                                         //extra actions is for rollerskates
+                    while(isPaused == true) // pausing point 1
+                    {
+                        yield return null;
+                    }
                     switch (sortedPlayers[playerInList].marbleEffect[currentTurn].x)
                     {
                         case 0:
@@ -151,6 +152,10 @@ public class TurnManager : MonoBehaviour
             {
                 for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
                 {
+                    while (isPaused == true) // puasing point 2
+                    {
+                        yield return null;
+                    }
                     float pathForRatx = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].x;
                     float pathForRaty = Movement.enemies[enemyCounter].GetComponent<RatProperties>().moves[ratPathKeeping].y;
 
@@ -158,7 +163,7 @@ public class TurnManager : MonoBehaviour
                     yield return new WaitForSeconds(turnLength);
                 }
             }
-
+           
             ratPathKeeping++;
             if (ratPathKeeping >= FindObjectOfType<RatProperties>().moves.Count)
             {
@@ -168,8 +173,11 @@ public class TurnManager : MonoBehaviour
 
             //Environment.Turn();
         }
-
-        for(int i = 0; i < players.Count; i++)
+        while (isPaused == true) // pusing point 3
+        {
+            yield return null;
+        }
+        for (int i = 0; i < players.Count; i++)
         {
             players[i].GetComponent<PlayerProperties>().isAlive = true;
             players[i].ResetMarbles();

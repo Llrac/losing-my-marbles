@@ -1,5 +1,89 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &394146314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 394146316}
+  - component: {fileID: 394146315}
+  m_Layer: 0
+  m_Name: Circle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &394146316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394146314}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2610747910663743189}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!212 &394146315
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394146314}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.27450982}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1950525978668078085
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +332,7 @@ Transform:
   - {fileID: 9173625994925322629}
   - {fileID: 9173625994920220934}
   - {fileID: 7025886546835260884}
+  - {fileID: 394146316}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -265,17 +350,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   savedTile: 88
   gridPosition: {x: 9, y: 5}
-  hasKey: 0
+  specialMarbleCount: 0
   currentDirectionID: 3
   mediumAudio: {fileID: 2011480802}
   quiterAudio: {fileID: 2011480804}
   louderAudio: {fileID: 2011480803}
   frontIdle: {fileID: 11400000, guid: 4c2dcc70f73f0ac4bab865b6774ff167, type: 2}
   frontJump: {fileID: 11400000, guid: f7b07ad5bbc2eff419767965cfd9967b, type: 2}
+  frontTurnRight: {fileID: 11400000, guid: d52b9cb6a2cdfcf4b995e65cf06dc0b2, type: 2}
+  frontTurnBack: {fileID: 11400000, guid: 1c3713e75f08e2d40bd63e0477d0d52c, type: 2}
   backIdle: {fileID: 11400000, guid: bb75fce215ca3084088e0c1434fc91c9, type: 2}
   backJump: {fileID: 11400000, guid: 9da017614ed6fc046b9c27d7be96ba09, type: 2}
+  backTurnRight: {fileID: 11400000, guid: a5fc60036556b0940a8a94289c75cb7e, type: 2}
+  backTurnFront: {fileID: 11400000, guid: 15ecf1ab3e38b0e4c91959a6e0b41c96, type: 2}
   jumpLength: 1
   jumpAnimationSpeed: 3
+  playInReverse: 0
+  lastCurrentDirectionID: 0
   playerID: 1
   playerMarbles: 
   marbleEffect: []
@@ -293,9 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b8033dd80dfac4f804bdab7cce74d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mediumAudio: {fileID: 2011480802}
-  quiterAudio: {fileID: 2011480804}
-  louderAudio: {fileID: 2011480803}
   jumpProgress:
     serializedVersion: 2
     m_Curve:
@@ -371,74 +459,56 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  keyProgress:
+  marbleTravelProgress:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 1.3333334
+      outSlope: 1.3333334
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.24056587
-      value: 1.0045245
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      time: 0.75
+      value: 1
+      inSlope: 1.3333334
+      outSlope: 1.3333334
+      tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  keyHeight:
+  marbleTravelHeight:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 10
-      outSlope: 10
+      inSlope: 7.5
+      outSlope: 7.5
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.15
+      time: 0.2
       value: 2.5
-      inSlope: 2.6272118
-      outSlope: 2.6272118
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.0814594
-    - serializedVersion: 3
-      time: 0.5
-      value: 3
-      inSlope: 0.000000059604645
-      outSlope: 0.000000059604645
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.85
-      value: 2.5
-      inSlope: -2.7386088
-      outSlope: -2.7386088
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.08327815
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -10.000002
-      outSlope: -10.000002
+      inSlope: -1.875
+      outSlope: -1.875
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -447,10 +517,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpProgressLength: 1
-  keyProgressLength: 0
+  marbleTravelLength: 0
   jumpAnimTimer: 10
   destination: {x: 0, y: 0}
-  keyAnimTimer: 10
+  marbleAnimTimer: 10
 --- !u!50 &2610747910663743188
 Rigidbody2D:
   serializedVersion: 4

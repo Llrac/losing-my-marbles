@@ -10,8 +10,6 @@ public abstract class Movement : MonoBehaviour
     public char savedTile = 'X';
 
     public Vector2 gridPosition = new(0, 0);
-    public bool hasKey = false;
-   
     public static List <Movement> enemies = new ();
 
     public int currentDirectionID = 0;
@@ -49,6 +47,7 @@ public abstract class Movement : MonoBehaviour
             }
         }
         PlayerProperties pp = GetComponent<PlayerProperties>();
+        RatProperties rp = GetComponent<RatProperties>();
         if (pp != null)
         {
             switch (pp.playerID)
@@ -86,9 +85,27 @@ public abstract class Movement : MonoBehaviour
                     break;
             }
         }
+        else if (rp != null)
+        {
+            switch (rp.enemyID)
+            {
+                case 5:
+                    frontSkeleton.initialSkinName = "Blå front";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "Blå back";
+                    backSkeleton.Initialize(true);
+                    break;
+                default:
+                    frontSkeleton.initialSkinName = "default";
+                    frontSkeleton.Initialize(true);
+                    backSkeleton.initialSkinName = "default";
+                    backSkeleton.Initialize(true);
+                    break;
+            }
+        }
     }
 
-    public bool TryMove(GameObject character, int dataID, int increment)
+    public bool TryMove(GameObject character, int dataID, int increment, int  forcedJump = 0)
     {
         // Set transform position
         if (dataID == 0)
@@ -114,7 +131,7 @@ public abstract class Movement : MonoBehaviour
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
-                    Move(character, 1);
+                    Move(character, 1, forcedJump);
                     savedTile = 'X';
                     return true;
 
@@ -122,14 +139,14 @@ public abstract class Movement : MonoBehaviour
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
 
-                    if (player.GetComponent<PlayerProperties>().hasKey == true)
-                    {
-                        player.GetComponent<Animation>().StealKey(character, player); // character steals from player
-                    }
+                    //if (player.GetComponent<PlayerProperties>().specialMarbleCount == true)
+                    //{
+                    //    // player.GetComponent<Animation>().StealKey(character, player); // character steals from player
+                    //}
                     
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        TryMove(gameObject, 0, 1);
+                        TryMove(gameObject, 0, 1, forcedJump);
                         if (mediumAudio != null)
                             mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
@@ -148,27 +165,27 @@ public abstract class Movement : MonoBehaviour
 
                 case GridManager.DOOR:
                    
-                    if (character.GetComponent<Movement>().hasKey == true)
-                    {
-                        character.GetComponent<Movement>().hasKey = false;
-                        character.SetActive(false);
-                        gg.UpdateGlitter();
-                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
-                        // players should not be able to send more actions
-                      //  FindObjectOfType<ResetManager>().ResetLevel();
-                    }
-                    else
-                    {
-                        Move(character, 1);
-                        savedTile = 'D';
-                        return true;
-                    }
+                    //if (character.GetComponent<Movement>().specialMarbleCount == true)
+                    //{
+                    //    character.GetComponent<Movement>().specialMarbleCount = false;
+                    //    character.SetActive(false);
+                    //    gg.UpdateGlitter();
+                    //    ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
+                    //    // players should not be able to send more actions
+                    //  //  FindObjectOfType<ResetManager>().ResetLevel();
+                    //}
+                    //else
+                    //{
+                    //    Move(character, 1);
+                    //    savedTile = 'D';
+                    //    return true;
+                    //}
                     break;
 
-                case GridManager.KEY:
+                case GridManager.MARBLE:
                     if (CompareTag("Player"))
                     {
-                        character.GetComponent<Animation>().PickupKey(character);
+                        character.GetComponent<AnimationCurveHandler>().PickupMarble(character, increment);
                         Move(character, 1);
                     }
                     else if (CompareTag("Enemy"))
@@ -179,11 +196,11 @@ public abstract class Movement : MonoBehaviour
                     return true;
 
                 case GridManager.HOLE:
-                    if (gameObject.GetComponent<Movement>().hasKey == true)
-                    {
-                        character.GetComponent<Animation>().DropKey(character);
-                        savedTile = GridManager.KEY;
-                    }
+                    //if (gameObject.GetComponent<Movement>().specialMarbleCount == true)
+                    //{
+                    //    //character.GetComponent<Animation>().DropKey(character);
+                    //    //savedTile = GridManager.KEY;
+                    //}
                     
                     grid.MoveInGridMatrix(gameObject.GetComponent<Movement>(), new Vector2(0, 0));
                     
@@ -242,15 +259,15 @@ public abstract class Movement : MonoBehaviour
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
 
-                    if (character.GetComponent<Movement>().hasKey && player.GetComponent<Movement>().savedTile == GridManager.DOOR)
+                    if (character.GetComponent<PlayerProperties>().specialMarbleCount >= TurnManager.marblesToWin)
                     {
                         ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
                     }
 
-                    if (player.GetComponent<PlayerProperties>().hasKey == true)
-                    {
-                        player.GetComponent<Animation>().StealKey(character, player);
-                    }
+                    //if (player.GetComponent<PlayerProperties>().specialMarbleCount == true)
+                    //{
+                    //    // player.GetComponent<Animation>().StealKey(character, player);
+                    //}
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
@@ -280,38 +297,40 @@ public abstract class Movement : MonoBehaviour
                     break;
 
                 case GridManager.DOOR:
-                    if (character.GetComponent<Movement>().hasKey == true)
-                    {
-                        character.GetComponent<Movement>().hasKey = false;
-                        character.SetActive(false);
-                        gg.UpdateGlitter();
-                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
-                        // players should not be able to send more actions
-                        //  FindObjectOfType<ResetManager>().ResetLevel();
-                    }
-                    else
-                    {
-                        Blink(increment);
-                        savedTile = 'D';
-                        return true;
-                    }
+                    //if (character.GetComponent<Movement>().specialMarbleCount == true)
+                    //{
+                    //    character.GetComponent<Movement>().specialMarbleCount = false;
+                    //    character.SetActive(false);
+                    //    gg.UpdateGlitter();
+                    //    ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
+                    //    // players should not be able to send more actions
+                    //    //  FindObjectOfType<ResetManager>().ResetLevel();
+                    //}
+                    //else
+                    //{
+                    //    Blink(increment);
+                    //    savedTile = 'D';
+                    //    return true;
+                    //}
                     
                     break;
 
-                case GridManager.KEY:
-                    character.GetComponent<Animation>().PickupKey(character);
-                    Blink(increment);
-                    gg.UpdateGlitter();
+                case GridManager.MARBLE:
+                    if (CompareTag("Player"))
+                    {
+                        character.GetComponent<AnimationCurveHandler>().PickupMarble(character, increment);
+                        Blink(increment);
+                    }
                     
                     return true;
 
                 case GridManager.HOLE:
                    
-                    if (gameObject.GetComponent<Movement>().hasKey == true)
-                    {
-                        character.GetComponent<Animation>().DropKey(character); // add a special fix to dropp key maybe the key should be dropped based on the holes gp and its transform position
+                    //if (gameObject.GetComponent<Movement>().specialMarbleCount == true)
+                    //{
+                    //    //character.GetComponent<Animation>().DropKey(character); // add a special fix to dropp key maybe the key should be dropped based on the holes gp and its transform position
                         
-                    }
+                    //}
                     grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
                     if (CompareTag("Player"))
                     {
@@ -457,7 +476,7 @@ public abstract class Movement : MonoBehaviour
         switch (dataID)
         {
             case 0: // Jump forward
-                Animation animation = character.GetComponent<Animation>();
+                AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
                 if (usingFrontSkeleton)
                 {
                     frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
@@ -520,7 +539,7 @@ public abstract class Movement : MonoBehaviour
         }
 
         wallJumpMultiplier = 1;
-        if (typeID == 0)
+        if (typeID == 0 || typeID == 2)
         {
             grid.MoveInGridMatrix(character.GetComponent<Movement>(), RequestGridPosition(currentDirectionID));
         }
@@ -529,7 +548,7 @@ public abstract class Movement : MonoBehaviour
             wallJumpMultiplier *= 0.5f;
         }
 
-        Animation animation = character.GetComponent<Animation>();
+        AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
        
         switch (currentDirectionID)
         {
