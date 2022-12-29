@@ -2185,6 +2185,46 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5056906181629956827, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
   m_PrefabInstance: {fileID: 1280986754}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280986757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607455304558905576, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1280986754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280986758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906182698631981, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1280986754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280986759 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607455304608513496, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1280986754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280986760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906181540582279, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1280986754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280986761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607455305510811107, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1280986754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280986762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906181041726771, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1280986754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280986763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906182093424090, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1280986754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280986764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906181670613592, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1280986754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1292823221
 GameObject:
   m_ObjectHideFlags: 0
@@ -3213,35 +3253,35 @@ PrefabInstance:
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280986763}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280986761}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280986759}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280986757}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerUIPosition.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280986764}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerUIPosition.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280986762}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerUIPosition.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280986760}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerUIPosition.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1280986758}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBagsAnimator.Array.data[0]
       value: 

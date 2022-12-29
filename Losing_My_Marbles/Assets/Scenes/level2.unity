@@ -1871,6 +1871,51 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5056906181629956827, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
   m_PrefabInstance: {fileID: 1382374461}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382374463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906181159560067, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382374464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607455304558905576, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382374465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906182698631981, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382374466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607455304608513496, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382374467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906181540582279, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382374468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607455305510811107, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382374469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906181041726771, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382374470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906182093424090, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1382374471 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906181670613592, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1402652133
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2282,7 +2327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amountOfTurns: 3
   uiDesktop: {fileID: 1997739543}
-  readyAlert: {fileID: 0}
+  readyAlert: {fileID: 1382374463}
   information: {fileID: 1382374462}
   actionHandler: {fileID: 623496582}
 --- !u!4 &1552591137
@@ -2827,35 +2872,35 @@ PrefabInstance:
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1382374470}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1382374468}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1382374466}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1382374464}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerUIPosition.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1382374471}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerUIPosition.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1382374469}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerUIPosition.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1382374467}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerUIPosition.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1382374465}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBagsAnimator.Array.data[0]
       value: 
