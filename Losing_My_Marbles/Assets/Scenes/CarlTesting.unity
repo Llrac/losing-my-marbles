@@ -1099,7 +1099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769845, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769851, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_RootOrder
@@ -1806,7 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13adaa1761d4e44597e3eb08c05bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 3
+  playerID: 1
 --- !u!4 &1073630580
 Transform:
   m_ObjectHideFlags: 0
@@ -2950,7 +2950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4350784977135210877, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a093fbe91b9ff084196903ba13d02230, type: 3}

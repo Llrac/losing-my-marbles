@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ActionHandler : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class ActionHandler : MonoBehaviour
         database.ListenForActions(InstantiateAction, Debug.Log);
         database.ListenForNewHand(InstantiateNewHand, Debug.Log);
     }
-    
+
 
     public void SendAction()
     {
@@ -68,8 +70,9 @@ public class ActionHandler : MonoBehaviour
         var action1 = Int32.Parse($"{actionMessage.firstAction}");
         var action2 = Int32.Parse($"{actionMessage.secondAction}");
         var action3 = Int32.Parse($"{actionMessage.thirdAction}");
-        var action4 = Int32.Parse($"{actionMessage.fourthAction}");
-        var action5 = Int32.Parse($"{actionMessage.fifthAction}");
+
+        if (playerID == 0)
+            return;
 
         List<int> listOfActions = new()
         {
@@ -77,6 +80,7 @@ public class ActionHandler : MonoBehaviour
         };
 
         Debug.Log("Instantiate Action");
+        Debug.Log(playerID);
 
         PlayerProperties.ids.Add(playerID);
 
