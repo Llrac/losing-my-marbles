@@ -89,7 +89,11 @@ public class ResetManager : MonoBehaviour
             }
         }
     }
-
+    public void NextLevel()
+    {
+        ResetValues();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
     private void ResetValues()
     {
         PlayerProperties.ids.Clear();
