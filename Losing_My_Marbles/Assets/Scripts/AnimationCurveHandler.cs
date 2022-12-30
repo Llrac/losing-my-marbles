@@ -218,6 +218,8 @@ public class AnimationCurveHandler : MonoBehaviour
                 }
                 else
                 {
+                    Destroy(marble);
+                   
                     child.gameObject.GetComponent<SpriteRenderer>().enabled = false;
                     child.gameObject.GetComponent<SpriteRenderer>().sortingOrder--;
                 }
@@ -233,6 +235,16 @@ public class AnimationCurveHandler : MonoBehaviour
                     child.gameObject.GetComponent<ParticleSystem>().Stop();
                 }
             }
+        }
+        StartCoroutine(NewLevel());
+    }
+    private IEnumerator NewLevel()
+    {
+        yield return new WaitForSeconds(1f);
+        if (FindObjectOfType<MysteryMarble>() == null) //should not happen if there is someone who won
+        {
+            Debug.Log("Hej");
+            FindObjectOfType<ResetManager>().NextLevel();
         }
     }
 

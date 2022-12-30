@@ -21,30 +21,41 @@ public class PlayerProperties : Movement
     GridManager gridManager;
     int act = 1;
     public bool isAlive;
-  
+
+    private static int[] scoreKeeper = new int[4]
+    {
+        0,0,0,0
+    };
+
     private void Awake()
     {
         TurnManager.players.Add(gameObject.GetComponent<PlayerProperties>());
         gridManager = FindObjectOfType<GridManager>();
         UpdateSkinBasedOnPlayerID();
-        
+        GetScore(); // keps ygour score
         FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
         intent = FindIntentShower.GetComponent<SetIntent>();
         startingGridPosition = gridPosition;
         startingWorldPosition = transform.position;
         startingDirection = currentDirectionID;
     }
-
+    private void GetScore()
+    {
+        specialMarbleCount = scoreKeeper[playerID - 1];
+    }
     private void Start()
     {
+        FindObjectOfType<UIDesktop>().UpdatePickupMarbles(this.gameObject);
         UpdateSkeleton();
     }
 
     private void OnDestroy()
     {
+        scoreKeeper[playerID - 1] = specialMarbleCount;
         TurnManager.players.Remove(this);
         TurnManager.sortedPlayers.Remove(this);
     }
+    
     void Update()
     {
         if (playerID == DebugManager.characterToControl)
