@@ -9,6 +9,7 @@ public class AnimationCurveHandler : MonoBehaviour
     public AnimationCurve jumpHeight;
     public AnimationCurve marbleTravelProgress;
     public AnimationCurve marbleTravelHeight;
+    //public AnimationCurve fallFromSkyProgress;
 
     [HideInInspector] public float jumpProgressLength;
     [HideInInspector] public float marbleTravelLength;

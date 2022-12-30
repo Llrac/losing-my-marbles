@@ -617,7 +617,7 @@ public abstract class Movement : MonoBehaviour
             quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().triggerBlink);
         if (blinkEffect != null)
         {
-            GameObject newBlinkEffect = Instantiate(blinkEffect, transform.position, transform.rotation);
+            GameObject newBlinkEffect = Instantiate(blinkEffect, new Vector2(transform.position.x, transform.position.y + 0.5f), transform.rotation);
             Destroy(newBlinkEffect, 1f);
         }
         if (GetComponent<Animator>() != null)
@@ -633,7 +633,7 @@ public abstract class Movement : MonoBehaviour
 
     IEnumerator BlinkAnimation(float blinkDistance)
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.25f);
         switch (currentDirectionID)
         {
             case 0:
@@ -656,7 +656,7 @@ public abstract class Movement : MonoBehaviour
 
         if (blinkEffect != null)
         {
-            GameObject newBlinkEffect = Instantiate(blinkEffect, transform.position, transform.rotation);
+            GameObject newBlinkEffect = Instantiate(blinkEffect, new Vector2(transform.position.x, transform.position.y + 0.5f), transform.rotation);
             newBlinkEffect.GetComponent<Animator>().SetTrigger("blink_to");
             Destroy(newBlinkEffect, 1f);
         }
