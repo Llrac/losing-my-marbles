@@ -2484,6 +2484,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
+--- !u!224 &1311886494 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5056906182427643715, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1280986754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1323179442 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1241819697, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
@@ -3254,7 +3259,7 @@ PrefabInstance:
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playLogTransform
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1311886494}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[0]
       value: 
