@@ -190,7 +190,7 @@ public class PlayerProperties : Movement
         int savedDir = currentDirectionID;
         currentDirectionID = dir;
 
-        if (TryMove(gameObject, 0, 1) == true)
+        if (TryMove(gameObject, 0, 1, 2) == true)
         {
             currentDirectionID = savedDir;
             UpdateSkeleton();
@@ -225,7 +225,12 @@ public class PlayerProperties : Movement
         {
             marbleEffect.Add(new Vector2(1, 0));
         }
-        
+        StartCoroutine(Respawn());
+       
+    }
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(.25f);
         for (int i = 0; i < TurnManager.players.Count; i++)
         {
             if (TurnManager.players[i].gridPosition == startingGridPosition && TurnManager.players[i].playerID != playerID)
@@ -233,7 +238,7 @@ public class PlayerProperties : Movement
                 TurnManager.players[i].Pushed(startingDirection);
             }
         }
-        
+
         currentDirectionID = startingDirection;
         gridPosition = startingGridPosition;
         UpdateSkeleton();
