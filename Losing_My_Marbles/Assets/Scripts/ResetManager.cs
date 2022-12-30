@@ -45,18 +45,18 @@ public class ResetManager : MonoBehaviour
             PauseGame();
             
         }
+        
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            ResetValues();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public void ResetLevel()
     {
-        PlayerProperties.ids.Clear();
-        PlayerProperties.myActions.Clear();
-        TurnManager.sortedPlayers.Clear();
-        TurnManager.players.Clear();
-        DebugManager.characterToControl = 1;
-        DatabaseAPI.hasBeenRestarted = true;
+        ResetValues();
         SceneManager.LoadScene("MainMenu");
-        GridManager.currentLevel++;
     }
 
     public static void PlayerWin(int playerID)
@@ -88,5 +88,15 @@ public class ResetManager : MonoBehaviour
                 child.gameObject.SetActive(false);
             }
         }
+    }
+
+    private void ResetValues()
+    {
+        PlayerProperties.ids.Clear();
+        PlayerProperties.myActions.Clear();
+        TurnManager.sortedPlayers.Clear();
+        TurnManager.players.Clear();
+        DebugManager.characterToControl = 1;
+        DatabaseAPI.hasBeenRestarted = true;
     }
 }
