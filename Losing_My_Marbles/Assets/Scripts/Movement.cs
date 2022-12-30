@@ -7,12 +7,13 @@ using Spine.Unity;
 
 public abstract class Movement : MonoBehaviour
 {
+    // Grid Stuff
     public char savedTile = 'X';
-
+    public int currentDirectionID = 0;
     public Vector2 gridPosition = new(0, 0);
     public static List <Movement> enemies = new ();
-
-    public int currentDirectionID = 0;
+    GridManager grid;
+    GridGenerator gg;
 
     public AudioSource mediumAudio;
     public AudioSource quiterAudio;
@@ -21,10 +22,10 @@ public abstract class Movement : MonoBehaviour
     public GameObject deathPoof = null;
     public GameObject blinkEffect = null;
     public GameObject swapEffect = null;
-
-    GridManager grid;
-    GridGenerator gg;
  
+    public float jumpLength = 1;
+    public float jumpAnimationSpeed = 5f;
+
     int jumpMultiplier;
     float wallJumpMultiplier;
 
@@ -34,25 +35,35 @@ public abstract class Movement : MonoBehaviour
     public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump; // TODO: implement idle2 and idle3
     public AnimationReferenceAsset frontAttack = null, backAttack = null; // rats only
 
-    public float jumpLength = 1;
-    public float jumpAnimationSpeed = 5f;
+    public Animator turnAnimator;
+    int lastAnimationDirectionID = 0;
+    int animationDirectionID = 0;
     Spine.Animation nextIdleAnimation;
     Spine.Animation nextJumpAnimation;
     Spine.Animation nextAttackAnimation; // rats only
 
+    #region Animation
     public void UpdateSkinBasedOnPlayerID()
     {
         foreach (Transform child in transform)
         {
-            if (child.name == "Front_Skeleton" && child.GetComponent<SkeletonAnimation>() != null)
+            if (child.GetComponent<SkeletonAnimation>() != null && child.name == "Front_Skeleton")
             {
                 frontSkeleton = child.GetComponent<SkeletonAnimation>();
             }
-            else if (child.name == "Back_Skeleton" && child.GetComponent<SkeletonAnimation>() != null)
+            else if (child.GetComponent<SkeletonAnimation>() != null && child.name == "Back_Skeleton")
             {
                 backSkeleton = child.GetComponent<SkeletonAnimation>();
             }
         }
+        foreach (Transform child in transform)
+        {
+            if (child.GetComponent<Animator>() != null)
+            {
+                turnAnimator = child.GetComponent<Animator>();
+            }
+        }
+        animationDirectionID = currentDirectionID;
         PlayerProperties pp = GetComponent<PlayerProperties>();
         RatProperties rp = GetComponent<RatProperties>();
         if (pp != null)
@@ -64,7 +75,6 @@ public abstract class Movement : MonoBehaviour
                     frontSkeleton.Initialize(true);
                     backSkeleton.initialSkinName = "red";
                     backSkeleton.Initialize(true);
-
                     break;
                 case 2:
                     frontSkeleton.initialSkinName = "purple";
@@ -110,271 +120,6 @@ public abstract class Movement : MonoBehaviour
                     break;
             }
         }
-    }
-
-    public bool TryMove(GameObject character, int dataID, int increment, int  forcedJump = 0)
-    {
-        // Set transform position
-        if (dataID == 0)
-        {
-            if (grid == null)
-            {
-                grid = FindObjectOfType<GridManager>();
-            }
-            if (gg == null)
-            {
-                gg = FindObjectOfType<GridGenerator>();
-            }
-            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
-            {
-                case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                    FindObjectOfType<GridGenerator>().OnHitWall(character);
-                    Move(character, 1, 1);
-                    TryMove(character, 1, 2);
-                    if (mediumAudio != null)
-                        mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
-                    return false;
-
-                case GridManager.WALKABLEGROUND: // WALKABLEGROUND
-                    Move(character, 1, forcedJump);
-                    savedTile = 'X';
-                    return true;
-
-                case GridManager.PLAYER: // PLAYER rat is able to push player
-                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
-                        + character.GetComponent<Movement>().gridPosition, TurnManager.players);
-
-                    //if (player.GetComponent<PlayerProperties>().specialMarbleCount == true)
-                    //{
-                    //    // player.GetComponent<Animation>().StealKey(character, player); // character steals from player
-                    //}
-                    
-                    if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
-                    {
-                        TryMove(gameObject, 0, 1, forcedJump);
-                        if (mediumAudio != null)
-                            mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
-
-                        return true;
-                    }
-                    
-                    return false;
-
-                case GridManager.ENEMY: // ENEMY
-                    GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
-                        + character.GetComponent<Movement>().gridPosition, enemies);
-
-                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
-                    
-                    break;
-
-                case GridManager.DOOR:
-                   
-                    //if (character.GetComponent<Movement>().specialMarbleCount == true)
-                    //{
-                    //    character.GetComponent<Movement>().specialMarbleCount = false;
-                    //    character.SetActive(false);
-                    //    gg.UpdateGlitter();
-                    //    ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
-                    //    // players should not be able to send more actions
-                    //  //  FindObjectOfType<ResetManager>().ResetLevel();
-                    //}
-                    //else
-                    //{
-                    //    Move(character, 1);
-                    //    savedTile = 'D';
-                    //    return true;
-                    //}
-                    break;
-
-                case GridManager.MARBLE:
-                    if (CompareTag("Player"))
-                    {
-                        character.GetComponent<AnimationCurveHandler>().PickupMarble(character, increment);
-                        Move(character, 1);
-                    }
-                    else if (CompareTag("Enemy"))
-                    {
-
-                    }
-                    
-                    return true;
-
-                case GridManager.HOLE:
-                    //if (gameObject.GetComponent<Movement>().specialMarbleCount == true)
-                    //{
-                    //    //character.GetComponent<Animation>().DropKey(character);
-                    //    //savedTile = GridManager.KEY;
-                    //}
-                    
-                    grid.MoveInGridMatrix(gameObject.GetComponent<Movement>(), new Vector2(0, 0));
-                    
-                    if (CompareTag("Player"))
-                    {
-                        character.GetComponent<PlayerProperties>().Death(gg.GetRealWorldPosition(gridPosition + RequestGridPosition(currentDirectionID)) + new Vector2(0, 0.7f));
-                    }
-                    else if (CompareTag("Enemy"))
-                    {
-                        character.GetComponent<RatProperties>().Death();
-                    }
-                    return true;
-      
-
-                case GridManager.WATER:
-                    // do water stuff
-                    Move(character, increment);
-                    savedTile = GridManager.WATER;
-                    break;
-            }
-
-        }
-        if (dataID == 2)
-        {
-            if (grid == null)
-            {
-                grid = FindObjectOfType<GridManager>();
-            }
-            if (gg == null)
-            {
-                gg = FindObjectOfType<GridGenerator>();
-            }
-            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
-            {
-                case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                    for(int i = increment-1; i > 0; i--)
-                    {
-                        if(grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.EMPTY)
-                        {
-                            TryMove(character, 2, i);
-                            if (mediumAudio != null)
-                                mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
-                            return true;
-                        }
-                    }
-                    
-                    return false;
-
-                case GridManager.WALKABLEGROUND: // WALKABLEGROUND
-                    Blink(increment);
-                    savedTile = 'X';
-                    return true;
-
-                case GridManager.PLAYER: // PLAYER rat is able to push player
-                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
-                        + character.GetComponent<Movement>().gridPosition, TurnManager.players);
-
-                    if (character.GetComponent<PlayerProperties>().specialMarbleCount >= TurnManager.marblesToWin)
-                    {
-                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
-                    }
-
-                    //if (player.GetComponent<PlayerProperties>().specialMarbleCount == true)
-                    //{
-                    //    // player.GetComponent<Animation>().StealKey(character, player);
-                    //}
-
-                    if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
-                    {
-                        Blink(increment); // else blink increment--
-                        if (mediumAudio != null)
-                            mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
-                        return true;
-                    }
-                    else
-                    {
-                        if(RequestGridPosition(currentDirectionID, increment) == gridPosition)
-                        {
-                            Blink(increment);
-                            return true;
-                        }
-                        TryMove(character, 2, increment - 1); // it sees itself if standing next to the player
-                        // if there is a
-                    }
-                    return false;
-
-                case GridManager.ENEMY: // ENEMY
-                    GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
-                        + character.GetComponent<Movement>().gridPosition, enemies);
-
-                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
-
-                    break;
-
-                case GridManager.DOOR:
-                    //if (character.GetComponent<Movement>().specialMarbleCount == true)
-                    //{
-                    //    character.GetComponent<Movement>().specialMarbleCount = false;
-                    //    character.SetActive(false);
-                    //    gg.UpdateGlitter();
-                    //    ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
-                    //    // players should not be able to send more actions
-                    //    //  FindObjectOfType<ResetManager>().ResetLevel();
-                    //}
-                    //else
-                    //{
-                    //    Blink(increment);
-                    //    savedTile = 'D';
-                    //    return true;
-                    //}
-                    
-                    break;
-
-                case GridManager.MARBLE:
-                    if (CompareTag("Player"))
-                    {
-                        character.GetComponent<AnimationCurveHandler>().PickupMarble(character, increment);
-                        Blink(increment);
-                    }
-                    
-                    return true;
-
-                case GridManager.HOLE:
-                   
-                    //if (gameObject.GetComponent<Movement>().specialMarbleCount == true)
-                    //{
-                    //    //character.GetComponent<Animation>().DropKey(character); // add a special fix to dropp key maybe the key should be dropped based on the holes gp and its transform position
-                        
-                    //}
-                    grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
-                    if (CompareTag("Player"))
-                    {
-                        character.GetComponent<PlayerProperties>().Death(gg.GetRealWorldPosition(gridPosition + RequestGridPosition(currentDirectionID, 3)) + new Vector2(0, 0.7f));
-                    }
-                    else
-                    {
-                        enemies.Remove(this); //is a rat jumps down a hole every rat dies
-                    }
-                    return true;
-
-                case GridManager.WATER:
-                    // do water stuff
-                    Blink(increment);
-                    savedTile = GridManager.WATER;
-                    break;
-            }
-
-        }
-        // Set character rotation
-        if (dataID == 1)
-        {
-            for (int i = 0; i < Mathf.Abs(increment); i++)
-            {
-                jumpMultiplier = 1;
-                if (increment < 0)
-                {
-                    jumpMultiplier *= -1;
-                }
-                currentDirectionID += jumpMultiplier;
-                if (currentDirectionID <= -4 || currentDirectionID >= 4)
-                {
-                    currentDirectionID = 0;
-                }
-            }
-
-            UpdateSkeleton();
-            SetAnimation(dataID, character);
-        }
-        return false;
     }
 
     public void UpdateSkeleton(int addToDirectionID = 0)
@@ -503,7 +248,7 @@ public abstract class Movement : MonoBehaviour
         }
         switch (dataID)
         {
-            case 0: // Jump forward
+            case 0: // Jump Forward
                 AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
                 if (usingFrontSkeleton)
                 {
@@ -527,20 +272,248 @@ public abstract class Movement : MonoBehaviour
                 }
                 break;
 
-            case 1: // Rotate sideways
-                if (usingFrontSkeleton)
-                {
-                    frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
-                }
-                else
-                {
-                    backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
-                }
+            case 1: // Turn Left or Right
+
+                // do turn animation here
+
+
+                StartCoroutine(PrepareIdleAnimation());
                 break;
 
             default:
                 break;
         }
+    }
+
+    IEnumerator PrepareIdleAnimation()
+    {
+        yield return new WaitForSeconds(0.6f);
+        if (usingFrontSkeleton)
+        {
+            frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+        }
+        else
+        {
+            backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+        }
+
+        yield return null;
+    }
+    #endregion
+
+    #region Movement
+    public bool TryMove(GameObject character, int dataID, int increment, int forcedJump = 0)
+    {
+        // Set transform position
+        if (dataID == 0)
+        {
+            if (grid == null)
+            {
+                grid = FindObjectOfType<GridManager>();
+            }
+            if (gg == null)
+            {
+                gg = FindObjectOfType<GridGenerator>();
+            }
+            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
+            {
+                case GridManager.EMPTY: // EMPTY (walls, void, etc)
+                    FindObjectOfType<GridGenerator>().OnHitWall(character);
+                    Move(character, 1, 1);
+                    TryMove(character, 1, 2);
+                    if (mediumAudio != null)
+                        mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
+                    return false;
+
+                case GridManager.WALKABLEGROUND: // WALKABLEGROUND
+                    Move(character, 1, forcedJump);
+                    savedTile = 'X';
+                    return true;
+
+                case GridManager.PLAYER: // PLAYER rat is able to push player
+                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
+                        + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+
+                    //if (player.GetComponent<PlayerProperties>().specialMarbleCount == true)
+                    //{
+                    //    // player.GetComponent<Animation>().StealKey(character, player); // character steals from player
+                    //}
+
+                    if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
+                    {
+                        TryMove(gameObject, 0, 1, forcedJump);
+                        if (mediumAudio != null)
+                            mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
+
+                        return true;
+                    }
+
+                    return false;
+
+                case GridManager.ENEMY: // ENEMY
+                    GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
+                        + character.GetComponent<Movement>().gridPosition, enemies);
+
+                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
+
+                    break;
+
+                case GridManager.DOOR:
+
+                    break;
+
+                case GridManager.MARBLE:
+                    if (CompareTag("Player"))
+                    {
+                        character.GetComponent<AnimationCurveHandler>().PickupMarble(character, increment);
+                        Move(character, 1);
+                    }
+
+                    return true;
+
+                case GridManager.HOLE:
+                    grid.MoveInGridMatrix(gameObject.GetComponent<Movement>(), new Vector2(0, 0));
+
+                    if (CompareTag("Player"))
+                    {
+                        character.GetComponent<PlayerProperties>().Death(gg.GetRealWorldPosition(gridPosition + RequestGridPosition(currentDirectionID)) + new Vector2(0, 0.7f));
+                    }
+                    else if (CompareTag("Enemy"))
+                    {
+                        character.GetComponent<RatProperties>().Death();
+                    }
+                    return true;
+
+
+                case GridManager.WATER:
+                    // do water stuff
+                    Move(character, increment);
+                    savedTile = GridManager.WATER;
+                    break;
+            }
+
+        }
+        if (dataID == 2)
+        {
+            if (grid == null)
+            {
+                grid = FindObjectOfType<GridManager>();
+            }
+            if (gg == null)
+            {
+                gg = FindObjectOfType<GridGenerator>();
+            }
+            switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
+            {
+                case GridManager.EMPTY: // EMPTY (walls, void, etc)
+                    for (int i = increment - 1; i > 0; i--)
+                    {
+                        if (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.EMPTY)
+                        {
+                            TryMove(character, 2, i);
+                            if (mediumAudio != null)
+                                mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
+                            return true;
+                        }
+                    }
+
+                    return false;
+
+                case GridManager.WALKABLEGROUND: // WALKABLEGROUND
+                    Blink(increment);
+                    savedTile = 'X';
+                    return true;
+
+                case GridManager.PLAYER: // PLAYER rat is able to push player
+                    GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
+                        + character.GetComponent<Movement>().gridPosition, TurnManager.players);
+
+                    if (character.GetComponent<PlayerProperties>().specialMarbleCount >= TurnManager.marblesToWin)
+                    {
+                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
+                    }
+
+                    if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
+                    {
+                        Blink(increment); // else blink increment--
+                        if (mediumAudio != null)
+                            mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
+                        return true;
+                    }
+                    else
+                    {
+                        if (RequestGridPosition(currentDirectionID, increment) == gridPosition)
+                        {
+                            Blink(increment);
+                            return true;
+                        }
+                        TryMove(character, 2, increment - 1); // it sees itself if standing next to the player
+                        // if there is a
+                    }
+                    return false;
+
+                case GridManager.ENEMY: // ENEMY
+                    GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
+                        + character.GetComponent<Movement>().gridPosition, enemies);
+
+                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
+
+                    break;
+
+                case GridManager.DOOR:
+                    break;
+
+                case GridManager.MARBLE:
+                    if (CompareTag("Player"))
+                    {
+                        character.GetComponent<AnimationCurveHandler>().PickupMarble(character, increment);
+                        Blink(increment);
+                    }
+
+                    return true;
+
+                case GridManager.HOLE:
+                    grid.MoveInGridMatrix(character.GetComponent<Movement>(), new Vector2(0, 0));
+                    if (CompareTag("Player"))
+                    {
+                        character.GetComponent<PlayerProperties>().Death(gg.GetRealWorldPosition(gridPosition +
+                            RequestGridPosition(currentDirectionID, 3)) + new Vector2(0, 0.7f));
+                    }
+                    else
+                    {
+                        enemies.Remove(this); //is a rat jumps down a hole every rat dies
+                    }
+                    return true;
+
+                case GridManager.WATER:
+                    // do water stuff
+                    Blink(increment);
+                    savedTile = GridManager.WATER;
+                    break;
+            }
+
+        }
+        // Set character rotation
+        if (dataID == 1)
+        {
+            for (int i = 0; i < Mathf.Abs(increment); i++)
+            {
+                jumpMultiplier = 1;
+                if (increment < 0)
+                {
+                    jumpMultiplier *= -1;
+                }
+                currentDirectionID += jumpMultiplier;
+                animationDirectionID += jumpMultiplier;
+                if (currentDirectionID <= -4 || currentDirectionID >= 4)
+                {
+                    currentDirectionID = 0;
+                }
+            }
+            UpdateSkeleton();
+            SetAnimation(dataID, character);
+        }
+        return false;
     }
 
     public Vector2 RequestGridPosition(int currentDirectionID, float distance = 1) // change this to give take a float as well to change the x and y
@@ -620,9 +593,9 @@ public abstract class Movement : MonoBehaviour
             GameObject newBlinkEffect = Instantiate(blinkEffect, new Vector2(transform.position.x, transform.position.y + 0.5f), transform.rotation);
             Destroy(newBlinkEffect, 1f);
         }
-        if (GetComponent<Animator>() != null)
+        if (gameObject.GetComponent<Animator>() != null)
         {
-            GetComponent<Animator>().SetTrigger("shrink");
+            gameObject.GetComponent<Animator>().SetTrigger("shrink");
         }
 
         grid?.MoveInGridMatrix(this, RequestGridPosition(currentDirectionID, blinkDistanceMultiplier));
@@ -660,13 +633,15 @@ public abstract class Movement : MonoBehaviour
             newBlinkEffect.GetComponent<Animator>().SetTrigger("blink_to");
             Destroy(newBlinkEffect, 1f);
         }
-        if (GetComponent<Animator>() != null)
+        if (gameObject.GetComponent<Animator>() != null)
         {
-            GetComponent<Animator>().SetTrigger("grow");
+            gameObject.GetComponent<Animator>().SetTrigger("grow");
         }
 
         yield return null;
     }
+    #endregion
+
     public abstract char ChangeTag();
     public abstract void DoAMove(int id, int inc, int dir);
 }
