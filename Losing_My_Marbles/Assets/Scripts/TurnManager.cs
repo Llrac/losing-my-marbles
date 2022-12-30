@@ -41,7 +41,7 @@ public class TurnManager : MonoBehaviour
 
     private void Start()
     {
-        uiDesktop.TurnOnMarbleBagAnimation();
+        //uiDesktop.TurnOnMarbleBagAnimation();
         roundInformation = information.GetComponent<TextMeshProUGUI>();
         specialMarbles = gameObject.GetComponent<SpecialMarble>();
     }
@@ -188,7 +188,7 @@ public class TurnManager : MonoBehaviour
         sortedPlayers.Clear();
         
         uiDesktop.ClearPlayerOrder();
-        uiDesktop.TurnOnMarbleBagAnimation();
+       // uiDesktop.TurnOnMarbleBagAnimation();
         //uiDesktop.TogglePlayerBags(true);
 
         readyAlert.GetComponent<Image>().enabled = true;
