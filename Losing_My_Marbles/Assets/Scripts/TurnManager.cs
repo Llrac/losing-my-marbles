@@ -52,6 +52,7 @@ public class TurnManager : MonoBehaviour
         // end of debugging
         if (PlayerProperties.ids.Count > tracking)
         {
+            uiDesktop.ToggleReadyShine(PlayerProperties.ids[tracking], true);
             tracking++;
         }
         
@@ -192,7 +193,7 @@ public class TurnManager : MonoBehaviour
         uiDesktop.ClearPlayerOrder();
 
        // uiDesktop.TurnOnMarbleBagAnimation();
-        //uiDesktop.TogglePlayerBags(true);
+        
 
 
         readyAlert.GetComponent<Image>().enabled = true;
