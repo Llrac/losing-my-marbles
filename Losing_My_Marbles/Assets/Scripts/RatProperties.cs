@@ -7,8 +7,6 @@ public class RatProperties : Movement
 {
     public int enemyID = 0;
 
-    public GameObject deathPoof = null;
-
     int savedDir;
 
     GridManager gridManager;
@@ -70,10 +68,11 @@ public class RatProperties : Movement
                 child.gameObject.SetActive(false);
             }
         }
-        if (deathPoof == null)
-            return;
-        GameObject newPoof = Instantiate(deathPoof, transform.position, transform.rotation);
-        Destroy(newPoof, 1f);
+        if (deathPoof != null)
+        {
+            GameObject newPoof = Instantiate(deathPoof, transform.position, transform.rotation);
+            Destroy(newPoof, 1f);
+        }
     }
 
     public override void DoAMove(int dataID, int increment , int dir)
@@ -115,8 +114,8 @@ public class RatProperties : Movement
         }
         if (gridManager.GetNexTile(gameObject, killZone) == 'P')
         {
-            SetAnimation(0, gameObject, false, true);
             yield return new WaitForSeconds(0.5f); // viktigt att notera, du kan inte ha denna timern för seg för då missar du den andra coroutinen.
+            SetAnimation(0, gameObject, false, true);
             GameObject player = gridManager.FindPlayerInMatrix(killZone // find player with your grid pos and the tile you detected player on
                     + gridPosition, TurnManager.players);
             player.GetComponent<PlayerProperties>().Death(player.transform.position);

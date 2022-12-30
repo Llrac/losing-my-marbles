@@ -9,6 +9,7 @@ public class AnimationCurveHandler : MonoBehaviour
     public AnimationCurve jumpHeight;
     public AnimationCurve marbleTravelProgress;
     public AnimationCurve marbleTravelHeight;
+    //public AnimationCurve fallFromSkyProgress;
 
     [HideInInspector] public float jumpProgressLength;
     [HideInInspector] public float marbleTravelLength;
@@ -79,11 +80,12 @@ public class AnimationCurveHandler : MonoBehaviour
             }
         }
         // End of Normal Jump
-        else if (jumpAnimTimer >= jumpProgressLength && normalJumpProgressID >= 1)
+        else if (jumpAnimTimer >= jumpProgressLength && normalJumpProgressID == 1)
         {
             normalJumpProgressID = 0;
             character.transform.position = destination;
         }
+
         // Jumping INTO wall
         else if (jumpAnimTimer < (jumpProgressLength / 2) && wallJumpProgressID == 1)
         {
@@ -111,8 +113,9 @@ public class AnimationCurveHandler : MonoBehaviour
         }
         #endregion
 
-        #region Key Animations
+        #region Marble Animations
 
+        // During
         if (marbleAnimTimer <= marbleTravelLength && marbleTravelProgressID > 0 && marble != null)
         {
             if (marbleGetter != null)
@@ -122,7 +125,7 @@ public class AnimationCurveHandler : MonoBehaviour
             marble.transform.position = new Vector2(Mathf.Lerp(marble.transform.position.x, marbleDestination.x, marbleTravelProgress.Evaluate(marbleAnimTimer)),
             Mathf.Lerp(marble.transform.position.y, marbleDestination.y + marbleTravelHeight.Evaluate(marbleAnimTimer / marbleTravelLength), marbleTravelProgress.Evaluate(marbleAnimTimer)));
         }
-        // End of <Insert Key Animation> AnimationCurve
+        // End
         else if (marbleAnimTimer > marbleTravelLength && marbleTravelProgressID > 0 && marble != null)
         {
             EnableMarbleVisuals(false);
@@ -147,7 +150,7 @@ public class AnimationCurveHandler : MonoBehaviour
         startPosition = character.transform.position;
         this.character = character;
         this.destination = destination;
-        this.typeID = typeID; 
+        this.typeID = typeID;
         if (typeID == 1)
         {
             wallJumpProgressID = 1;
@@ -158,29 +161,6 @@ public class AnimationCurveHandler : MonoBehaviour
         }
     }
     #endregion
-
-    public void PickupMarble(GameObject marbleGetter, int increment = 1)
-    {
-        if (marble == null)
-            marble = GetSpecificMarbleInScene(marbleGetter, increment);
-
-        marbleTravelProgressID = 1;
-        marbleAnimTimer = 0;
-        this.marbleGetter = marbleGetter;
-        EnableMarbleVisuals(true);
-        GetComponent<Movement>().quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().pickupMarble);
-
-        //foreach (Transform transformInScene in FindObjectsOfType<Transform>())
-        //{
-        //    if (transformInScene.gameObject.CompareTag("Special Marble"))
-        //    {
-        //        foreach (Transform child in transformInScene.gameObject.transform)
-        //        {
-
-        //        }
-        //    }
-        //}
-    }
 
     public GameObject GetSpecificMarbleInScene(GameObject character, int increment = 1)
     {
@@ -225,5 +205,17 @@ public class AnimationCurveHandler : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void PickupMarble(GameObject marbleGetter, int increment = 1)
+    {
+        if (marble == null)
+            marble = GetSpecificMarbleInScene(marbleGetter, increment);
+
+        marbleTravelProgressID = 1;
+        marbleAnimTimer = 0;
+        this.marbleGetter = marbleGetter;
+        EnableMarbleVisuals(true);
+        GetComponent<Movement>().quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().pickupMarble);
     }
 }

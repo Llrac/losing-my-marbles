@@ -223,8 +223,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5ee91f18b36aaf44199e93f12396dd39, type: 2}
-  - {fileID: 2100000, guid: 7d14c73a826782a47a46a1a76a5ef112, type: 2}
-  - {fileID: 2100000, guid: 5ee91f18b36aaf44199e93f12396dd39, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -305,6 +303,7 @@ GameObject:
   - component: {fileID: 2610747910663743189}
   - component: {fileID: 2133818761148525459}
   - component: {fileID: 5348300030501963020}
+  - component: {fileID: 1692071088948532174}
   - component: {fileID: 2610747910663743188}
   - component: {fileID: 2011480802}
   - component: {fileID: 2011480803}
@@ -349,28 +348,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savedTile: 88
-  gridPosition: {x: 9, y: 5}
-  specialMarbleCount: 0
-  currentDirectionID: 3
+  gridPosition: {x: 1, y: 8}
+  currentDirectionID: 2
   mediumAudio: {fileID: 2011480802}
   quiterAudio: {fileID: 2011480804}
   louderAudio: {fileID: 2011480803}
+  deathPoof: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
+  blinkEffect: {fileID: 5129169769643277586, guid: fd76de4d9f32c124094b3089ceadedd8, type: 3}
+  swapEffect: {fileID: 7600782810854787399, guid: ed4051fa1becbd54ba46548ebefdd97d, type: 3}
   frontIdle: {fileID: 11400000, guid: 4c2dcc70f73f0ac4bab865b6774ff167, type: 2}
   frontJump: {fileID: 11400000, guid: f7b07ad5bbc2eff419767965cfd9967b, type: 2}
-  frontTurnRight: {fileID: 11400000, guid: d52b9cb6a2cdfcf4b995e65cf06dc0b2, type: 2}
-  frontTurnBack: {fileID: 11400000, guid: 1c3713e75f08e2d40bd63e0477d0d52c, type: 2}
   backIdle: {fileID: 11400000, guid: bb75fce215ca3084088e0c1434fc91c9, type: 2}
   backJump: {fileID: 11400000, guid: 9da017614ed6fc046b9c27d7be96ba09, type: 2}
-  backTurnRight: {fileID: 11400000, guid: a5fc60036556b0940a8a94289c75cb7e, type: 2}
-  backTurnFront: {fileID: 11400000, guid: 15ecf1ab3e38b0e4c91959a6e0b41c96, type: 2}
+  frontAttack: {fileID: 0}
+  backAttack: {fileID: 0}
   jumpLength: 1
   jumpAnimationSpeed: 3
-  playInReverse: 0
-  lastCurrentDirectionID: 0
   playerID: 1
+  specialMarbleCount: 0
   playerMarbles: 
   marbleEffect: []
-  deathPoof: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
   isAlive: 1
 --- !u!114 &5348300030501963020
 MonoBehaviour:
@@ -521,6 +518,26 @@ MonoBehaviour:
   jumpAnimTimer: 10
   destination: {x: 0, y: 0}
   marbleAnimTimer: 10
+--- !u!95 &1692071088948532174
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610747910663743195}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c8a1d64ade854fa4daa66b2cf2bc6a2e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &2610747910663743188
 Rigidbody2D:
   serializedVersion: 4
