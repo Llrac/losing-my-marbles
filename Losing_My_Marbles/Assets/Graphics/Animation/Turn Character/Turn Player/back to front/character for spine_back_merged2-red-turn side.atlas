@@ -1,0 +1,46 @@
+character for spine_back_merged2-red-turn side.png
+size:4826,2798
+filter:Linear,Linear
+pma:true
+character for spine_back_merged2-red-turn side_00
+bounds:2,2,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_01
+bounds:605,2,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_02
+bounds:1208,2,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_03
+bounds:1811,2,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_04
+bounds:2414,2,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_05
+bounds:3017,2,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_06
+bounds:3620,2,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_07
+bounds:4223,2,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_08
+bounds:2,1400,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_09
+bounds:605,1400,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_10
+bounds:1208,1400,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_11
+bounds:1811,1400,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_12
+bounds:2414,1400,601,1396
+origin:287,21
+character for spine_back_merged2-red-turn side_13
+bounds:3017,1400,601,1396
+origin:287,21
