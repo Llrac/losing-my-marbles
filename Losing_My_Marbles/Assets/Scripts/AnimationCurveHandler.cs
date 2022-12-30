@@ -9,10 +9,11 @@ public class AnimationCurveHandler : MonoBehaviour
     public AnimationCurve jumpHeight;
     public AnimationCurve marbleTravelProgress;
     public AnimationCurve marbleTravelHeight;
-    //public AnimationCurve fallFromSkyProgress;
+    public AnimationCurve fallHeight = null;
 
     [HideInInspector] public float jumpProgressLength;
     [HideInInspector] public float marbleTravelLength;
+    [HideInInspector] public float fallLength;
 
     float jumpHeightLength;
     float jumpCurveDiff;
@@ -25,6 +26,8 @@ public class AnimationCurveHandler : MonoBehaviour
 
     int normalJumpProgressID = 0;
     int wallJumpProgressID = 0;
+    int marbleTravelProgressID = 0;
+    int fallProgressID = 0;
 
     // PickupMarble variables
     [HideInInspector] public float marbleAnimTimer = 10f;
@@ -32,7 +35,9 @@ public class AnimationCurveHandler : MonoBehaviour
     GameObject marbleGetter;
     Vector2 marbleDestination;
 
-    int marbleTravelProgressID = 0; // 0 = Empty
+    // Respawn variables
+    [HideInInspector] public float fallAnimTimer = 10f;
+
     int typeID;
 
     // Other Scripts
@@ -57,12 +62,17 @@ public class AnimationCurveHandler : MonoBehaviour
         {
             marbleTravelLength = marbleTravelProgress[marbleTravelProgress.length - 1].time;
         }
+        if (fallHeight != null)
+        {
+            fallLength = fallHeight[fallHeight.length - 1].time;
+        }
     }
 
     void Update()
     {
         jumpAnimTimer += Time.deltaTime;
         marbleAnimTimer += Time.deltaTime;
+        fallAnimTimer += Time.deltaTime;
 
         #region Jump Animations
         // Normal Jump
@@ -103,7 +113,7 @@ public class AnimationCurveHandler : MonoBehaviour
         if (jumpAnimTimer < jumpProgressLength && wallJumpProgressID == 2)
         {
             character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, startPosition.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
-            Mathf.Lerp(character.transform.position.y, startPosition.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
+            Mathf.Lerp(character.transform.position.y, startPosition.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff) * Time.deltaTime * Application.targetFrameRate, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
         }
         // End of Walljump
         else if (jumpAnimTimer >= jumpProgressLength && wallJumpProgressID == 2)
@@ -114,7 +124,6 @@ public class AnimationCurveHandler : MonoBehaviour
         #endregion
 
         #region Marble Animations
-
         // During
         if (marbleAnimTimer <= marbleTravelLength && marbleTravelProgressID > 0 && marble != null)
         {
@@ -122,8 +131,8 @@ public class AnimationCurveHandler : MonoBehaviour
             {
                 marbleDestination = marbleGetter.transform.position;
             }
-            marble.transform.position = new Vector2(Mathf.Lerp(marble.transform.position.x, marbleDestination.x, marbleTravelProgress.Evaluate(marbleAnimTimer)),
-            Mathf.Lerp(marble.transform.position.y, marbleDestination.y + marbleTravelHeight.Evaluate(marbleAnimTimer / marbleTravelLength), marbleTravelProgress.Evaluate(marbleAnimTimer)));
+            marble.transform.position = new Vector2(Mathf.Lerp(marble.transform.position.x, marbleDestination.x, marbleTravelProgress.Evaluate(marbleAnimTimer) * Time.deltaTime * Application.targetFrameRate),
+            Mathf.Lerp(marble.transform.position.y, marbleDestination.y + marbleTravelHeight.Evaluate(marbleAnimTimer / marbleTravelLength) * Time.deltaTime * Application.targetFrameRate, marbleTravelProgress.Evaluate(marbleAnimTimer) * Time.deltaTime * Application.targetFrameRate));
         }
         // End
         else if (marbleAnimTimer > marbleTravelLength && marbleTravelProgressID > 0 && marble != null)
@@ -140,9 +149,20 @@ public class AnimationCurveHandler : MonoBehaviour
             }
         }
         #endregion
+
+        // Fall from sky
+        if (fallAnimTimer <= fallLength && fallProgressID == 1)
+        {
+            character.transform.position = new Vector2(startPosition.x, Mathf.Lerp(startPosition.y + fallHeight.Evaluate(fallAnimTimer) * Time.deltaTime * Application.targetFrameRate,
+            destination.y + fallHeight.Evaluate(fallAnimTimer) * Time.deltaTime * Application.targetFrameRate, fallHeight.Evaluate(fallAnimTimer) * Time.deltaTime * Application.targetFrameRate));
+        }
+        else if (fallAnimTimer > fallLength && fallProgressID == 1)
+        {
+            fallProgressID = 0;
+            character.transform.position = destination;
+        }
     }
 
-    #region Player Animation Functions
     public void ForwardJump(GameObject character, Vector3 destination, int typeID = 0)
         // typeID 0 = Normal Jump, typeID 1 = Wall Jump
     {
@@ -160,8 +180,17 @@ public class AnimationCurveHandler : MonoBehaviour
             normalJumpProgressID = 1;
         }
     }
-    #endregion
 
+    public void Respawn(GameObject character, Vector2 destination)
+    {
+        fallAnimTimer = 0;
+        startPosition = destination;
+        this.destination = destination;
+        this.character = character;
+        fallProgressID = 1;
+    }
+
+    #region Marble Functions
     public GameObject GetSpecificMarbleInScene(GameObject character, int increment = 1)
     {
         foreach (Transform transformInScene in FindObjectsOfType<Transform>())
@@ -218,4 +247,5 @@ public class AnimationCurveHandler : MonoBehaviour
         EnableMarbleVisuals(true);
         GetComponent<Movement>().quiterAudio.PlayOneShot(FindObjectOfType<AudioManager>().pickupMarble);
     }
+    #endregion
 }

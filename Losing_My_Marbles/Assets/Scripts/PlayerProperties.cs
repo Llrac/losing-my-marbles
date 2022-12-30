@@ -224,11 +224,11 @@ public class PlayerProperties : Movement
         }
         
         currentDirectionID = startingDirection;
-        transform.position = startingWorldPosition;
         gridPosition = startingGridPosition;
         UpdateSkeleton();
         gridManager.levels[GridManager.currentLevel][(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();
         savedTile = GridManager.WALKABLEGROUND;
+        GetComponent<AnimationCurveHandler>().Respawn(gameObject, startingWorldPosition);
         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().characterFall);
         isAlive = false;
     }

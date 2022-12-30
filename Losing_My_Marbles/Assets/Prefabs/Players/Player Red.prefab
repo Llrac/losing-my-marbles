@@ -513,11 +513,37 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  fallHeight:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 7
+      inSlope: -23.333332
+      outSlope: -23.333332
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.3
+      value: 0
+      inSlope: -23.333332
+      outSlope: -23.333332
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   jumpProgressLength: 1
   marbleTravelLength: 0
+  fallLength: 0
   jumpAnimTimer: 10
   destination: {x: 0, y: 0}
   marbleAnimTimer: 10
+  fallAnimTimer: 10
 --- !u!95 &1692071088948532174
 Animator:
   serializedVersion: 4
