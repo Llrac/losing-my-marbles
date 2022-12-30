@@ -15,7 +15,7 @@ public class PlayerProperties : Movement
     public static List<int> myActions = new();
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
-    public GameObject deathPoof = null;
+
     SpriteRenderer FindIntentShower;
     SetIntent intent;
     GridManager gridManager;
@@ -107,6 +107,7 @@ public class PlayerProperties : Movement
 
     public override void DoAMove(int id, int inc, int dir)
     {
+        Debug.Log("player DoAMove");
         throw new System.NotImplementedException();
     }
     
@@ -235,7 +236,6 @@ public class PlayerProperties : Movement
         
         currentDirectionID = startingDirection;
         transform.position = startingWorldPosition;
-        Debug.Log(startingWorldPosition);
         gridPosition = startingGridPosition;
         UpdateSkeleton();
         gridManager.levels[GridManager.currentLevel][(int)gridPosition.x, (int)gridPosition.y] = ChangeTag();

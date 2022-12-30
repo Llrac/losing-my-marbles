@@ -267,6 +267,9 @@ MonoBehaviour:
   mediumAudio: {fileID: 633420726097404220}
   quiterAudio: {fileID: 633420726097404218}
   louderAudio: {fileID: 633420726097404221}
+  deathPoof: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
+  blinkEffect: {fileID: 0}
+  swapEffect: {fileID: 0}
   frontIdle: {fileID: 11400000, guid: 7eddba7c760494041a381fb20e290c16, type: 2}
   frontJump: {fileID: 11400000, guid: c89298e4bbc8d9b44bbd4b04b8b5d523, type: 2}
   backIdle: {fileID: 11400000, guid: 217aeb07772648e4b8b4dec51a75d0e0, type: 2}
@@ -276,7 +279,6 @@ MonoBehaviour:
   jumpLength: 1
   jumpAnimationSpeed: 3
   enemyID: 5
-  deathPoof: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
   moves:
   - {x: 0, y: 1}
   - {x: 0, y: 1}
