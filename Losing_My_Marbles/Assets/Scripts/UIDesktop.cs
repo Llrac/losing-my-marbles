@@ -57,8 +57,7 @@ public class UIDesktop : MonoBehaviour
         
         ToggleReadyShine(playerID, true);
 
-        if (GetComponent<AudioSource>() != null)
-            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().playerReady);
+       
     }
 
     public void ToggleReadyShine(int playerID, bool isShining)
@@ -66,6 +65,13 @@ public class UIDesktop : MonoBehaviour
         GameObject child = playerUIPosition[playerID - 1].transform.GetChild(0).gameObject;
         
         child.SetActive(isShining);
+
+        if(isShining == true)
+        {
+            if (GetComponent<AudioSource>() != null)
+                GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().playerReady);
+        }
+       
         //Debug.Log(child);
     }
     
