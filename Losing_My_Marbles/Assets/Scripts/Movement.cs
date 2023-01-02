@@ -24,7 +24,7 @@ public abstract class Movement : MonoBehaviour
     public GameObject swapEffect = null;
  
     public float jumpLength = 1;
-    public float jumpAnimationSpeed = 5f;
+    public float jumpAnimationSpeed = 1f;
 
     int jumpMultiplier;
     float wallJumpMultiplier;
@@ -229,8 +229,6 @@ public abstract class Movement : MonoBehaviour
         {
             return;
         }
-        if (wallJump)
-            dataID = 0;
         if (ratAttack)
         {
             AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
@@ -250,13 +248,13 @@ public abstract class Movement : MonoBehaviour
         switch (dataID)
         {
             case 0: // Jump Forward
-                AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
+                //AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
                 if (usingFrontSkeleton)
                 {
                     frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                     if (wallJump)
                     {
-                        frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
+                        //frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     frontSkeleton.timeScale = jumpAnimationSpeed;
                     StartCoroutine(PrepareIdleAnimation(frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationEnd / frontSkeleton.timeScale));
@@ -266,7 +264,7 @@ public abstract class Movement : MonoBehaviour
                     backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                     if (wallJump)
                     {
-                        backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
+                        //backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     backSkeleton.timeScale = jumpAnimationSpeed;
                     StartCoroutine(PrepareIdleAnimation(backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationEnd / backSkeleton.timeScale));
@@ -276,7 +274,6 @@ public abstract class Movement : MonoBehaviour
             case 1: // Turn Left or Right
 
                 // do turn animation here
-
 
                 StartCoroutine(PrepareIdleAnimation(0.5f));
                 break;
@@ -295,8 +292,6 @@ public abstract class Movement : MonoBehaviour
     IEnumerator PrepareIdleAnimation(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        Debug.Log("ready for jump");
-        
 
         if (usingFrontSkeleton)
         {
