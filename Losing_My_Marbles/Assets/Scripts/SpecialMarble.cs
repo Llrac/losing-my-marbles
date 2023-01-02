@@ -116,13 +116,6 @@ public class SpecialMarble : MonoBehaviour
                 TurnManager.players[p].GetComponent<Animator>().SetTrigger("shrink");
             }
 
-            user.gridPosition = targetDestination;
-            user.gameObject.transform.position = targetWorldPosition;
-            TurnManager.players[p].gridPosition = myPosition;
-            TurnManager.players[p].transform.position = worldPosition;
-            user.savedTile = opponentSavedTile;
-            TurnManager.players[p].savedTile = mySavedTile;
-
             StartCoroutine(SwapAnimation(user, p, targetDestination, myPosition, targetWorldPosition, worldPosition, mySavedTile, opponentSavedTile));
             return;
         }
@@ -130,7 +123,15 @@ public class SpecialMarble : MonoBehaviour
 
     private static IEnumerator SwapAnimation(PlayerProperties user, int p, Vector2 targetDestination, Vector2 myPosition, Vector2 targetWorldPosition, Vector2 worldPosition, char mySavedTile, char opponentSavedTile)
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
+
+        user.gridPosition = targetDestination;
+        user.gameObject.transform.position = targetWorldPosition;
+        TurnManager.players[p].gridPosition = myPosition;
+        TurnManager.players[p].transform.position = worldPosition;
+        user.savedTile = opponentSavedTile;
+        TurnManager.players[p].savedTile = mySavedTile;
+
         user.gridPosition = targetDestination;
         user.gameObject.transform.position = targetWorldPosition;
         TurnManager.players[p].gridPosition = myPosition;

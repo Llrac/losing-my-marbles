@@ -92,8 +92,17 @@ public class PlayerProperties : Movement
             if (Input.GetKeyDown(KeyCode.N))
             {
                 StartCoroutine(FindObjectOfType<SpecialMarble>().Bomb(this));
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerBomb);
             }
-            
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                FindObjectOfType<SpecialMarble>().Swap(this);
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerSwap);
+            }
+
             if (Input.GetKeyDown(KeyCode.B))
             {
                 TryMove(gameObject, 2, 3);
