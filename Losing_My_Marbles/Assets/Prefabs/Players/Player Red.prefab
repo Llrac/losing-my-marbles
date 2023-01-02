@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 2610747910663743189}
   - component: {fileID: 2133818761148525459}
   - component: {fileID: 5348300030501963020}
+  - component: {fileID: 8696141951812053389}
   - component: {fileID: 1692071088948532174}
   - component: {fileID: 2610747910663743188}
   - component: {fileID: 2011480802}
@@ -358,7 +359,10 @@ MonoBehaviour:
   blinkEffect: {fileID: 5129169769643277586, guid: fd76de4d9f32c124094b3089ceadedd8, type: 3}
   swapEffect: {fileID: 7600782810854787399, guid: ed4051fa1becbd54ba46548ebefdd97d, type: 3}
   jumpLength: 1
-  jumpAnimationSpeed: 3
+  jumpAnimationSpeed: 2
+  frontSkeleton: {fileID: 0}
+  backSkeleton: {fileID: 0}
+  usingFrontSkeleton: 0
   frontIdle: {fileID: 11400000, guid: 4c2dcc70f73f0ac4bab865b6774ff167, type: 2}
   frontJump: {fileID: 11400000, guid: f7b07ad5bbc2eff419767965cfd9967b, type: 2}
   backIdle: {fileID: 11400000, guid: bb75fce215ca3084088e0c1434fc91c9, type: 2}
@@ -400,7 +404,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.1
+      time: 0.2
       value: 0
       inSlope: 0
       outSlope: 0
@@ -409,10 +413,10 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.25
+      time: 0.5
       value: 1
-      inSlope: 6.6666665
-      outSlope: 6.6666665
+      inSlope: 3.3333333
+      outSlope: 3.3333333
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -426,39 +430,21 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 29.663006
-      outSlope: 29.663006
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.13885956
-      value: 4.118992
-      inSlope: -0.07284938
-      outSlope: -0.07284938
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.22321007
-      outWeight: 0.0814594
-    - serializedVersion: 3
-      time: 0.38199005
-      value: -0.028656006
+      time: 1
+      value: 0
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.5
-      value: 0
-      inSlope: 0.24282703
-      outSlope: 0.24282703
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -550,6 +536,18 @@ MonoBehaviour:
   destination: {x: 0, y: 0}
   marbleAnimTimer: 10
   fallAnimTimer: 10
+--- !u!114 &8696141951812053389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2610747910663743195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7500278e3384e7440bc76046bf5e018f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &1692071088948532174
 Animator:
   serializedVersion: 4

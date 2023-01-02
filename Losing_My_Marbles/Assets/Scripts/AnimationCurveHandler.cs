@@ -6,7 +6,6 @@ using UnityEngine.Audio;
 public class AnimationCurveHandler : MonoBehaviour
 {
     public AnimationCurve jumpProgress;
-    public AnimationCurve jumpHeight;
     public AnimationCurve marbleTravelProgress;
     public AnimationCurve marbleTravelHeight;
     public AnimationCurve fallHeight = null;
@@ -52,11 +51,6 @@ public class AnimationCurveHandler : MonoBehaviour
         if (jumpProgress != null)
         {
             jumpProgressLength = jumpProgress[jumpProgress.length - 1].time;
-            if (jumpHeight != null)
-            {
-                jumpHeightLength = jumpHeight[jumpHeight.length - 1].time;
-                jumpCurveDiff = jumpProgressLength / jumpHeightLength;
-            }
         }
         if (marbleTravelProgress != null)
         {
@@ -86,7 +80,7 @@ public class AnimationCurveHandler : MonoBehaviour
             else
             {
                 character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
-                Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
+                Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
             }
         }
         // End of Normal Jump
@@ -100,7 +94,7 @@ public class AnimationCurveHandler : MonoBehaviour
         else if (jumpAnimTimer < (jumpProgressLength / 2) && wallJumpProgressID == 1)
         {
             character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, destination.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
-            Mathf.Lerp(character.transform.position.y, destination.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff), jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
+            Mathf.Lerp(character.transform.position.y, destination.y, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
         }
         // Halfwaypoint Walljump
         if (jumpAnimTimer >= (jumpProgressLength / 2) && wallJumpProgressID == 1)
@@ -113,7 +107,7 @@ public class AnimationCurveHandler : MonoBehaviour
         if (jumpAnimTimer < jumpProgressLength && wallJumpProgressID == 2)
         {
             character.transform.position = new Vector2(Mathf.Lerp(character.transform.position.x, startPosition.x, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate),
-            Mathf.Lerp(character.transform.position.y, startPosition.y + jumpHeight.Evaluate(jumpAnimTimer / jumpCurveDiff) * Time.deltaTime * Application.targetFrameRate, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
+            Mathf.Lerp(character.transform.position.y, startPosition.y, jumpProgress.Evaluate(jumpAnimTimer) * Time.deltaTime * Application.targetFrameRate));
         }
         // End of Walljump
         else if (jumpAnimTimer >= jumpProgressLength && wallJumpProgressID == 2)

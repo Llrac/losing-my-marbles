@@ -29,19 +29,19 @@ public abstract class Movement : MonoBehaviour
     int jumpMultiplier;
     float wallJumpMultiplier;
 
-    SkeletonAnimation frontSkeleton;
-    SkeletonAnimation backSkeleton;
-    bool usingFrontSkeleton = false;
+    [HideInInspector] public SkeletonAnimation frontSkeleton;
+    [HideInInspector] public SkeletonAnimation backSkeleton;
+    [HideInInspector] public bool usingFrontSkeleton = false;
     public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump; // TODO: implement idle2 and idle3
     public AnimationReferenceAsset frontIdle2 = null, frontIdle3 = null, backIdle2 = null, backIdle3 = null; // players only
     public AnimationReferenceAsset frontAttack = null, backAttack = null; // rats only
 
     public Animator turnAnimator;
-    int lastAnimationDirectionID = 0;
-    int animationDirectionID = 0;
-    Spine.Animation nextIdleAnimation;
-    Spine.Animation nextJumpAnimation;
-    Spine.Animation nextAttackAnimation; // rats only
+    int lastAnimationDirectionID = 0; // later use
+    int animationDirectionID = 0; // later use
+    [HideInInspector] public Spine.Animation nextIdleAnimation;
+    [HideInInspector] public Spine.Animation nextJumpAnimation;
+    [HideInInspector] public Spine.Animation nextAttackAnimation; // rats only
 
     #region Animation
     public void UpdateSkinBasedOnPlayerID()
@@ -121,8 +121,6 @@ public abstract class Movement : MonoBehaviour
                     break;
             }
         }
-        StopAllCoroutines();
-        StartCoroutine(RandomizeIdleAnimation());
     }
 
     public void UpdateSkeleton(int addToDirectionID = 0)
@@ -225,49 +223,6 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    void RepeatIdleRandomizer()
-    {
-        StopAllCoroutines();
-        StartCoroutine(RandomizeIdleAnimation());
-    }
-
-    IEnumerator RandomizeIdleAnimation()
-    {
-        int randomWaitTime = Random.Range(5, 15);
-        yield return new WaitForSeconds(randomWaitTime);
-        Debug.Log(randomWaitTime);
-        int randomizedAnimation = Random.Range(1, 4);
-        Debug.Log(randomizedAnimation);
-        UpdateSkeleton();
-        if (usingFrontSkeleton)
-        {
-            nextIdleAnimation = randomizedAnimation switch
-            {
-                1 => frontIdle2,
-                2 => frontIdle3,
-                _ => frontIdle,
-            };
-            frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, false);
-            yield return new WaitForSeconds(frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, false).AnimationEnd);
-            nextIdleAnimation = frontIdle;
-            frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
-        }
-        else
-        {
-            nextIdleAnimation = randomizedAnimation switch
-            {
-                2 => backIdle2,
-                3 => backIdle3,
-                _ => backIdle,
-            };
-            backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, false);
-            yield return new WaitForSeconds(backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, false).AnimationEnd);
-            nextIdleAnimation = backIdle;
-            backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
-        }
-        RepeatIdleRandomizer();
-    }
-
     public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false, bool ratAttack = false)
     {
         if (frontSkeleton == null || backSkeleton == null)
@@ -303,9 +258,8 @@ public abstract class Movement : MonoBehaviour
                     {
                         frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
-                    frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                    frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
-
+                    frontSkeleton.timeScale = jumpAnimationSpeed;
+                    StartCoroutine(PrepareIdleAnimation(frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationEnd / frontSkeleton.timeScale));
                 }
                 else
                 {
@@ -314,9 +268,8 @@ public abstract class Movement : MonoBehaviour
                     {
                         backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
-                    backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                    backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
-
+                    backSkeleton.timeScale = jumpAnimationSpeed;
+                    StartCoroutine(PrepareIdleAnimation(backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationEnd / backSkeleton.timeScale));
                 }
                 break;
 
@@ -325,32 +278,36 @@ public abstract class Movement : MonoBehaviour
                 // do turn animation here
 
 
-                StartCoroutine(PrepareIdleAnimation());
+                StartCoroutine(PrepareIdleAnimation(0.5f));
                 break;
 
             default:
                 break;
         }
-        StopAllCoroutines();
-        StartCoroutine(RandomizeIdleAnimation());
+        GetComponent<RandomAnimationHandler>().StartRandomizeIdleAnimation(character);
     }
 
-    IEnumerator PrepareIdleAnimation()
+    public void RepeatIdleRandomizer(GameObject character)
     {
-        yield return new WaitForSeconds(0.6f);
+        GetComponent<RandomAnimationHandler>().StartRandomizeIdleAnimation(character);
+    }
+
+    IEnumerator PrepareIdleAnimation(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        Debug.Log("ready for jump");
+        
 
         if (usingFrontSkeleton)
         {
             frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
-
+            frontSkeleton.timeScale = 1;
         }
         else
         {
             backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
-
+            backSkeleton.timeScale = 1;
         }
-
-        yield return null;
     }
     #endregion
 
@@ -483,7 +440,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (character.GetComponent<PlayerProperties>().specialMarbleCount >= TurnManager.marblesToWin)
                     {
-                        ResetManager.PlayerWin(gameObject.GetComponent<PlayerProperties>().playerID);
+                        ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID);
                     }
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
