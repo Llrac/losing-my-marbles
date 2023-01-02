@@ -82,19 +82,18 @@ public class TurnManager : MonoBehaviour
         }
     }
 
-    private IEnumerator ExecuteTurn()
+    public IEnumerator ExecuteTurn()
     {
         amountOfRounds++;
 
-        yield return new WaitForSeconds(2f);
-        
-       
+        yield return new WaitForSeconds(0.3f);
+
         for (int i = 3; i > 0; i--)
         {
             roundInformation.text = "Round " + amountOfRounds + " Starts in " + i;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
         }
-        
+
         roundInformation.text = ""; // TODO add sounds
        
         for (int i = 0; i < sortedPlayers.Count; i++)
