@@ -15,11 +15,13 @@ public class MainMenu : MonoBehaviour
     {
         creditsText = creditsGO.GetComponent<TextMeshProUGUI>();
     }
-    public void StartGame()
+    public void AskPlay()
     {
-        SceneManager.LoadScene(1);
+        FindObjectOfType<GameSession>().CreateSession();
+        FindObjectOfType<Scenehandler>().LoadDesktopMatchmaking();
+        //SceneManager.LoadScene(1);
     }
-    public void ShowCredits()
+    public void EnterCredits()
     {
         if (creditsText.enabled == false)
         {
@@ -30,6 +32,17 @@ public class MainMenu : MonoBehaviour
             creditsText.enabled = false;
         }
     } 
+
+    public void EnterOptions()
+    {
+
+    }
+
+    public void AskExit()
+    {
+
+    }
+
     public void ShowHowTo()
     {
 
