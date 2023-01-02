@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
+    [Header("Player Properties")]
     public int playerID = 0; // playerID of (0) is null
     private Vector2 startingGridPosition = Vector2.zero;
     private Vector2 startingWorldPosition = Vector2.zero;

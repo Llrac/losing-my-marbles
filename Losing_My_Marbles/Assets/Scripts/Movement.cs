@@ -32,13 +32,26 @@ public abstract class Movement : MonoBehaviour
     [HideInInspector] public SkeletonAnimation frontSkeleton;
     [HideInInspector] public SkeletonAnimation backSkeleton;
     [HideInInspector] public bool usingFrontSkeleton = false;
-    public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump; // TODO: implement idle2 and idle3
-    public AnimationReferenceAsset frontIdle2 = null, frontIdle3 = null, backIdle2 = null, backIdle3 = null; // players only
-    public AnimationReferenceAsset frontAttack = null, backAttack = null; // rats only
 
-    public Animator turnAnimator;
-    int lastAnimationDirectionID = 0; // later use
-    int animationDirectionID = 0; // later use
+    [Header("Obligatory")]
+    public AnimationReferenceAsset frontIdle;
+    public AnimationReferenceAsset frontJump;
+    public AnimationReferenceAsset backIdle;
+    public AnimationReferenceAsset backJump;
+
+    [Header("Players Only")]
+    public AnimationReferenceAsset frontIdle2 = null;
+    public AnimationReferenceAsset frontIdle3 = null;
+    public AnimationReferenceAsset backIdle2 = null;
+    public AnimationReferenceAsset backIdle3 = null;
+
+    [Header("Rats Only")]
+    public AnimationReferenceAsset frontAttack = null;
+    public AnimationReferenceAsset backAttack = null;
+
+    Animator turnAnimator;
+    int newAnimationDirectionID = 0;
+    int lastAnimationDirectionID = 0;
     [HideInInspector] public Spine.Animation nextIdleAnimation;
     [HideInInspector] public Spine.Animation nextJumpAnimation;
     [HideInInspector] public Spine.Animation nextAttackAnimation; // rats only
@@ -64,7 +77,8 @@ public abstract class Movement : MonoBehaviour
                 turnAnimator = child.GetComponent<Animator>();
             }
         }
-        animationDirectionID = currentDirectionID;
+        newAnimationDirectionID = currentDirectionID;
+        lastAnimationDirectionID = newAnimationDirectionID;
         PlayerProperties pp = GetComponent<PlayerProperties>();
         RatProperties rp = GetComponent<RatProperties>();
         if (pp != null)
@@ -229,6 +243,8 @@ public abstract class Movement : MonoBehaviour
         {
             return;
         }
+        if (wallJump)
+            dataID = 1;
         if (ratAttack)
         {
             AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
@@ -271,9 +287,70 @@ public abstract class Movement : MonoBehaviour
                 }
                 break;
 
-            case 1: // Turn Left or Right
+            case 1:
+                if (CompareTag("Enemy") || wallJump)
+                {
+                    return;
+                }
 
-                // do turn animation here
+                // disable skeletons, enable monke ;)
+                frontSkeleton.gameObject.SetActive(false);
+                backSkeleton.gameObject.SetActive(false);
+                turnAnimator.gameObject.SetActive(true);
+                if (newAnimationDirectionID < lastAnimationDirectionID) // turn left
+                {
+                    switch (Mathf.Abs(newAnimationDirectionID % 4)) // gives currentDirectionID
+                    {
+                        case 0:
+                            turnAnimator.SetTrigger("front_back_left");
+                            break;
+
+                        case 1:
+                            turnAnimator.SetTrigger("front_left");
+                            break;
+
+                        case 2:
+                            turnAnimator.SetTrigger("back_front_left");
+                            break;
+
+                        case 3:
+                            turnAnimator.SetTrigger("back_left");
+                            break;
+
+                        default:
+                            Debug.Log(newAnimationDirectionID + " was not used correctly.");
+                            break;
+                    }
+                }
+                else if (newAnimationDirectionID > lastAnimationDirectionID) // turn right
+                {
+                    switch (Mathf.Abs(newAnimationDirectionID % 4)) // gives currentDirectionID
+                    {
+                        case 0:
+                            turnAnimator.SetTrigger("back_right");
+                            break;
+
+                        case 1:
+                            turnAnimator.SetTrigger("back_front_right");
+                            break;
+
+                        case 2:
+                            turnAnimator.SetTrigger("front_right");
+                            break;
+
+                        case 3:
+                            turnAnimator.SetTrigger("front_back_right");
+                            break;
+
+                        default:
+                            Debug.Log(newAnimationDirectionID + " was not used correctly.");
+                            break;
+                    }
+                }
+                else
+                {
+                    Debug.Log("animationDirectionID = lastAnimationDirectionID");
+                }
 
                 StartCoroutine(PrepareIdleAnimation(0.5f));
                 break;
@@ -292,14 +369,17 @@ public abstract class Movement : MonoBehaviour
     IEnumerator PrepareIdleAnimation(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-
+        if (CompareTag("Player"))
+            turnAnimator.gameObject.SetActive(false);
         if (usingFrontSkeleton)
         {
+            frontSkeleton.gameObject.SetActive(true);
             frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
             frontSkeleton.timeScale = 1;
         }
         else
         {
+            backSkeleton.gameObject.SetActive(true);
             backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
             backSkeleton.timeScale = 1;
         }
@@ -307,7 +387,7 @@ public abstract class Movement : MonoBehaviour
     #endregion
 
     #region Movement
-    public bool TryMove(GameObject character, int dataID, int increment, int forcedJump = 0)
+    public bool TryMove(GameObject character, int dataID, int increment, int typeID = 0)
     {
         // Set transform position
         if (dataID == 0)
@@ -325,13 +405,13 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
                     Move(character, 1, 1);
-                    TryMove(character, 1, 2);
+                    TryMove(character, 1, 2, 1);
                     if (mediumAudio != null)
                         mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
-                    Move(character, 1, forcedJump);
+                    Move(character, 1);
                     savedTile = 'X';
                     return true;
 
@@ -346,7 +426,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        TryMove(gameObject, 0, 1, forcedJump);
+                        TryMove(gameObject, 0, 1);
                         if (mediumAudio != null)
                             mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
@@ -501,6 +581,7 @@ public abstract class Movement : MonoBehaviour
         // Set character rotation
         if (dataID == 1)
         {
+            lastAnimationDirectionID = newAnimationDirectionID;
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
                 jumpMultiplier = 1;
@@ -509,14 +590,17 @@ public abstract class Movement : MonoBehaviour
                     jumpMultiplier *= -1;
                 }
                 currentDirectionID += jumpMultiplier;
-                animationDirectionID += jumpMultiplier;
+                newAnimationDirectionID += jumpMultiplier;
                 if (currentDirectionID <= -4 || currentDirectionID >= 4)
                 {
                     currentDirectionID = 0;
                 }
             }
             UpdateSkeleton();
-            SetAnimation(dataID, character);
+            if (typeID == 1) // if wall jump
+                SetAnimation(dataID, character, true);
+            else
+                SetAnimation(dataID, character);
         }
         return false;
     }
@@ -554,7 +638,7 @@ public abstract class Movement : MonoBehaviour
         }
         else if (typeID == 1)
         {
-            wallJumpMultiplier *= 0.5f;
+            //wallJumpMultiplier *= 0.5f;
         }
 
         AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
