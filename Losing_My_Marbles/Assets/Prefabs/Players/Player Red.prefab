@@ -363,6 +363,10 @@ MonoBehaviour:
   frontJump: {fileID: 11400000, guid: f7b07ad5bbc2eff419767965cfd9967b, type: 2}
   backIdle: {fileID: 11400000, guid: bb75fce215ca3084088e0c1434fc91c9, type: 2}
   backJump: {fileID: 11400000, guid: 9da017614ed6fc046b9c27d7be96ba09, type: 2}
+  frontIdle2: {fileID: 11400000, guid: 3df9ea01648c710499dbceff583bdce2, type: 2}
+  frontIdle3: {fileID: 11400000, guid: 1abf5bf3400634b4fb9b46bc60151a28, type: 2}
+  backIdle2: {fileID: 11400000, guid: daea38329384566438db6939b7853f50, type: 2}
+  backIdle3: {fileID: 11400000, guid: 2bd4846d41389cf4ebe4d4563f6c6e5d, type: 2}
   frontAttack: {fileID: 0}
   backAttack: {fileID: 0}
   turnAnimator: {fileID: 0}

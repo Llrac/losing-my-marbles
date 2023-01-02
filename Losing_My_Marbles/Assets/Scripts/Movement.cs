@@ -33,6 +33,7 @@ public abstract class Movement : MonoBehaviour
     SkeletonAnimation backSkeleton;
     bool usingFrontSkeleton = false;
     public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump; // TODO: implement idle2 and idle3
+    public AnimationReferenceAsset frontIdle2 = null, frontIdle3 = null, backIdle2 = null, backIdle3 = null; // players only
     public AnimationReferenceAsset frontAttack = null, backAttack = null; // rats only
 
     public Animator turnAnimator;
@@ -120,6 +121,8 @@ public abstract class Movement : MonoBehaviour
                     break;
             }
         }
+        StopAllCoroutines();
+        StartCoroutine(RandomizeIdleAnimation());
     }
 
     public void UpdateSkeleton(int addToDirectionID = 0)
@@ -222,6 +225,49 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
+    void RepeatIdleRandomizer()
+    {
+        StopAllCoroutines();
+        StartCoroutine(RandomizeIdleAnimation());
+    }
+
+    IEnumerator RandomizeIdleAnimation()
+    {
+        int randomWaitTime = Random.Range(5, 15);
+        yield return new WaitForSeconds(randomWaitTime);
+        Debug.Log(randomWaitTime);
+        int randomizedAnimation = Random.Range(1, 4);
+        Debug.Log(randomizedAnimation);
+        UpdateSkeleton();
+        if (usingFrontSkeleton)
+        {
+            nextIdleAnimation = randomizedAnimation switch
+            {
+                1 => frontIdle2,
+                2 => frontIdle3,
+                _ => frontIdle,
+            };
+            frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, false);
+            yield return new WaitForSeconds(frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, false).AnimationEnd);
+            nextIdleAnimation = frontIdle;
+            frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+        }
+        else
+        {
+            nextIdleAnimation = randomizedAnimation switch
+            {
+                2 => backIdle2,
+                3 => backIdle3,
+                _ => backIdle,
+            };
+            backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, false);
+            yield return new WaitForSeconds(backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, false).AnimationEnd);
+            nextIdleAnimation = backIdle;
+            backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+        }
+        RepeatIdleRandomizer();
+    }
+
     public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false, bool ratAttack = false)
     {
         if (frontSkeleton == null || backSkeleton == null)
@@ -258,7 +304,8 @@ public abstract class Movement : MonoBehaviour
                         frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                    frontSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+                    frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+
                 }
                 else
                 {
@@ -268,7 +315,8 @@ public abstract class Movement : MonoBehaviour
                         backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).TimeScale = jumpAnimationSpeed;
-                    backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
+                    backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+
                 }
                 break;
 
@@ -283,18 +331,23 @@ public abstract class Movement : MonoBehaviour
             default:
                 break;
         }
+        StopAllCoroutines();
+        StartCoroutine(RandomizeIdleAnimation());
     }
 
     IEnumerator PrepareIdleAnimation()
     {
         yield return new WaitForSeconds(0.6f);
+
         if (usingFrontSkeleton)
         {
             frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+
         }
         else
         {
             backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
+
         }
 
         yield return null;
