@@ -2291,6 +2291,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1384989512580587494, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 5322485839030291331, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
     - target: {fileID: 3238477012892353797, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
       propertyPath: m_Name
       value: Blue Rat
@@ -2404,6 +2408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Red
       objectReference: {fileID: 0}
+    - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 7064127189265369304, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
 --- !u!1 &1479892926 stripped
@@ -3714,7 +3722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7772963788211389755, guid: 56f8681a161199748926c267cb9cdabe, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56f8681a161199748926c267cb9cdabe, type: 3}
