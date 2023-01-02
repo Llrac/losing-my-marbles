@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,7 +139,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1410
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d225491eb0225c4db7d9abcca40626c
+      internalID: -826339196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_1
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 1410
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c505ce277cb3b084caaac2929981eca6
+      internalID: 1545608322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_2
+      rect:
+        serializedVersion: 2
+        x: 1396
+        y: 1410
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 529b3b5a74193de438360c8cabedc272
+      internalID: -941035355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_3
+      rect:
+        serializedVersion: 2
+        x: 2094
+        y: 1410
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dd7b2843d93b2e4fa4cd845db69e8dc
+      internalID: 312806510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_4
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 1410
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 305fc3e4795439b469b4c85543a2d212
+      internalID: -1184110311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_5
+      rect:
+        serializedVersion: 2
+        x: 3490
+        y: 1410
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efb567bd44a553e4d859f512bdab22fc
+      internalID: -2071881496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_6
+      rect:
+        serializedVersion: 2
+        x: 4188
+        y: 1410
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e923b11d3130a064ab5bfd4ab0068bd3
+      internalID: -1107834139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a66e7ab259beae64197f6317ec7ac098
+      internalID: -1639020245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_8
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 0
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95777a1199dd94247a53757a0d0711bc
+      internalID: -981621286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_9
+      rect:
+        serializedVersion: 2
+        x: 1396
+        y: 0
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec9136f22dab5b145b10285cd27a3cf9
+      internalID: 870827679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_10
+      rect:
+        serializedVersion: 2
+        x: 2094
+        y: 0
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5734ebc1cf0350d4a9f4016bba758ca5
+      internalID: -300011148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_11
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 0
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1727549c0067444b8b2d68c15a01bca
+      internalID: -1763711040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_12
+      rect:
+        serializedVersion: 2
+        x: 3490
+        y: 0
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3006ae0968d70234986105c2cc3165ee
+      internalID: 1050086151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-red-idle_13
+      rect:
+        serializedVersion: 2
+        x: 4188
+        y: 0
+        width: 698.2857
+        height: 1410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b76eec7bd4efb4419b29dea86b05a3e
+      internalID: 487267737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -150,7 +444,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      character for spine_front_merged-red-idle_13: 487267737
+      character for spine_front_merged-red-idle_8: -981621286
+      character for spine_front_merged-red-idle_6: -1107834139
+      character for spine_front_merged-red-idle_9: 870827679
+      character for spine_front_merged-red-idle_2: -941035355
+      character for spine_front_merged-red-idle_7: -1639020245
+      character for spine_front_merged-red-idle_5: -2071881496
+      character for spine_front_merged-red-idle_11: -1763711040
+      character for spine_front_merged-red-idle_0: -826339196
+      character for spine_front_merged-red-idle_10: -300011148
+      character for spine_front_merged-red-idle_12: 1050086151
+      character for spine_front_merged-red-idle_4: -1184110311
+      character for spine_front_merged-red-idle_1: 1545608322
+      character for spine_front_merged-red-idle_3: 312806510
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

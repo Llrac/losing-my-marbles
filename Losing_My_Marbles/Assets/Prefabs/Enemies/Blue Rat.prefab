@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 3238477012892353803}
   - component: {fileID: 4824100951751452371}
   - component: {fileID: 4824100951751452370}
+  - component: {fileID: 7057920389070182984}
   - component: {fileID: 3238477012892353802}
   - component: {fileID: 633420726097404220}
   - component: {fileID: 633420726097404221}
@@ -262,22 +263,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   savedTile: 88
-  gridPosition: {x: 6, y: 2}
   currentDirectionID: 0
+  gridPosition: {x: 6, y: 2}
   mediumAudio: {fileID: 633420726097404220}
   quiterAudio: {fileID: 633420726097404218}
   louderAudio: {fileID: 633420726097404221}
   deathPoof: {fileID: 5621411139665734072, guid: 9904f148a8358f24ea2ae77ba9881ada, type: 3}
   blinkEffect: {fileID: 0}
   swapEffect: {fileID: 0}
+  jumpLength: 1
+  jumpAnimationSpeed: 3
+  frontSkeleton: {fileID: 0}
+  backSkeleton: {fileID: 0}
+  usingFrontSkeleton: 0
   frontIdle: {fileID: 11400000, guid: 7eddba7c760494041a381fb20e290c16, type: 2}
   frontJump: {fileID: 11400000, guid: c89298e4bbc8d9b44bbd4b04b8b5d523, type: 2}
   backIdle: {fileID: 11400000, guid: 217aeb07772648e4b8b4dec51a75d0e0, type: 2}
   backJump: {fileID: 11400000, guid: 6e725438e2ad8854e83bb28666588afe, type: 2}
+  frontIdle2: {fileID: 0}
+  frontIdle3: {fileID: 0}
+  backIdle2: {fileID: 0}
+  backIdle3: {fileID: 0}
   frontAttack: {fileID: 11400000, guid: 95074e89e63212e43b2be08f84dcfa88, type: 2}
   backAttack: {fileID: 11400000, guid: b98921b9e2791ad4191a0fa58423d2db, type: 2}
-  jumpLength: 1
-  jumpAnimationSpeed: 3
+  turnAnimator: {fileID: 0}
   enemyID: 5
   moves:
   - {x: 0, y: 1}
@@ -323,30 +332,6 @@ MonoBehaviour:
       value: 1
       inSlope: 1.1111112
       outSlope: 1.1111112
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jumpHeight:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -451,6 +436,18 @@ MonoBehaviour:
   destination: {x: 0, y: 0}
   marbleAnimTimer: 10
   fallAnimTimer: 10
+--- !u!114 &7057920389070182984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3238477012892353797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7500278e3384e7440bc76046bf5e018f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &3238477012892353802
 Rigidbody2D:
   serializedVersion: 4
