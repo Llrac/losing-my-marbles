@@ -1093,13 +1093,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1624514242073255453, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1957209109995007018, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 7064127189265369304, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
+    - target: {fileID: 3024147135918400341, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
+      propertyPath: m_Size.x
+      value: 6.1136274
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024147135918400341, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
+      propertyPath: m_Size.y
+      value: 14.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024147135918400341, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769845, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_Name
       value: Player Teal
+      objectReference: {fileID: 0}
+    - target: {fileID: 4637896218025769845, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769851, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_RootOrder
@@ -2407,6 +2427,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Red
       objectReference: {fileID: 0}
+    - target: {fileID: 2610747910663743195, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589475807611813627, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Size.y
+      value: 14.105507
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589475807611813627, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2954,6 +2986,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Purple
       objectReference: {fileID: 0}
+    - target: {fileID: 6182285770391538013, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_Size.x
+      value: 6.982857
+      objectReference: {fileID: 0}
+    - target: {fileID: 6182285770391538013, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_Size.y
+      value: 14.105507
+      objectReference: {fileID: 0}
+    - target: {fileID: 6182285770391538013, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7427964913557210658, guid: a093fbe91b9ff084196903ba13d02230, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -3101,7 +3145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1969670893450060763, guid: 4028aed999475864f9d17518108fc2c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2518154864918441619, guid: 4028aed999475864f9d17518108fc2c4, type: 3}
       propertyPath: gridPosition.x

@@ -29,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2610747910438394671, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743189, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_RootOrder
@@ -82,6 +82,22 @@ PrefabInstance:
     - target: {fileID: 5410755133457316768, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: initialSkinName
       value: turquoise
+      objectReference: {fileID: 0}
+    - target: {fileID: 5481252069440013600, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: bdb5a38b9b47d7644b403f4c98b9292c, type: 2}
+    - target: {fileID: 5589475807611813627, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Size.x
+      value: 6.1136274
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589475807611813627, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_Size.y
+      value: 14.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589475807611813627, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7110433741541033014, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Materials.Array.size
