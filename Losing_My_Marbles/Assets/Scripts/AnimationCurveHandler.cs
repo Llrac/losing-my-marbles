@@ -236,17 +236,9 @@ public class AnimationCurveHandler : MonoBehaviour
                 }
             }
         }
-        StartCoroutine(NewLevel());
+       
     }
-    private IEnumerator NewLevel()
-    {
-        yield return new WaitForSeconds(1f);
-        if (FindObjectOfType<MysteryMarble>() == null) //should not happen if there is someone who won
-        {
-            Debug.Log("Hej");
-            FindObjectOfType<ResetManager>().NextLevel();
-        }
-    }
+   
 
     public void PickupMarble(GameObject marbleGetter, int increment = 1)
     {

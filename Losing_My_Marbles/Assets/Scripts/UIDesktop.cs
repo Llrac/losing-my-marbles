@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class UIDesktop : MonoBehaviour
 {
@@ -109,13 +110,19 @@ public class UIDesktop : MonoBehaviour
             }
         }
         
-        if (FindObjectOfType<MysteryMarble>() == null && playerWin == false) // if no mystery marbles in scene, do ...
+        if (playerWin == false) // if no mystery marbles in scene, do ...
         {
-           
-         // insert load next scene function here
+            StartCoroutine(NewLevel());
+            playerWin = false;
+            // insert load next scene function here
         }
     }
-    
-    
-
+    private IEnumerator NewLevel()
+    {
+        yield return new WaitForSeconds(.5f);
+        if (FindObjectOfType<MysteryMarble>() == null && playerWin == false) //should not happen if there is someone who won
+        {
+            FindObjectOfType<ResetManager>().NextLevel();
+        }
+    }
 }
