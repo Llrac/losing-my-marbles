@@ -14,7 +14,7 @@ public class GameSession : MonoBehaviour
     public static int mobilePlayerID;
     public DatabaseAPI database;
     public int numberOfPlayers = 4;
-    public int activePlayers = 0;
+    public int activePlayers = 7;
 
     private void Start()
     {
@@ -22,8 +22,15 @@ public class GameSession : MonoBehaviour
         {
             database.ListenForGameSessionMobile(InstantiateNewSession, Debug.Log);
             
-            if (isNewPlayer)
+            Debug.Log(mobilePlayerID);
+
+            if (SceneManager.GetActiveScene().name == "Mobile Matchmaking")
+            {
                 mobilePlayerID = -1;
+                Debug.Log(SceneManager.GetActiveScene().name);
+            }
+            
+            Debug.Log(mobilePlayerID);
             //DatabaseAPI.mobileIsListening = true;
         }
     }
@@ -53,7 +60,7 @@ public class GameSession : MonoBehaviour
         {
             activePlayers++;
             
-            database.PostGameSessionInfoToMobile(new GameSessionMessage(activePlayers), () =>
+            database.PostGameSessionInfoToMobile(new MobileGameSessionMessage(7), () =>
             {
                 // posted playerID to mobile
             }, exception => { Debug.Log(exception); });
@@ -64,18 +71,20 @@ public class GameSession : MonoBehaviour
             CheckMatchedGames.matchedGame = true;
     }
     
-    private void InstantiateNewSession(GameSessionMessage gameSessionMessage)
+    private void InstantiateNewSession(MobileGameSessionMessage mobileGameSessionMessage)
     {
-        var playerID= Int32.Parse($"{gameSessionMessage.playerID}");
+        var playerID= Int32.Parse($"{mobileGameSessionMessage.playerID}");
         
         if (playerID == 0)
             return;
 
         if (mobilePlayerID == -1)
         {
+            PlayerID.playerID = playerID;
             mobilePlayerID = playerID;
+            Debug.Log(playerID);
             isNewPlayer = false;
-            Debug.Log("I am now " + mobilePlayerID);
+            Debug.Log(isNewPlayer);
         }
         
         Debug.Log("I am now " + mobilePlayerID);

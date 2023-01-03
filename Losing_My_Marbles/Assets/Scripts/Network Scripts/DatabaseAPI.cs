@@ -58,13 +58,12 @@ public class DatabaseAPI : MonoBehaviour
         });
     }
     
-    public void PostGameSessionInfoToMobile(GameSessionMessage gameSessionMessage, Action callback, Action<AggregateException> fallback)
+    public void PostGameSessionInfoToMobile(MobileGameSessionMessage mobileGameSessionMessage, Action callback, Action<AggregateException> fallback)
     {
         var gameSessionID = GameSession.sessionID.ToString();
-        var playerID = PlayerID.playerID.ToString();
-        var postGameJson = JsonUtility.ToJson(gameSessionMessage);
+        var postGameJson = JsonUtility.ToJson(mobileGameSessionMessage);
 
-        dbReference.Child("game session").Child(gameSessionID).Child(playerID).Push().SetRawJsonValueAsync(postGameJson).ContinueWith(task =>
+        dbReference.Child("game session").Child(gameSessionID).Push().SetRawJsonValueAsync(postGameJson).ContinueWith(task =>
         {
             if (task.IsCanceled || task.IsFaulted) fallback(task.Exception);
             else callback();
@@ -86,17 +85,16 @@ public class DatabaseAPI : MonoBehaviour
     {
         
         var gameSessionID = GameSession.sessionID.ToString();
-        var playerID = PlayerID.playerID.ToString();
         void CurrentListener(object o, ChildChangedEventArgs args)
         {
             if (args.DatabaseError != null) fallback(new AggregateException(new Exception(args.DatabaseError.Message)));
             else callback(JsonUtility.FromJson<SessionMessage>(args.Snapshot.GetRawJsonValue()));
         }
 
-        dbReference.Child("game session").Child(gameSessionID).Child(playerID).ChildAdded += CurrentListener;
+        dbReference.Child("game session").Child(gameSessionID).ChildAdded += CurrentListener;
     }
     
-    public void ListenForGameSessionMobile(Action<GameSessionMessage> callback, Action<AggregateException> fallback)
+    public void ListenForGameSessionMobile(Action<MobileGameSessionMessage> callback, Action<AggregateException> fallback)
     {
         // if (mobileIsListening)
         // {
@@ -108,7 +106,7 @@ public class DatabaseAPI : MonoBehaviour
         void CurrentListener(object o, ChildChangedEventArgs args)
         {
             if (args.DatabaseError != null) fallback(new AggregateException(new Exception(args.DatabaseError.Message)));
-            else callback(JsonUtility.FromJson<GameSessionMessage>(args.Snapshot.GetRawJsonValue()));
+            else callback(JsonUtility.FromJson<MobileGameSessionMessage>(args.Snapshot.GetRawJsonValue()));
         }
             
         dbReference.Child("game session").Child(gameSessionID).ChildAdded += CurrentListener;

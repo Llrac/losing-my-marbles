@@ -17,6 +17,7 @@ public class ActionHandler : MonoBehaviour
         database.ListenForActions(InstantiateAction, Debug.Log);
         database.ListenForNewHand(InstantiateNewHand, Debug.Log);
         
+        
         playerID = GameSession.mobilePlayerID;
     }
 

@@ -6,36 +6,36 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Prefabs/Scenes/MainMenu.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: 2dec5ac8e0c7d53458c4970eb274bbfc
   - enabled: 1
-    path: Assets/Prefabs/Scenes/level1.unity
+    path: Assets/Scenes/level1.unity
     guid: bc3ba598db9b83e4997b89fbebde361f
-  - enabled: 1
-    path: Assets/Prefabs/Scenes/level2.unity
+  - enabled: 0
+    path: Assets/Scenes/level2.unity
     guid: e413bd9d44e752149aa0870f534aed6f
-  - enabled: 1
-    path: Assets/Prefabs/Scenes/level3.unity
+  - enabled: 0
+    path: Assets/Scenes/level3.unity
     guid: eefc4c1de2066464fba0e0972d5338a0
-  - enabled: 1
-    path: Assets/Prefabs/Scenes/level4.unity
+  - enabled: 0
+    path: Assets/Scenes/level4.unity
     guid: 5b4a59fbe3a9166468c36a230815aa45
-  - enabled: 1
-    path: Assets/Prefabs/Scenes/level5.unity
+  - enabled: 0
+    path: Assets/Scenes/level5.unity
     guid: 705da869bf0b5404ea8be071b471a756
   - enabled: 0
-    path: Assets/Prefabs/Scenes/Mobile Matchmaking.unity
+    path: Assets/Scenes/Mobile Matchmaking.unity
     guid: 59a48b2ee2848e44e81d27920c927ff0
   - enabled: 0
-    path: Assets/Prefabs/Scenes/Mobile Interface.unity
+    path: Assets/Scenes/Mobile Interface.unity
     guid: 709712042b8d49845b81549c790ede8d
   - enabled: 0
-    path: Assets/Prefabs/Scenes/EmilTesting.unity
+    path: Assets/Scenes/EmilTesting.unity
     guid: ebf742b98d1fcf54989f595fc3f22a10
   - enabled: 0
-    path: Assets/Prefabs/Scenes/SampleScene.unity
+    path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Prefabs/Scenes/Desktop Matchmaking.unity
+    path: Assets/Scenes/Desktop Matchmaking.unity
     guid: 8d00d16be49a8354e82dc9c88bbf6719
   m_configObjects: {}
