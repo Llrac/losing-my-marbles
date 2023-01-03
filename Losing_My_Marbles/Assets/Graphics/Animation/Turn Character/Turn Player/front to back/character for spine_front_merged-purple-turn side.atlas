@@ -1,0 +1,46 @@
+character for spine_front_merged-purple-turn side.png
+size:4850,2816
+filter:Linear,Linear
+pma:true
+character for spine_front_merged-purple-turn side_00
+bounds:2,2,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_01
+bounds:608,2,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_02
+bounds:1214,2,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_03
+bounds:1820,2,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_04
+bounds:2426,2,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_05
+bounds:3032,2,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_06
+bounds:3638,2,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_07
+bounds:4244,2,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_08
+bounds:2,1409,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_09
+bounds:608,1409,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_10
+bounds:1214,1409,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_11
+bounds:1820,1409,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_12
+bounds:2426,1409,604,1405
+origin:343,23
+character for spine_front_merged-purple-turn side_13
+bounds:3032,1409,604,1405
+origin:343,23

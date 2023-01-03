@@ -1,0 +1,46 @@
+character for spine_front_merged-yellow-turn front.png
+size:4888,2828
+filter:Linear,Linear
+pma:true
+character for spine_front_merged-yellow-turn front_00
+bounds:2,2,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_01
+bounds:700,2,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_02
+bounds:1398,2,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_03
+bounds:2096,2,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_04
+bounds:2794,2,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_05
+bounds:3492,2,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_06
+bounds:4190,2,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_07
+bounds:2,1415,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_08
+bounds:700,1415,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_09
+bounds:1398,1415,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_10
+bounds:2096,1415,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_11
+bounds:2794,1415,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_12
+bounds:3492,1415,696,1411
+origin:343,29
+character for spine_front_merged-yellow-turn front_13
+bounds:4190,1415,696,1411
+origin:343,29
