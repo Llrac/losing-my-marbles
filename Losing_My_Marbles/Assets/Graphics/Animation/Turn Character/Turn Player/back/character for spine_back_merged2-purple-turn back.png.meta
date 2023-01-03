@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,7 +139,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1400
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1e3e3e24e83957409fe6ec2fd15becb
+      internalID: -593535478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_1
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 1400
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f709186d81545864b85fb4cf9cbbbfa5
+      internalID: 1767872093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_2
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 1400
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be8c1f7dcaeca71479bce0d0ff47a485
+      internalID: -1591412785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_3
+      rect:
+        serializedVersion: 2
+        x: 1836
+        y: 1400
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfe94bbf4e7053740925f97bbe11f649
+      internalID: -2076741805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_4
+      rect:
+        serializedVersion: 2
+        x: 2448
+        y: 1400
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 312faea4bbf4abc47a332b2578f17fab
+      internalID: 1508446136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_5
+      rect:
+        serializedVersion: 2
+        x: 3060
+        y: 1400
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2250e26a3f2168f4f880b551d5128f73
+      internalID: 1262310703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_6
+      rect:
+        serializedVersion: 2
+        x: 3672
+        y: 1400
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3c78c5e1c291ba4c8a49ea5a8985a95
+      internalID: 978493505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_7
+      rect:
+        serializedVersion: 2
+        x: 4284
+        y: 1400
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ace8b436a146697428965e0f064b090e
+      internalID: -1574314542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf192f85bc074e45be26c674c164230
+      internalID: -1486014636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_9
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 0
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c7b53f4770139440961795af60828c0
+      internalID: 1817603422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_10
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 0
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a0c84cf2e1eaae4384c5cd9ff752ffd
+      internalID: -1328100475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_11
+      rect:
+        serializedVersion: 2
+        x: 1836
+        y: 0
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 381d865a20e2b9e47aa69c60f91b411a
+      internalID: -1813688943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_12
+      rect:
+        serializedVersion: 2
+        x: 2448
+        y: 0
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10ef3cc08896eaa46ae3a40c09fa1367
+      internalID: -855840469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_back_merged2-purple-turn back_13
+      rect:
+        serializedVersion: 2
+        x: 3060
+        y: 0
+        width: 612.25
+        height: 1400
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5329965a52190343a155595e1f875ef
+      internalID: -1688011875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -150,7 +444,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      character for spine_back_merged2-purple-turn back_8: -1486014636
+      character for spine_back_merged2-purple-turn back_1: 1767872093
+      character for spine_back_merged2-purple-turn back_13: -1688011875
+      character for spine_back_merged2-purple-turn back_6: 978493505
+      character for spine_back_merged2-purple-turn back_0: -593535478
+      character for spine_back_merged2-purple-turn back_10: -1328100475
+      character for spine_back_merged2-purple-turn back_3: -2076741805
+      character for spine_back_merged2-purple-turn back_12: -855840469
+      character for spine_back_merged2-purple-turn back_9: 1817603422
+      character for spine_back_merged2-purple-turn back_4: 1508446136
+      character for spine_back_merged2-purple-turn back_5: 1262310703
+      character for spine_back_merged2-purple-turn back_7: -1574314542
+      character for spine_back_merged2-purple-turn back_11: -1813688943
+      character for spine_back_merged2-purple-turn back_2: -1591412785
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
