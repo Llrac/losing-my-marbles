@@ -252,7 +252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2131092306888246689, guid: 8fe959bbfe7437a448ccb16c4cf768f0, type: 3}
       propertyPath: numberOfPlayers
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2131092306888246702, guid: 8fe959bbfe7437a448ccb16c4cf768f0, type: 3}
       propertyPath: m_Name
@@ -267,6 +267,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1305786580, guid: 2019f381720087247916d9c0937ae589, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 209725965087590388, guid: 2019f381720087247916d9c0937ae589, type: 3}
       propertyPath: m_RootOrder
       value: 6

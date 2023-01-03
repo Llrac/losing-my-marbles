@@ -61,6 +61,9 @@ MonoBehaviour:
   triggerEarthquake: {fileID: 8300000, guid: c0d527d57b29d484b830df3f3e494c6f, type: 3}
   triggerRollerskates: {fileID: 8300000, guid: d2c4fe40c15a8094a83740af2a9fee6a, type: 3}
   triggerSwap: {fileID: 8300000, guid: f124a0abf200b0342983c9b783f57149, type: 3}
+  onHoverEnter: {fileID: 8300000, guid: e2b656112ee2a4e4facc907c200f11ce, type: 3}
+  onHoverExit: {fileID: 0}
+  onClick: {fileID: 0}
   newMarbles: {fileID: 8300000, guid: 45289102eedb37d489c02b0a34e65037, type: 3}
   selectMarble: {fileID: 8300000, guid: 62a0083d0c8f5074a97d5082d83c9d2b, type: 3}
   marblesReady: {fileID: 8300000, guid: d6f73a746d69b2a4fb882da03a2f1d95, type: 3}

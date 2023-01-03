@@ -8,12 +8,12 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private GameObject creditsGO;
+    //[SerializeField] private GameObject creditsGO;
     public DatabaseAPI databaseAPI;
     private TextMeshProUGUI creditsText;
     private void Start()
     {
-        creditsText = creditsGO.GetComponent<TextMeshProUGUI>();
+        //creditsText = creditsGO.GetComponent<TextMeshProUGUI>();
     }
     public void AskPlay()
     {
@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
         FindObjectOfType<Scenehandler>().LoadDesktopMatchmaking();
         //SceneManager.LoadScene(1);
     }
-    public void EnterCredits()
+    public void ShowCredits()
     {
         if (creditsText.enabled == false)
         {
@@ -33,7 +33,7 @@ public class MainMenu : MonoBehaviour
         }
     } 
 
-    public void EnterOptions()
+    public void ShowOptions()
     {
 
     }
@@ -56,6 +56,9 @@ public class MainMenu : MonoBehaviour
                 child.gameObject.SetActive(false);
             }
         }
+
+        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onHoverEnter);
+        
     }
 
     public void OnExit(GameObject button)
