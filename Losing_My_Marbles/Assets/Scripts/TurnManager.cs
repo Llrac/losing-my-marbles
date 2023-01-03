@@ -24,7 +24,7 @@ public class TurnManager : MonoBehaviour
     public GameObject readyAlert;
     //public GameObject information;
     public GameObject[] turnLetterImages = new GameObject[3];
-    private TextMeshProUGUI roundInformation;
+    //private TextMeshProUGUI roundInformation;
 
     public ActionHandler actionHandler;
 
@@ -88,31 +88,38 @@ public class TurnManager : MonoBehaviour
         amountOfRounds++;
 
         // display countdown
-        if (turnLetterImages != null)
+        yield return new WaitForSeconds(1f);
+        for (int i = 3; i < turnLetterImages.Length; i--)
         {
-            yield return new WaitForSeconds(1f);
-            for (int i = 3; i < turnLetterImages.Length; i--)
+            if (turnLetterImages[i + 1] != null)
             {
-                if (turnLetterImages[i + 1] != null)
-                    turnLetterImages[i + 1].SetActive(false);
-                if (turnLetterImages[i - 1] != null)
-                    turnLetterImages[i - 1].SetActive(false);
+                turnLetterImages[i + 1].SetActive(false);
+                Debug.Log("disabled " + turnLetterImages[i + 1]);
+            }
+            if (turnLetterImages[i - 1] != null)
+            {
+                turnLetterImages[i - 1].SetActive(false);
+                Debug.Log("disabled " + turnLetterImages[i - 1]);
+            }
+            if (turnLetterImages[i] != null)
+            {
                 turnLetterImages[i].SetActive(true);
-                yield return new WaitForSeconds(1f);
+                Debug.Log("enabled " + turnLetterImages[i]);
             }
-        }
-        else
-        {
             yield return new WaitForSeconds(1f);
-            for (int i = 3; i > 0; i--)
-            {
-                roundInformation.text = "Round " + amountOfRounds + " Starts in " + i;
-                yield return new WaitForSeconds(1f);
-            }
         }
+        //else
+        //{
+        //    yield return new WaitForSeconds(1f);
+        //    for (int i = 3; i > 0; i--)
+        //    {
+        //        roundInformation.text = "Round " + amountOfRounds + " Starts in " + i;
+        //        yield return new WaitForSeconds(1f);
+        //    }
+        //}
 
-        roundInformation.text = ""; // TODO add sounds
-       
+        //roundInformation.text = ""; // TODO add sounds
+
         for (int i = 0; i < sortedPlayers.Count; i++)
         {
 
@@ -125,7 +132,7 @@ public class TurnManager : MonoBehaviour
         
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
-            roundInformation.text = "Marble " + (currentTurn + 1);
+            //roundInformation.text = "Marble " + (currentTurn + 1);
             for (int playerInList = 0; playerInList < players.Count; playerInList++) // keeps track of which player is currently doing something
             {
                 //show intent
@@ -214,9 +221,9 @@ public class TurnManager : MonoBehaviour
 
         readyAlert.GetComponent<Image>().enabled = true;
         
-        roundInformation.text = "Round " + amountOfRounds + " is over";
+        //roundInformation.text = "Round " + amountOfRounds + " is over";
         yield return new WaitForSeconds(2f);
-        roundInformation.text = "Play your marbles!";
+        //roundInformation.text = "Play your marbles!";
         startTurn = true;
         
         actionHandler.DrawNewHand(true);

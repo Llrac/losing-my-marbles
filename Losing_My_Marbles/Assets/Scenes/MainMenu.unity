@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2131092306888246689, guid: 8fe959bbfe7437a448ccb16c4cf768f0, type: 3}
+      propertyPath: numberOfPlayers
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2131092306888246702, guid: 8fe959bbfe7437a448ccb16c4cf768f0, type: 3}
       propertyPath: m_Name
       value: GameSessionHandler

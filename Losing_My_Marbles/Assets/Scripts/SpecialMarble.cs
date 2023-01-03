@@ -66,59 +66,66 @@ public class SpecialMarble : MonoBehaviour
                 p = Random.Range(0, TurnManager.players.Count);
                 if (TurnManager.players[p] != user)
                 { //save used variables
-                    Vector2 targetDestination = TurnManager.players[p].GetComponent<PlayerProperties>().gridPosition;
-                    Vector2 myPosition = user.gridPosition;
-                    Vector2 targetWorldPosition = TurnManager.players[p].gameObject.transform.position;
-                    Vector2 worldPosition = user.gameObject.transform.position;
-                    char mySavedTile = user.savedTile;
-                    char opponentSavedTile = TurnManager.players[p].savedTile;
-                    //use saved variables
-                    user.gridPosition = targetDestination;
-                    user.gameObject.transform.position = targetWorldPosition;
-                    TurnManager.players[p].gridPosition = myPosition;
-                    TurnManager.players[p].transform.position = worldPosition;
-                    user.savedTile = opponentSavedTile;
-                    TurnManager.players[p].savedTile = mySavedTile;
+                    PrepSwapAnimation(user, p);
+                    //Vector2 targetDestination = TurnManager.players[p].GetComponent<PlayerProperties>().gridPosition;
+                    //Vector2 myPosition = user.gridPosition;
+                    //Vector2 targetWorldPosition = TurnManager.players[p].gameObject.transform.position;
+                    //Vector2 worldPosition = user.gameObject.transform.position;
+                    //char mySavedTile = user.savedTile;
+                    //char opponentSavedTile = TurnManager.players[p].savedTile;
+                    ////use saved variables
+                    //user.gridPosition = targetDestination;
+                    //user.gameObject.transform.position = targetWorldPosition;
+                    //TurnManager.players[p].gridPosition = myPosition;
+                    //TurnManager.players[p].transform.position = worldPosition;
+                    //user.savedTile = opponentSavedTile;
+                    //TurnManager.players[p].savedTile = mySavedTile;
                     return;
                 }
             }
         }
         else
         {
-            Vector2 targetDestination = TurnManager.players[p].GetComponent<PlayerProperties>().gridPosition;
-            Vector2 myPosition = user.gridPosition;
-            Vector2 targetWorldPosition = TurnManager.players[p].gameObject.transform.position;
-            Vector2 worldPosition = user.gameObject.transform.position;
-            char mySavedTile = user.savedTile;
-            char opponentSavedTile = TurnManager.players[p].savedTile;
-
-            // create effect at your starting position
-            if (user.GetComponent<Movement>().swapEffect != null)
-            {
-                GameObject newSwapEffect = Instantiate(user.GetComponent<Movement>().swapEffect, new Vector2(user.transform.position.x, user.transform.position.y + 0.5f), user.transform.rotation);
-                newSwapEffect.GetComponent<Animator>().SetTrigger("swap_away");
-                Destroy(newSwapEffect, 1f);
-            }
-            if (user.GetComponent<Animator>() != null)
-            {
-                user.GetComponent<Animator>().SetTrigger("shrink");
-            }
-
-            // create effect at your mate's position
-            if (TurnManager.players[p].GetComponent<Movement>().swapEffect != null)
-            {
-                GameObject newSwapEffect = Instantiate(TurnManager.players[p].GetComponent<Movement>().swapEffect, new Vector2(TurnManager.players[p].transform.position.x, TurnManager.players[p].transform.position.y + 0.5f), TurnManager.players[p].transform.rotation);
-                newSwapEffect.GetComponent<Animator>().SetTrigger("swap_away");
-                Destroy(newSwapEffect, 1f);
-            }
-            if (TurnManager.players[p].GetComponent<Animator>() != null)
-            {
-                TurnManager.players[p].GetComponent<Animator>().SetTrigger("shrink");
-            }
-
-            StartCoroutine(SwapAnimation(user, p, targetDestination, myPosition, targetWorldPosition, worldPosition, mySavedTile, opponentSavedTile));
+            PrepSwapAnimation(user, p);
             return;
         }
+    }
+
+    private void PrepSwapAnimation(PlayerProperties user, int p)
+    {
+        Vector2 targetDestination = TurnManager.players[p].GetComponent<PlayerProperties>().gridPosition;
+        Vector2 myPosition = user.gridPosition;
+        Vector2 targetWorldPosition = TurnManager.players[p].gameObject.transform.position;
+        Vector2 worldPosition = user.gameObject.transform.position;
+        char mySavedTile = user.savedTile;
+        char opponentSavedTile = TurnManager.players[p].savedTile;
+
+        // create effect at your starting position
+        if (user.GetComponent<Movement>().swapEffect != null)
+        {
+            GameObject newSwapEffect = Instantiate(user.GetComponent<Movement>().swapEffect, new Vector2(user.transform.position.x, user.transform.position.y + 0.5f), user.transform.rotation);
+            newSwapEffect.GetComponent<Animator>().SetTrigger("swap_away");
+            Destroy(newSwapEffect, 1f);
+        }
+        if (user.GetComponent<Animator>() != null)
+        {
+            user.GetComponent<Animator>().SetTrigger("shrink");
+        }
+
+        // create effect at your mate's position
+        if (TurnManager.players[p].GetComponent<Movement>().swapEffect != null)
+        {
+            GameObject newSwapEffect = Instantiate(TurnManager.players[p].GetComponent<Movement>().swapEffect, new Vector2(TurnManager.players[p].transform.position.x, TurnManager.players[p].transform.position.y + 0.5f), TurnManager.players[p].transform.rotation);
+            newSwapEffect.GetComponent<Animator>().SetTrigger("swap_away");
+            Destroy(newSwapEffect, 1f);
+        }
+        if (TurnManager.players[p].GetComponent<Animator>() != null)
+        {
+            TurnManager.players[p].GetComponent<Animator>().SetTrigger("shrink");
+        }
+
+        StartCoroutine(SwapAnimation(user, p, targetDestination, myPosition, targetWorldPosition, worldPosition, mySavedTile, opponentSavedTile));
+        return;
     }
 
     private static IEnumerator SwapAnimation(PlayerProperties user, int p, Vector2 targetDestination, Vector2 myPosition, Vector2 targetWorldPosition, Vector2 worldPosition, char mySavedTile, char opponentSavedTile)
@@ -143,7 +150,7 @@ public class SpecialMarble : MonoBehaviour
         if (user.GetComponent<Movement>().swapEffect != null)
         {
             GameObject newSwapEffect = Instantiate(user.GetComponent<Movement>().swapEffect, new Vector2(user.transform.position.x, user.transform.position.y + 0.5f), user.transform.rotation);
-            newSwapEffect.GetComponent<Animator>().SetTrigger("swap_away");
+            newSwapEffect.GetComponent<Animator>().SetTrigger("swap_to");
             Destroy(newSwapEffect, 1f);
         }
         if (user.GetComponent<Animator>() != null)

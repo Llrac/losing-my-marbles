@@ -352,7 +352,7 @@ public abstract class Movement : MonoBehaviour
                     Debug.Log("animationDirectionID = lastAnimationDirectionID");
                 }
 
-                StartCoroutine(PrepareIdleAnimation(0.5f));
+                StartCoroutine(PrepareIdleAnimation(0.4f));
                 break;
 
             default:
