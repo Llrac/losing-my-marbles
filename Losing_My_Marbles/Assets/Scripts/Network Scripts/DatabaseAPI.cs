@@ -83,6 +83,7 @@ public class DatabaseAPI : MonoBehaviour
     public void ListenForActions(Action<ActionMessage> callback, Action<AggregateException> fallback)
     {
         var gameSessionID = GameSession.sessionID.ToString();
+        
         if (hasBeenRestarted)
         {
             Debug.Log("dont add again");

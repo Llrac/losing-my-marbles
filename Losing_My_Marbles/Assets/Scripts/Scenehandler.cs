@@ -24,10 +24,16 @@ public class Scenehandler : MonoBehaviour
         
     }
 
+    public void LoadMobileMatchmaking()
+    {
+        SceneManager.LoadScene("Mobile Matchmaking");
+    }
+
     public void LoadDesktopMatchmaking()
     {
         SceneManager.LoadScene("Desktop Matchmaking");
     }
-
+    
+    
     
 }
