@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,9 +8,11 @@ using TMPro;
 
 public class UIDesktop : MonoBehaviour
 {
+    [Header("Transition")]
+    public GameObject transitionScreen = null;
+
     [Header("In game")]
     public Transform playLogTransform;
-
     public GameObject playerOrderPrefab;
     public Sprite[] playerSprite;
 
@@ -24,7 +27,24 @@ public class UIDesktop : MonoBehaviour
 
     void Start()
     {
-        //tm = FindObjectOfType<TurnManager>();
+        GameObject desktopCanvas = FindObjectOfType<Canvas>().gameObject;
+        foreach (Transform child in desktopCanvas.transform)
+        {
+            if (child.gameObject.name == "Transition")
+            {
+                transitionScreen = child.gameObject;
+            }
+        }
+
+        StartCoroutine(Transition());
+    }
+
+    IEnumerator Transition()
+    {
+        yield return new WaitForSeconds(4f);
+        Debug.Log("fade out");
+        transitionScreen.GetComponent<Animator>().SetTrigger("fade_out");
+        yield return null;
     }
     
     public void InstantiatePlayerOrder(int playerId)
