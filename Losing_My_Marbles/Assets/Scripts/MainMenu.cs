@@ -43,9 +43,33 @@ public class MainMenu : MonoBehaviour
 
     }
 
-    public void ShowHowTo()
+    public void OnHover(GameObject button)
     {
-
+        foreach (Transform child in button.transform)
+        {
+            if (child.gameObject.name == "ON")
+            {
+                child.gameObject.SetActive(true);
+            }
+            else if (child.name == "OFF")
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
     }
-   
+
+    public void OnExit(GameObject button)
+    {
+        foreach (Transform child in button.transform)
+        {
+            if (child.gameObject.name == "ON")
+            {
+                child.gameObject.SetActive(false);
+            }
+            else if (child.name == "OFF")
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
+    }
 }

@@ -26,6 +26,11 @@ public class AudioManager : MonoBehaviour
     public AudioClip triggerRollerskates = null;
     public AudioClip triggerSwap = null;
 
+    [Header("Menu Buttons")]
+    public AudioClip onHoverEnter = null;
+    public AudioClip onHoverExit = null;
+    public AudioClip onClick = null;
+
     [Header("Mobile FX")]
     public AudioClip newMarbles = null;
     public AudioClip selectMarble = null;

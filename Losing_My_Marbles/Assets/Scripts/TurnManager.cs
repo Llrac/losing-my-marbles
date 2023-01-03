@@ -96,16 +96,16 @@ public class TurnManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             int index = 2 - i;
-            foreach (var item in turnLetterImages)
+            foreach (GameObject letter in turnLetterImages)
             {
-                item.SetActive(false);
+                letter.SetActive(false);
             }
             turnLetterImages[index].SetActive(true);
             yield return new WaitForSeconds(0.6f);
         }
-        foreach (var item in turnLetterImages)
+        foreach (GameObject letter in turnLetterImages)
         {
-            item.SetActive(false);
+            letter.SetActive(false);
         }
 
         //roundInformation.text = ""; // TODO add sounds
