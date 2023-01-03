@@ -50,6 +50,7 @@ public abstract class Movement : MonoBehaviour
     public AnimationReferenceAsset backAttack = null;
 
     Animator turnAnimator;
+    public float turnAnimatorSpeed = 1.5f;
     int newAnimationDirectionID = 0;
     int lastAnimationDirectionID = 0;
     [HideInInspector] public Spine.Animation nextIdleAnimation;
@@ -297,6 +298,7 @@ public abstract class Movement : MonoBehaviour
                 frontSkeleton.gameObject.SetActive(false);
                 backSkeleton.gameObject.SetActive(false);
                 turnAnimator.gameObject.SetActive(true);
+                turnAnimator.speed = turnAnimatorSpeed;
                 if (newAnimationDirectionID < lastAnimationDirectionID) // turn left
                 {
                     switch (Mathf.Abs(newAnimationDirectionID % 4)) // gives currentDirectionID
@@ -352,7 +354,7 @@ public abstract class Movement : MonoBehaviour
                     Debug.Log("animationDirectionID = lastAnimationDirectionID");
                 }
 
-                StartCoroutine(PrepareIdleAnimation(0.4f));
+                StartCoroutine(PrepareIdleAnimation(0.25f / turnAnimatorSpeed));
                 break;
 
             default:

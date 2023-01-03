@@ -373,6 +373,7 @@ MonoBehaviour:
   backIdle3: {fileID: 11400000, guid: 2bd4846d41389cf4ebe4d4563f6c6e5d, type: 2}
   frontAttack: {fileID: 0}
   backAttack: {fileID: 0}
+  turnAnimatorSpeed: 1
   playerID: 1
   specialMarbleCount: 0
   playerMarbles: 
