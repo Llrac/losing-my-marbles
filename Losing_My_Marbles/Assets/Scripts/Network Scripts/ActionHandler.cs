@@ -10,20 +10,21 @@ public class ActionHandler : MonoBehaviour
 {
     public DatabaseAPI database;
     public UIManager uiManager;
-    public PlayerID playerId;
 
     private int playerID;
-
     private void Start()
     {
-        playerID = playerId.playerID;
         database.ListenForActions(InstantiateAction, Debug.Log);
         database.ListenForNewHand(InstantiateNewHand, Debug.Log);
+        
+        playerID = GameSession.mobilePlayerID;
     }
 
 
     public void SendAction()
     {
+        Debug.Log(playerID);
+        
         if (uiManager != null)
         {
             database.PostActions(new ActionMessage(playerID, uiManager.orderID[0],

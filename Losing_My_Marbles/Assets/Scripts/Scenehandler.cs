@@ -20,8 +20,7 @@ public class Scenehandler : MonoBehaviour
     public void JoinGameMobile()
     {
         GameSession.sessionID = Int32.Parse(sessionCode.text);
-        SceneManager.LoadScene("Mobile Interface");
-        
+        Invoke(nameof(LoadMobileInterface), 1f);
     }
 
     public void LoadDesktopMatchmaking()
@@ -29,5 +28,9 @@ public class Scenehandler : MonoBehaviour
         SceneManager.LoadScene("Desktop Matchmaking");
     }
 
+    public void LoadMobileInterface()
+    {
+        SceneManager.LoadScene("Mobile Interface");
+    }
     
 }

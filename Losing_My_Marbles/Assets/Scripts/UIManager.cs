@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class UIManager : MonoBehaviour
 {
-    public PlayerID playerID;
+    //public PlayerID playerID;
     public ActionHandler actionHandler;
     
     [Header("Marbles & Slots")]
@@ -36,8 +36,9 @@ public class UIManager : MonoBehaviour
         // TODO connect this to matchmaking etc
         if (background != null)
         {
-            background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID - 1];
+            background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[PlayerID.playerID];
         }
+        
 
         for (int i = 0; i < availableMarbleSlotsTop.Length; i++)
         {
@@ -55,11 +56,18 @@ public class UIManager : MonoBehaviour
         if (confirmButton != null)
             confirmButton.image.enabled = false;
         
+        
         FillHandWithMarbles();
     }
 
     private void Update()
     {
+        
+        if (background != null)
+        {
+            background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[PlayerID.playerID];
+        }
+        
         if (timer != null)
         {
             if (timer.timeValue <= 0)

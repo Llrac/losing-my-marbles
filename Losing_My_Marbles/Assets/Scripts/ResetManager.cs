@@ -9,7 +9,9 @@ public class ResetManager : MonoBehaviour
     public List<Sprite> winScreens = new();
     public static List<Sprite> Screens = new();
     public DatabaseAPI databaseAPI;
+    
     [SerializeField] private GameObject winImage = null;
+    
     private static Image win;
     private float timer = 2;
     bool starting = false;
@@ -35,9 +37,9 @@ public class ResetManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            ResetLevel();
+            QuitSession();
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -53,9 +55,10 @@ public class ResetManager : MonoBehaviour
         }
     }
 
-    public void ResetLevel()
+    public void QuitSession()
     {
         ResetValues();
+        databaseAPI.DeleteGameSession();
         SceneManager.LoadScene("MainMenu");
     }
 

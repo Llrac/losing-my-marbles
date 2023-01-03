@@ -568,7 +568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13adaa1761d4e44597e3eb08c05bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 3
+  PID: 0
 --- !u!4 &807219183
 Transform:
   m_ObjectHideFlags: 0
@@ -1429,6 +1429,10 @@ PrefabInstance:
     - target: {fileID: 2131092306888246688, guid: 8fe959bbfe7437a448ccb16c4cf768f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2131092306888246689, guid: 8fe959bbfe7437a448ccb16c4cf768f0, type: 3}
+      propertyPath: iAmAMobilePhone
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2131092306888246702, guid: 8fe959bbfe7437a448ccb16c4cf768f0, type: 3}
       propertyPath: m_Name
