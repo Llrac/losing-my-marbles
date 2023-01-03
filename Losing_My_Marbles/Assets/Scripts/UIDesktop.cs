@@ -57,8 +57,6 @@ public class UIDesktop : MonoBehaviour
         playerBags[playerID - 1].GetComponent<Animator>().SetBool("chosen marbles", true);
         
         ToggleReadyShine(playerID, true);
-
-       
     }
 
     public void ToggleReadyShine(int playerID, bool isShining)
@@ -105,7 +103,7 @@ public class UIDesktop : MonoBehaviour
             child.SetActive(true);
             if (player.GetComponent<PlayerProperties>().specialMarbleCount >= 3)
             {
-                ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID);
+                ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID); 
                 playerWin = true;
             }
         }

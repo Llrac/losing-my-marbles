@@ -86,7 +86,6 @@ public class ResetManager : MonoBehaviour
         ResetValues();
        
         StartCoroutine(LS());
-        
     }
     IEnumerator LS()
     {
@@ -101,6 +100,14 @@ public class ResetManager : MonoBehaviour
             win.enabled = true;
         }
         TurnManager.isPaused = true;
+
+        for (int i = 0; i < TurnManager.players.Count; i++)
+        {
+            if (playerID == TurnManager.players[i].playerID)
+            {
+                //do animation
+            }
+        }
     }
     public void PauseGame()
     {
@@ -163,16 +170,11 @@ public class ResetManager : MonoBehaviour
 
         while (levelOrder.Count < gm.levels.Length)
         {
-            int k = Random.Range(1, gm.levels.Length+1);
-            if (levelOrder.Contains(k) == false)
+            int randomLevel = Random.Range(1, gm.levels.Length+1);
+            if (levelOrder.Contains(randomLevel) == false)
             {
-                levelOrder.Add(k);
+                levelOrder.Add(randomLevel);
             }
-        }
-
-        if (levelOrder.Contains(0))  
-        {
-            levelOrder.Remove(0);
         }
     }
 }
