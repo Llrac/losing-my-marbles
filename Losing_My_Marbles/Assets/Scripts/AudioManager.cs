@@ -78,12 +78,12 @@ public class AudioManager : MonoBehaviour
         if (Instance != this)
         {
             Destroy(gameObject);
-            Instance.UpdateBackgroundAudio();
         }
         else
         {
             DontDestroyOnLoad(gameObject);
-            UpdateBackgroundAudio();
         }
+
+        Instance.UpdateBackgroundAudio();
     }
 }
