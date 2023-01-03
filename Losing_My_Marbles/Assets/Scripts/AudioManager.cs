@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    [Header("Ambience")]
+    [Header("Background")]
     public AudioClip ambience = null;
+    public AudioClip marbleMachine = null;
 
     [Header("Desktop FX")]
     public AudioClip playerJump = null;
@@ -37,10 +38,52 @@ public class AudioManager : MonoBehaviour
     public AudioClip marblesReady = null;
     public AudioClip pressGo = null;
 
-    private void Start()
+    private void UpdateBackgroundAudio()
     {
-        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        if (sceneName != "Mobile Interface")
-            GetComponent<AudioSource>().PlayOneShot(ambience);
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.GetComponent<AudioSource>() != null)
+            {
+                string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+                if (sceneName == "MainMenu")
+                {
+                    child.gameObject.GetComponent<AudioSource>().Play();
+                    return;
+                }
+                if (sceneName != "Mobile Interface")
+                {
+                    child.gameObject.GetComponent<AudioSource>().Stop();
+                    child.gameObject.GetComponent<AudioSource>().PlayOneShot(ambience);
+
+                }
+            }
+        }
+    }
+
+    private static AudioManager instance = null;
+    public static AudioManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = (AudioManager)FindObjectOfType(typeof(AudioManager));
+            }
+            return instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (Instance != this)
+        {
+            Destroy(gameObject);
+            Instance.UpdateBackgroundAudio();
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+            UpdateBackgroundAudio();
+        }
     }
 }
