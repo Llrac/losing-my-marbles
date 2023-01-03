@@ -22,7 +22,8 @@ public class TurnManager : MonoBehaviour
     public static List <PlayerProperties> sortedPlayers = new();
     public UIDesktop uiDesktop;
     public GameObject readyAlert;
-    public GameObject information;
+    //public GameObject information;
+    public GameObject[] turnLetterImages = new GameObject[3];
     private TextMeshProUGUI roundInformation;
 
     public ActionHandler actionHandler;
@@ -44,7 +45,7 @@ public class TurnManager : MonoBehaviour
 
         //uiDesktop.TurnOnMarbleBagAnimation();
 
-        roundInformation = information.GetComponent<TextMeshProUGUI>();
+        //roundInformation = information.GetComponent<TextMeshProUGUI>();
         specialMarbles = gameObject.GetComponent<SpecialMarble>();
     }
     private void Update()
@@ -86,12 +87,28 @@ public class TurnManager : MonoBehaviour
     {
         amountOfRounds++;
 
-        yield return new WaitForSeconds(0.3f);
-
-        for (int i = 3; i > 0; i--)
+        // display countdown
+        if (turnLetterImages != null)
         {
-            roundInformation.text = "Round " + amountOfRounds + " Starts in " + i;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
+            for (int i = 3; i < turnLetterImages.Length; i--)
+            {
+                if (turnLetterImages[i + 1] != null)
+                    turnLetterImages[i + 1].SetActive(false);
+                if (turnLetterImages[i - 1] != null)
+                    turnLetterImages[i - 1].SetActive(false);
+                turnLetterImages[i].SetActive(true);
+                yield return new WaitForSeconds(1f);
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+            for (int i = 3; i > 0; i--)
+            {
+                roundInformation.text = "Round " + amountOfRounds + " Starts in " + i;
+                yield return new WaitForSeconds(1f);
+            }
         }
 
         roundInformation.text = ""; // TODO add sounds
