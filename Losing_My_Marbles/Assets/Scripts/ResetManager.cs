@@ -59,6 +59,7 @@ public class ResetManager : MonoBehaviour
         }
     }
 
+   
     public void ResetLevel()
     {
         PlayerProperties.scoreKeeper = new int[4]
