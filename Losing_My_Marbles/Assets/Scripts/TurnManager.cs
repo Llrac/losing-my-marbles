@@ -18,8 +18,8 @@ public class TurnManager : MonoBehaviour
     public int amountOfTurns = 3;
     public static int marblesToWin = 3;
     public static float turnLength = .5f; // den h�r kan allts� �ndras s� att man hinner med en annan coroutine!!!
-    public static List <PlayerProperties> players = new();
-    public static List <PlayerProperties> sortedPlayers = new();
+    public static List<PlayerProperties> players = new();
+    public static List<PlayerProperties> sortedPlayers = new();
     public UIDesktop uiDesktop;
     public GameObject readyAlert;
     //public GameObject information;
@@ -56,12 +56,12 @@ public class TurnManager : MonoBehaviour
             uiDesktop.ToggleReadyShine(PlayerProperties.ids[tracking], true);
             tracking++;
         }
-        
+
         if (PlayerProperties.myActions.Count == players.Count * amountOfTurns && PlayerProperties.myActions.Count != 0)
         {
             //Debug.Log(players.Count);
             //Debug.Log(players[0].marbleEffect.Count);
-            
+
             for (int i = 0; i < players.Count; i++)
             {
                 for (int j = 0; j < players.Count; j++)
@@ -73,63 +73,53 @@ public class TurnManager : MonoBehaviour
                     }
                 }
             }
-            
+
             if (startTurn == true)
             {
                 readyAlert.GetComponent<Image>().enabled = false;
-                StartCoroutine(ExecuteTurn()); 
+                StartCoroutine(ExecuteTurn());
                 startTurn = false;
-            }     
+            }
         }
     }
 
     public IEnumerator ExecuteTurn()
     {
         amountOfRounds++;
+        Debug.Log("ExecuteTurn");
 
         // display countdown
-        yield return new WaitForSeconds(1f);
-        for (int i = 3; i < turnLetterImages.Length; i--)
+        yield return new WaitForSeconds(0.6f);
+
+        Debug.Log("ExecuteTurn2");
+
+        for (int i = 0; i < 3; i++)
         {
-            if (turnLetterImages[i + 1] != null)
+            int index = 2 - i;
+            foreach (var item in turnLetterImages)
             {
-                turnLetterImages[i + 1].SetActive(false);
-                Debug.Log("disabled " + turnLetterImages[i + 1]);
+                item.SetActive(false);
             }
-            if (turnLetterImages[i - 1] != null)
-            {
-                turnLetterImages[i - 1].SetActive(false);
-                Debug.Log("disabled " + turnLetterImages[i - 1]);
-            }
-            if (turnLetterImages[i] != null)
-            {
-                turnLetterImages[i].SetActive(true);
-                Debug.Log("enabled " + turnLetterImages[i]);
-            }
-            yield return new WaitForSeconds(1f);
+            turnLetterImages[index].SetActive(true);
+            yield return new WaitForSeconds(0.6f);
         }
-        //else
-        //{
-        //    yield return new WaitForSeconds(1f);
-        //    for (int i = 3; i > 0; i--)
-        //    {
-        //        roundInformation.text = "Round " + amountOfRounds + " Starts in " + i;
-        //        yield return new WaitForSeconds(1f);
-        //    }
-        //}
+        foreach (var item in turnLetterImages)
+        {
+            item.SetActive(false);
+        }
 
         //roundInformation.text = ""; // TODO add sounds
 
         for (int i = 0; i < sortedPlayers.Count; i++)
         {
 
-           // uiDesktop.TogglePlayerBags(false, sortedPlayers[i].playerID);
+            // uiDesktop.TogglePlayerBags(false, sortedPlayers[i].playerID);
 
             uiDesktop.ToggleReadyShine(sortedPlayers[i].playerID, false);
             uiDesktop.InstantiatePlayerOrder(sortedPlayers[i].playerID);
             yield return new WaitForSeconds(0.3f);
         }
-        
+
         for (int currentTurn = 0; currentTurn < amountOfTurns; currentTurn++) //keeps track of turns
         {
             //roundInformation.text = "Marble " + (currentTurn + 1);
@@ -140,7 +130,7 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(turnLength);
                 for (int steps = 0; steps < Mathf.Abs((int)sortedPlayers[playerInList].marbleEffect[currentTurn].y); steps++)  // execute player j trymove with player j gameobject and player j list of actions    
                 {                                                                                                                                                         //extra actions is for rollerskates
-                    while(isPaused == true) // pausing point 1
+                    while (isPaused == true) // pausing point 1
                     {
                         yield return null;
                     }
@@ -148,7 +138,7 @@ public class TurnManager : MonoBehaviour
                     {
                         case 0:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, 1);
-                           
+
                             break;
                         case 1:
                             sortedPlayers[playerInList].TryMove(sortedPlayers[playerInList].gameObject, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].x, (int)sortedPlayers[playerInList].marbleEffect[currentTurn].y);
@@ -174,7 +164,7 @@ public class TurnManager : MonoBehaviour
                 yield return new WaitForSeconds(turnLength);
             }
             // enemy
-            if(Movement.enemies.Count > 0)
+            if (Movement.enemies.Count > 0)
             {
                 for (int enemyCounter = 0; enemyCounter < Movement.enemies.Count; enemyCounter++)
                 {
@@ -189,7 +179,7 @@ public class TurnManager : MonoBehaviour
                     yield return new WaitForSeconds(turnLength);
                 }
             }
-           
+
             ratPathKeeping++;
             if (ratPathKeeping >= FindObjectOfType<RatProperties>().moves.Count)
             {
@@ -212,20 +202,20 @@ public class TurnManager : MonoBehaviour
         PlayerProperties.ids.Clear();
         tracking = 0;
         sortedPlayers.Clear();
-        
+
         uiDesktop.ClearPlayerOrder();
 
-       // uiDesktop.TurnOnMarbleBagAnimation();
-        
+        // uiDesktop.TurnOnMarbleBagAnimation();
+
 
 
         readyAlert.GetComponent<Image>().enabled = true;
-        
+
         //roundInformation.text = "Round " + amountOfRounds + " is over";
         yield return new WaitForSeconds(2f);
         //roundInformation.text = "Play your marbles!";
         startTurn = true;
-        
+
         actionHandler.DrawNewHand(true);
     }
 }
