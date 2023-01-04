@@ -51,7 +51,6 @@ public abstract class Movement : MonoBehaviour
     public AnimationReferenceAsset rFrontIdle3 = null;
     public AnimationReferenceAsset rFrontIdle4 = null;
     public AnimationReferenceAsset rFrontIdle5 = null;
-    public AnimationReferenceAsset rFrontIdle6 = null;
 
     public AnimationReferenceAsset rBackIdle2 = null;
     public AnimationReferenceAsset rBackIdle3 = null;
