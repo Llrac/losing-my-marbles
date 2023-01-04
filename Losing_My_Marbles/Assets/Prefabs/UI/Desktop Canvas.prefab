@@ -1988,8 +1988,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5056906182355483227}
-  m_RootOrder: 10
+  m_Father: {fileID: 8960293918423009006}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2079,7 +2079,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -2247,8 +2247,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     startSize:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 1
+      minMaxState: 3
+      scalar: 1.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -2300,7 +2300,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -2353,7 +2353,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -2571,7 +2571,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -2936,7 +2936,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 1
+    enabled: 0
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -3332,9 +3332,9 @@ ParticleSystem:
     fps: 30
     frameOverTime:
       serializedVersion: 2
-      minMaxState: 1
+      minMaxState: 3
       scalar: 0.9999
-      minScalar: 0.9999
+      minScalar: 0
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3436,7 +3436,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    speedRange: {x: 0, y: 1}
+    speedRange: {x: 0, y: 0}
     tilesX: 1
     tilesY: 1
     animationType: 0
@@ -3445,7 +3445,15 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 21300000, guid: 94452a3893e1fca42a8358cb8373cd4e, type: 3}
+    - sprite: {fileID: 1066107735, guid: b93d9468ccd75664591b42e85d9e85fb, type: 3}
+    - sprite: {fileID: -1235382042, guid: b93d9468ccd75664591b42e85d9e85fb, type: 3}
+    - sprite: {fileID: -1959163310, guid: b93d9468ccd75664591b42e85d9e85fb, type: 3}
+    - sprite: {fileID: 111580041, guid: b93d9468ccd75664591b42e85d9e85fb, type: 3}
+    - sprite: {fileID: -1330243750, guid: b93d9468ccd75664591b42e85d9e85fb, type: 3}
+    - sprite: {fileID: 1731693634, guid: b93d9468ccd75664591b42e85d9e85fb, type: 3}
+    - sprite: {fileID: 1379095569, guid: b93d9468ccd75664591b42e85d9e85fb, type: 3}
+    - sprite: {fileID: 1396260142, guid: b93d9468ccd75664591b42e85d9e85fb, type: 3}
+    - sprite: {fileID: 827929315, guid: b93d9468ccd75664591b42e85d9e85fb, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -7240,7 +7248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8960293918423009006
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7255,6 +7263,7 @@ RectTransform:
   m_Children:
   - {fileID: 5056906183059004376}
   - {fileID: 5542813770362482187}
+  - {fileID: 3908508764051122564}
   m_Father: {fileID: 5056906182355483227}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8801,7 +8810,6 @@ RectTransform:
   - {fileID: 1453955367}
   - {fileID: 8960293918423009006}
   - {fileID: 5056906181533450827}
-  - {fileID: 3908508764051122564}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

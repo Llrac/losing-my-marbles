@@ -3408,14 +3408,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 36617717}
-    - target: {fileID: 497545834306560931, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 497545834306560933, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
-      propertyPath: UVModule.sprites.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5056906181106434851, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

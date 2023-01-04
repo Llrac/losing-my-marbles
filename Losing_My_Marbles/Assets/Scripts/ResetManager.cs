@@ -109,6 +109,7 @@ public class ResetManager : MonoBehaviour
             _ => "default",
         };
         FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
+        FindObjectOfType<UIDesktop>().marbleRain.SetActive(true);
         FindObjectOfType<UIDesktop>().winScreen.SetActive(true);
         FindObjectOfType<UIDesktop>().winScreen.GetComponent<Animator>().SetTrigger("fade_in");
         FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(false);

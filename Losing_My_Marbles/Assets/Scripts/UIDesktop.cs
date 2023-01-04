@@ -15,6 +15,7 @@ public class UIDesktop : MonoBehaviour
     readonly static List<int> tooltipOrder = new();
     [HideInInspector] public GameObject transitionScreen;
     [HideInInspector] public GameObject winScreen;
+    [HideInInspector] public GameObject marbleRain;
     [HideInInspector] public SkeletonGraphic skeleton;
     GameObject randomTooltip;
     GameObject loadingIcon;
@@ -57,6 +58,10 @@ public class UIDesktop : MonoBehaviour
             if (child.gameObject.name == "Win_Player")
             {
                 skeleton = child.GetComponent<SkeletonGraphic>();
+            }
+            if (child.gameObject.name == "Its_Raining_Marbles")
+            {
+                marbleRain = child.gameObject;
             }
         }
         foreach (Transform child in transitionScreen.transform)
