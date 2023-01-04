@@ -449,10 +449,8 @@ public abstract class Movement : MonoBehaviour
                     GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, enemies);
 
-                    if(enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID) == true)
-                    {
-                        TryMove(character, 0, 1);
-                    }
+                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
+                    TryMove(character, 0, 1);
 
                     break;
 
