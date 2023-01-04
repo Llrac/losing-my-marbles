@@ -1813,6 +1813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13adaa1761d4e44597e3eb08c05bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
 --- !u!4 &1073630580
 Transform:
   m_ObjectHideFlags: 0
@@ -3411,6 +3412,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 36617717}
+    - target: {fileID: 1453955366, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 258875185325370067, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
       propertyPath: initialSkinName
       value: red
