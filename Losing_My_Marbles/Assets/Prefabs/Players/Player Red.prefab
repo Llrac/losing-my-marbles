@@ -315,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2610747910663743189
 Transform:
   m_ObjectHideFlags: 0
@@ -374,8 +374,12 @@ MonoBehaviour:
   frontWinJump: {fileID: 11400000, guid: ce1c26db62308334494783a49c1bdb20, type: 2}
   rFrontIdle2: {fileID: 0}
   rFrontIdle3: {fileID: 0}
+  rFrontIdle4: {fileID: 0}
+  rFrontIdle5: {fileID: 0}
   rBackIdle2: {fileID: 0}
   rBackIdle3: {fileID: 0}
+  rBackIdle4: {fileID: 0}
+  rBackIdle5: {fileID: 0}
   frontAttack: {fileID: 0}
   backAttack: {fileID: 0}
   turnAnimatorSpeed: 1
@@ -875,7 +879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3811693432645594752
 Transform:
   m_ObjectHideFlags: 0
@@ -951,7 +955,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8281359356456321971}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: cd28b03461cfee344bfa14513c9be950, type: 2}
   m_CullingMode: 0

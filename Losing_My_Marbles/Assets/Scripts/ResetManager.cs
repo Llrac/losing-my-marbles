@@ -99,43 +99,29 @@ public class ResetManager : MonoBehaviour
             win.sprite = Screens[playerID - 1];
             win.enabled = true;
         }
-        TurnManager.isPaused = true;
+
+        FindObjectOfType<UIDesktop>().skeleton.initialSkinName = playerID switch
+        {
+            1 => "red",
+            2 => "purple",
+            3 => "turquoise",
+            4 => "yellow",
+            _ => "default",
+        };
+        FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
+        FindObjectOfType<UIDesktop>().winScreen.SetActive(true);
+        FindObjectOfType<UIDesktop>().winScreen.GetComponent<Animator>().SetTrigger("fade_in");
+        FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(false);
+        FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_on");
 
         foreach (PlayerProperties playersInScene in FindObjectsOfType<PlayerProperties>())
         {
             if (playerID == playersInScene.playerID)
             {
-                playersInScene.gameObject.SetActive(false);
+                Destroy(playersInScene.gameObject);
             }
         }
-
-        switch (playerID)
-        {
-            case 1:
-                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "red";
-                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
-                break;
-            case 2:
-                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "purple";
-                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
-                break;
-            case 3:
-                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "turquoise";
-                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
-                break;
-            case 4:
-                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "yellow";
-                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
-                break;
-            default:
-                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "default";
-                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
-                break;
-        }
-
-        FindObjectOfType<UIDesktop>().winScreen.GetComponent<Animator>().SetTrigger("fade_in");
-        FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(false);
-        FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_on");
+        TurnManager.isPaused = true;
     }
     public void PauseGame()
     {
