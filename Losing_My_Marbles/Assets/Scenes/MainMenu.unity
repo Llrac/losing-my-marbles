@@ -375,6 +375,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 209725965087590389, guid: 2019f381720087247916d9c0937ae589, type: 3}
+      propertyPath: onClick
+      value: 
+      objectReference: {fileID: 8300000, guid: bac9974a8bb0a154d960001256e8bcb9, type: 3}
+    - target: {fileID: 209725965087590389, guid: 2019f381720087247916d9c0937ae589, type: 3}
+      propertyPath: onHoverEnter
+      value: 
+      objectReference: {fileID: 8300000, guid: e2b656112ee2a4e4facc907c200f11ce, type: 3}
     - target: {fileID: 209725965087590391, guid: 2019f381720087247916d9c0937ae589, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -915,6 +923,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 36846029281325300, guid: b255128f4c9f50e48aa573b131c86a2c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1929430914}
     - target: {fileID: 36846029281325301, guid: b255128f4c9f50e48aa573b131c86a2c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
