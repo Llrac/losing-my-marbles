@@ -124,10 +124,10 @@ MonoBehaviour:
       - m_Target: {fileID: 36846028635142453}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ClickSecret
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 601422700}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
