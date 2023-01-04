@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 879df6362369a0f489769c90013f1db5
+guid: d593162513fe4f84c98f1fa11f0ab122
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,7 +139,301 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1414
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b8b8eaa9389e424f8d6349b176cf93a
+      internalID: -1231057265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_1
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 1414
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe74fd78320f0944da57bfe35a929d52
+      internalID: -1588654484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_2
+      rect:
+        serializedVersion: 2
+        x: 1396
+        y: 1414
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a5368fbe2444d547b5d5b09cfda4267
+      internalID: 1686744748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_3
+      rect:
+        serializedVersion: 2
+        x: 2094
+        y: 1414
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd015803ba7086e40b8b9176196ea064
+      internalID: 2049664510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_4
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 1414
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 618883a3b5de79044bdbf861f09c1588
+      internalID: 30555838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_5
+      rect:
+        serializedVersion: 2
+        x: 3490
+        y: 1414
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7714c1b428b32db488b080d05440f811
+      internalID: 1678777756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_6
+      rect:
+        serializedVersion: 2
+        x: 4188
+        y: 1414
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b62f9cfc16d16b439ceac89d3374b69
+      internalID: 1517699331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17a181c099ed14943a2a1706968c1fe5
+      internalID: 1421024866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_8
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 0
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9431ddd69012a464dae247e7952e73bd
+      internalID: 1364846580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_9
+      rect:
+        serializedVersion: 2
+        x: 1396
+        y: 0
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c1bbd47e54baec4c92598659dab6ce0
+      internalID: 237762080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_10
+      rect:
+        serializedVersion: 2
+        x: 2094
+        y: 0
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1d2495b60e040343a321f84f12dfc89
+      internalID: 2107533205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_11
+      rect:
+        serializedVersion: 2
+        x: 2792
+        y: 0
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31a4553fdb014c444afd14fd01643a69
+      internalID: -567398978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_12
+      rect:
+        serializedVersion: 2
+        x: 3490
+        y: 0
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bb736df08f779b4b96de1f8bc3e67db
+      internalID: -128835128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: character for spine_front_merged-turn front_13
+      rect:
+        serializedVersion: 2
+        x: 4188
+        y: 0
+        width: 698.2857
+        height: 1414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0f0789928cda4747bf7a7d73a292c53
+      internalID: -1900428527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -150,7 +444,21 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      character for spine_front_merged-turn front_6: 1517699331
+      character for spine_front_merged-turn front_12: -128835128
+      character for spine_front_merged-turn front_13: -1900428527
+      character for spine_front_merged-turn front_11: -567398978
+      character for spine_front_merged-turn front_0: -1231057265
+      character for spine_front_merged-turn front_7: 1421024866
+      character for spine_front_merged-turn front_5: 1678777756
+      character for spine_front_merged-turn front_10: 2107533205
+      character for spine_front_merged-turn front_2: 1686744748
+      character for spine_front_merged-turn front_9: 237762080
+      character for spine_front_merged-turn front_8: 1364846580
+      character for spine_front_merged-turn front_3: 2049664510
+      character for spine_front_merged-turn front_1: -1588654484
+      character for spine_front_merged-turn front_4: 30555838
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
