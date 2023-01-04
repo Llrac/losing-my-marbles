@@ -2346,14 +2346,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4824100951751452371, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
-      propertyPath: jumpAnimationSpeed
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8612317307832832601, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8612317307832832602, guid: 41cfba385a74f3c4ea1d58b6301ee2c1, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2421,7 +2413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743195, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Mesh

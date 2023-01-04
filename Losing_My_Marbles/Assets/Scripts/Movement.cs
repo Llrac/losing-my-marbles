@@ -40,13 +40,23 @@ public abstract class Movement : MonoBehaviour
     public AnimationReferenceAsset backJump;
 
     [Header("Players Only")]
-    public AnimationReferenceAsset frontIdle2 = null;
-    public AnimationReferenceAsset frontIdle3 = null;
-    public AnimationReferenceAsset backIdle2 = null;
-    public AnimationReferenceAsset backIdle3 = null;
+    public AnimationReferenceAsset pFrontIdle2 = null;
+    public AnimationReferenceAsset pFrontIdle3 = null;
+    public AnimationReferenceAsset pBackIdle2 = null;
+    public AnimationReferenceAsset pBackIdle3 = null;
     public AnimationReferenceAsset frontWinJump = null;
 
     [Header("Rats Only")]
+    public AnimationReferenceAsset rFrontIdle2 = null;
+    public AnimationReferenceAsset rFrontIdle3 = null;
+    public AnimationReferenceAsset rFrontIdle4 = null;
+    public AnimationReferenceAsset rFrontIdle5 = null;
+
+    public AnimationReferenceAsset rBackIdle2 = null;
+    public AnimationReferenceAsset rBackIdle3 = null;
+    public AnimationReferenceAsset rBackIdle4 = null;
+    public AnimationReferenceAsset rBackIdle5 = null;
+
     public AnimationReferenceAsset frontAttack = null;
     public AnimationReferenceAsset backAttack = null;
 

@@ -20,29 +20,42 @@ public class RandomAnimationHandler : MonoBehaviour
 
     public void StartRandomizeIdleAnimation(GameObject character)
     {
-        if (CompareTag("Player"))
-        {
-            GetComponent<RandomAnimationHandler>().StopRandomizeIdleAnimation();
-            StartCoroutine(GetComponent<RandomAnimationHandler>().RandomizeIdleAnimation(character));
-        }
+        GetComponent<RandomAnimationHandler>().StopRandomizeIdleAnimation();
+        StartCoroutine(GetComponent<RandomAnimationHandler>().RandomizeIdleAnimation(character));
     }
 
     public IEnumerator RandomizeIdleAnimation(GameObject character)
     {
         int randomWaitTime = Random.Range(5, 15);
         yield return new WaitForSeconds(randomWaitTime);
-        int randomizedAnimation = Random.Range(1, 4);
         Movement m = character.GetComponent<Movement>();
         m.UpdateSkeleton();
         if (m.usingFrontSkeleton)
         {
             m.frontSkeleton.timeScale = 1;
-            m.nextIdleAnimation = randomizedAnimation switch
+            if (character.CompareTag("Player"))
             {
-                1 => m.frontIdle2,
-                2 => m.frontIdle3,
-                _ => m.frontIdle,
-            };
+                int randomizedAnimation = Random.Range(1, 4); // 3 unique animations
+                m.nextIdleAnimation = randomizedAnimation switch
+                {
+                    1 => m.pFrontIdle2,
+                    2 => m.pFrontIdle3,
+                    _ => m.frontIdle,
+                };
+            }
+            else if (character.CompareTag("Enemy"))
+            {
+                int randomizedAnimation = Random.Range(1, 6); // 5 unique animations
+                m.nextIdleAnimation = randomizedAnimation switch
+                {
+                    1 => m.rFrontIdle2,
+                    2 => m.rFrontIdle3,
+                    3 => m.rFrontIdle4,
+                    4 => m.rFrontIdle5,
+                    _ => m.frontIdle,
+                };
+            }
+            
             m.frontSkeleton.AnimationState.SetAnimation(0, m.nextIdleAnimation, false);
             yield return new WaitForSeconds(m.frontSkeleton.AnimationState.SetAnimation(0, m.nextIdleAnimation, false).AnimationEnd);
             m.nextIdleAnimation = m.frontIdle;
@@ -51,12 +64,29 @@ public class RandomAnimationHandler : MonoBehaviour
         else
         {
             m.backSkeleton.timeScale = 1;
-            m.nextIdleAnimation = randomizedAnimation switch
+            if (character.CompareTag("Player"))
             {
-                2 => m.backIdle2,
-                3 => m.backIdle3,
-                _ => m.backIdle,
-            };
+                int randomizedAnimation = Random.Range(1, 4); // 3 unique animations
+                m.nextIdleAnimation = randomizedAnimation switch
+                {
+                    2 => m.pBackIdle2,
+                    3 => m.pBackIdle3,
+                    _ => m.backIdle,
+                };
+            }
+            else if (character.CompareTag("Enemy"))
+            {
+                int randomizedAnimation = Random.Range(1, 6); // 5 unique animations
+                m.nextIdleAnimation = randomizedAnimation switch
+                {
+                    1 => m.rBackIdle2,
+                    2 => m.rBackIdle3,
+                    3 => m.rBackIdle4,
+                    4 => m.rBackIdle5,
+                    _ => m.backIdle,
+                };
+            }
+
             m.backSkeleton.AnimationState.SetAnimation(0, m.nextIdleAnimation, false);
             yield return new WaitForSeconds(m.backSkeleton.AnimationState.SetAnimation(0, m.nextIdleAnimation, false).AnimationEnd);
             m.nextIdleAnimation = m.backIdle;
