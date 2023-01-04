@@ -166,13 +166,13 @@ public class UIDesktop : MonoBehaviour
         {
             GameObject child = playerPickupMarbles[player.GetComponent<PlayerProperties>().playerID - 1].transform.GetChild(i).gameObject;
             child.SetActive(true);
-            if (player.GetComponent<PlayerProperties>().specialMarbleCount >= 3)
-            {
-                ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID);
-                playerWin = true;
-            }
         }
-        
+        if (player.GetComponent<PlayerProperties>().specialMarbleCount >= 3)
+        {
+            ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID);
+            playerWin = true;
+        }
+
         if (playerWin == false) // if no mystery marbles in scene, do ...
         {
             StartCoroutine(NewLevel());

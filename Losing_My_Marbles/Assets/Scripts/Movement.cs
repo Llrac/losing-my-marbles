@@ -313,7 +313,7 @@ public abstract class Movement : MonoBehaviour
                 }
 
                 StartCoroutine(PrepareIdleAnimation(0));
-                return;
+                break;
 
                 //// disable skeletons, enable monke ;)
                 //frontSkeleton.gameObject.SetActive(false);
