@@ -6,11 +6,8 @@ public class RandomAnimationHandler : MonoBehaviour
 {
     private void Start()
     {
-        if (CompareTag("Player"))
-        {
-            StopRandomizeIdleAnimation();
-            StartCoroutine(RandomizeIdleAnimation(gameObject));
-        }
+        StopRandomizeIdleAnimation();
+        StartCoroutine(RandomizeIdleAnimation(gameObject));
     }
 
     public void StopRandomizeIdleAnimation()
@@ -52,8 +49,9 @@ public class RandomAnimationHandler : MonoBehaviour
                     2 => m.rFrontIdle3,
                     3 => m.rFrontIdle4,
                     4 => m.rFrontIdle5,
-                    _ => m.frontIdle,
+                    _ => m.rFrontIdle6
                 };
+                Debug.Log(randomizedAnimation);
             }
             
             m.frontSkeleton.AnimationState.SetAnimation(0, m.nextIdleAnimation, false);
@@ -76,15 +74,15 @@ public class RandomAnimationHandler : MonoBehaviour
             }
             else if (character.CompareTag("Enemy"))
             {
-                int randomizedAnimation = Random.Range(1, 6); // 5 unique animations
+                int randomizedAnimation = Random.Range(1, 5); // 4 unique animations
                 m.nextIdleAnimation = randomizedAnimation switch
                 {
                     1 => m.rBackIdle2,
                     2 => m.rBackIdle3,
                     3 => m.rBackIdle4,
-                    4 => m.rBackIdle5,
-                    _ => m.backIdle,
+                    _ => m.rBackIdle5
                 };
+                Debug.Log(randomizedAnimation);
             }
 
             m.backSkeleton.AnimationState.SetAnimation(0, m.nextIdleAnimation, false);
