@@ -20,12 +20,13 @@ public class TurnManager : MonoBehaviour
     public static float turnLength = .5f; // den h�r kan allts� �ndras s� att man hinner med en annan coroutine!!!
     public static List <PlayerProperties> players = new();
     public static List <PlayerProperties> sortedPlayers = new();
+    
+    public ActionHandler actionHandler;
     public UIDesktop uiDesktop;
     public GameObject readyAlert;
     public GameObject information;
+    
     private TextMeshProUGUI roundInformation;
-
-    public ActionHandler actionHandler;
 
     private SpecialMarble specialMarbles;
     //TODO add a sorted list here

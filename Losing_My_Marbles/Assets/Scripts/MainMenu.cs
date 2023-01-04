@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
     }
     public void StartGame()
     {
+        GameSession.activePlayers = 0;
         SceneManager.LoadScene(1);
     }
     public void ShowCredits()

@@ -26,6 +26,7 @@ public class DatabaseAPI : MonoBehaviour
         // Gets an instance of the database
         FirebaseDatabase.GetInstance("https://losing-my-marbles-620eb-default-rtdb.europe-west1.firebasedatabase.app/");
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        FirebaseDatabase.DefaultInstance.SetPersistenceEnabled(false);
 
         // dbReference.SetValueAsync(null); //clears the database every play session
         // dbReference.SetValueAsync("game session");
@@ -102,8 +103,8 @@ public class DatabaseAPI : MonoBehaviour
     public void PostNewHand(NewHandMessage newHandMessage, Action callback, Action<AggregateException> fallback)
     {
         var gameSessionID = GameSession.sessionID.ToString();
-        
         var newHandJson = JsonUtility.ToJson(newHandMessage);
+        
         dbReference.Child("game session").Child(gameSessionID).Push().SetRawJsonValueAsync(newHandJson).ContinueWith(task =>
         {
             if (task.IsCanceled || task.IsFaulted) fallback(task.Exception);
@@ -123,5 +124,11 @@ public class DatabaseAPI : MonoBehaviour
 
         dbReference.Child("game session").Child(gameSessionID).ChildAdded += CurrentListener;
 
+    }
+    
+    public void DeleteGameSession()
+    {
+        var gameSessionID = GameSession.sessionID.ToString();
+        dbReference.Child("game session").Child(gameSessionID).RemoveValueAsync();
     }
 }
