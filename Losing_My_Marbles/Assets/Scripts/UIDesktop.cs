@@ -35,6 +35,7 @@ public class UIDesktop : MonoBehaviour
 
     void Start()
     {
+        orderInLevel++;
         GameObject desktopCanvas = FindObjectOfType<Canvas>().gameObject;
         foreach (Transform child in desktopCanvas.transform)
         {
@@ -77,7 +78,11 @@ public class UIDesktop : MonoBehaviour
                         tooltipOrder.Add(randomTooltip);
                     }
                 }
-                randomTooltip.GetComponent<Image>().sprite = tooltips[tooltipOrder[orderInLevel - 1]];
+                randomTooltip.GetComponent<Image>().sprite = tooltips[tooltipOrder[orderInLevel]];
+                if(orderInLevel >= 2)
+                {
+                    orderInLevel = 0;
+                }
             }
         }
 

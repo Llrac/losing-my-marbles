@@ -16,7 +16,13 @@ public class Scenehandler : MonoBehaviour
     {
         
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            SceneManager.LoadScene(1);
+        }
+    }
     public void JoinGameMobile()
     {
         GameSession.sessionID = Int32.Parse(sessionCode.text);

@@ -47,7 +47,7 @@ public class MainMenu : MonoBehaviour
     public void AskExit()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 
     public void OnHover(GameObject button)

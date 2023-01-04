@@ -133,11 +133,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5056906182093424068, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
   m_PrefabInstance: {fileID: 2042137480}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &21293269 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5056906181629956827, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
-  m_PrefabInstance: {fileID: 2042137480}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &80288516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,7 +1105,10 @@ MonoBehaviour:
   amountOfTurns: 3
   uiDesktop: {fileID: 235453894}
   readyAlert: {fileID: 1750751545}
-  information: {fileID: 21293269}
+  turnLetterImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   actionHandler: {fileID: 487106152}
 --- !u!4 &816951276
 Transform:
@@ -3535,6 +3533,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 510053272, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
+      propertyPath: bomb
+      value: 
+      objectReference: {fileID: 5048783173194823481, guid: 30d1bc4f6ad35b94b802b85e9b2901b8, type: 3}
     - target: {fileID: 2120634356009288632, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
       propertyPath: m_RootOrder
       value: 8

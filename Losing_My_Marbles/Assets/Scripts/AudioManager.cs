@@ -84,6 +84,6 @@ public class AudioManager : MonoBehaviour
         }
 
         Instance.UpdateBackgroundAudio();
-        UIDesktop.orderInLevel++;
+       
     }
 }

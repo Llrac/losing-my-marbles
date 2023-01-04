@@ -431,7 +431,7 @@ public abstract class Movement : MonoBehaviour
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
-                    Move(character, 1);
+                    Move(character, 1, typeID);
                     savedTile = 'X';
                     return true;
 
@@ -446,7 +446,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        TryMove(gameObject, 0, 1);
+                        TryMove(gameObject, 0, 1, typeID);
                         if (mediumAudio != null)
                             mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
@@ -691,6 +691,7 @@ public abstract class Movement : MonoBehaviour
         {
             SetAnimation(typeID, character, true);
         }
+        
     }
     public void Blink(int blinkDistanceMultiplier) // you could think of this as part 1/2 of the whole blink process
     {
