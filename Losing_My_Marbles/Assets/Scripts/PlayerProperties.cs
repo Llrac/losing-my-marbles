@@ -253,7 +253,7 @@ public class PlayerProperties : Movement
     }
     private IEnumerator Respawn()
     {
-        transform.position = new Vector2(100,100);
+        transform.position = new Vector2(100,100); // mediocre fix
         yield return new WaitForSeconds(1.5f);
         for (int i = 0; i < TurnManager.players.Count; i++)
         {
