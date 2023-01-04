@@ -307,73 +307,76 @@ public abstract class Movement : MonoBehaviour
                 break;
 
             case 1:
-                if (CompareTag("Enemy") || wallJump)
+                if (wallJump)
                 {
                     return;
                 }
 
-                // disable skeletons, enable monke ;)
-                frontSkeleton.gameObject.SetActive(false);
-                backSkeleton.gameObject.SetActive(false);
-                turnAnimator.gameObject.SetActive(true);
-                turnAnimator.speed = turnAnimatorSpeed;
-                if (newAnimationDirectionID < lastAnimationDirectionID) // turn left
-                {
-                    switch (Mathf.Abs(newAnimationDirectionID % 4)) // gives currentDirectionID
-                    {
-                        case 0:
-                            turnAnimator.SetTrigger("front_back_left");
-                            break;
-
-                        case 1:
-                            turnAnimator.SetTrigger("front_left");
-                            break;
-
-                        case 2:
-                            turnAnimator.SetTrigger("back_front_left");
-                            break;
-
-                        case 3:
-                            turnAnimator.SetTrigger("back_left");
-                            break;
-
-                        default:
-                            Debug.Log(newAnimationDirectionID + " was not used correctly.");
-                            break;
-                    }
-                }
-                else if (newAnimationDirectionID > lastAnimationDirectionID) // turn right
-                {
-                    switch (Mathf.Abs(newAnimationDirectionID % 4)) // gives currentDirectionID
-                    {
-                        case 0:
-                            turnAnimator.SetTrigger("back_right");
-                            break;
-
-                        case 1:
-                            turnAnimator.SetTrigger("back_front_right");
-                            break;
-
-                        case 2:
-                            turnAnimator.SetTrigger("front_right");
-                            break;
-
-                        case 3:
-                            turnAnimator.SetTrigger("front_back_right");
-                            break;
-
-                        default:
-                            Debug.Log(newAnimationDirectionID + " was not used correctly.");
-                            break;
-                    }
-                }
-                else
-                {
-                    Debug.Log("animationDirectionID = lastAnimationDirectionID");
-                }
-
-                StartCoroutine(PrepareIdleAnimation(0.25f / turnAnimatorSpeed));
+                StartCoroutine(PrepareIdleAnimation(0));
                 break;
+
+                //// disable skeletons, enable monke ;)
+                //frontSkeleton.gameObject.SetActive(false);
+                //backSkeleton.gameObject.SetActive(false);
+                //turnAnimator.gameObject.SetActive(true);
+                //turnAnimator.speed = turnAnimatorSpeed;
+                //if (newAnimationDirectionID < lastAnimationDirectionID) // turn left
+                //{
+                //    switch (Mathf.Abs(newAnimationDirectionID % 4)) // gives currentDirectionID
+                //    {
+                //        case 0:
+                //            turnAnimator.SetTrigger("front_back_left");
+                //            break;
+
+                //        case 1:
+                //            turnAnimator.SetTrigger("front_left");
+                //            break;
+
+                //        case 2:
+                //            turnAnimator.SetTrigger("back_front_left");
+                //            break;
+
+                //        case 3:
+                //            turnAnimator.SetTrigger("back_left");
+                //            break;
+
+                //        default:
+                //            Debug.Log(newAnimationDirectionID + " was not used correctly.");
+                //            break;
+                //    }
+                //}
+                //else if (newAnimationDirectionID > lastAnimationDirectionID) // turn right
+                //{
+                //    switch (Mathf.Abs(newAnimationDirectionID % 4)) // gives currentDirectionID
+                //    {
+                //        case 0:
+                //            turnAnimator.SetTrigger("back_right");
+                //            break;
+
+                //        case 1:
+                //            turnAnimator.SetTrigger("back_front_right");
+                //            break;
+
+                //        case 2:
+                //            turnAnimator.SetTrigger("front_right");
+                //            break;
+
+                //        case 3:
+                //            turnAnimator.SetTrigger("front_back_right");
+                //            break;
+
+                //        default:
+                //            Debug.Log(newAnimationDirectionID + " was not used correctly.");
+                //            break;
+                //    }
+                //}
+                //else
+                //{
+                //    Debug.Log("animationDirectionID = lastAnimationDirectionID");
+                //}
+
+                ////StartCoroutine(PrepareIdleAnimation(0.25f / turnAnimatorSpeed));
+                //break;
 
             default:
                 break;
@@ -389,7 +392,7 @@ public abstract class Movement : MonoBehaviour
     IEnumerator PrepareIdleAnimation(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        if (CompareTag("Player"))
+        if (CompareTag("Player") && turnAnimator != null)
             turnAnimator.gameObject.SetActive(false);
         if (usingFrontSkeleton)
         {
