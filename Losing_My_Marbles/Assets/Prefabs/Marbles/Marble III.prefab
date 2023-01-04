@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 209766369953659393, guid: 63e1b8c37f9239b48bbf7912bc1dc2d5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 14aa327bae580e34e8b1d8f575367bbc, type: 3}
     - target: {fileID: 1691507434093092371, guid: 63e1b8c37f9239b48bbf7912bc1dc2d5, type: 3}
       propertyPath: marbleID
       value: 3
