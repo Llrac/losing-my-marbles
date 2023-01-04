@@ -107,6 +107,11 @@ public class PlayerProperties : Movement
             {
                 TryMove(gameObject, 2, 3);
             }
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                ResetManager.PlayerWin(playerID);
+            }
         }
     }
 

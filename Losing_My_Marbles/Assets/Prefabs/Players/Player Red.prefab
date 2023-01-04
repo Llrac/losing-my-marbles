@@ -371,6 +371,7 @@ MonoBehaviour:
   frontIdle3: {fileID: 11400000, guid: 1abf5bf3400634b4fb9b46bc60151a28, type: 2}
   backIdle2: {fileID: 11400000, guid: daea38329384566438db6939b7853f50, type: 2}
   backIdle3: {fileID: 11400000, guid: 2bd4846d41389cf4ebe4d4563f6c6e5d, type: 2}
+  frontWinJump: {fileID: 11400000, guid: ce1c26db62308334494783a49c1bdb20, type: 2}
   frontAttack: {fileID: 0}
   backAttack: {fileID: 0}
   turnAnimatorSpeed: 1
@@ -932,7 +933,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.1225, y: 14.002828}
+  m_Size: {x: 6.1125, y: 14.051587}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0

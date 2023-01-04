@@ -106,7 +106,29 @@ public class ResetManager : MonoBehaviour
         {
             if (playerID == TurnManager.players[i].playerID)
             {
-                //do animation
+                GameObject winner = TurnManager.players[i].gameObject;
+                Movement winnerScript = winner.GetComponent<Movement>();
+
+                // play win animation
+                winner.GetComponent<RandomAnimationHandler>().StopRandomizeIdleAnimation();
+                winnerScript.nextWinAnimation = TurnManager.players[i].gameObject.GetComponent<Movement>().frontWinJump;
+
+                // if player is facing back, make them face front instead
+                if (winnerScript.currentDirectionID == 0 || winnerScript.currentDirectionID == 3 ||
+                    winnerScript.currentDirectionID == -1)
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        winnerScript.currentDirectionID += 1;
+                        if (winnerScript.currentDirectionID <= -4 || winnerScript.currentDirectionID >= 4)
+                        {
+                            winnerScript.currentDirectionID = 0;
+                        }
+                    }
+                }
+                winnerScript.UpdateSkeleton();
+                winnerScript.frontSkeleton.AnimationState.SetAnimation(0, winnerScript.nextWinAnimation, true);
+                return;
             }
         }
     }

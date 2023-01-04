@@ -44,6 +44,7 @@ public abstract class Movement : MonoBehaviour
     public AnimationReferenceAsset frontIdle3 = null;
     public AnimationReferenceAsset backIdle2 = null;
     public AnimationReferenceAsset backIdle3 = null;
+    public AnimationReferenceAsset frontWinJump = null;
 
     [Header("Rats Only")]
     public AnimationReferenceAsset frontAttack = null;
@@ -55,6 +56,7 @@ public abstract class Movement : MonoBehaviour
     int lastAnimationDirectionID = 0;
     [HideInInspector] public Spine.Animation nextIdleAnimation;
     [HideInInspector] public Spine.Animation nextJumpAnimation;
+    [HideInInspector] public Spine.Animation nextWinAnimation; // players only
     [HideInInspector] public Spine.Animation nextAttackAnimation; // rats only
 
     #region Animation
