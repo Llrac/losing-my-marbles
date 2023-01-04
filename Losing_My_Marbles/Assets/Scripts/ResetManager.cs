@@ -12,9 +12,7 @@ public class ResetManager : MonoBehaviour
     public DatabaseAPI databaseAPI;
     [SerializeField] private GameObject winImage = null;
     private static Image win;
-    private static float timer = 2;
-    bool starting = false;
-    public static List<int> levelOrder = new List<int>();
+    public static List<int> levelOrder = new();
     static int tcurrentLevel = 0;
     private void Start()
     {
@@ -83,6 +81,7 @@ public class ResetManager : MonoBehaviour
         {
             TurnManager.players[i].specialMarbleCount = 0;
         }
+        UIDesktop.orderInLevel = 0;
 
         ResetValues();
        
@@ -102,13 +101,41 @@ public class ResetManager : MonoBehaviour
         }
         TurnManager.isPaused = true;
 
-        for (int i = 0; i < TurnManager.players.Count; i++)
+        foreach (PlayerProperties playersInScene in FindObjectsOfType<PlayerProperties>())
         {
-            if (playerID == TurnManager.players[i].playerID)
+            if (playerID == playersInScene.playerID)
             {
-                //do animation
+                playersInScene.gameObject.SetActive(false);
             }
         }
+
+        switch (playerID)
+        {
+            case 1:
+                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "red";
+                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
+                break;
+            case 2:
+                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "purple";
+                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
+                break;
+            case 3:
+                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "turquoise";
+                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
+                break;
+            case 4:
+                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "yellow";
+                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
+                break;
+            default:
+                FindObjectOfType<UIDesktop>().skeleton.initialSkinName = "default";
+                FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
+                break;
+        }
+
+        FindObjectOfType<UIDesktop>().winScreen.GetComponent<Animator>().SetTrigger("fade_in");
+        FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(false);
+        FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_on");
     }
     public void PauseGame()
     {
@@ -121,6 +148,8 @@ public class ResetManager : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
             }
+            FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(true);
+            FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_off");
         }
         else
         {
@@ -130,6 +159,8 @@ public class ResetManager : MonoBehaviour
             {
                 child.gameObject.SetActive(false);
             }
+            FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(false);
+            FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_on");
         }
     }
     public void NextLevel()
