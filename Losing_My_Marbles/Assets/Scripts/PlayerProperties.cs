@@ -46,7 +46,7 @@ public class PlayerProperties : Movement
     }
     private void Start()
     { 
-        FindObjectOfType<UIDesktop>().UpdatePickupMarbles(this.gameObject);
+        //FindObjectOfType<UIDesktop>().UpdatePickupMarbles(this.gameObject);
         UpdateSkeleton();
     }
 

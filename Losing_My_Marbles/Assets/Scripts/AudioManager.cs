@@ -54,7 +54,6 @@ public class AudioManager : MonoBehaviour
                 {
                     child.gameObject.GetComponent<AudioSource>().Stop();
                     child.gameObject.GetComponent<AudioSource>().PlayOneShot(ambience);
-
                 }
             }
         }
@@ -85,5 +84,6 @@ public class AudioManager : MonoBehaviour
         }
 
         Instance.UpdateBackgroundAudio();
+        UIDesktop.orderInLevel++;
     }
 }

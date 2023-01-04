@@ -240,7 +240,7 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false, bool ratAttack = false)
+    public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false, bool ratAttack = false, bool winAnim = false)
     {
         if (frontSkeleton == null || backSkeleton == null)
         {
@@ -262,6 +262,12 @@ public abstract class Movement : MonoBehaviour
                 backSkeleton.AnimationState.SetAnimation(0, nextAttackAnimation, false).TimeScale = jumpAnimationSpeed;
                 backSkeleton.AnimationState.AddAnimation(0, nextIdleAnimation, true, animation.jumpProgressLength);
             }
+            return;
+        }
+        if (winAnim)
+        {
+            nextWinAnimation = frontWinJump;
+            frontSkeleton.AnimationState.SetAnimation(0, nextWinAnimation, true);
             return;
         }
         switch (dataID)
@@ -288,6 +294,7 @@ public abstract class Movement : MonoBehaviour
                     backSkeleton.timeScale = jumpAnimationSpeed;
                     StartCoroutine(PrepareIdleAnimation(backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationEnd / backSkeleton.timeScale));
                 }
+                Debug.Log("jump");
                 break;
 
             case 1:

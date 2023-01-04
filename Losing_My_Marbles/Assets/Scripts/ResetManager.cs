@@ -12,10 +12,11 @@ public class ResetManager : MonoBehaviour
     public DatabaseAPI databaseAPI;
     [SerializeField] private GameObject winImage = null;
     private static Image win;
-    private static float timer = 2;
-    bool starting = false;
-    public static List<int> levelOrder = new List<int>();
+    public static List<int> levelOrder = new();
     static int tcurrentLevel = 0;
+
+    static GameObject winner;
+
     private void Start()
     {
         if (winImage == null)
@@ -83,6 +84,7 @@ public class ResetManager : MonoBehaviour
         {
             TurnManager.players[i].specialMarbleCount = 0;
         }
+        UIDesktop.orderInLevel = 0;
 
         ResetValues();
        
@@ -102,35 +104,33 @@ public class ResetManager : MonoBehaviour
         }
         TurnManager.isPaused = true;
 
-        for (int i = 0; i < TurnManager.players.Count; i++)
+        foreach (PlayerProperties playersInScene in FindObjectsOfType<PlayerProperties>())
         {
-            if (playerID == TurnManager.players[i].playerID)
+            if (playerID == playersInScene.playerID)
             {
-                GameObject winner = TurnManager.players[i].gameObject;
-                Movement winnerScript = winner.GetComponent<Movement>();
-
-                // play win animation
-                winner.GetComponent<RandomAnimationHandler>().StopRandomizeIdleAnimation();
-                winnerScript.nextWinAnimation = TurnManager.players[i].gameObject.GetComponent<Movement>().frontWinJump;
-
-                // if player is facing back, make them face front instead
-                if (winnerScript.currentDirectionID == 0 || winnerScript.currentDirectionID == 3 ||
-                    winnerScript.currentDirectionID == -1)
-                {
-                    for (int j = 0; j < 2; j++)
-                    {
-                        winnerScript.currentDirectionID += 1;
-                        if (winnerScript.currentDirectionID <= -4 || winnerScript.currentDirectionID >= 4)
-                        {
-                            winnerScript.currentDirectionID = 0;
-                        }
-                    }
-                }
-                winnerScript.UpdateSkeleton();
-                winnerScript.frontSkeleton.AnimationState.SetAnimation(0, winnerScript.nextWinAnimation, true);
-                return;
+                winner = playersInScene.gameObject;
             }
         }
+
+        // play win animation
+        winner.GetComponent<RandomAnimationHandler>().StopRandomizeIdleAnimation();
+        Movement winnerScript = winner.GetComponent<Movement>();
+
+        // if player is facing back, make them face front instead
+        if (winnerScript.currentDirectionID == 0 || winnerScript.currentDirectionID == 3 ||
+            winnerScript.currentDirectionID == -1)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                winnerScript.currentDirectionID += 1;
+                if (winnerScript.currentDirectionID <= -4 || winnerScript.currentDirectionID >= 4)
+                {
+                    winnerScript.currentDirectionID = 0;
+                }
+            }
+        }
+        winnerScript.UpdateSkeleton();
+        winnerScript.SetAnimation(0, winner, false, false, true);
     }
     public void PauseGame()
     {

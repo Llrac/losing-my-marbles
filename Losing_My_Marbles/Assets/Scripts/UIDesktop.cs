@@ -5,14 +5,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
 
 public class UIDesktop : MonoBehaviour
 {
     [Header("Transition")]
     public GameObject transitionScreen = null;
-    public Sprite[] tooltips = new Sprite[3];
+    public Sprite[] tooltips;
     GameObject randomTooltip;
+    readonly static List<int> tooltipOrder = new();
+    public static int orderInLevel = 0;
     GameObject loadingIcon;
 
     [Header("In game")]
@@ -43,15 +44,23 @@ public class UIDesktop : MonoBehaviour
         }
         foreach (Transform child in transitionScreen.transform)
         {
-            if (child.gameObject.name == "Random_Tooltip")
+            if (child.gameObject.name == "Loading_Icon")
+            {
+                loadingIcon = child.gameObject;
+            }
+            else if (child.gameObject.name == "Random_Tooltip")
             {
                 randomTooltip = child.gameObject;
 
-                randomTooltip.GetComponent<Image>().sprite = tooltips[UnityEngine.Random.Range(0, tooltips.Length)];
-            }
-            else if (child.gameObject.name == "Loading_Icon")
-            {
-                loadingIcon = child.gameObject;
+                while (tooltipOrder.Count < tooltips.Length)
+                {
+                    int randomTooltip = UnityEngine.Random.Range(0, tooltips.Length);
+                    if (!tooltipOrder.Contains(randomTooltip))
+                    {
+                        tooltipOrder.Add(randomTooltip);
+                    }
+                }
+                randomTooltip.GetComponent<Image>().sprite = tooltips[tooltipOrder[orderInLevel - 1]];
             }
         }
 
@@ -142,7 +151,7 @@ public class UIDesktop : MonoBehaviour
             child.SetActive(true);
             if (player.GetComponent<PlayerProperties>().specialMarbleCount >= 3)
             {
-                ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID); 
+                ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID);
                 playerWin = true;
             }
         }
