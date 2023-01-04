@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class PlayerID : MonoBehaviour
 {
-    public int playerID;
+    public static int playerID;
 }

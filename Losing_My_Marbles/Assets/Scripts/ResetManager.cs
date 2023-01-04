@@ -17,12 +17,10 @@ public class ResetManager : MonoBehaviour
     public List<Sprite> winScreens = new();
     
     private static Image win;
-
     private static float timer = 2;
     private static int tcurrentLevel = 0;
     
     bool starting = false;
-
     private void Start()
     {
         if (winImage == null)
@@ -70,7 +68,14 @@ public class ResetManager : MonoBehaviour
    
     public void ResetLevel()
     {
-        ResetScores();
+        PlayerProperties.scoreKeeper = new int[4]
+        {
+            0,0,0,0
+        };
+        for (int i = 0; i < TurnManager.players.Count; i++)
+        {
+            TurnManager.players[i].specialMarbleCount = 0;
+        }
         ResetValues();
         GameSession.activePlayers = 0;
         databaseAPI.DeleteGameSession();
@@ -78,11 +83,24 @@ public class ResetManager : MonoBehaviour
     }
     public void Restart()
     {
-
+<<<<<<< HEAD
        ResetScores();
        ResetValues();
        StartCoroutine(LS());
+=======
+        PlayerProperties.scoreKeeper = new int[4]
+        {
+            0,0,0,0
+        };
+        for(int i = 0; i < TurnManager.players.Count; i++)
+        {
+            TurnManager.players[i].specialMarbleCount = 0;
+        }
 
+        ResetValues();
+       
+        StartCoroutine(LS());
+>>>>>>> parent of ca7fdab (Updated Resetmanager and gave a bunch of resources a lift)
     }
     IEnumerator LS()
     {
@@ -96,29 +114,15 @@ public class ResetManager : MonoBehaviour
             win.sprite = Screens[playerID - 1];
             win.enabled = true;
         }
+        TurnManager.isPaused = true;
 
-        FindObjectOfType<UIDesktop>().skeleton.initialSkinName = playerID switch
+        for (int i = 0; i < TurnManager.players.Count; i++)
         {
-            1 => "red",
-            2 => "purple",
-            3 => "turquoise",
-            4 => "yellow",
-            _ => "default",
-        };
-        FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
-        FindObjectOfType<UIDesktop>().winScreen.SetActive(true);
-        FindObjectOfType<UIDesktop>().winScreen.GetComponent<Animator>().SetTrigger("fade_in");
-        FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(false);
-        FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_on");
-
-        foreach (PlayerProperties playersInScene in FindObjectsOfType<PlayerProperties>())
-        {
-            if (playerID == playersInScene.playerID)
+            if (playerID == TurnManager.players[i].playerID)
             {
-                Destroy(playersInScene.gameObject);
+                //do animation
             }
         }
-        TurnManager.isPaused = true;
     }
     
     public void PauseGame()
@@ -133,8 +137,6 @@ public class ResetManager : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
             }
-            FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(true);
-            FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_off");
         }
         else
         {
@@ -144,8 +146,6 @@ public class ResetManager : MonoBehaviour
             {
                 child.gameObject.SetActive(false);
             }
-            FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(false);
-            FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_on");
         }
     }
     public void NextLevel()
@@ -162,7 +162,7 @@ public class ResetManager : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
-
+<<<<<<< HEAD
     
     private void ResetScores()
     {
@@ -178,6 +178,9 @@ public class ResetManager : MonoBehaviour
     }
     
     private void ResetValues(bool shouldRandomizeLevels = true)
+=======
+    private void ResetValues( bool shouldRandomizeLevels = true)
+>>>>>>> parent of ca7fdab (Updated Resetmanager and gave a bunch of resources a lift)
     {
         PlayerProperties.ids.Clear();
         PlayerProperties.myActions.Clear();
@@ -186,17 +189,26 @@ public class ResetManager : MonoBehaviour
         DebugManager.characterToControl = 1;
         DatabaseAPI.hasBeenRestarted = true;
         TurnManager.isPaused = false;
+<<<<<<< HEAD
 
 
         if (shouldRandomizeLevels == true)
-
+=======
+        
+        if(shouldRandomizeLevels == true)
+>>>>>>> parent of ca7fdab (Updated Resetmanager and gave a bunch of resources a lift)
         {
             tcurrentLevel = 0;
             RandomizeLevels();
         }
           
     }
+<<<<<<< HEAD
 
+  
+    
+=======
+>>>>>>> parent of ca7fdab (Updated Resetmanager and gave a bunch of resources a lift)
     public void RandomizeLevels()
     {
         GridManager gm = FindObjectOfType<GridManager>();

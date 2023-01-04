@@ -24,7 +24,7 @@ public abstract class Movement : MonoBehaviour
     public GameObject swapEffect = null;
  
     public float jumpLength = 1;
-    public float jumpAnimationSpeed = 1f;
+    public float jumpAnimationSpeed = 5f;
 
     int jumpMultiplier;
     float wallJumpMultiplier;
@@ -32,41 +32,15 @@ public abstract class Movement : MonoBehaviour
     [HideInInspector] public SkeletonAnimation frontSkeleton;
     [HideInInspector] public SkeletonAnimation backSkeleton;
     [HideInInspector] public bool usingFrontSkeleton = false;
+    public AnimationReferenceAsset frontIdle, frontJump, backIdle, backJump; // TODO: implement idle2 and idle3
+    public AnimationReferenceAsset frontIdle2 = null, frontIdle3 = null, backIdle2 = null, backIdle3 = null; // players only
+    public AnimationReferenceAsset frontAttack = null, backAttack = null; // rats only
 
-    [Header("Obligatory")]
-    public AnimationReferenceAsset frontIdle;
-    public AnimationReferenceAsset frontJump;
-    public AnimationReferenceAsset backIdle;
-    public AnimationReferenceAsset backJump;
-
-    [Header("Players Only")]
-    public AnimationReferenceAsset pFrontIdle2 = null;
-    public AnimationReferenceAsset pFrontIdle3 = null;
-    public AnimationReferenceAsset pBackIdle2 = null;
-    public AnimationReferenceAsset pBackIdle3 = null;
-    public AnimationReferenceAsset frontWinJump = null;
-
-    [Header("Rats Only")]
-    public AnimationReferenceAsset rFrontIdle2 = null;
-    public AnimationReferenceAsset rFrontIdle3 = null;
-    public AnimationReferenceAsset rFrontIdle4 = null;
-    public AnimationReferenceAsset rFrontIdle5 = null;
-
-    public AnimationReferenceAsset rBackIdle2 = null;
-    public AnimationReferenceAsset rBackIdle3 = null;
-    public AnimationReferenceAsset rBackIdle4 = null;
-    public AnimationReferenceAsset rBackIdle5 = null;
-
-    public AnimationReferenceAsset frontAttack = null;
-    public AnimationReferenceAsset backAttack = null;
-
-    Animator turnAnimator;
-    public float turnAnimatorSpeed = 1.5f;
-    int newAnimationDirectionID = 0;
-    int lastAnimationDirectionID = 0;
+    public Animator turnAnimator;
+    int lastAnimationDirectionID = 0; // later use
+    int animationDirectionID = 0; // later use
     [HideInInspector] public Spine.Animation nextIdleAnimation;
     [HideInInspector] public Spine.Animation nextJumpAnimation;
-    [HideInInspector] public Spine.Animation nextWinAnimation; // players only
     [HideInInspector] public Spine.Animation nextAttackAnimation; // rats only
 
     #region Animation
@@ -90,10 +64,9 @@ public abstract class Movement : MonoBehaviour
                 turnAnimator = child.GetComponent<Animator>();
             }
         }
-        newAnimationDirectionID = currentDirectionID;
-        lastAnimationDirectionID = newAnimationDirectionID;
-        RatProperties rp = GetComponent<RatProperties>();
+        animationDirectionID = currentDirectionID;
         PlayerProperties pp = GetComponent<PlayerProperties>();
+        RatProperties rp = GetComponent<RatProperties>();
         if (pp != null)
         {
             switch (pp.playerID)
@@ -135,9 +108,9 @@ public abstract class Movement : MonoBehaviour
             switch (rp.enemyID)
             {
                 case 5:
-                    frontSkeleton.initialSkinName = "Blï¿½ front";
+                    frontSkeleton.initialSkinName = "Blå front";
                     frontSkeleton.Initialize(true);
-                    backSkeleton.initialSkinName = "Blï¿½ back";
+                    backSkeleton.initialSkinName = "Blå back";
                     backSkeleton.Initialize(true);
                     break;
                 default:
@@ -250,14 +223,14 @@ public abstract class Movement : MonoBehaviour
         }
     }
 
-    public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false, bool ratAttack = false, bool winAnim = false)
+    public void SetAnimation(int dataID, GameObject character = null, bool wallJump = false, bool ratAttack = false)
     {
         if (frontSkeleton == null || backSkeleton == null)
         {
             return;
         }
         if (wallJump)
-            dataID = 1;
+            dataID = 0;
         if (ratAttack)
         {
             AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
@@ -274,22 +247,16 @@ public abstract class Movement : MonoBehaviour
             }
             return;
         }
-        if (winAnim)
-        {
-            nextWinAnimation = frontWinJump;
-            frontSkeleton.AnimationState.SetAnimation(0, nextWinAnimation, true);
-            return;
-        }
         switch (dataID)
         {
             case 0: // Jump Forward
-                //AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
+                AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
                 if (usingFrontSkeleton)
                 {
                     frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                     if (wallJump)
                     {
-                        //frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
+                        frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     frontSkeleton.timeScale = jumpAnimationSpeed;
                     StartCoroutine(PrepareIdleAnimation(frontSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationEnd / frontSkeleton.timeScale));
@@ -299,84 +266,20 @@ public abstract class Movement : MonoBehaviour
                     backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false);
                     if (wallJump)
                     {
-                        //backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
+                        backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationStart = animation.jumpAnimTimer;
                     }
                     backSkeleton.timeScale = jumpAnimationSpeed;
                     StartCoroutine(PrepareIdleAnimation(backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationEnd / backSkeleton.timeScale));
                 }
                 break;
 
-            case 1:
-                if (wallJump)
-                {
-                    return;
-                }
+            case 1: // Turn Left or Right
 
-                StartCoroutine(PrepareIdleAnimation(0));
+                // do turn animation here
+
+
+                StartCoroutine(PrepareIdleAnimation(0.5f));
                 break;
-
-                //// disable skeletons, enable monke ;)
-                //frontSkeleton.gameObject.SetActive(false);
-                //backSkeleton.gameObject.SetActive(false);
-                //turnAnimator.gameObject.SetActive(true);
-                //turnAnimator.speed = turnAnimatorSpeed;
-                //if (newAnimationDirectionID < lastAnimationDirectionID) // turn left
-                //{
-                //    switch (Mathf.Abs(newAnimationDirectionID % 4)) // gives currentDirectionID
-                //    {
-                //        case 0:
-                //            turnAnimator.SetTrigger("front_back_left");
-                //            break;
-
-                //        case 1:
-                //            turnAnimator.SetTrigger("front_left");
-                //            break;
-
-                //        case 2:
-                //            turnAnimator.SetTrigger("back_front_left");
-                //            break;
-
-                //        case 3:
-                //            turnAnimator.SetTrigger("back_left");
-                //            break;
-
-                //        default:
-                //            Debug.Log(newAnimationDirectionID + " was not used correctly.");
-                //            break;
-                //    }
-                //}
-                //else if (newAnimationDirectionID > lastAnimationDirectionID) // turn right
-                //{
-                //    switch (Mathf.Abs(newAnimationDirectionID % 4)) // gives currentDirectionID
-                //    {
-                //        case 0:
-                //            turnAnimator.SetTrigger("back_right");
-                //            break;
-
-                //        case 1:
-                //            turnAnimator.SetTrigger("back_front_right");
-                //            break;
-
-                //        case 2:
-                //            turnAnimator.SetTrigger("front_right");
-                //            break;
-
-                //        case 3:
-                //            turnAnimator.SetTrigger("front_back_right");
-                //            break;
-
-                //        default:
-                //            Debug.Log(newAnimationDirectionID + " was not used correctly.");
-                //            break;
-                //    }
-                //}
-                //else
-                //{
-                //    Debug.Log("animationDirectionID = lastAnimationDirectionID");
-                //}
-
-                ////StartCoroutine(PrepareIdleAnimation(0.25f / turnAnimatorSpeed));
-                //break;
 
             default:
                 break;
@@ -392,17 +295,16 @@ public abstract class Movement : MonoBehaviour
     IEnumerator PrepareIdleAnimation(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        if (CompareTag("Player") && turnAnimator != null)
-            turnAnimator.gameObject.SetActive(false);
+        Debug.Log("ready for jump");
+        
+
         if (usingFrontSkeleton)
         {
-            frontSkeleton.gameObject.SetActive(true);
             frontSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
             frontSkeleton.timeScale = 1;
         }
         else
         {
-            backSkeleton.gameObject.SetActive(true);
             backSkeleton.AnimationState.SetAnimation(0, nextIdleAnimation, true);
             backSkeleton.timeScale = 1;
         }
@@ -410,7 +312,7 @@ public abstract class Movement : MonoBehaviour
     #endregion
 
     #region Movement
-    public bool TryMove(GameObject character, int dataID, int increment, int typeID = 0)
+    public bool TryMove(GameObject character, int dataID, int increment, int forcedJump = 0)
     {
         // Set transform position
         if (dataID == 0)
@@ -428,13 +330,13 @@ public abstract class Movement : MonoBehaviour
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
                     FindObjectOfType<GridGenerator>().OnHitWall(character);
                     Move(character, 1, 1);
-                    TryMove(character, 1, 2, 1);
+                    TryMove(character, 1, 2);
                     if (mediumAudio != null)
                         mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
-                    Move(character, 1);
+                    Move(character, 1, forcedJump);
                     savedTile = 'X';
                     return true;
 
@@ -449,7 +351,7 @@ public abstract class Movement : MonoBehaviour
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
                     {
-                        TryMove(gameObject, 0, 1);
+                        TryMove(gameObject, 0, 1, forcedJump);
                         if (mediumAudio != null)
                             mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().pushHit);
 
@@ -462,10 +364,7 @@ public abstract class Movement : MonoBehaviour
                     GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, enemies);
 
-                    if(enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID) == true)
-                    {
-                        TryMove(character, 0, 1);
-                    }
+                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
 
                     break;
 
@@ -517,10 +416,17 @@ public abstract class Movement : MonoBehaviour
             switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                   
-                    TryMove(character, 2, increment - 1);
-                    if (mediumAudio != null)
-                        mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
+                    for (int i = increment - 1; i > 0; i--)
+                    {
+                        if (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.EMPTY)
+                        {
+                            TryMove(character, 2, i);
+                            if (mediumAudio != null)
+                                mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
+                            return true;
+                        }
+                    }
+
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
@@ -532,10 +438,9 @@ public abstract class Movement : MonoBehaviour
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
 
-                    if (gridPosition + RequestGridPosition(currentDirectionID, increment) == gridPosition)
+                    if (character.GetComponent<PlayerProperties>().specialMarbleCount >= TurnManager.marblesToWin)
                     {
-                        Blink(increment);
-                        return true;
+                        ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID);
                     }
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
@@ -547,23 +452,21 @@ public abstract class Movement : MonoBehaviour
                     }
                     else
                     {
-                        TryMove(character, 2, increment - 1);
+                        if (RequestGridPosition(currentDirectionID, increment) == gridPosition)
+                        {
+                            Blink(increment);
+                            return true;
+                        }
+                        TryMove(character, 2, increment - 1); // it sees itself if standing next to the player
+                        // if there is a
                     }
-                   
                     return false;
 
                 case GridManager.ENEMY: // ENEMY
                     GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, enemies);
 
-                    if(enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID) == true)
-                    {
-                        Blink(increment);
-                    }
-                    else
-                    {
-                        TryMove(character, 2, increment - 1);
-                    }
+                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
 
                     break;
 
@@ -603,7 +506,6 @@ public abstract class Movement : MonoBehaviour
         // Set character rotation
         if (dataID == 1)
         {
-            lastAnimationDirectionID = newAnimationDirectionID;
             for (int i = 0; i < Mathf.Abs(increment); i++)
             {
                 jumpMultiplier = 1;
@@ -612,17 +514,14 @@ public abstract class Movement : MonoBehaviour
                     jumpMultiplier *= -1;
                 }
                 currentDirectionID += jumpMultiplier;
-                newAnimationDirectionID += jumpMultiplier;
+                animationDirectionID += jumpMultiplier;
                 if (currentDirectionID <= -4 || currentDirectionID >= 4)
                 {
                     currentDirectionID = 0;
                 }
             }
             UpdateSkeleton();
-            if (typeID == 1) // if wall jump
-                SetAnimation(dataID, character, true);
-            else
-                SetAnimation(dataID, character);
+            SetAnimation(dataID, character);
         }
         return false;
     }
@@ -660,7 +559,7 @@ public abstract class Movement : MonoBehaviour
         }
         else if (typeID == 1)
         {
-            //wallJumpMultiplier *= 0.5f;
+            wallJumpMultiplier *= 0.5f;
         }
 
         AnimationCurveHandler animation = character.GetComponent<AnimationCurveHandler>();
@@ -754,5 +653,5 @@ public abstract class Movement : MonoBehaviour
     #endregion
 
     public abstract char ChangeTag();
-    public abstract bool DoAMove(int id, int inc, int dir);
+    public abstract void DoAMove(int id, int inc, int dir);
 }

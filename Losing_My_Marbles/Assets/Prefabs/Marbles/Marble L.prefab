@@ -11,10 +11,6 @@ PrefabInstance:
       propertyPath: marbleID
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 435832906650176218, guid: f8d2c233f7b485e41b782db0136a32d7, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2885fb4d5d163164da2340095ac41f04, type: 3}
     - target: {fileID: 5938139530171352585, guid: f8d2c233f7b485e41b782db0136a32d7, type: 3}
       propertyPath: m_Name
       value: Marble L

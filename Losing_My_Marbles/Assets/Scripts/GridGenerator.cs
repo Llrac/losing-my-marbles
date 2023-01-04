@@ -65,7 +65,7 @@ public class GridGenerator : MonoBehaviour
     public void DeployBomb(Vector2 destination)
     {
         float posX = destination.x * tileSize + destination.y * tileSize + tileToCopy.transform.position.x - 1; // this is the actual x position of the tile
-        float posY = ((-destination.x * tileSize + destination.y * tileSize) / 2) + tileToCopy.transform.position.y + 2.5f;
+        float posY = ((-destination.x * tileSize + destination.y * tileSize) / 2) + tileToCopy.transform.position.y + 1.5f;
         GameObject newBomb = Instantiate(bomb, new Vector3(posX, posY, 0), Quaternion.identity);
         Destroy(newBomb, 1.5f);
     }

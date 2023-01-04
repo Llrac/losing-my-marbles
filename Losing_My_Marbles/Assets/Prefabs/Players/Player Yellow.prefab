@@ -31,10 +31,6 @@ PrefabInstance:
       propertyPath: currentDirectionID
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2610747910438394671, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2610747910663743189, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -87,22 +83,6 @@ PrefabInstance:
       propertyPath: initialSkinName
       value: yellow
       objectReference: {fileID: 0}
-    - target: {fileID: 5481252069440013600, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: cc4a2e135ba7b9d4384df27db9d74d99, type: 2}
-    - target: {fileID: 5589475807611813627, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_Size.x
-      value: 6.982857
-      objectReference: {fileID: 0}
-    - target: {fileID: 5589475807611813627, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_Size.y
-      value: 14.141308
-      objectReference: {fileID: 0}
-    - target: {fileID: 5589475807611813627, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7110433741541033014, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Materials.Array.size
       value: 3
@@ -123,10 +103,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[4]
       value: 
       objectReference: {fileID: 2100000, guid: 5ee91f18b36aaf44199e93f12396dd39, type: 2}
-    - target: {fileID: 8281359356456321971, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9173625994925322628, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Mesh
       value: 

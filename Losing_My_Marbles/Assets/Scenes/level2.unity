@@ -1999,6 +1999,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+--- !u!1 &1382374462 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5056906181629956827, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1382374461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1382374463 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5056906181159560067, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
@@ -2252,10 +2257,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Red
       objectReference: {fileID: 0}
-    - target: {fileID: 2610747910663743195, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
 --- !u!1 &1484315171
@@ -2461,13 +2462,7 @@ MonoBehaviour:
   actionHandler: {fileID: 623496582}
   uiDesktop: {fileID: 1997739543}
   readyAlert: {fileID: 1382374463}
-
-  turnLetterImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  actionHandler: {fileID: 623496582}
-
+  information: {fileID: 1382374462}
 --- !u!4 &1552591137
 Transform:
   m_ObjectHideFlags: 0

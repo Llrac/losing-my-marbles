@@ -272,30 +272,21 @@ MonoBehaviour:
   blinkEffect: {fileID: 0}
   swapEffect: {fileID: 0}
   jumpLength: 1
-  jumpAnimationSpeed: 4
+  jumpAnimationSpeed: 3
   frontSkeleton: {fileID: 0}
   backSkeleton: {fileID: 0}
   usingFrontSkeleton: 0
-  frontIdle: {fileID: 11400000, guid: b1980e376fcce26498852fd03968c703, type: 2}
-  frontJump: {fileID: 11400000, guid: a5051858f357fd44984f9fd2b16c0130, type: 2}
-  backIdle: {fileID: 11400000, guid: f1dfceb11e4bdfe4789d5e3a2bc3ebfb, type: 2}
-  backJump: {fileID: 11400000, guid: f778673cf7ab2ab42a517e2df1d0d580, type: 2}
-  pFrontIdle2: {fileID: 0}
-  pFrontIdle3: {fileID: 0}
-  pBackIdle2: {fileID: 0}
-  pBackIdle3: {fileID: 0}
-  frontWinJump: {fileID: 0}
-  rFrontIdle2: {fileID: 11400000, guid: a88d2388c06b2a64b942422d59c106a7, type: 2}
-  rFrontIdle3: {fileID: 11400000, guid: 81371ab16cadfae4f8589304beb9994f, type: 2}
-  rFrontIdle4: {fileID: 11400000, guid: 4803a964c1538c4459006969bfd0a133, type: 2}
-  rFrontIdle5: {fileID: 11400000, guid: a4d27b6fe9a22234f96552bfea6902e3, type: 2}
-  rBackIdle2: {fileID: 11400000, guid: 88101f23dbdfbfa42a82c300e96e5148, type: 2}
-  rBackIdle3: {fileID: 11400000, guid: a0f7fe3f935361248b4d1c9bbae03e5d, type: 2}
-  rBackIdle4: {fileID: 11400000, guid: 6b6e21d7cb6f8d641bc965411de31abf, type: 2}
-  rBackIdle5: {fileID: 11400000, guid: 30af40d24eea5ba4aa55991b14657a25, type: 2}
-  frontAttack: {fileID: 11400000, guid: cc0c7307d45ad6f4280175ecb1b4d697, type: 2}
-  backAttack: {fileID: 11400000, guid: 135a7989c1efe86468f765e04062f8c2, type: 2}
-  turnAnimatorSpeed: 1.5
+  frontIdle: {fileID: 11400000, guid: 7eddba7c760494041a381fb20e290c16, type: 2}
+  frontJump: {fileID: 11400000, guid: c89298e4bbc8d9b44bbd4b04b8b5d523, type: 2}
+  backIdle: {fileID: 11400000, guid: 217aeb07772648e4b8b4dec51a75d0e0, type: 2}
+  backJump: {fileID: 11400000, guid: 6e725438e2ad8854e83bb28666588afe, type: 2}
+  frontIdle2: {fileID: 0}
+  frontIdle3: {fileID: 0}
+  backIdle2: {fileID: 0}
+  backIdle3: {fileID: 0}
+  frontAttack: {fileID: 11400000, guid: 95074e89e63212e43b2be08f84dcfa88, type: 2}
+  backAttack: {fileID: 11400000, guid: b98921b9e2791ad4191a0fa58423d2db, type: 2}
+  turnAnimator: {fileID: 0}
   enemyID: 5
   moves:
   - {x: 0, y: 1}

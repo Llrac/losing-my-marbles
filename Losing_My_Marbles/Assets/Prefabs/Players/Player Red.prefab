@@ -367,22 +367,13 @@ MonoBehaviour:
   frontJump: {fileID: 11400000, guid: f7b07ad5bbc2eff419767965cfd9967b, type: 2}
   backIdle: {fileID: 11400000, guid: bb75fce215ca3084088e0c1434fc91c9, type: 2}
   backJump: {fileID: 11400000, guid: 9da017614ed6fc046b9c27d7be96ba09, type: 2}
-  pFrontIdle2: {fileID: 11400000, guid: 3df9ea01648c710499dbceff583bdce2, type: 2}
-  pFrontIdle3: {fileID: 11400000, guid: 1abf5bf3400634b4fb9b46bc60151a28, type: 2}
-  pBackIdle2: {fileID: 11400000, guid: daea38329384566438db6939b7853f50, type: 2}
-  pBackIdle3: {fileID: 11400000, guid: 2bd4846d41389cf4ebe4d4563f6c6e5d, type: 2}
-  frontWinJump: {fileID: 11400000, guid: ce1c26db62308334494783a49c1bdb20, type: 2}
-  rFrontIdle2: {fileID: 0}
-  rFrontIdle3: {fileID: 0}
-  rFrontIdle4: {fileID: 0}
-  rFrontIdle5: {fileID: 0}
-  rBackIdle2: {fileID: 0}
-  rBackIdle3: {fileID: 0}
-  rBackIdle4: {fileID: 0}
-  rBackIdle5: {fileID: 0}
+  frontIdle2: {fileID: 11400000, guid: 3df9ea01648c710499dbceff583bdce2, type: 2}
+  frontIdle3: {fileID: 11400000, guid: 1abf5bf3400634b4fb9b46bc60151a28, type: 2}
+  backIdle2: {fileID: 11400000, guid: daea38329384566438db6939b7853f50, type: 2}
+  backIdle3: {fileID: 11400000, guid: 2bd4846d41389cf4ebe4d4563f6c6e5d, type: 2}
   frontAttack: {fileID: 0}
   backAttack: {fileID: 0}
-  turnAnimatorSpeed: 1
+  turnAnimator: {fileID: 0}
   playerID: 1
   specialMarbleCount: 0
   playerMarbles: 
@@ -941,7 +932,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.1125, y: 14.051587}
+  m_Size: {x: 6.1225, y: 14.002828}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -955,7 +946,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8281359356456321971}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: cd28b03461cfee344bfa14513c9be950, type: 2}
   m_CullingMode: 0
