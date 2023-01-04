@@ -2839,6 +2839,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1453955366}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
+      propertyPath: tooltips.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 17bd29caff38cca4783743db690cb8fd, type: 3}
+    - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
+      propertyPath: tooltips.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 29928e275735cc34c8bff2b887a6185f, type: 3}
+    - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
+      propertyPath: tooltips.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8bf68dd26f56af245b27d9c3e0a9493e, type: 3}
+    - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: playerBags.Array.data[0]
       value: 
       objectReference: {fileID: 1397892878}

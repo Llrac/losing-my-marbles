@@ -10,6 +10,9 @@ public class UIDesktop : MonoBehaviour
 {
     [Header("Transition")]
     public GameObject transitionScreen = null;
+    public Sprite[] tooltips = new Sprite[3];
+    GameObject randomTooltip;
+    GameObject loadingIcon;
 
     [Header("In game")]
     public Transform playLogTransform;
@@ -34,6 +37,20 @@ public class UIDesktop : MonoBehaviour
             {
                 transitionScreen = child.gameObject;
             }
+            
+        }
+        foreach (Transform child in transitionScreen.transform)
+        {
+            if (child.gameObject.name == "Random_Tooltip")
+            {
+                randomTooltip = child.gameObject;
+
+                randomTooltip.GetComponent<Image>().sprite = tooltips[UnityEngine.Random.Range(0, tooltips.Length)];
+            }
+            else if (child.gameObject.name == "Loading_Icon")
+            {
+                loadingIcon = child.gameObject;
+            }
         }
 
         StartCoroutine(Transition());
@@ -41,8 +58,9 @@ public class UIDesktop : MonoBehaviour
 
     IEnumerator Transition()
     {
-        yield return new WaitForSeconds(4f);
-        Debug.Log("fade out");
+        yield return new WaitForSeconds(3f);
+        loadingIcon.GetComponent<Animator>().SetTrigger("fade_out");
+        yield return new WaitForSeconds(0.75f);
         transitionScreen.GetComponent<Animator>().SetTrigger("fade_out");
         yield return null;
     }
