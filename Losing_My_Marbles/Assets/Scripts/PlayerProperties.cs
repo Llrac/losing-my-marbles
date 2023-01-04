@@ -11,7 +11,7 @@ public class PlayerProperties : Movement
     private int startingDirection = 0;
     public int specialMarbleCount = 0;
 
-    public static List<int> ids = new();
+    public static List<int> ids = new() {1,1};
     public static List<int> myActions = new();
     public List<int> playerMarbles = new();
     public List <Vector2> marbleEffect = new();
