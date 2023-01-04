@@ -75,4 +75,10 @@ public class MainMenu : MonoBehaviour
             }
         }
     }
+
+    public void ClickSecret(Image button)
+    {
+        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
+        button.color = Color.black;
+    }
 }

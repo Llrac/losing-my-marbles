@@ -315,7 +315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2610747910663743189
 Transform:
   m_ObjectHideFlags: 0
@@ -374,8 +374,12 @@ MonoBehaviour:
   frontWinJump: {fileID: 11400000, guid: ce1c26db62308334494783a49c1bdb20, type: 2}
   rFrontIdle2: {fileID: 0}
   rFrontIdle3: {fileID: 0}
+  rFrontIdle4: {fileID: 0}
+  rFrontIdle5: {fileID: 0}
   rBackIdle2: {fileID: 0}
   rBackIdle3: {fileID: 0}
+  rBackIdle4: {fileID: 0}
+  rBackIdle5: {fileID: 0}
   frontAttack: {fileID: 0}
   backAttack: {fileID: 0}
   turnAnimatorSpeed: 1
