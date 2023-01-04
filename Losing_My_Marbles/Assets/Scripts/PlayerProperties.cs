@@ -127,7 +127,7 @@ public class PlayerProperties : Movement
         return 'P';
     }
 
-    public override void DoAMove(int id, int inc, int dir)
+    public override bool DoAMove(int id, int inc, int dir)
     {
         Debug.Log("player DoAMove");
         throw new System.NotImplementedException();

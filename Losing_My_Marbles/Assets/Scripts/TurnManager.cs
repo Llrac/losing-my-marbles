@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class TurnManager : MonoBehaviour
 {
@@ -51,6 +52,7 @@ public class TurnManager : MonoBehaviour
     private void Update()
     {
         // end of debugging
+        CheckForDuplicateID();
         if (PlayerProperties.ids.Count > tracking)
         {
             uiDesktop.ToggleReadyShine(PlayerProperties.ids[tracking], true);
@@ -218,4 +220,21 @@ public class TurnManager : MonoBehaviour
 
         actionHandler.DrawNewHand(true);
     }
+    private void CheckForDuplicateID()
+    {
+        IEnumerator SomethingWentWrong()
+        {
+            Debug.Log("Something went wrong, please make sure you are not using the same colors!");
+            yield return new WaitForSeconds(5f);
+            isPaused = false;
+            FindObjectOfType<ResetManager>().ResetLevel();
+
+        }
+        if(PlayerProperties.ids.Count != PlayerProperties.ids.Distinct().Count() && isPaused == false)
+        {
+            isPaused = true;
+            StartCoroutine(SomethingWentWrong());
+        }
+    }
+    
 }

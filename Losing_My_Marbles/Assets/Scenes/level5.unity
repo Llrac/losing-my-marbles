@@ -799,7 +799,10 @@ MonoBehaviour:
   amountOfTurns: 3
   uiDesktop: {fileID: 470455691}
   readyAlert: {fileID: 1152910105}
-  information: {fileID: 895531741}
+  turnLetterImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   actionHandler: {fileID: 2099459000}
 --- !u!4 &229866133
 Transform:
@@ -1367,6 +1370,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Red
       objectReference: {fileID: 0}
+    - target: {fileID: 2610747910663743195, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7110433741541033014, guid: e362b43cf3214714896782a3306dc5fa, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1790,11 +1797,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &895531741 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5056906181629956827, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
-  m_PrefabInstance: {fileID: 1241967915}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &935389692
 PrefabInstance:
   m_ObjectHideFlags: 0
