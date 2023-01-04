@@ -75,19 +75,23 @@ public class RatProperties : Movement
         }
     }
 
-    public override void DoAMove(int dataID, int increment , int dir)
+    public override bool DoAMove(int dataID, int increment , int dir)
     {
         savedDir = gameObject.GetComponent<RatProperties>().currentDirectionID;
         gameObject.GetComponent<RatProperties>().currentDirectionID = dir;
-         
+        
+        bool iMoved = false;
+
         if (TryMove(gameObject, dataID, increment) == true)
         {
             gameObject.GetComponent<RatProperties>().currentDirectionID = savedDir;
+            iMoved = true;
         }
         if (gameObject.GetComponent<RatProperties>().isActiveAndEnabled == true)
         {
             StartCoroutine(CheckForKills());
         }
+        return iMoved;
     }
 
     public IEnumerator CheckForKills()

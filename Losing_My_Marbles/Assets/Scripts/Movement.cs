@@ -449,7 +449,10 @@ public abstract class Movement : MonoBehaviour
                     GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, enemies);
 
-                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
+                    if(enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID) == true)
+                    {
+                        TryMove(character, 0, 1, forcedJump);
+                    }
 
                     break;
 
@@ -501,17 +504,11 @@ public abstract class Movement : MonoBehaviour
             switch (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, increment)))
             {
                 case GridManager.EMPTY: // EMPTY (walls, void, etc)
-                    for (int i = increment - 1; i > 0; i--)
-                    {
-                        if (grid.GetNexTile(character, RequestGridPosition(currentDirectionID, i)) != GridManager.EMPTY)
-                        {
-                            TryMove(character, 2, i);
-                            if (mediumAudio != null)
-                                mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
-                            return true;
-                        }
-                    }
-
+                  
+                    TryMove(character, 2, increment - 1);
+                    if (mediumAudio != null)
+                        mediumAudio.PlayOneShot(FindObjectOfType<AudioManager>().wallHit);
+                    
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
@@ -523,9 +520,11 @@ public abstract class Movement : MonoBehaviour
                     GameObject player = grid.FindPlayerInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, TurnManager.players);
 
-                    if (character.GetComponent<PlayerProperties>().specialMarbleCount >= TurnManager.marblesToWin)
+                    if ( gridPosition + RequestGridPosition(currentDirectionID, increment) == gridPosition)
                     {
-                        ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID);
+                        Blink(increment);
+                        grid.levels[GridManager.currentLevel][(int)gridPosition.x, (int)gridPosition.y] = GridManager.PLAYER;
+                        return true;
                     }
 
                     if (player.GetComponent<PlayerProperties>().Pushed(character.GetComponent<Movement>().currentDirectionID) == true)
@@ -537,11 +536,7 @@ public abstract class Movement : MonoBehaviour
                     }
                     else
                     {
-                        if (RequestGridPosition(currentDirectionID, increment) == gridPosition)
-                        {
-                            Blink(increment);
-                            return true;
-                        }
+                        
                         TryMove(character, 2, increment - 1); // it sees itself if standing next to the player
                         // if there is a
                     }
@@ -551,7 +546,15 @@ public abstract class Movement : MonoBehaviour
                     GameObject enemy = grid.FindInMatrix(RequestGridPosition(currentDirectionID, increment)
                         + character.GetComponent<Movement>().gridPosition, enemies);
 
-                    enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID);
+                    if(enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID) == true)
+                    {
+                        Blink(increment);
+                    }
+                    else
+                    {
+                        TryMove(character, 2, increment - 1);
+                    }
+
 
                     break;
 
@@ -742,5 +745,5 @@ public abstract class Movement : MonoBehaviour
     #endregion
 
     public abstract char ChangeTag();
-    public abstract void DoAMove(int id, int inc, int dir);
+    public abstract bool DoAMove(int id, int inc, int dir);
 }
