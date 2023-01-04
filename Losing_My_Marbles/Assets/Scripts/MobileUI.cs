@@ -13,7 +13,7 @@ public class MobileUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[PlayerID.playerID];
+        background.GetComponent<Image>().sprite = background.GetComponent<PlayerColor>().backgroundColor[playerID.playerID];
         
         insertAlert.enabled = true;
         confirmButton.image.enabled = false;

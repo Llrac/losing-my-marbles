@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &209725965087590391
+--- !u!1 &1776726479
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,74 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 209725965087590388}
-  - component: {fileID: 209725965087590389}
-  - component: {fileID: 1305786580}
+  - component: {fileID: 1776726480}
+  - component: {fileID: 8638572747636438030}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: Background
   m_TagString: Untagged
-  m_Icon: {fileID: 2800000, guid: 9059e055aa673b3469a5c2896c0b8fb5, type: 3}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &209725965087590388
+--- !u!4 &1776726480
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209725965087590391}
+  m_GameObject: {fileID: 1776726479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 209725965087590388}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &209725965087590389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209725965087590391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ab44efde216094691b98bbe4835813, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ambience: {fileID: 8300000, guid: f1fcf5de018582c4f8b360dea37f3654, type: 3}
-  playerJump: {fileID: 8300000, guid: 9bd973b5666fa7547a66ce8941cc266b, type: 3}
-  pickupMarble: {fileID: 8300000, guid: f14213a0b28489e4fa239672d6d9f436, type: 3}
-  dropKey: {fileID: 8300000, guid: e3e650f861bfaca4db2fe669c4a80d32, type: 3}
-  characterFall: {fileID: 8300000, guid: b8f5c7580901aa74488a86e902a17da2, type: 3}
-  pushHit: {fileID: 8300000, guid: 5ec5d6900558d9c47ad234f8e7e6501d, type: 3}
-  wallHit: {fileID: 8300000, guid: 9739f9a51639c0540a2cb0a638dd41ee, type: 3}
-  playerReady: {fileID: 8300000, guid: 763748d0c3782304f8caea3aa4ba296c, type: 3}
-  triggerAmplifier: {fileID: 8300000, guid: 124334ee275927343a7f36d0f3a512e7, type: 3}
-  triggerBlink: {fileID: 8300000, guid: ccb397993e889af4f89abd5ee76e6f68, type: 3}
-  triggerBlock: {fileID: 8300000, guid: 51e524474b080b04fb4deebf9edcd7f5, type: 3}
-  triggerBomb: {fileID: 8300000, guid: 29d8b42666db2c744a3f16d2b45f8857, type: 3}
-  triggerDaze: {fileID: 8300000, guid: bac9974a8bb0a154d960001256e8bcb9, type: 3}
-  triggerEarthquake: {fileID: 8300000, guid: c0d527d57b29d484b830df3f3e494c6f, type: 3}
-  triggerRollerskates: {fileID: 8300000, guid: d2c4fe40c15a8094a83740af2a9fee6a, type: 3}
-  triggerSwap: {fileID: 8300000, guid: f124a0abf200b0342983c9b783f57149, type: 3}
-  newMarbles: {fileID: 8300000, guid: 45289102eedb37d489c02b0a34e65037, type: 3}
-  selectMarble: {fileID: 8300000, guid: 62a0083d0c8f5074a97d5082d83c9d2b, type: 3}
-  marblesReady: {fileID: 8300000, guid: d6f73a746d69b2a4fb882da03a2f1d95, type: 3}
-  pressGo: {fileID: 8300000, guid: 17a74cfba51fdeb48bc1b8269bb62d2d, type: 3}
---- !u!82 &1305786580
+--- !u!82 &8638572747636438030
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209725965087590391}
+  m_GameObject: {fileID: 1776726479}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: bc92cea61e43ed44a8edb976f5ff4607, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b53e0fc7216ece34db1ad6eae2efca08, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -121,7 +88,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.8
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -161,3 +128,72 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &209725965087590391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 209725965087590388}
+  - component: {fileID: 209725965087590389}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 2800000, guid: 9059e055aa673b3469a5c2896c0b8fb5, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &209725965087590388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209725965087590391}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1776726480}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &209725965087590389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209725965087590391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ab44efde216094691b98bbe4835813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ambience: {fileID: 8300000, guid: f1fcf5de018582c4f8b360dea37f3654, type: 3}
+  marbleMachine: {fileID: 8300000, guid: b53e0fc7216ece34db1ad6eae2efca08, type: 3}
+  playerJump: {fileID: 8300000, guid: 9bd973b5666fa7547a66ce8941cc266b, type: 3}
+  pickupMarble: {fileID: 8300000, guid: f14213a0b28489e4fa239672d6d9f436, type: 3}
+  dropKey: {fileID: 8300000, guid: e3e650f861bfaca4db2fe669c4a80d32, type: 3}
+  characterFall: {fileID: 8300000, guid: b8f5c7580901aa74488a86e902a17da2, type: 3}
+  pushHit: {fileID: 8300000, guid: 5ec5d6900558d9c47ad234f8e7e6501d, type: 3}
+  wallHit: {fileID: 8300000, guid: 9739f9a51639c0540a2cb0a638dd41ee, type: 3}
+  playerReady: {fileID: 8300000, guid: 763748d0c3782304f8caea3aa4ba296c, type: 3}
+  triggerAmplifier: {fileID: 8300000, guid: 124334ee275927343a7f36d0f3a512e7, type: 3}
+  triggerBlink: {fileID: 8300000, guid: ccb397993e889af4f89abd5ee76e6f68, type: 3}
+  triggerBlock: {fileID: 8300000, guid: 51e524474b080b04fb4deebf9edcd7f5, type: 3}
+  triggerBomb: {fileID: 8300000, guid: 29d8b42666db2c744a3f16d2b45f8857, type: 3}
+  triggerDaze: {fileID: 8300000, guid: bac9974a8bb0a154d960001256e8bcb9, type: 3}
+  triggerEarthquake: {fileID: 8300000, guid: c0d527d57b29d484b830df3f3e494c6f, type: 3}
+  triggerRollerskates: {fileID: 8300000, guid: d2c4fe40c15a8094a83740af2a9fee6a, type: 3}
+  triggerSwap: {fileID: 8300000, guid: f124a0abf200b0342983c9b783f57149, type: 3}
+  onHoverEnter: {fileID: 8300000, guid: 46c0182ffb6a73d4ab96c090fb603208, type: 3}
+  onHoverExit: {fileID: 0}
+  onClick: {fileID: 0}
+  newMarbles: {fileID: 8300000, guid: 45289102eedb37d489c02b0a34e65037, type: 3}
+  selectMarble: {fileID: 8300000, guid: 62a0083d0c8f5074a97d5082d83c9d2b, type: 3}
+  marblesReady: {fileID: 8300000, guid: d6f73a746d69b2a4fb882da03a2f1d95, type: 3}
+  pressGo: {fileID: 8300000, guid: 17a74cfba51fdeb48bc1b8269bb62d2d, type: 3}
