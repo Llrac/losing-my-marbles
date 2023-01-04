@@ -14,7 +14,8 @@ public class GridManager : MonoBehaviour
     public const char WATER = 'W';
 
     public static int currentLevel = 0;
-  
+
+    public static List<int> randomizedNumbers = new();
     public static char[,] level0 = new char[10, 10] // [column, row in column] or [y, x]
     {
             {'?','?','?','?','?','?','?','?','?','?'},
@@ -80,14 +81,16 @@ public class GridManager : MonoBehaviour
             {'X','X','X','X','M','X','X','X','X','?'},
             {'X','X','X','X','X','X','X','X','X','?'}
    };
-   
+    
     public char[][,] levels = new char[5][,]
     {
         level0, level1, level2, level3, level4
     };
-  
+   
     void Start()
     {
+        ResetLevels();   
+       
         currentLevel = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex - 1;
         for (int i = 0; i < Movement.enemies.Count; i++)
         {
@@ -205,5 +208,73 @@ public class GridManager : MonoBehaviour
         }
         return null;
     }
-  
+   
+    private void ResetLevels()
+    {
+        level0 = new char[10, 10] // [column, row in column] or [y, x]
+        {
+            {'?','?','?','?','?','?','?','?','?','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','M','H','X','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'H','H','X','X','X','X','X','H','H','?'},
+            {'X','X','X','X','H','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'}
+        };
+        level1 = new char[10, 10]
+        {
+            {'?','?','?','?','?','?','?','?','?','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','H','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','H','X','M','X','H','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','H','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'}
+        };
+        level2 = new char[10, 10]
+        {
+            {'?','?','?','?','?','?','?','?','?','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','M','X','X','X','X','X','X','?'},
+            {'X','X','H','X','X','X','X','M','X','?'},
+            {'X','X','X','X','X','H','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','X','H','X','X','X','?'},
+            {'X','X','X','X','X','H','X','X','M','?'},
+            {'X','X','X','X','X','H','X','X','X','?'},
+            {'X','X','X','X','X','H','X','X','X','?'}
+        };
+        level3 = new char[10, 10]
+        {
+            {'?','?','?','?','?','?','?','?','?','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','H','M','H','X','H','M','H','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'}
+        };
+        level4 = new char[10, 10]
+        {
+            {'?','?','?','?','?','?','?','?','?','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','H','X','X','X','X','?'},
+            {'H','X','X','X','X','X','X','X','H','?'},
+            {'X','H','X','X','X','X','X','H','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'},
+            {'X','X','X','X','M','X','X','X','X','?'},
+            {'X','X','X','X','X','X','X','X','X','?'}
+        };
+    }
 }

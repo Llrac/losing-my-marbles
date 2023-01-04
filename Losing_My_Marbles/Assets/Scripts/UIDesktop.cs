@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class UIDesktop : MonoBehaviour
 {
@@ -95,8 +96,6 @@ public class UIDesktop : MonoBehaviour
         playerBags[playerID - 1].GetComponent<Animator>().SetBool("chosen marbles", true);
         
         ToggleReadyShine(playerID, true);
-
-       
     }
 
     public void ToggleReadyShine(int playerID, bool isShining)
@@ -143,18 +142,24 @@ public class UIDesktop : MonoBehaviour
             child.SetActive(true);
             if (player.GetComponent<PlayerProperties>().specialMarbleCount >= 3)
             {
-                ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID);
+                ResetManager.PlayerWin(player.GetComponent<PlayerProperties>().playerID); 
                 playerWin = true;
             }
         }
         
-        if (FindObjectOfType<MysteryMarble>() == null && playerWin == false) // if no mystery marbles in scene, do ...
+        if (playerWin == false) // if no mystery marbles in scene, do ...
         {
-           
-         // insert load next scene function here
+            StartCoroutine(NewLevel());
+            playerWin = false;
+            // insert load next scene function here
         }
     }
-    
-    
-
+    private IEnumerator NewLevel()
+    {
+        yield return new WaitForSeconds(.5f);
+        if (FindObjectOfType<MysteryMarble>() == null && playerWin == false) //should not happen if there is someone who won
+        {
+            FindObjectOfType<ResetManager>().NextLevel();
+        }
+    }
 }

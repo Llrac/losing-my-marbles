@@ -23,7 +23,7 @@ public class PlayerProperties : Movement
     int act = 1;
     public bool isAlive;
 
-    private static int[] scoreKeeper = new int[4]
+    public static int[] scoreKeeper = new int[4]
     {
         0,0,0,0
     };
@@ -33,7 +33,7 @@ public class PlayerProperties : Movement
         TurnManager.players.Add(gameObject.GetComponent<PlayerProperties>());
         gridManager = FindObjectOfType<GridManager>();
         UpdateSkinBasedOnPlayerID();
-        GetScore(); // keps ygour score
+        GetScore(); // keps your score
         FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
         intent = FindIntentShower.GetComponent<SetIntent>();
         startingGridPosition = gridPosition;
@@ -45,7 +45,7 @@ public class PlayerProperties : Movement
         specialMarbleCount = scoreKeeper[playerID - 1];
     }
     private void Start()
-    {
+    { 
         FindObjectOfType<UIDesktop>().UpdatePickupMarbles(this.gameObject);
         UpdateSkeleton();
     }
