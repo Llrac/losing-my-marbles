@@ -18,7 +18,7 @@ public class ActionHandler : MonoBehaviour
 
     private void Start()
     {
-        playerID = playerId.playerID;
+        playerID = PlayerID.playerID;
         database.ListenForActions(InstantiateAction, Debug.Log);
         database.ListenForNewHand(InstantiateNewHand, Debug.Log);
     }
