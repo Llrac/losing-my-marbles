@@ -13,7 +13,6 @@ public class CheckMatchedGames : MonoBehaviour
             Debug.Log(matchedGame);
             SceneManager.LoadScene("level1");
             matchedGame = false;
-            GameSession.activePlayers = 0;
         }
         
     }
