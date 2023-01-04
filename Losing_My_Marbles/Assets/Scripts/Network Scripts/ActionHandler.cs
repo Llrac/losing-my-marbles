@@ -10,12 +10,13 @@ public class ActionHandler : MonoBehaviour
 {
     public DatabaseAPI database;
     public UIManager uiManager;
-    
+    public PlayerID playerId;
 
     private int playerID;
 
     private void Start()
     {
+        playerID = playerId.playerID;
         database.ListenForActions(InstantiateAction, Debug.Log);
         database.ListenForNewHand(InstantiateNewHand, Debug.Log);
     }
@@ -25,7 +26,7 @@ public class ActionHandler : MonoBehaviour
     {
         if (uiManager != null)
         {
-            database.PostActions(new ActionMessage(PlayerID.playerID, uiManager.orderID[0],
+            database.PostActions(new ActionMessage(playerID, uiManager.orderID[0],
                 uiManager.orderID[1], uiManager.orderID[2]), () =>
             {
                 // Action was sent!
