@@ -85,7 +85,6 @@ public class DatabaseAPI : MonoBehaviour
         var gameSessionID = GameSession.sessionID.ToString();
         if (hasBeenRestarted)
         {
-            Debug.Log("dont add again");
             return;
         }
 
