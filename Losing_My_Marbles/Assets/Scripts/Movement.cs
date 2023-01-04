@@ -451,7 +451,7 @@ public abstract class Movement : MonoBehaviour
 
                     if(enemy.GetComponent<RatProperties>().DoAMove(0, 1, currentDirectionID) == true)
                     {
-                        TryMove(character, 0, 1, forcedJump);
+                        TryMove(character, 0, 1);
                     }
 
                     break;

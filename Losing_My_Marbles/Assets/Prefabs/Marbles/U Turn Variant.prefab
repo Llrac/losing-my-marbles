@@ -98,14 +98,14 @@ PrefabInstance:
     - target: {fileID: 1875667417433160254, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 96a73bdee3d9aca44893a4ca39deeaee, type: 3}
+      objectReference: {fileID: 21300000, guid: fc224e1f746d5ea46bc391a2d9f5d45f, type: 3}
     - target: {fileID: 3934649390374279741, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5648451115260212973, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_Name
-      value: U Turn
+      value: U Turn Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
