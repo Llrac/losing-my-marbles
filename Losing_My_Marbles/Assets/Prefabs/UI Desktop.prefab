@@ -46,11 +46,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltips:
+  - {fileID: 21300000, guid: 32dcd492453a64c439e32090e93075dd, type: 3}
+  - {fileID: 21300000, guid: 2c2f6ae88e5084e409c5cf92f4eccfba, type: 3}
+  - {fileID: 21300000, guid: 89d28ac5084e60b49a79749149d8a2f1, type: 3}
   - {fileID: 21300000, guid: 17bd29caff38cca4783743db690cb8fd, type: 3}
   - {fileID: 21300000, guid: 29928e275735cc34c8bff2b887a6185f, type: 3}
   - {fileID: 21300000, guid: 8bf68dd26f56af245b27d9c3e0a9493e, type: 3}
+  - {fileID: 21300000, guid: 16e424dd34449234fb01ac85f9caa8ad, type: 3}
   transitionScreen: {fileID: 0}
   winScreen: {fileID: 0}
+  skeleton: {fileID: 0}
   playLogTransform: {fileID: 0}
   playerOrderPrefab: {fileID: 2289388166846186781, guid: 4c516e3871547c346b4766b606b06fb1, type: 3}
   playerSprite:
