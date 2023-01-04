@@ -1,0 +1,753 @@
+fileFormatVersion: 2
+guid: 1a8493e6728a2a84aab2f0d0322b6e80
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 461f4f0a4c28d2341b5f58c579e4f2db
+      internalID: -1783124294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_1
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d56e8c0bac6ed18469044ca9bc69901b
+      internalID: 1364673030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_2
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fb328a9c84a6264599fc4b9fe6db521
+      internalID: 1577400813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_3
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3e86d85866701041a6f10012d0b19c4
+      internalID: -827956347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_4
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 316c44114b380ae418e142fffb21afdd
+      internalID: -33292783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_5
+      rect:
+        serializedVersion: 2
+        x: 820
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feaddc54e7c529e4cb702a4d4e6d86d5
+      internalID: 2001594917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_6
+      rect:
+        serializedVersion: 2
+        x: 984
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f02c4649d03b56a40b3c9a084f3a935b
+      internalID: 1015638650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_7
+      rect:
+        serializedVersion: 2
+        x: 1148
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49c317c7d84788a4eb7794c342f8117b
+      internalID: -536586645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_8
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 140ba3b3ccde0874ab7737bef3bef4ce
+      internalID: -959391372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_9
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 789e2def76ca2c04fb7a9938e3f18f2e
+      internalID: -944590167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_10
+      rect:
+        serializedVersion: 2
+        x: 1640
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8b889664c57ce145ab99c3d54bd7842
+      internalID: -1710891997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_11
+      rect:
+        serializedVersion: 2
+        x: 1804
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17bbe3b0e7e853d4c884199ce5b9f721
+      internalID: 1261614001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_12
+      rect:
+        serializedVersion: 2
+        x: 1968
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03f72025effd7624faddb7d9cf4c0d04
+      internalID: 702855353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_13
+      rect:
+        serializedVersion: 2
+        x: 2132
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 971b416f6061c07438bf504ce470e78e
+      internalID: -859932358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_14
+      rect:
+        serializedVersion: 2
+        x: 2296
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d1897b6a36a16341957b0da186d30fd
+      internalID: -1530717479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_15
+      rect:
+        serializedVersion: 2
+        x: 2460
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 819ae48ed4603f54db97944b9f676ef7
+      internalID: -1567235419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_16
+      rect:
+        serializedVersion: 2
+        x: 2624
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10ead403b5708ae459734a2d631c3ae9
+      internalID: 1184149881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_17
+      rect:
+        serializedVersion: 2
+        x: 2788
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7eba62e5fe640f4a98f69e94d69f843
+      internalID: 152592144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_18
+      rect:
+        serializedVersion: 2
+        x: 2952
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 421010b864289724c8c72fbac8b9311f
+      internalID: -2130339038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_19
+      rect:
+        serializedVersion: 2
+        x: 3116
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bef027de1694226489ff3b6b117a9f9d
+      internalID: -1418595257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_20
+      rect:
+        serializedVersion: 2
+        x: 3280
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23a402b24483d0a4faff4ba782181631
+      internalID: 262095021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_21
+      rect:
+        serializedVersion: 2
+        x: 3444
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd1460e5706e8384b86e9d0517ca8511
+      internalID: -1698120008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_22
+      rect:
+        serializedVersion: 2
+        x: 3608
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 487a48759ca7c2a4bbff6a9ae7c1eb42
+      internalID: -1169300348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_23
+      rect:
+        serializedVersion: 2
+        x: 3772
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50b4deffbe9c4bf48b2e32434c736edd
+      internalID: 307927830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_24
+      rect:
+        serializedVersion: 2
+        x: 3936
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 249bec0317e4fde449bcb30822e721d8
+      internalID: -471728803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_25
+      rect:
+        serializedVersion: 2
+        x: 4100
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7535567953309174a8e85464a1cf2102
+      internalID: 1497665606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: loading icon_for spine-animation_26
+      rect:
+        serializedVersion: 2
+        x: 4264
+        y: 0
+        width: 164.07408
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9c5ecf8daf6d1e47a8598444572af90
+      internalID: 593013469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      loading icon_for spine-animation_8: -959391372
+      loading icon_for spine-animation_15: -1567235419
+      loading icon_for spine-animation_18: -2130339038
+      loading icon_for spine-animation_23: 307927830
+      loading icon_for spine-animation_10: -1710891997
+      loading icon_for spine-animation_17: 152592144
+      loading icon_for spine-animation_22: -1169300348
+      loading icon_for spine-animation_0: -1783124294
+      loading icon_for spine-animation_25: 1497665606
+      loading icon_for spine-animation_24: -471728803
+      loading icon_for spine-animation_9: -944590167
+      loading icon_for spine-animation_6: 1015638650
+      loading icon_for spine-animation_12: 702855353
+      loading icon_for spine-animation_5: 2001594917
+      loading icon_for spine-animation_4: -33292783
+      loading icon_for spine-animation_2: 1577400813
+      loading icon_for spine-animation_7: -536586645
+      loading icon_for spine-animation_13: -859932358
+      loading icon_for spine-animation_14: -1530717479
+      loading icon_for spine-animation_11: 1261614001
+      loading icon_for spine-animation_21: -1698120008
+      loading icon_for spine-animation_1: 1364673030
+      loading icon_for spine-animation_3: -827956347
+      loading icon_for spine-animation_19: -1418595257
+      loading icon_for spine-animation_16: 1184149881
+      loading icon_for spine-animation_20: 262095021
+      loading icon_for spine-animation_26: 593013469
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
