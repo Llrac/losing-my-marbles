@@ -85,7 +85,6 @@ public class RandomAnimationHandler : MonoBehaviour
                     4 => m.rBackIdle4,
                     _ => m.rBackIdle5
                 };
-                Debug.Log(randomizedAnimation);
             }
 
             m.backSkeleton.AnimationState.SetAnimation(0, m.nextIdleAnimation, false);
