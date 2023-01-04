@@ -36,6 +36,7 @@ public class UIDesktop : MonoBehaviour
             if (child.gameObject.name == "Transition")
             {
                 transitionScreen = child.gameObject;
+                transitionScreen.SetActive(true);
             }
             
         }
