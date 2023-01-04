@@ -8,10 +8,12 @@ using UnityEngine;
 public class SessionMessage
 {
     public int gameSessionID;
+    public bool gameIsActive;
 
-    public SessionMessage(int gameSessionID)
+    public SessionMessage(int gameSessionID, bool gameIsActive)
     {
         this.gameSessionID = gameSessionID;
+        this.gameIsActive = gameIsActive;
     }
     
     

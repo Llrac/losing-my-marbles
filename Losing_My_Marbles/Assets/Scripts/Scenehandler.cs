@@ -21,7 +21,16 @@ public class Scenehandler : MonoBehaviour
     {
         GameSession.sessionID = Int32.Parse(sessionCode.text);
         SceneManager.LoadScene("Mobile Interface");
-        
+    }
+
+    public void LoadMobileMatchmaking()
+    {
+        SceneManager.LoadScene("Mobile Matchmaking");
+    }
+    
+    public void LoadChooseColor()
+    {
+        SceneManager.LoadScene("Choose Color");
     }
 
     public void LoadDesktopMatchmaking()

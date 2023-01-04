@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   database: {fileID: 7772963788211389754}
   uiManager: {fileID: 0}
-  playerId: {fileID: 0}
+  sceneHandler: {fileID: 8954320635930925929, guid: 5b391c7d2dfafe34787a9ebd2a62b599, type: 3}
 --- !u!114 &7772963788211389754
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,9 @@ public class ActionHandler : MonoBehaviour
 {
     public DatabaseAPI database;
     public UIManager uiManager;
-    public PlayerID playerId;
+
+    public Scenehandler sceneHandler;
+    
 
     private int playerID;
 
@@ -50,6 +52,7 @@ public class ActionHandler : MonoBehaviour
     {
         var drawNewHand = Convert.ToBoolean($"{newHandMessage.drawNewHand}");
 
+
         if (uiManager == null)
             return;
         
@@ -64,6 +67,7 @@ public class ActionHandler : MonoBehaviour
                 uiManager.timer.ResetTimer();
             }
         }
+        
     }
 
     // This happens on the desktop side

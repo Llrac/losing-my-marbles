@@ -7,13 +7,22 @@ using UnityEngine.SceneManagement;
 
 public class ResetManager : MonoBehaviour
 {
-    public List<Sprite> winScreens = new();
-    public static List<Sprite> Screens = new();
-    public DatabaseAPI databaseAPI;
     [SerializeField] private GameObject winImage = null;
+    public DatabaseAPI databaseAPI;
+    public ActionHandler actionHandler;
+    
+    public static List<int> levelOrder = new List<int>();
+    public static List<Sprite> Screens = new();
+    
+    public List<Sprite> winScreens = new();
+    
     private static Image win;
-    public static List<int> levelOrder = new();
-    static int tcurrentLevel = 0;
+
+    private static float timer = 2;
+    private static int tcurrentLevel = 0;
+    
+    bool starting = false;
+
     private void Start()
     {
         if (winImage == null)
@@ -29,10 +38,12 @@ public class ResetManager : MonoBehaviour
         }
        
         Screens = winScreens;
+        
         if(tcurrentLevel == 0)
         {
             RandomizeLevels();
         }
+        
         if (winImage != null)
             win = winImage.GetComponent<Image>();
     }
@@ -52,7 +63,6 @@ public class ResetManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.O))
         {
-            
             NextLevel();
         }
     }
@@ -60,32 +70,19 @@ public class ResetManager : MonoBehaviour
    
     public void ResetLevel()
     {
-        PlayerProperties.scoreKeeper = new int[4]
-        {
-            0,0,0,0
-        };
-        for (int i = 0; i < TurnManager.players.Count; i++)
-        {
-            TurnManager.players[i].specialMarbleCount = 0;
-        }
+        ResetScores();
         ResetValues();
+        GameSession.activePlayers = 0;
+        databaseAPI.DeleteGameSession();
         SceneManager.LoadScene("MainMenu");
     }
     public void Restart()
     {
-        PlayerProperties.scoreKeeper = new int[4]
-        {
-            0,0,0,0
-        };
-        for(int i = 0; i < TurnManager.players.Count; i++)
-        {
-            TurnManager.players[i].specialMarbleCount = 0;
-        }
-        UIDesktop.orderInLevel = 0;
 
-        ResetValues();
-       
-        StartCoroutine(LS());
+       ResetScores();
+       ResetValues();
+       StartCoroutine(LS());
+
     }
     IEnumerator LS()
     {
@@ -123,9 +120,11 @@ public class ResetManager : MonoBehaviour
         }
         TurnManager.isPaused = true;
     }
+    
     public void PauseGame()
     {
         GameObject pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
+        
         if (TurnManager.isPaused == false)
         {
             TurnManager.isPaused = true;
@@ -163,7 +162,22 @@ public class ResetManager : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
-    private void ResetValues( bool shouldRandomizeLevels = true)
+
+    
+    private void ResetScores()
+    {
+        PlayerProperties.scoreKeeper = new int[4]
+        {
+            0, 0, 0, 0
+        };
+        
+        for (int i = 0; i < TurnManager.players.Count; i++)
+        {
+            TurnManager.players[i].specialMarbleCount = 0;
+        }
+    }
+    
+    private void ResetValues(bool shouldRandomizeLevels = true)
     {
         PlayerProperties.ids.Clear();
         PlayerProperties.myActions.Clear();
@@ -172,14 +186,17 @@ public class ResetManager : MonoBehaviour
         DebugManager.characterToControl = 1;
         DatabaseAPI.hasBeenRestarted = true;
         TurnManager.isPaused = false;
-        
-        if(shouldRandomizeLevels == true)
+
+
+        if (shouldRandomizeLevels == true)
+
         {
             tcurrentLevel = 0;
             RandomizeLevels();
         }
           
     }
+
     public void RandomizeLevels()
     {
         GridManager gm = FindObjectOfType<GridManager>();
