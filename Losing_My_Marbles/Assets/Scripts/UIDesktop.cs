@@ -5,15 +5,18 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Spine.Unity;
 
 public class UIDesktop : MonoBehaviour
 {
     [Header("Transition")]
-    public GameObject transitionScreen = null;
     public Sprite[] tooltips;
-    GameObject randomTooltip;
-    readonly static List<int> tooltipOrder = new();
     public static int orderInLevel = 0;
+    readonly static List<int> tooltipOrder = new();
+    [HideInInspector] public GameObject transitionScreen;
+    [HideInInspector] public GameObject winScreen;
+    [HideInInspector] public SkeletonGraphic skeleton;
+    GameObject randomTooltip;
     GameObject loadingIcon;
 
     [Header("In game")]
@@ -41,6 +44,20 @@ public class UIDesktop : MonoBehaviour
                 transitionScreen.SetActive(true);
             }
             
+        }
+        foreach (Transform child in desktopCanvas.transform)
+        {
+            if (child.gameObject.name == "WinScreen")
+            {
+                winScreen = child.gameObject;
+            }
+        }
+        foreach (Transform child in winScreen.transform)
+        {
+            if (child.gameObject.name == "Win_Player")
+            {
+                skeleton = child.GetComponent<SkeletonGraphic>();
+            }
         }
         foreach (Transform child in transitionScreen.transform)
         {
@@ -72,7 +89,7 @@ public class UIDesktop : MonoBehaviour
         yield return new WaitForSeconds(3f);
         loadingIcon.GetComponent<Animator>().SetTrigger("fade_out");
         yield return new WaitForSeconds(0.75f);
-        transitionScreen.GetComponent<Animator>().SetTrigger("fade_out");
+        transitionScreen.GetComponent<Animator>().SetTrigger("go_away");
         yield return null;
     }
     

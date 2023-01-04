@@ -82,8 +82,8 @@ public abstract class Movement : MonoBehaviour
         }
         newAnimationDirectionID = currentDirectionID;
         lastAnimationDirectionID = newAnimationDirectionID;
-        PlayerProperties pp = GetComponent<PlayerProperties>();
         RatProperties rp = GetComponent<RatProperties>();
+        PlayerProperties pp = GetComponent<PlayerProperties>();
         if (pp != null)
         {
             switch (pp.playerID)
@@ -294,7 +294,6 @@ public abstract class Movement : MonoBehaviour
                     backSkeleton.timeScale = jumpAnimationSpeed;
                     StartCoroutine(PrepareIdleAnimation(backSkeleton.AnimationState.SetAnimation(0, nextJumpAnimation, false).AnimationEnd / backSkeleton.timeScale));
                 }
-                Debug.Log("jump");
                 break;
 
             case 1:
