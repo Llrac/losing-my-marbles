@@ -34,7 +34,14 @@ public class PlayerProperties : Movement
         gridManager = FindObjectOfType<GridManager>();
         UpdateSkinBasedOnPlayerID();
         GetScore(); // keps your score
-        FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.name == "IntentShower")
+            {
+                FindIntentShower = child.gameObject.GetComponent<SpriteRenderer>();
+            }
+        }
+        //FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
         intent = FindIntentShower.GetComponent<SetIntent>();
         startingGridPosition = gridPosition;
         startingWorldPosition = transform.position;
