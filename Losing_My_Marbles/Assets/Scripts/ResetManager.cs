@@ -45,6 +45,7 @@ public class ResetManager : MonoBehaviour
         {
             ResetLevel();
         }
+        
         if (Input.GetKeyDown(KeyCode.P))
         {
             //pause game
@@ -62,31 +63,16 @@ public class ResetManager : MonoBehaviour
    
     public void ResetLevel()
     {
-        PlayerProperties.scoreKeeper = new int[4]
-        {
-            0,0,0,0
-        };
-        for (int i = 0; i < TurnManager.players.Count; i++)
-        {
-            TurnManager.players[i].specialMarbleCount = 0;
-        }
+        ResetScores();
         ResetValues();
         SceneManager.LoadScene("MainMenu");
     }
     public void Restart()
     {
-        PlayerProperties.scoreKeeper = new int[4]
-        {
-            0,0,0,0
-        };
-        for(int i = 0; i < TurnManager.players.Count; i++)
-        {
-            TurnManager.players[i].specialMarbleCount = 0;
-        }
-
-        ResetValues();
+       ResetScores();
+       ResetValues();
        
-        StartCoroutine(LS());
+       StartCoroutine(LS());
     }
     IEnumerator LS()
     {
@@ -163,6 +149,20 @@ public class ResetManager : MonoBehaviour
         }
           
     }
+
+    private void ResetScores()
+    {
+        PlayerProperties.scoreKeeper = new int[4]
+        {
+            0, 0, 0, 0
+        };
+        
+        for (int i = 0; i < TurnManager.players.Count; i++)
+        {
+            TurnManager.players[i].specialMarbleCount = 0;
+        }
+    }
+    
     public void RandomizeLevels()
     {
         GridManager gm = FindObjectOfType<GridManager>();
