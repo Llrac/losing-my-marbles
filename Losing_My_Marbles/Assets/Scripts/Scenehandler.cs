@@ -10,7 +10,7 @@ using TMPro;
 public class Scenehandler : MonoBehaviour
 {
     public GameSession gameSession;
-    public TMP_InputField sessionCode;
+    public TMP_InputField sessionCode = null;
 
     public void Start()
     {

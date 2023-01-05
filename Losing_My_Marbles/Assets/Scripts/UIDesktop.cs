@@ -53,40 +53,45 @@ public class UIDesktop : MonoBehaviour
                 winScreen = child.gameObject;
             }
         }
-        foreach (Transform child in winScreen.transform)
+        if (winScreen != null)
         {
-            if (child.gameObject.name == "Win_Player")
+            foreach (Transform child in winScreen.transform)
             {
-                skeleton = child.GetComponent<SkeletonGraphic>();
-            }
-            if (child.gameObject.name == "Its_Raining_Marbles")
-            {
-                marbleRain = child.gameObject;
-            }
-        }
-        foreach (Transform child in transitionScreen.transform)
-        {
-            if (child.gameObject.name == "Loading_Icon")
-            {
-                loadingIcon = child.gameObject;
-            }
-            else if (child.gameObject.name == "Random_Tooltip")
-            {
-                randomTooltip = child.gameObject;
-
-                while (tooltipOrder.Count < tooltips.Length)
+                if (child.gameObject.name == "Win_Player")
                 {
-                    int randomTooltip = UnityEngine.Random.Range(0, tooltips.Length);
-                    if (!tooltipOrder.Contains(randomTooltip))
-                    {
-                        tooltipOrder.Add(randomTooltip);
-                    }
+                    skeleton = child.GetComponent<SkeletonGraphic>();
                 }
-                randomTooltip.GetComponent<Image>().sprite = tooltips[tooltipOrder[orderInLevel - 1]];
+                if (child.gameObject.name == "Its_Raining_Marbles")
+                {
+                    marbleRain = child.gameObject;
+                }
             }
         }
+        if (transitionScreen != null)
+        {
+            foreach (Transform child in transitionScreen.transform)
+            {
+                if (child.gameObject.name == "Loading_Icon")
+                {
+                    loadingIcon = child.gameObject;
+                }
+                else if (child.gameObject.name == "Random_Tooltip")
+                {
+                    randomTooltip = child.gameObject;
 
-        StartCoroutine(Transition());
+                    while (tooltipOrder.Count < tooltips.Length)
+                    {
+                        int randomTooltip = UnityEngine.Random.Range(0, tooltips.Length);
+                        if (!tooltipOrder.Contains(randomTooltip))
+                        {
+                            tooltipOrder.Add(randomTooltip);
+                        }
+                    }
+                    randomTooltip.GetComponent<Image>().sprite = tooltips[tooltipOrder[orderInLevel - 1]];
+                }
+            }
+            StartCoroutine(Transition());
+        }
     }
 
     IEnumerator Transition()

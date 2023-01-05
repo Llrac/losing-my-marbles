@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Special Marble
   - PauseScreen
+  - MenuButton
+  - Arrow
   layers:
   - Default
   - TransparentFX
