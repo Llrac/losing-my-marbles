@@ -253,7 +253,8 @@ public class PlayerProperties : Movement
     }
     private IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(.25f);
+        transform.position = new Vector2(100,100); // mediocre fix
+        yield return new WaitForSeconds(1.5f);
         for (int i = 0; i < TurnManager.players.Count; i++)
         {
             if (TurnManager.players[i].gridPosition == startingGridPosition && TurnManager.players[i].playerID != playerID)
@@ -261,7 +262,6 @@ public class PlayerProperties : Movement
                 TurnManager.players[i].Pushed(startingDirection);
             }
         }
-
         currentDirectionID = startingDirection;
         gridPosition = startingGridPosition;
         UpdateSkeleton();

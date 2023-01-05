@@ -434,7 +434,7 @@ public abstract class Movement : MonoBehaviour
                     return false;
 
                 case GridManager.WALKABLEGROUND: // WALKABLEGROUND
-                    Move(character, 1);
+                    Move(character, 1, typeID);
                     savedTile = 'X';
                     return true;
 

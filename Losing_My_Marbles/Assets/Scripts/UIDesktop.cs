@@ -78,6 +78,10 @@ public class UIDesktop : MonoBehaviour
                     }
                 }
                 randomTooltip.GetComponent<Image>().sprite = tooltips[tooltipOrder[orderInLevel - 1]];
+                if(orderInLevel >= tooltips.Length - 1)
+                {
+                    orderInLevel = 0;
+                }
             }
         }
 

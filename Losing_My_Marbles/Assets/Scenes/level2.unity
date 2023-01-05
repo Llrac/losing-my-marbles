@@ -1556,6 +1556,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 510053272, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
+      propertyPath: bomb
+      value: 
+      objectReference: {fileID: 5048783173194823481, guid: 30d1bc4f6ad35b94b802b85e9b2901b8, type: 3}
     - target: {fileID: 2120634356009288632, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -2461,13 +2465,10 @@ MonoBehaviour:
   actionHandler: {fileID: 623496582}
   uiDesktop: {fileID: 1997739543}
   readyAlert: {fileID: 1382374463}
-
   turnLetterImages:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  actionHandler: {fileID: 623496582}
-
 --- !u!4 &1552591137
 Transform:
   m_ObjectHideFlags: 0

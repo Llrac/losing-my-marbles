@@ -42,7 +42,10 @@ public class GameSession : MonoBehaviour
         }
         
         if (activePlayers == numberOfPlayers)
+        {
             CheckMatchedGames.matchedGame = true;
+            activePlayers = 0;
+        }
         
         
     }

@@ -38,6 +38,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip marblesReady = null;
     public AudioClip pressGo = null;
 
+    
     private void UpdateBackgroundAudio()
     {
         foreach (Transform child in transform)
@@ -58,7 +59,15 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
+    public static void StopAllAudio()
+    {
+        AudioSource [] allSources = FindObjectsOfType<AudioSource>(); 
+        foreach (AudioSource source in allSources)
+        {
+            source.Stop();
+        }
 
+    }
     private static AudioManager instance = null;
     public static AudioManager Instance
     {
