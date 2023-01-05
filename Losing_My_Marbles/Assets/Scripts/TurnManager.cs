@@ -221,15 +221,16 @@ public class TurnManager : MonoBehaviour
     {
         IEnumerator SomethingWentWrong()
         {
-            Debug.Log("Something went wrong, please make sure you are not using the same colors!");
             yield return new WaitForSeconds(5f);
             isPaused = false;
+            GameObject.Find("Warning").GetComponent<Image>().enabled = false;
             FindObjectOfType<ResetManager>().ResetLevel();
 
         }
         if(PlayerProperties.ids.Count != PlayerProperties.ids.Distinct().Count() && isPaused == false)
         {
             isPaused = true;
+            GameObject.Find("Warning").GetComponent<Image>().enabled = true;
             StartCoroutine(SomethingWentWrong());
         }
     }
