@@ -73,7 +73,7 @@ public class ResetManager : MonoBehaviour
         ResetScores();
         ResetValues();
         GameSession.activePlayers = 0;
-        databaseAPI.DeleteGameSession();
+        databaseAPI?.DeleteGameSession();
         SceneManager.LoadScene("MainMenu");
     }
     public void Restart()

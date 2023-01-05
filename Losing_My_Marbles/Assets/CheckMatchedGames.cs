@@ -11,9 +11,9 @@ public class CheckMatchedGames : MonoBehaviour
         if (matchedGame)
         {
             Debug.Log(matchedGame);
-            SceneManager.LoadScene("level1");
             matchedGame = false;
             GameSession.activePlayers = 0;
+            SceneManager.LoadScene("level1");
         }
         
     }
