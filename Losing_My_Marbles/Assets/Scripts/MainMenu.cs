@@ -23,6 +23,10 @@ public class MainMenu : MonoBehaviour
         Application.targetFrameRate = 60;
 
         arrow = GameObject.FindGameObjectWithTag("Arrow").GetComponent<Animator>();
+
+        creditsPanel.SetActive(true);
+        optionsPanel.SetActive(true);
+        exitPanel.SetActive(true);
     }
 
     private void Update()
