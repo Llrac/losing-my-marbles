@@ -199,7 +199,6 @@ public class MainMenu : MonoBehaviour
     public void ExitApplication()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
         GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
     }
 

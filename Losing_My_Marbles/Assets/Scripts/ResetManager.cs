@@ -50,21 +50,21 @@ public class ResetManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetLevel();
-        }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            //pause game
-            PauseGame();
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    ResetLevel();
+        //}
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    //pause game
+        //    PauseGame();
             
-        }
+        //}
         
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            NextLevel();
-        }
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    NextLevel();
+        //}
     }
 
    

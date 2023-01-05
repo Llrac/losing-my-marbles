@@ -29,8 +29,6 @@ public class GameSession : MonoBehaviour
         var gameSession = Int32.Parse($"{sessionMessage.gameSessionID}");
         var gameIsActive = Convert.ToBoolean($"{sessionMessage.gameIsActive}");
 
-        Debug.Log(gameSession);
-
         if (gameIsActive == false)
         {
             return;

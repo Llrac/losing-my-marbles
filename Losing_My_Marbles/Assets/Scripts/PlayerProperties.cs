@@ -66,60 +66,60 @@ public class PlayerProperties : Movement
     
     void Update()
     {
-        if (playerID == DebugManager.characterToControl)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                TryMove(gameObject, 0, act);
-            }
-            else if (Input.GetKeyDown(KeyCode.A))
-            {
-                TryMove(gameObject, 1, -1);
-            }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                TryMove(gameObject, 1, 1);
-            }
+        //if (playerID == DebugManager.characterToControl)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.W))
+        //    {
+        //        TryMove(gameObject, 0, act);
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.A))
+        //    {
+        //        TryMove(gameObject, 1, -1);
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.D))
+        //    {
+        //        TryMove(gameObject, 1, 1);
+        //    }
             
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                act++;
-            }
+        //    if (Input.GetKeyDown(KeyCode.Q))
+        //    {
+        //        act++;
+        //    }
             
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                act--;
-            }
+        //    if (Input.GetKeyDown(KeyCode.E))
+        //    {
+        //        act--;
+        //    }
             
-            if (Input.GetButtonDown("Jump"))
-            {
-                SpecialMarble.Amplifier(this);
-            }
+        //    if (Input.GetButtonDown("Jump"))
+        //    {
+        //        SpecialMarble.Amplifier(this);
+        //    }
             
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                StartCoroutine(FindObjectOfType<SpecialMarble>().Bomb(this));
-                if (GetComponent<AudioSource>() != null)
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerBomb);
-            }
+        //    if (Input.GetKeyDown(KeyCode.N))
+        //    {
+        //        StartCoroutine(FindObjectOfType<SpecialMarble>().Bomb(this));
+        //        if (GetComponent<AudioSource>() != null)
+        //            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerBomb);
+        //    }
 
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                FindObjectOfType<SpecialMarble>().Swap(this);
-                if (GetComponent<AudioSource>() != null)
-                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerSwap);
-            }
+        //    if (Input.GetKeyDown(KeyCode.S))
+        //    {
+        //        FindObjectOfType<SpecialMarble>().Swap(this);
+        //        if (GetComponent<AudioSource>() != null)
+        //            GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerSwap);
+        //    }
 
-            if (Input.GetKeyDown(KeyCode.B))
-            {
-                TryMove(gameObject, 2, 3);
-            }
+        //    if (Input.GetKeyDown(KeyCode.B))
+        //    {
+        //        TryMove(gameObject, 2, 3);
+        //    }
 
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                ResetManager.PlayerWin(playerID);
-            }
-        }
+        //    if (Input.GetKeyDown(KeyCode.F))
+        //    {
+        //        ResetManager.PlayerWin(playerID);
+        //    }
+        //}
     }
 
     public override char ChangeTag()

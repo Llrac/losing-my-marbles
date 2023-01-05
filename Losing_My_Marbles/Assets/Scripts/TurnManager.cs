@@ -25,7 +25,7 @@ public class TurnManager : MonoBehaviour
     
     public ActionHandler actionHandler;
     public UIDesktop uiDesktop;
-    public GameObject readyAlert;
+    //public GameObject readyAlert;
     //public GameObject information;
     public GameObject[] turnLetterImages = new GameObject[3];
     private TextMeshProUGUI roundInformation;
@@ -80,7 +80,6 @@ public class TurnManager : MonoBehaviour
 
             if (startTurn == true)
             {
-                readyAlert.GetComponent<Image>().enabled = false;
                 StartCoroutine(ExecuteTurn());
                 startTurn = false;
             }
@@ -210,10 +209,6 @@ public class TurnManager : MonoBehaviour
         uiDesktop.ClearPlayerOrder();
 
         // uiDesktop.TurnOnMarbleBagAnimation();
-
-
-
-        readyAlert.GetComponent<Image>().enabled = true;
 
         //roundInformation.text = "Round " + amountOfRounds + " is over";
         yield return new WaitForSeconds(2f);
