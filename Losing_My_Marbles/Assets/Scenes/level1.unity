@@ -237,13 +237,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3faf7473080ce4181f96f4301415d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winImage: {fileID: 1791015179}
+  databaseAPI: {fileID: 36617719}
+  actionHandler: {fileID: 623496582}
   winScreens:
   - {fileID: 21300000, guid: 768b7e46ae3f65044be92b01601ca82a, type: 3}
   - {fileID: 21300000, guid: d34698314f3047349868ace72531cd39, type: 3}
   - {fileID: 21300000, guid: ebd527e08d394084eb4ebbee7cf17046, type: 3}
   - {fileID: 21300000, guid: 1c70d402199f0c144b65cfe14480453a, type: 3}
-  databaseAPI: {fileID: 0}
-  winImage: {fileID: 1791015179}
 --- !u!4 &36617718
 Transform:
   m_ObjectHideFlags: 0
@@ -2467,13 +2468,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfTurns: 3
+  actionHandler: {fileID: 623496582}
   uiDesktop: {fileID: 1997739543}
   readyAlert: {fileID: 453755223}
   turnLetterImages:
-  - {fileID: 5056906181276459735}
-  - {fileID: 5056906181276459734}
-  - {fileID: 5056906181276459733}
-  actionHandler: {fileID: 623496582}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1552591137
 Transform:
   m_ObjectHideFlags: 0
@@ -3510,21 +3511,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
---- !u!1 &5056906181276459733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3797288419143187470, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
-  m_PrefabInstance: {fileID: 5056906181276459732}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5056906181276459734 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3369855938246256481, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
-  m_PrefabInstance: {fileID: 5056906181276459732}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5056906181276459735 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3643709608406505210, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
-  m_PrefabInstance: {fileID: 5056906181276459732}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5639527082496630540 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 607455304608513496, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
@@ -3613,7 +3599,7 @@ PrefabInstance:
     - target: {fileID: 7772963788211389753, guid: 56f8681a161199748926c267cb9cdabe, type: 3}
       propertyPath: uiManager
       value: 
-      objectReference: {fileID: 2070015176}
+      objectReference: {fileID: 0}
     - target: {fileID: 7772963788211389755, guid: 56f8681a161199748926c267cb9cdabe, type: 3}
       propertyPath: m_Name
       value: ActionHandler

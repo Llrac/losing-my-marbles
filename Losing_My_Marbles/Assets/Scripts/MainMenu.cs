@@ -67,6 +67,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
+
         FindObjectOfType<GameSession>().CreateSession();
         FindObjectOfType<Scenehandler>().LoadDesktopMatchmaking();
     }

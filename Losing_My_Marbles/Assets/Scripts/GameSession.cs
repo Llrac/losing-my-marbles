@@ -9,8 +9,7 @@ public class GameSession : MonoBehaviour
     public static int sessionID = 0;
     public DatabaseAPI database;
     public int numberOfPlayers = 4;
-    public int activePlayers = 0;
-
+    public static int activePlayers = 0;
 
     public void CreateSession()
     {
@@ -28,22 +27,29 @@ public class GameSession : MonoBehaviour
         Debug.Log("I'm listening!");
 
         var gameSession = Int32.Parse($"{sessionMessage.gameSessionID}");
+        var gameIsActive = Convert.ToBoolean($"{sessionMessage.gameIsActive}");
 
         Debug.Log(gameSession);
-        
-        if (activePlayers == numberOfPlayers)
-            CheckMatchedGames.matchedGame = true;
+
+        if (gameIsActive == false)
+        {
+            return;
+        }
         
         if (gameSession == sessionID)
         {
             activePlayers++;
         }
         
+        if (activePlayers == numberOfPlayers)
+            CheckMatchedGames.matchedGame = true;
+        
+        
     }
     
     public void JoinGame()
     {
-        database.JoinGameSession(new SessionMessage(sessionID), () =>
+        database.JoinGameSession(new SessionMessage(sessionID, true), () =>
         {
             
         }, exception => { Debug.Log(exception); });
