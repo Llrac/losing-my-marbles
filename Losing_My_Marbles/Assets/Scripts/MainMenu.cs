@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public DatabaseAPI databaseAPI;
     public GameObject creditsPanel;
     public GameObject optionsPanel;
+    public GameObject exitPanel;
     Animator arrow;
     private static bool audioIsMuted = false;
     float audioTimer = 0;
@@ -29,7 +30,7 @@ public class MainMenu : MonoBehaviour
         audioTimer += Time.deltaTime * Time.deltaTime * Application.targetFrameRate;
     }
 
-    public void OnHover(GameObject button)
+    public void OnHoverEnter(GameObject button)
     {
         foreach (Transform child in button.transform)
         {
@@ -49,103 +50,7 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void Play()
-    {
-        FindObjectOfType<GameSession>().CreateSession();
-        FindObjectOfType<Scenehandler>().LoadDesktopMatchmaking();
-    }
-
-    public void ShowOptions()
-    {
-        if (!optionsPanel.activeSelf)
-        {
-            optionsPanel.SetActive(true);
-            creditsPanel.SetActive(false);
-
-            if (currentArrowState == ArrowStates.options)
-            {
-                currentArrowState = ArrowStates.howtoplay;
-                arrow.SetTrigger("howtoplay");
-            }
-        }
-        else
-        {
-            optionsPanel.SetActive(false);
-
-            if (currentArrowState == ArrowStates.howtoplay)
-            {
-                currentArrowState = ArrowStates.options;
-                arrow.SetTrigger("options");
-            }
-        }
-        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
-    }
-
-    public void ShowHTP(GameObject howToPlay)
-    {
-        GameObject button = null;
-        foreach (GameObject buttonInScene in GameObject.FindGameObjectsWithTag("MenuButton"))
-        {
-            foreach (Transform child in buttonInScene.transform)
-            {
-                if (child.GetComponent<Button>() != null)
-                {
-                    button = child.gameObject;
-                }
-            }
-        }
-        Animator anim = howToPlay.GetComponent<Animator>();
-        if (!anim.GetBool("isShowing"))
-        {
-            anim.SetTrigger("show");
-            anim.SetBool("isShowing", true);
-            GameObject.FindGameObjectWithTag("Special Marble").GetComponent<ParticleSystem>().Stop();
-            GameObject.FindGameObjectWithTag("Special Marble").GetComponent<ParticleSystem>().Clear();
-            button.GetComponent<Button>().enabled = false;
-
-            if (currentArrowState == ArrowStates.howtoplay)
-            {
-                currentArrowState = ArrowStates.disable;
-                arrow.SetTrigger("disable");
-            }
-        }
-        else
-        {
-            anim.SetTrigger("back");
-            anim.SetBool("isShowing", false);
-            GameObject.FindGameObjectWithTag("Special Marble").GetComponent<ParticleSystem>().Play();
-            button.GetComponent<Button>().enabled = true;
-        }
-        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
-    }
-
-    public void ShowCredits()
-    {
-        if (!creditsPanel.activeSelf)
-        {
-            creditsPanel.SetActive(true);
-            optionsPanel.SetActive(false);
-        }
-        else
-        {
-            creditsPanel.SetActive(false);
-
-            if (currentArrowState == ArrowStates.howtoplay)
-            {
-                currentArrowState = ArrowStates.options;
-            }
-        }
-        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
-    }
-
-    public void AskExit()
-    {
-        Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
-        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
-    }
-
-    public void OnExit(GameObject button)
+    public void OnHoverExit(GameObject button)
     {
         foreach (Transform child in button.transform)
         {
@@ -158,6 +63,139 @@ public class MainMenu : MonoBehaviour
                 child.gameObject.SetActive(true);
             }
         }
+    }
+
+    public void Play()
+    {
+        FindObjectOfType<GameSession>().CreateSession();
+        FindObjectOfType<Scenehandler>().LoadDesktopMatchmaking();
+    }
+
+    public void ShowOptions()
+    {
+        if (!optionsPanel.GetComponent<Animator>().GetBool("isShowing"))
+        {
+            optionsPanel.GetComponent<Animator>().SetBool("isShowing", true);
+            optionsPanel.GetComponent<Animator>().SetTrigger("show");
+
+            if (creditsPanel.GetComponent<Animator>().GetBool("isShowing"))
+            {
+                creditsPanel.GetComponent<Animator>().SetBool("isShowing", false);
+                creditsPanel.GetComponent<Animator>().SetTrigger("hide");
+            }
+
+            if (currentArrowState == ArrowStates.options)
+            {
+                currentArrowState = ArrowStates.howtoplay;
+                arrow.SetTrigger("howtoplay");
+            }
+        }
+        else
+        {
+            optionsPanel.GetComponent<Animator>().SetBool("isShowing", false);
+            optionsPanel.GetComponent<Animator>().SetTrigger("hide");
+
+            if (currentArrowState == ArrowStates.howtoplay)
+            {
+                currentArrowState = ArrowStates.options;
+                arrow.SetTrigger("options");
+            }
+        }
+
+        AskExit(true);
+
+        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
+    }
+
+    public void ShowHTP(GameObject howToPlay)
+    {
+        AskExit(true);
+
+        Animator anim = howToPlay.GetComponent<Animator>();
+        if (!anim.GetBool("isShowing"))
+        {
+            anim.SetTrigger("show");
+            anim.SetBool("isShowing", true);
+            GameObject.FindGameObjectWithTag("Special Marble").GetComponent<ParticleSystem>().Stop();
+            GameObject.FindGameObjectWithTag("Special Marble").GetComponent<ParticleSystem>().Clear();
+
+            if (currentArrowState == ArrowStates.howtoplay)
+            {
+                currentArrowState = ArrowStates.disable;
+                arrow.SetTrigger("disable");
+            }
+        }
+        else
+        {
+            anim.SetTrigger("hide");
+            anim.SetBool("isShowing", false);
+            GameObject.FindGameObjectWithTag("Special Marble").GetComponent<ParticleSystem>().Play();
+        }
+    }
+
+    public void ShowCredits()
+    {
+        if (!creditsPanel.GetComponent<Animator>().GetBool("isShowing"))
+        {
+            creditsPanel.GetComponent<Animator>().SetBool("isShowing", true);
+            creditsPanel.GetComponent<Animator>().SetTrigger("show");
+
+            if (optionsPanel.GetComponent<Animator>().GetBool("isShowing"))
+            {
+                optionsPanel.GetComponent<Animator>().SetBool("isShowing", false);
+                optionsPanel.GetComponent<Animator>().SetTrigger("hide");
+            }
+        }
+        else
+        {
+            creditsPanel.GetComponent<Animator>().SetBool("isShowing", false);
+            creditsPanel.GetComponent<Animator>().SetTrigger("hide");
+
+        }
+        if (currentArrowState == ArrowStates.howtoplay)
+        {
+            currentArrowState = ArrowStates.options;
+            arrow.SetTrigger("options");
+        }
+
+        AskExit(true);
+
+        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
+    }
+
+    public void AskExit(bool hide = false)
+    {
+        if (exitPanel.GetComponent<Animator>().GetBool("isShowing"))
+        {
+            exitPanel.GetComponent<Animator>().SetBool("isShowing", false);
+            exitPanel.GetComponent<Animator>().SetTrigger("hide");
+            GameObject.FindGameObjectWithTag("Special Marble").GetComponent<ParticleSystem>().Play();
+            if (currentArrowState == ArrowStates.options)
+            {
+                arrow.SetTrigger("options");
+            }
+            else if (currentArrowState == ArrowStates.howtoplay)
+            {
+                arrow.SetTrigger("howtoplay");
+            }
+        }
+        else if (!hide)
+        {
+            exitPanel.GetComponent<Animator>().SetBool("isShowing", true);
+            exitPanel.GetComponent<Animator>().SetTrigger("show");
+            GameObject.FindGameObjectWithTag("Special Marble").GetComponent<ParticleSystem>().Stop();
+            GameObject.FindGameObjectWithTag("Special Marble").GetComponent<ParticleSystem>().Clear();
+            arrow.SetTrigger("disable");
+        }
+        if (!hide)
+        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
+    }
+
+    public void ExitApplication()
+    {
+        Application.Quit();
+        UnityEditor.EditorApplication.isPlaying = false;
+        GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().onClick);
     }
 
     public void SecretButton(GameObject button)
