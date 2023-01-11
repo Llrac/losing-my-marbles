@@ -122,9 +122,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 761782328705225898, guid: 07e7db57365b938489982a1db5442653, type: 3}
+      - m_Target: {fileID: 2420142926738599161, guid: 07e7db57365b938489982a1db5442653, type: 3}
         m_TargetAssemblyTypeName: ChooseColor, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: PickRed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
