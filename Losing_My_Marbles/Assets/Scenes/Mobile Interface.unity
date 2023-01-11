@@ -2501,6 +2501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5962e1e33c8d07d4086bb4edc86d1678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 1035956314}
   backgroundColor:
   - {fileID: 21300000, guid: 293d4e06067517941a5b760bff743fe7, type: 3}
   - {fileID: 21300000, guid: 3483872232bb1f248a076a210f71d7df, type: 3}
