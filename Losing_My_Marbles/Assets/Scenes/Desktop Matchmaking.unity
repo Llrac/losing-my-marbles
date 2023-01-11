@@ -771,6 +771,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Desktop
       objectReference: {fileID: 0}
+    - target: {fileID: 5815408277541116926, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5815408277541116927, guid: 8241bccd5ab5162449be39daf4123128, type: 3}
       propertyPath: sessionCode
       value: 

@@ -11,12 +11,6 @@ public class GameSession : MonoBehaviour
     public int numberOfPlayers = 4;
     public static int activePlayers = 0;
 
-
-    private void Update()
-    {
-        Debug.Log(activePlayers);
-    }
-
     public void CreateSession()
     {
         GenerateSessionID();
@@ -48,7 +42,10 @@ public class GameSession : MonoBehaviour
         }
         
         if (activePlayers == numberOfPlayers)
+        {
             CheckMatchedGames.matchedGame = true;
+            activePlayers = 0;
+        }
         
         
     }

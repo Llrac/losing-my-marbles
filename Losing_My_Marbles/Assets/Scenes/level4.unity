@@ -133,11 +133,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 5056906182093424068, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
   m_PrefabInstance: {fileID: 2042137480}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &21293269 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5056906181629956827, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
-  m_PrefabInstance: {fileID: 2042137480}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &80288516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,10 +1103,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfTurns: 3
+  actionHandler: {fileID: 487106152}
   uiDesktop: {fileID: 235453894}
   readyAlert: {fileID: 1750751545}
-  information: {fileID: 21293269}
-  actionHandler: {fileID: 487106152}
+  turnLetterImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &816951276
 Transform:
   m_ObjectHideFlags: 0
@@ -1724,7 +1722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13adaa1761d4e44597e3eb08c05bc9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 1
 --- !u!4 &1061519365
 Transform:
   m_ObjectHideFlags: 0
@@ -2217,13 +2214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3faf7473080ce4181f96f4301415d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winImage: {fileID: 1658654708}
+  databaseAPI: {fileID: 0}
+  actionHandler: {fileID: 0}
   winScreens:
   - {fileID: 21300000, guid: 768b7e46ae3f65044be92b01601ca82a, type: 3}
   - {fileID: 21300000, guid: d34698314f3047349868ace72531cd39, type: 3}
   - {fileID: 21300000, guid: ebd527e08d394084eb4ebbee7cf17046, type: 3}
   - {fileID: 21300000, guid: 1c70d402199f0c144b65cfe14480453a, type: 3}
-  databaseAPI: {fileID: 0}
-  winImage: {fileID: 1658654708}
 --- !u!114 &1478962706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3535,6 +3533,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 510053272, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
+      propertyPath: bomb
+      value: 
+      objectReference: {fileID: 5048783173194823481, guid: 30d1bc4f6ad35b94b802b85e9b2901b8, type: 3}
     - target: {fileID: 2120634356009288632, guid: e22e73124d9bf0f46aed5a57c10a3d73, type: 3}
       propertyPath: m_RootOrder
       value: 8

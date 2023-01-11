@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerProperties : Movement
 {
+    [Header("Player Properties")]
     public int playerID = 0; // playerID of (0) is null
     private Vector2 startingGridPosition = Vector2.zero;
     private Vector2 startingWorldPosition = Vector2.zero;
@@ -33,7 +34,14 @@ public class PlayerProperties : Movement
         gridManager = FindObjectOfType<GridManager>();
         UpdateSkinBasedOnPlayerID();
         GetScore(); // keps your score
-        FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
+        foreach (Transform child in transform)
+        {
+            if (child.gameObject.name == "IntentShower")
+            {
+                FindIntentShower = child.gameObject.GetComponent<SpriteRenderer>();
+            }
+        }
+        //FindIntentShower = transform.GetComponentInChildren<SpriteRenderer>(); //only works intentshower is the first spriterenderer in children 
         intent = FindIntentShower.GetComponent<SetIntent>();
         startingGridPosition = gridPosition;
         startingWorldPosition = transform.position;
@@ -91,11 +99,25 @@ public class PlayerProperties : Movement
             if (Input.GetKeyDown(KeyCode.N))
             {
                 StartCoroutine(FindObjectOfType<SpecialMarble>().Bomb(this));
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerBomb);
             }
-            
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                FindObjectOfType<SpecialMarble>().Swap(this);
+                if (GetComponent<AudioSource>() != null)
+                    GetComponent<AudioSource>().PlayOneShot(FindObjectOfType<AudioManager>().triggerSwap);
+            }
+
             if (Input.GetKeyDown(KeyCode.B))
             {
                 TryMove(gameObject, 2, 3);
+            }
+
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                ResetManager.PlayerWin(playerID);
             }
         }
     }
@@ -105,7 +127,7 @@ public class PlayerProperties : Movement
         return 'P';
     }
 
-    public override void DoAMove(int id, int inc, int dir)
+    public override bool DoAMove(int id, int inc, int dir)
     {
         Debug.Log("player DoAMove");
         throw new System.NotImplementedException();
@@ -203,6 +225,7 @@ public class PlayerProperties : Movement
     }
     public void ShowMyIntent(int marbleID)
     {
+        Debug.Log(intent);
         intent.ShowIntent(Intent.GiveIntent(marbleID), !isAlive);
     }
     public void HideMyIntent()
@@ -230,7 +253,8 @@ public class PlayerProperties : Movement
     }
     private IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(.25f);
+        transform.position = new Vector2(100,100); // mediocre fix
+        yield return new WaitForSeconds(1.5f);
         for (int i = 0; i < TurnManager.players.Count; i++)
         {
             if (TurnManager.players[i].gridPosition == startingGridPosition && TurnManager.players[i].playerID != playerID)
@@ -238,7 +262,6 @@ public class PlayerProperties : Movement
                 TurnManager.players[i].Pushed(startingDirection);
             }
         }
-
         currentDirectionID = startingDirection;
         gridPosition = startingGridPosition;
         UpdateSkeleton();

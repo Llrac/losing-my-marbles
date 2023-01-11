@@ -17,10 +17,12 @@ public class ResetManager : MonoBehaviour
     public List<Sprite> winScreens = new();
     
     private static Image win;
+
     private static float timer = 2;
     private static int tcurrentLevel = 0;
     
     bool starting = false;
+
     private void Start()
     {
         if (winImage == null)
@@ -52,7 +54,6 @@ public class ResetManager : MonoBehaviour
         {
             ResetLevel();
         }
-        
         if (Input.GetKeyDown(KeyCode.P))
         {
             //pause game
@@ -77,9 +78,11 @@ public class ResetManager : MonoBehaviour
     }
     public void Restart()
     {
+
        ResetScores();
        ResetValues();
        StartCoroutine(LS());
+
     }
     IEnumerator LS()
     {
@@ -93,15 +96,29 @@ public class ResetManager : MonoBehaviour
             win.sprite = Screens[playerID - 1];
             win.enabled = true;
         }
-        TurnManager.isPaused = true;
 
-        for (int i = 0; i < TurnManager.players.Count; i++)
+        FindObjectOfType<UIDesktop>().skeleton.initialSkinName = playerID switch
         {
-            if (playerID == TurnManager.players[i].playerID)
+            1 => "red",
+            2 => "purple",
+            3 => "turquoise",
+            4 => "yellow",
+            _ => "default",
+        };
+        FindObjectOfType<UIDesktop>().skeleton.Initialize(true);
+        FindObjectOfType<UIDesktop>().winScreen.SetActive(true);
+        FindObjectOfType<UIDesktop>().winScreen.GetComponent<Animator>().SetTrigger("fade_in");
+        FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(false);
+        FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_on");
+
+        foreach (PlayerProperties playersInScene in FindObjectsOfType<PlayerProperties>())
+        {
+            if (playerID == playersInScene.playerID)
             {
-                //do animation
+                Destroy(playersInScene.gameObject);
             }
         }
+        TurnManager.isPaused = true;
     }
     
     public void PauseGame()
@@ -116,6 +133,8 @@ public class ResetManager : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
             }
+            FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(true);
+            FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_off");
         }
         else
         {
@@ -125,6 +144,8 @@ public class ResetManager : MonoBehaviour
             {
                 child.gameObject.SetActive(false);
             }
+            FindObjectOfType<UIDesktop>().playLogTransform.gameObject.SetActive(false);
+            FindObjectOfType<UIDesktop>().transitionScreen.GetComponent<Animator>().SetTrigger("shade_on");
         }
     }
     public void NextLevel()
@@ -141,6 +162,7 @@ public class ResetManager : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
+
     
     private void ResetScores()
     {
@@ -167,6 +189,7 @@ public class ResetManager : MonoBehaviour
 
 
         if (shouldRandomizeLevels == true)
+
         {
             tcurrentLevel = 0;
             RandomizeLevels();
@@ -174,8 +197,6 @@ public class ResetManager : MonoBehaviour
           
     }
 
-  
-    
     public void RandomizeLevels()
     {
         GridManager gm = FindObjectOfType<GridManager>();

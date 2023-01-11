@@ -230,7 +230,6 @@ public class AnimationCurveHandler : MonoBehaviour
                 }
             }
         }
-       
     }
    
 
