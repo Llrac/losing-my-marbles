@@ -805,9 +805,9 @@ MonoBehaviour:
   uiDesktop: {fileID: 470455691}
   readyAlert: {fileID: 1152910105}
   turnLetterImages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1241967918}
+  - {fileID: 1241967917}
+  - {fileID: 1241967916}
 --- !u!4 &229866133
 Transform:
   m_ObjectHideFlags: 0
@@ -2643,6 +2643,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+--- !u!1 &1241967916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3797288419143187470, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1241967915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1241967917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3369855938246256481, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1241967915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1241967918 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3643709608406505210, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
+  m_PrefabInstance: {fileID: 1241967915}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1253952496 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 607455304608513496, guid: ff883e3ff7160c3419b9ca0029fc0d08, type: 3}
@@ -3634,7 +3649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769845, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4637896218025769851, guid: cc68735bcb6258a4e9a28d166b7e97fe, type: 3}
       propertyPath: m_RootOrder

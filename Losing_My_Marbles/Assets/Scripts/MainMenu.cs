@@ -46,11 +46,12 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void AskExit()
-    {
-        Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
-    }
+    //TODO For some reason this code prevent us to build
+    // public void AskExit()
+    // {
+    //     Application.Quit();
+    //     UnityEditor.EditorApplication.isPlaying = false;
+    // }
 
     public void OnHover(GameObject button)
     {
