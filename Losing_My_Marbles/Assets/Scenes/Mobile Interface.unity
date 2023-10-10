@@ -380,6 +380,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1875667417433160254, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 94452a3893e1fca42a8358cb8373cd4e, type: 3}
     - target: {fileID: 5648451115260212973, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_Name
       value: Marble I (3)
@@ -509,6 +513,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1875667417433160254, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 94452a3893e1fca42a8358cb8373cd4e, type: 3}
     - target: {fileID: 3934649390374279741, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -765,6 +773,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1875667417433160254, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 94452a3893e1fca42a8358cb8373cd4e, type: 3}
     - target: {fileID: 3934649390374279741, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1570,6 +1582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ambience: {fileID: 0}
+  marbleMachine: {fileID: 0}
   playerJump: {fileID: 0}
   pickupMarble: {fileID: 0}
   dropKey: {fileID: 0}
@@ -1585,6 +1598,9 @@ MonoBehaviour:
   triggerEarthquake: {fileID: 0}
   triggerRollerskates: {fileID: 0}
   triggerSwap: {fileID: 0}
+  onHoverEnter: {fileID: 0}
+  onHoverExit: {fileID: 0}
+  onClick: {fileID: 0}
   newMarbles: {fileID: 0}
   selectMarble: {fileID: 0}
   marblesReady: {fileID: 0}
@@ -2251,6 +2267,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1875667417433160254, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 94452a3893e1fca42a8358cb8373cd4e, type: 3}
     - target: {fileID: 3934649390374279741, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -2471,7 +2491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 293d4e06067517941a5b760bff743fe7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 89bd3a9718fe0e448826cc12f038c1f2, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3215,6 +3235,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1875667417433160254, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 94452a3893e1fca42a8358cb8373cd4e, type: 3}
     - target: {fileID: 3934649390374279741, guid: fc26866abeeb8d54eb1ff40d28f71910, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
